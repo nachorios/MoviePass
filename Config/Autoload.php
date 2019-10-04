@@ -7,13 +7,13 @@ class Autoload {
           spl_autoload_register(function($classNotFound)
           {
                // Armo la url de la clase a partir del namespace y la instancia.
-               $url = ROOT . '/' . str_replace("\\", "/", $classNotFound)  . ".php";
-
-
-               // Convierto la url a minúsculas ya que mi estructura de directorios y ficheros esta toda en minúsculas
-               $url = strtolower($url);
-
-
+               $url = ROOT . str_replace("\\", "/", $classNotFound)  . ".php";
+               $url = str_replace("\\","/",$url);
+               
+               //if ()
+               //$url = str_replace("Controllers/","/",$url);
+               //echo $url . " ". $classNotFound . '<br/> ';
+               
                // Incluyo la url que, si todo esta bien, debería contener la clase que intento instanciar.
                include_once($url);
           });
