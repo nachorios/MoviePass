@@ -1,5 +1,8 @@
-<?php namespace Controllers
+<?php namespace Controllers;
 
-    interface IController {
-        function Add();
+    interface IController 
+    {
+        function add($value);
+        function getAll();
+        function get($id);
     }
