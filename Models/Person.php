@@ -1,6 +1,6 @@
 <?php namespace Models;
 
-class Person{
+class abstract Person{
     private $name;
     private $lastName;
     private $dni;
