@@ -5,7 +5,7 @@ class Movie {
     private $time;
     private $language;
 
-    public function  __construct( $title, $time, $language){
+    public function  __construct( $title = "", $time = 0, $language = ""){
         $this->title = $title;
         $this->time = $time;
         $this->language = $language;
