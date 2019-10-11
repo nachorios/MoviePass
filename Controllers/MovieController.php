@@ -21,6 +21,9 @@
         /*--------------*/
 
 
+        /**
+         * Agrega una peliculo al DAO
+         */
         public function Add($title, $time, $language) {
 
             $movie = new Movie();

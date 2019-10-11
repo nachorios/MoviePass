@@ -10,6 +10,9 @@
         private $connection;
         private $tableName = "movies";
 
+        /**
+         * Funcion para agregar mediante un INSERT una pelicula a la base de datos.
+         */
         public function Add(Movie $movie) {
             try {
 
@@ -28,6 +31,9 @@
             }
         }
 
+        /**
+         * Funcion para obtener todas las peliculas de la base de datos mediante un SELECT.
+         */
         public function GetAll() {
 
             try {
