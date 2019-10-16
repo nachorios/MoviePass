@@ -10,8 +10,8 @@
             $this->userDAO = new UserDAO();
         }
 
-        public function Add($name, $lastName, $dni, $mail, $pass){
-            $user = new User($name, $lastName, $dni, $mail, $pass);
+        public function Add($name, $lastName, $dni, $mail, $pass, $role){
+            $user = new User($name, $lastName, $dni, $mail, $pass, $role);
             
             $this->userDAO->Add($user);
         }

@@ -4,11 +4,13 @@ class User implements Person{
 
     private $mail;
     private $pass;
+    private $role;
 
-    public function  __construct($name, $lastName, $dni, $mail, $pass){
+    public function  __construct($name, $lastName, $dni, $mail, $pass, $role){
         super($name, $lastName, $dni);
         $this->mail = $mail;
         $this->pass = $pass;
+        $this->role = $role;
     }
 
     public function setMail($mail){
@@ -25,5 +27,13 @@ class User implements Person{
 
     public function getPass(){
         return $this->pass;
+    }
+
+    public function getRole(){
+        return $this->role;
+    }
+
+    public function setRole($role){
+        $this->role = $role;
     }
 }
