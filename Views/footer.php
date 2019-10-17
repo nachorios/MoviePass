@@ -10,18 +10,18 @@
         <div class="row text-center text-light font-weight-bold">
 
             <div class="col-12 col-sm-4 col-xl-4 align-middle ">
-                <img src="<?php echo URL ?>/img/PT-logo.png" alt="" style="margin-top:20%">
+                <img src="<?php echo IMG_PATH?>/PT-logo.png" alt="" style="margin-top:20%">
             </div>
             <div class="col-12 col-sm-4 col-xl-4 ">
                 <p style="font-size: 1.5em">Contactate con nosotros</p>
                 <div class="facebook">
-                    <a href="#"><img src="<?php echo URL ?>/img/facebook.png" alt="" style="width:50px; lenght:50px;" class="my-5 align-middle"></a><span style="font-size:1.5em" class="align-middle"> /MyTicket</span>
+                    <a href="#"><img src="<?php echo IMG_PATH ?>facebook.png" alt="" style="width:50px; lenght:50px;" class="my-5 align-middle"></a><span style="font-size:1.5em" class="align-middle"> /MyTicket</span>
                 </div>
                 <div class="facebook">
-                    <a href="#"><img src="<?php echo URL ?>/img/instagram.png" alt="" style="width:50px; lenght:50px;" class="my-5"></a><span style="font-size:1.5em" class="align-middle"> @MyTicket</span>
+                    <a href="#"><img src="<?php echo IMG_PATH?>/instagram.png" alt="" style="width:50px; lenght:50px;" class="my-5"></a><span style="font-size:1.5em" class="align-middle"> @MyTicket</span>
                 </div>
                 <div class="facebook">
-                    <a href="#"><img src="<?php echo URL ?>/img/twitter.png" alt="" style="width:50px; lenght:50px;" class="my-5"></a><span style="font-size:1.5em" class="align-middle"> @MyTicket</span>
+                    <a href="#"><img src="<?php echo IMG_PATH?>/twitter.png" alt="" style="width:50px; lenght:50px;" class="my-5"></a><span style="font-size:1.5em" class="align-middle"> @MyTicket</span>
                 </div>
             </div>
             <div class="col-12 col-sm-4 col-xl-4 " style="margin-top:5%;">

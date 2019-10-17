@@ -8,7 +8,7 @@
                <header class="text-center">
                     <h2 style="color:white">Ingresar</h2>
                </header>
-               <form action="" method="POST" class="login-form bg-dark-alpha p-5 text-white">
+               <form action="<?php echo URL ?>/Home/Index" method="POST" class="login-form bg-dark-alpha p-5 text-white">
                     <div class="form-group">
                          <label for="">Nombre de usuario</label>
                          <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingresar usuario">

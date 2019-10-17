@@ -5,6 +5,7 @@
         public function Index($message = "")
         {
             require_once(VIEWS_PATH."index.php");
-        }        
+            echo var_dump($_POST);
+        }
     }
 ?>
