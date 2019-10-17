@@ -1,13 +1,13 @@
 <?php namespace Models;
 
-class User implements Person{
+class User extends Person{
 
     private $mail;
     private $pass;
     private $role;
 
     public function  __construct($name, $lastName, $dni, $mail, $pass, $role){
-        super($name, $lastName, $dni);
+        parent::__construct($name, $lastName, $dni);
         $this->mail = $mail;
         $this->pass = $pass;
         $this->role = $role;

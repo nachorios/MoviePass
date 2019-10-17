@@ -20,7 +20,19 @@
         }
 
         public function register() {
-            var_dump($_POST);
+            $userRegistered = false;
+            if (isset($_POST)){
+                $name = $_POST['name'];
+                $lastName = $_POST['last-name'];
+                $dni = $_POST['dni'];
+                $mail = $_POST['mail'];
+                $pass = $_POST['pass'];
+                $role = $_POST['role'];
+                $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
+                $userRegistered =true;
+            }
+            require_once(VIEWS_PATH . 'header.php');
+            require_once(VIEWS_PATH . "index.php");
         }
 
         public function AddJson($name, $lastName, $dni, $mail, $pass, $role){

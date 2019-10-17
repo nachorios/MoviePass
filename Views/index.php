@@ -13,15 +13,68 @@
     </div>
     <!-- en vez de class="btn btn-success" o class="btn btn-dark btn-block btn-lg" quedo -->
 
-<!--Boton modal-->
-    <button type="button" data-toggle="modal" data-target="#mimodal" class="btn btn-success">Consultar-modal</button> 
+     <?php 
+     if (isset($userRegistered)) {
+          if($userRegistered) {
+          ?>
+               <script>
+                    $(function(){
+                         $('#registro-exito').modal('show');
+                    });
+               </script>
+          <?php
+          } else {
+          ?>
+               <script>
+                    $(function(){
+                         $('#registro-error').modal('show');
+                    });
+               </script>
+          <?php
+          }
+     }
+     
+      ?>
+
+  <div class = "modal fade" id = "registro-exito" role = "dialog">
+     <div class = "modal-dialog modal-sm text-success">
+          <div class = "modal-content">
+               <div class = "modal-header">
+                    <h4 class = "modal-title">¡Bienvenido!</h4>
+               </div>
+               <div class = "modal-body">
+                    <p>Usuario registrado con exito.</p>
+               </div>
+               <div class = "modal-footer">
+                    <button type = "button" class = "btn btn-success" data-dismiss = "modal">Aceptar</button>
+               </div>
+          </div>
+     </div>
+</div>
+
+<div class = "modal fade" id = "registro-error" role = "dialog">
+     <div class = "modal-dialog modal-sm text-danger">
+          <div class = "modal-content">
+               <div class = "modal-header">
+                    <h4 class = "modal-title">Lo sentimos</h4>
+               </div>
+               <div class = "modal-body">
+                    <p>No se ha logrado registrar la cuenta.</p>
+               </div>
+               <div class = "modal-footer">
+                    <button type = "button" class = "btn btn-success" data-dismiss = "modal">Aceptar</button>
+               </div>
+          </div>
+     </div>
+</div>
+
     <!--Desarrollo modal-->
     <div class="modal fade" id="mimodal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!--header-->
                 <div class="modal-header">
-                    <h4 class="modal-title">Registrate !</h4>
+                    <h4 class="modal-title">Registrate!</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!--body-->
