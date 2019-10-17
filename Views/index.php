@@ -8,19 +8,7 @@
                <header class="text-center">
                     <h2 style="color:white">Ingresar</h2>
                </header>
-               <form action="<?php echo URL ?>/Home/Index" method="POST" class="login-form bg-dark-alpha p-5 text-white">
-                    <div class="form-group">
-                         <label for="">Nombre de usuario</label>
-                         <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingresar usuario">
-                    </div>
-                    <div class="form-group">
-                         <label for="">Contraseña</label>
-                         <input type="text" name="pass" class="form-control form-control-lg" placeholder="Ingresar constraseña">
-                    </div>
-                    <button class="btn btn-success btn-block btn-lg" type="submit">Iniciar Sesión</button>
-                    <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true">Logearse con facebook (a futuro)</div>
-                    <button type="button" data-toggle="modal" data-target="#mimodal" class="btn btn-success btn-block btn-lg">Registrarse</button>
-               </form>
+               <?php include(FORM_PATH ."/login-form.php"); ?>
           </div>
     </div>
     <!-- en vez de class="btn btn-success" o class="btn btn-dark btn-block btn-lg" quedo -->
@@ -38,29 +26,7 @@
                 </div>
                 <!--body-->
                 <div class="modal-body">
-                  <form action="" method="POST" class="login-form bg-dark-alpha p-5 text-black">
-                       <div class="form-group">
-                            <label for="user" >Nombre usuario</label>
-                            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingresar nombre de usuario">
-                       </div>
-                       <div class="form-group">
-                            <label for="">Contraseña</label>
-                            <input type="text" name="pass" class="form-control form-control-lg" placeholder="Ingresar constraseña">
-                       </div>
-                       <div class="form-group">
-                            <label for="">Apellido</label>
-                            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingrese su apellido">
-                       </div>
-                       <div class="form-group">
-                            <label for="">Nombre</label>
-                            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingrese su nombre">
-                       </div>
-                       <div class="form-group">
-                            <label for="">Dni</label>
-                            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingrese su dni">
-                       </div>
-                       <button class="btn btn-dark btn-block btn-lg" type="submit">Registrarse</button>
-                  </form>
+                  <?php include(FORM_PATH ."/register-form.php") ?>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
