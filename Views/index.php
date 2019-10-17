@@ -14,7 +14,7 @@
     <!-- en vez de class="btn btn-success" o class="btn btn-dark btn-block btn-lg" quedo -->
 
 <!--Boton modal-->
-<!--    <button type="button" data-toggle="modal" data-target="#mimodal" class="btn btn-success">Consultar-modal</button> -->
+    <button type="button" data-toggle="modal" data-target="#mimodal" class="btn btn-success">Consultar-modal</button> 
     <!--Desarrollo modal-->
     <div class="modal fade" id="mimodal">
         <div class="modal-dialog">

@@ -1,7 +1,7 @@
-<form action="" method="POST" class="login-form bg-dark-alpha p-5 text-black">
+<form action="user/register" method="POST" class="login-form bg-dark-alpha p-5 text-black">
                        <div class="form-group">
-                            <label for="user" >Nombre usuario</label>
-                            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingresar nombre de usuario">
+                            <label for="user" >Email</label>
+                            <input type="text" name="mail" class="form-control form-control-lg" placeholder="Ingresar nombre de usuario">
                        </div>
                        <div class="form-group">
                             <label for="">Contraseña</label>
@@ -9,15 +9,17 @@
                        </div>
                        <div class="form-group">
                             <label for="">Apellido</label>
-                            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingrese su apellido">
+                            <input type="text" name="lastName" class="form-control form-control-lg" placeholder="Ingrese su apellido">
                        </div>
                        <div class="form-group">
                             <label for="">Nombre</label>
-                            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingrese su nombre">
+                            <input type="text" name="name" class="form-control form-control-lg" placeholder="Ingrese su nombre">
                        </div>
                        <div class="form-group">
                             <label for="">Dni</label>
-                            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingrese su dni">
+                            <input type="text" name="dni" class="form-control form-control-lg" placeholder="Ingrese su dni">
                        </div>
+                       <input type="text" name="role" value="5" class="form-control form-control-lg" hide>
+                       
                        <button class="btn btn-dark btn-block btn-lg" type="submit">Registrarse</button>
                   </form>
