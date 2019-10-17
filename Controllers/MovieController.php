@@ -15,11 +15,19 @@
         /*----Vistas----*/
         public function ShowListView() //pruebas
         {
-            $movieList = $this->movieDAO->GetAll();
+            
+		    require_once( VIEWS_PATH . 'header.php');
+		    require_once( VIEWS_PATH . 'navbar.php');
+            $arrayMovies = $this->movieDAO->getNowApi();
             require_once(VIEWS_PATH."movie-list.php");
         }
         /*--------------*/
 
+        public function getList()
+		{
+			$api = $this->movieDAO->getNowApi();
+			return $api;
+		}
 
         /**
          * Agrega una peliculo al DAO

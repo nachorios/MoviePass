@@ -1,5 +1,4 @@
-<?php  include(VIEWS_PATH . 'navbar.php') ?>
-
+<?php  include(VISTA . 'navbar.php') ?>
 
 
 <main class="d-flex align-items-center justify-content-center height-100">

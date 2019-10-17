@@ -1,0 +1,9 @@
+/*por que tengo que poner lo del body y lo del html?*/
+
+body,
+html {
+  background-image: url("../img/bg-cine2.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  margin: 0;
+}
