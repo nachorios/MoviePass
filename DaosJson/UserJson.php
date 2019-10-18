@@ -47,8 +47,18 @@
         }
         public function Add($value){
             $this->RetrieveData();
-            array_push($this->usersList, $value);
-            $this->SaveData();
+            $registered = true;
+            foreach($this->usersList as $user) {
+                if ($value->getMail() == $user->getMail()) {
+                    $registered = false;
+                    break;
+                }
+            }
+            if($registered) {
+                array_push($this->usersList, $value);
+                $this->SaveData();
+            }
+            return $registered;
         }
         public function GetAll(){
             $this->RetrieveData();
