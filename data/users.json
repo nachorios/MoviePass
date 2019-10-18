@@ -22,5 +22,13 @@
         "mail": null,
         "pass": null,
         "role": null
+    },
+    {
+        "name": "Nacho",
+        "lastName": "RIos",
+        "dni": "38456296",
+        "mail": "riosignacio312@gmail.com",
+        "pass": "123456789",
+        "role": "1"
     }
 ]
