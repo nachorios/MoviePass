@@ -1,10 +1,26 @@
 [
     {
-        "name": "Luis",
-        "lastName": "Monteza",
-        "dni": "luis.monteza@hotmail.com",
-        "mail": "38456295",
-        "pass": "123",
+        "name": "julio",
+        "lastName": "cesar",
+        "dni": "12345",
+        "mail": "prueba123@hotmail.com",
+        "pass": "hola",
+        "role": "1"
+    },
+    {
+        "name": null,
+        "lastName": null,
+        "dni": null,
+        "mail": null,
+        "pass": null,
+        "role": null
+    },
+    {
+        "name": "H\u00e9ctor",
+        "lastName": "Soto",
+        "dni": "32668887",
+        "mail": "cotomdq@hotmail.com",
+        "pass": "admin",
         "role": "1"
     }
 ]

@@ -1,7 +1,7 @@
 <form action="<?php echo URL ?>/user/login" method="POST" class="login-form bg-dark-alpha p-5 text-white">
     <div class="form-group">
-            <label for="">Nombre de usuario</label>
-            <input type="text" name="user" class="form-control form-control-lg" placeholder="Ingresar usuario" required>
+            <label for="">Email</label>
+            <input type="email" name="user" class="form-control form-control-lg" placeholder="Ingresar correo" required>
     </div>
     <div class="form-group">
             <label for="">Contraseña</label>

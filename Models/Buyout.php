@@ -1,24 +1,24 @@
 <?php namespace Models;
 
 class Buyout{
-    private $cant;
-    private $desc;
+    private $quan;
+    private $disc;
     private $date;
     private $total;
 
-    public function __construct($cant, $desc, $date, $total){
-        $this->cant = $cant;
-        $this->desc = $desc;
+    public function __construct($quan, $disc, $date, $total){
+        $this->quan = $quan;
+        $this->disc = $disc;
         $this->date = $date;
         $this->total = $total;
     }
 
-    public function setCant($cant){
-        $this->cant=$cant;
+    public function setQuan($quan){
+        $this->quan=$quan;
     }
 
-    public function setDesc($desc){
-        $this->desc=$desc;
+    public function setDisc($disc){
+        $this->disc=$disc;
     }
 
     public function setDate($date){
@@ -29,12 +29,12 @@ class Buyout{
         $this->total=$total;
     }
 
-    public function getCant(){
-        return $this->cant;
+    public function getQuan(){
+        return $this->quan;
     }
 
-    public function getDesc(){
-        return $this->desc;
+    public function getDisc(){
+        return $this->disc;
     }
 
     public function getDate(){
