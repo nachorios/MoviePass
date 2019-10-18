@@ -19,18 +19,32 @@
             $this->userDAO->Add($user);
         }
 
-        public function register() {
-            $userRegistered = false;
-            if (isset($_POST)){
-                $name = $_POST['name'];
-                $lastName = $_POST['last-name'];
-                $dni = $_POST['dni'];
-                $mail = $_POST['mail'];
-                $pass = $_POST['pass'];
-                $role = $_POST['role'];
-                $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
-                $userRegistered =true;
+        public function register($dni, $pass, $name, $lastName, $mail, $role) {
+            $userRegistered = $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
+            require_once(VIEWS_PATH . 'header.php');
+            require_once(VIEWS_PATH . "login.php");
+        }
+
+        public function login($name, $pass) {
+            $userList = $this->userDAOJson->GetAll();
+            $logeado = false;
+            foreach($userList as $user) {
+                if($name == $user->getName() && $pass == $user->getPass()) {
+                    $_SESSION['loggedUser'] = $user;
+                    $logeado = true;
+                    break;
+                }
             }
+            require_once(VIEWS_PATH . 'header.php');
+            if ($logeado) {
+                require_once(VIEWS_PATH . "index.php");
+            } else {
+                require_once(VIEWS_PATH . "login.php");
+            }
+        }
+
+        public function logout() {
+            unset($_SESSION['loggedUser']);
             require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . "index.php");
         }
@@ -38,7 +52,8 @@
         public function AddJson($name, $lastName, $dni, $mail, $pass, $role){
             $user = new User($name, $lastName, $dni, $mail, $pass, $role);
             
-            $this->userDAOJson->Add($user);
+            $registered = $this->userDAOJson->Add($user);;
+            return $registered;
         }
 
     }
