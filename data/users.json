@@ -30,5 +30,13 @@
         "mail": "cotomdq@hotmail.com",
         "pass": "admin",
         "role": "1"
+    },
+    {
+        "name": "pepe",
+        "lastName": "corcho",
+        "dni": "33555444",
+        "mail": "pepe@gmail.com",
+        "pass": "admin",
+        "role": "1"
     }
 ]
