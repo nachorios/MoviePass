@@ -2,7 +2,7 @@
 
 class Cinema{
     private $name;
-    private $capacity
+    private $capacity;
     private $adress;
     private $value;
 
