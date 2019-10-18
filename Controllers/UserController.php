@@ -25,11 +25,11 @@
             require_once(VIEWS_PATH . "login.php");
         }
 
-        public function login($name, $pass) {
+        public function login($mail, $pass) {
             $userList = $this->userDAOJson->GetAll();
             $logeado = false;
             foreach($userList as $user) {
-                if($name == $user->getName() && $pass == $user->getPass()) {
+                if($mail == $user->getMail() && $pass == $user->getPass()) {
                     $_SESSION['loggedUser'] = $user;
                     $logeado = true;
                     break;
