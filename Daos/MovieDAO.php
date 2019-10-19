@@ -18,7 +18,7 @@
         private function retrieveData()
         {
             $movielist= array();
-            $jsonContent= file_get_contents('https://api.themoviedb.org/3/movie/now_playing?api_key=1e5c581fb6ceaf853ff088a424f4cfcb&language=en-US&page=1', true);
+            $jsonContent= file_get_contents('https://api.themoviedb.org/3/movie/now_playing?api_key=1e5c581fb6ceaf853ff088a424f4cfcb&language=es-ES&page=1', true);
             $arrayTodecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
             $filmArray = $arrayTodecode['results'];
             foreach ($filmArray as $indice)
@@ -42,6 +42,14 @@
             }
             return $movielist;
         }
+
+        public function getGenreList() {
+            $genrelist= array();
+            $jsonContent= file_get_contents('https://api.themoviedb.org/3/genre/movie/list?api_key=1e5c581fb6ceaf853ff088a424f4cfcb&language=es-ES', true);
+            $arrayTodecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
+            return $arrayTodecode['genres'];
+        }
+
 
         /**
          * Funcion para agregar mediante un INSERT una pelicula a la base de datos.
