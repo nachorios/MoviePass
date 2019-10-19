@@ -13,9 +13,10 @@
           foreach ($arrayMovies as $movie) {
                ?>
             <div class="container-fluid">
-                 <div class="row">
-                      <div class="col-4  my-5">
-                           <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" alt=<?php $movie->getTitle() ?> class="img-fluid rounded">
+                 <div class="row mt-5" style="background-color: rgb(0,0,0,0.4);">
+                      <div class="col-4  my-5" >
+                           <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" alt=<?php $movie->getTitle() ?> 
+                           class="rounded">
                       </div>
                       <div class="col-8  my-5">
                            <table class="table">
