@@ -22,5 +22,29 @@
         "mail": null,
         "pass": null,
         "role": null
+    },
+    {
+        "name": "juan",
+        "lastName": "juanes",
+        "dni": "123123123",
+        "mail": "juan@gmai.com",
+        "pass": "123",
+        "role": "1"
+    },
+    {
+        "name": "asd",
+        "lastName": "asd",
+        "dni": "asd",
+        "mail": "asd",
+        "pass": "asd",
+        "role": "1"
+    },
+    {
+        "name": null,
+        "lastName": null,
+        "dni": null,
+        "mail": null,
+        "pass": null,
+        "role": null
     }
 ]
