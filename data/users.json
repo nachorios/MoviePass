@@ -8,14 +8,6 @@
         "role": "1"
     },
     {
-        "name": "julio",
-        "lastName": "cesar",
-        "dni": "12345",
-        "mail": "prueba123@hotmail.com",
-        "pass": "hola",
-        "role": "1"
-    },
-    {
         "name": null,
         "lastName": null,
         "dni": null,
@@ -24,27 +16,19 @@
         "role": null
     },
     {
-        "name": "juan",
-        "lastName": "juanes",
-        "dni": "123123123",
-        "mail": "juan@gmai.com",
-        "pass": "123",
+        "name": "H\u00e9ctor",
+        "lastName": "Soto",
+        "dni": "32668887",
+        "mail": "cotomdq@hotmail.com",
+        "pass": "admin",
         "role": "1"
     },
     {
-        "name": "asd",
-        "lastName": "asd",
-        "dni": "asd",
-        "mail": "asd",
-        "pass": "asd",
+        "name": "pepe",
+        "lastName": "corcho",
+        "dni": "33555444",
+        "mail": "pepe@gmail.com",
+        "pass": "admin",
         "role": "1"
-    },
-    {
-        "name": null,
-        "lastName": null,
-        "dni": null,
-        "mail": null,
-        "pass": null,
-        "role": null
     }
 ]
