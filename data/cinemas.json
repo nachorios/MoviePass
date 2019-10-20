@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Ambassador",
+        "capacity": "50",
+        "adress": "Cordoba",
+        "value": "100"
+    },
+    {
+        "name": "Ambassador",
+        "capacity": "50",
+        "adress": "Cordoba",
+        "value": "100"
+    },
+    {
+        "name": "Ambassador",
+        "capacity": "50",
+        "adress": "Cordoba",
+        "value": "100"
+    },
+    {
+        "name": "Ambassador",
+        "capacity": "50",
+        "adress": "Cordoba",
+        "value": "100"
+    },
+    {
+        "name": "",
+        "capacity": "",
+        "adress": "",
+        "value": ""
+    },
+    {
+        "name": "",
+        "capacity": "",
+        "adress": "",
+        "value": ""
+    }
+]

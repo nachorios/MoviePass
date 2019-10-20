@@ -13,6 +13,13 @@ class CinemaController{
         $this->cinemaDAOJson = new CinemaJson();
     }
 
+    public function ShowCinemasList()
+    {
+      require_once( VIEWS_PATH . 'header.php');
+      require_once( VIEWS_PATH . 'navbar.php');
+      require_once(VIEWS_PATH . "cinemas-list.php");
+    }
+
     public function Add($name, $capacity, $adress, $value){
         $cinema = new Cinema($name, $capacity, $adress, $value);
 
@@ -25,8 +32,15 @@ class CinemaController{
         $this->cinemaDAOJson->Add($cinema);
     }
 
+    public function registerCinema($name, $capacity, $adress, $value)
+    {
+      $cinemaRegistered = $this->AddJson($name, $capacity, $adress, $value);
+      require_once(VIEWS_PATH . 'header.php'); // no se porque no muestra el navar y no me lleva a cinemas-list
+      require_once(VIEWS_PATH . "cinemas-list.php");
+    }
+
     public function deleteCinema($name){
-        $this->cinemaDAOJson->Delete($name)
+        $this->cinemaDAOJson->Delete($name);
     }
 
     public function allCinema(){

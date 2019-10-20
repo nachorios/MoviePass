@@ -13,7 +13,7 @@
     </div>
     <!-- en vez de class="btn btn-success" o class="btn btn-dark btn-block btn-lg" quedo -->
 
-     <?php 
+     <?php
      if (isset($userRegistered)) {
           if($userRegistered) {
           ?>
@@ -42,10 +42,10 @@
                          $('#login-error').modal('show');
                     });
                </script>
-          <?php 
+          <?php
           }
      }
-     
+
       ?>
 
   <div class = "modal fade" id = "registro-exito" role = "dialog">

@@ -1,6 +1,6 @@
 <?php namespace Daos;
 
-use \Exceotion as Exception;
+use \Exception as Exception;
 use Models\Cinema as Cinema;
 use Daos\Connection as Connection;
 
@@ -17,6 +17,13 @@ class CinemaDAO {
             $parameters["capacity"] = $cinema->getCapacity();
             $parameters["adress"] = $cinema->getAdress();
             $parameters["value"] = $cinema->getValue();
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        }
+        catch(Exception $e) {
+        throw $e;
         }
     }
 }

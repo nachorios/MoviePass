@@ -11,16 +11,16 @@
 
             foreach($this->cinemaList as $cinema)
             {
-                $valuesArray["name"] = $user->getName();
-                $valuesArray["capacity"] = $user->getCapacity();
-                $valuesArray["adress"] = $user->getAdress();
-                $valuesArray["value"] = $user->getValue();
+                $valuesArray["name"] = $cinema->getName();
+                $valuesArray["capacity"] = $cinema->getCapacity();
+                $valuesArray["adress"] = $cinema->getAdress();
+                $valuesArray["value"] = $cinema->getValue();
 
                 array_push($arrayToEncode, $valuesArray);
             }
 
             $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            
+
             file_put_contents('data/cinemas.json', $jsonContent);
         }
 
@@ -50,14 +50,14 @@
         }
         public function GetAll(){
             $this->RetrieveData();
-    
+
             return $this->cinemaList;
         }
         public function Delete($value){
             $this->RetrieveData();
             foreach($this->cinemaList as $key => $cinema){
-                if($cinema->getName() == $value){ 
-                    unset($this->cinemaList[$key]);      
+                if($cinema->getName() == $value){
+                    unset($this->cinemaList[$key]);
                 }
             }
             $this->SaveData();

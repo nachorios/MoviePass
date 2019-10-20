@@ -8,13 +8,13 @@
                 class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse ml-auto" id="uno">
             <ul class="navbar-nav ml-auto font-weight-bold" style="font-size: 1.2em;margin-right:5px;"  >
-                <li class="nav-item"><a href="#" class="nav-link text-light">Cines</a></li>
+                <li class="nav-item"><a href="<?php echo URL ?>/Cinema/ShowCinemasList/" class="nav-link text-light">Cines</a></li>
                 <li class="nav-item"><a href="#" class="nav-link text-light">Horarios</a></li>
                 <li class="nav-item"><a href="#" class="nav-link text-light">Precios</a></li>
                 <li class="nav-item"><a href="<?php echo URL ?>/Movie/ShowListView/" class="nav-link text-light">Peliculas</a></li>
-                <?php 
+                <?php
                     if(isset($_SESSION['loggedUser'])):
-                    ?> 
+                    ?>
                         <li class="nav-item"><a href="<?php echo URL ?>/User/logout/" class="nav-link text-light">Logout(<?php echo $_SESSION['loggedUser']->getName(); ?>)</a></li>
                     <?php
                     else:
@@ -22,7 +22,7 @@
                         <li class="nav-item"><a href="<?php echo URL ?>/Home/Login/" class="nav-link text-light">Ingresar/Registrarse</a></li>
                     <?php
                     endif;?>
-                
+
                 <!--<form action="search.php" method="post" class="form-inline">// Boton de buscar
                     <input type="text" placeholder="Buscar" class="form-control mr-sm-2">
                     <button type="submit" class="btn btn-success">Buscar</button>

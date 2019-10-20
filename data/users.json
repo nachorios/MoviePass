@@ -30,5 +30,13 @@
         "mail": "pepe@gmail.com",
         "pass": "admin",
         "role": "1"
+    },
+    {
+        "name": "nacho",
+        "lastName": "chiaradia",
+        "dni": "nacho@gmail.com",
+        "mail": "123123123",
+        "pass": "123",
+        "role": "1"
     }
 ]
