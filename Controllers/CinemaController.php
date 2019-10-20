@@ -32,8 +32,16 @@ class CinemaController{
         $this->cinemaDAOJson->Add($cinema);
     }
 
+    public function registerCinema($name, $capacity, $adress, $value)
+    {
+      $cinemaRegistered = $this->AddJson($name, $capacity, $adress, $value);
+      require_once(VIEWS_PATH . 'header.php');
+      require_once(VIEWS_PATH . "cinemas-list.php");
+
+    }
+
     public function deleteCinema($name){
-        $this->cinemaDAOJson->Delete($name)
+        $this->cinemaDAOJson->Delete($name);
     }
 
     public function allCinema(){
