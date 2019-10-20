@@ -35,9 +35,8 @@ class CinemaController{
     public function registerCinema($name, $capacity, $adress, $value)
     {
       $cinemaRegistered = $this->AddJson($name, $capacity, $adress, $value);
-      require_once(VIEWS_PATH . 'header.php');
+      require_once(VIEWS_PATH . 'header.php'); // no se porque no muestra el navar y no me lleva a cinemas-list
       require_once(VIEWS_PATH . "cinemas-list.php");
-
     }
 
     public function deleteCinema($name){
