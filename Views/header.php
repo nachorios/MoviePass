@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<?php echo URL ?>/css/bootstrap.css" />
     <link rel="stylesheet" href="<?php echo URL ?>/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo URL ?>/css/fondocinecss.css" />
+    <link rel="stylesheet" href="<?php echo URL ?>/css/fondocinecss.css" />    
     <title>MyTicket</title>
 
 </head>

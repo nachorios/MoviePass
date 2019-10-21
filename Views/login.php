@@ -1,6 +1,3 @@
-<?php  include(VIEWS_PATH . 'navbar.php') ?>
-
-
 
 <main class="d-flex align-items-center justify-content-center height-100">
   <div style="background-color:rgb(0,0,0,0.5); margin-top:5%; margin-bottom:5%;">
