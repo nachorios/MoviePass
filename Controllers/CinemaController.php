@@ -3,20 +3,25 @@
 use Daos\CinemaDAO as CinemaDAO;
 use DaosJson\CinemaJson as CinemaJson;
 use Models\Cinema as Cinema;
+use Controllers\ViewController as ViewC;
 
 class CinemaController{
     private $cinemaDAO;
     private $cinemaDAOJson;
+    private $viewController;
+
 
     public function __construct(){
         $this->cinemaDAO = new CinemaDAO();
         $this->cinemaDAOJson = new CinemaJson();
+        $this->viewController = new ViewC();
     }
 
     public function ShowCinemasList()
     {
-      require_once( VIEWS_PATH . 'header.php');
-      require_once( VIEWS_PATH . 'navbar.php');
+      require_once(VIEWS_PATH . 'navbar.php');
+//      $arrayCinemas = $this->cinemaDAOJson->GetAll();
+      $cinemasDao = $this->cinemaDAOJson; //probando
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
@@ -35,8 +40,8 @@ class CinemaController{
     public function registerCinema($name, $capacity, $adress, $value)
     {
       $cinemaRegistered = $this->AddJson($name, $capacity, $adress, $value);
-      require_once(VIEWS_PATH . 'header.php'); // no se porque no muestra el navar y no me lleva a cinemas-list
-      require_once(VIEWS_PATH . "cinemas-list.php");
+      $this->ShowCinemasList(); //cambiar por viewcontroller
+      //$this->viewController->ShowCinemasList();
     }
 
     public function deleteCinema($name){

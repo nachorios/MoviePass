@@ -15,13 +15,14 @@
 
         public function Add($name, $lastName, $dni, $mail, $pass, $role){
             $user = new User($name, $lastName, $dni, $mail, $pass, $role);
-            
+
             $this->userDAO->Add($user);
         }
 
         public function register($dni, $pass, $name, $lastName, $mail, $role) {
             $userRegistered = $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
             require_once(VIEWS_PATH . 'header.php');
+            require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "login.php");
         }
 
@@ -36,6 +37,7 @@
                 }
             }
             require_once(VIEWS_PATH . 'header.php');
+            require_once(VIEWS_PATH . 'navbar.php');
             if ($logeado) {
                 require_once(VIEWS_PATH . "index.php");
             } else {
@@ -46,15 +48,15 @@
         public function logout() {
             unset($_SESSION['loggedUser']);
             require_once(VIEWS_PATH . 'header.php');
+            require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "index.php");
         }
 
         public function AddJson($name, $lastName, $dni, $mail, $pass, $role){
             $user = new User($name, $lastName, $dni, $mail, $pass, $role);
-            
-            $registered = $this->userDAOJson->Add($user);;
+
+            $registered = $this->userDAOJson->Add($user);
             return $registered;
         }
 
     }
-    
