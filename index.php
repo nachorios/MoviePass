@@ -4,8 +4,6 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    session_start();
-
     require "Config/Autoload.php";
     require "Config/Config.php";
 
@@ -14,6 +12,8 @@
     use Config\Request 	as Request;
 
     Autoload::start();
+
+    session_start();
 
   require_once(VIEWS_PATH."header.php");
 

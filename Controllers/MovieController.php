@@ -19,6 +19,7 @@
 		    require_once( VIEWS_PATH . 'header.php');
 		    require_once( VIEWS_PATH . 'navbar.php');
             $arrayMovies = $this->movieDAO->getNowApi();
+            $genreList = $this->movieDAO->getGenreList();
             require_once(VIEWS_PATH."movie-list.php");
         }
         /*--------------*/
