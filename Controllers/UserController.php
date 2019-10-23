@@ -19,7 +19,7 @@
             $this->userDAO->Add($user);
         }
 
-        public function register($dni, $pass, $name, $lastName, $mail, $role) {
+        public function register($mail, $pass, $name, $lastName, $dni, $role) {
             $userRegistered = $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
             require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . 'navbar.php');

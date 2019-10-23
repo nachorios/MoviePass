@@ -38,5 +38,13 @@
         "mail": "123123123",
         "pass": "123",
         "role": "1"
+    },
+    {
+        "name": "nacho",
+        "lastName": "rios",
+        "dni": "38456296",
+        "mail": "nacho123@gmail.com",
+        "pass": "123456789",
+        "role": "1"
     }
 ]

@@ -1,7 +1,7 @@
 <form action= "<?php echo URL?>/user/register" method="POST" class="login-form bg-dark-alpha p-5 text-black">
                        <div class="form-group">
                             <label for="user" >Email</label>
-                            <input type="email" name="mail" class="form-control form-control-lg" placeholder="Ingresar nombre de usuario" required>
+                            <input type="email" name="mail" class="form-control form-control-lg" placeholder="Ingresar Email" required>
                        </div>
                        <div class="form-group">
                             <label for="">Contraseña</label>

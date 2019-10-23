@@ -10,11 +10,5 @@
         "capacity": "100",
         "adress": "Cordoba",
         "value": "100"
-    },
-    {
-        "name": "hola",
-        "capacity": "123",
-        "adress": "jujuuj",
-        "value": "1"
     }
 ]
