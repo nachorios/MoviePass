@@ -44,6 +44,14 @@ class CinemaController{
       //$this->viewController->ShowCinemasList();
     }
 
+    public function editCinema($name, $capacity, $adress, $value, $oldName)
+    {
+      $this->cinemaDAOJson->Delete($oldName);
+      $cinemaRegistered = $this->AddJson($name, $capacity, $adress, $value);
+      $this->ShowCinemasList(); //cambiar por viewcontroller
+      //$this->viewController->ShowCinemasList();
+    }
+
     public function deleteCinema($name){
         $this->cinemaDAOJson->Delete($name);
     }

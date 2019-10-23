@@ -5,8 +5,37 @@ if(isset($_SESSION['loggedUser'])) {
   }
 }
 ?>
+<?php
+if(isset($_GET['edit'])) {
+       ?>
+       <script>
+            $(function(){
+                 $('#mimodal').modal('show');
+            });
+       </script>
+  <?php
+}
 
+?>
 
+<div class="modal fade" id="mimodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--header-->
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!--body-->
+                <div class="modal-body">
+                  <?php include(FORM_PATH ."/cinema-edit-form.php") ?>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <div class="container-fluid text-center">
      <div class="row mt-5 d-flex justify-content-center" style="background-color: rgb(0,0,0,0.4)">
@@ -48,8 +77,8 @@ if(!empty($arrayCinemas))
                           if(isset($_SESSION['loggedUser'])) {
                               if($_SESSION['loggedUser']->getRole()>1) {
                                 ?>
-                                  <td> <a href="?delete=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-danger">Borrar</button> </a> </td>
-                                  <td> <button type="submit" class="btn btn-info">Editar</button> </td>
+                                  <td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-danger">Borrar</button> </a> </td>
+                                  <td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?edit=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-info">Editar</button> </a> </td>
                                 <?php
                               }
                           }
