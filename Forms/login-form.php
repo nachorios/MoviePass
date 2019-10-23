@@ -7,7 +7,7 @@
             <label for="">Contraseña</label>
             <input type="password" name="pass" class="form-control form-control-lg" placeholder="Ingresar constraseña" required>
     </div>
-    <button class="btn btn-success btn-block btn-lg" type="submit">Iniciar Sesión</button>
-    <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true">Logearse con facebook (a futuro)</div>
+    <button class="btn btn-success btn-block btn-lg mb-3" type="submit">Iniciar Sesión</button>
+    <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true"> <!--Logearse con facebook (a futuro)--></div>
     <button type="button" data-toggle="modal" data-target="#mimodal" class="btn btn-success btn-block btn-lg"">Registrarse</button>
 </form>

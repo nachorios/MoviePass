@@ -13,7 +13,7 @@
   </div>
   <div class="form-group">
     <label for="valueCine"> Valor entrada: </label>
-    <input type="text" name="value" class="form-control" id="valueCine" placeholder="Ingresar valor unico de entrada" required> </input>
+    <input type="number" name="value" class="form-control" id="valueCine" placeholder="Ingresar valor unico de entrada" required> </input>
   </div>
   <input type="text" name="editCinema" class="form-control" id="editCinema" value="<?php if(isset($_GET['edit'])){ echo $_GET['edit']; }?>" hidden> </input>
   

@@ -13,7 +13,7 @@
   </div>
   <div class="form-group">
     <label for="valueCine"> Valor entrada: </label>
-    <input type="text" name="value" class="form-control" id="valueCine" placeholder="Ingresar valor unico de entrada" required> </input>
+    <input type="number" name="value" class="form-control" id="valueCine" placeholder="Ingresar valor unico de entrada" required> </input>
   </div>
   <button type="submit" class="btn btn-success btn-lg">Agregar</button>
 </form>

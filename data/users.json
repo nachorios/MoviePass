@@ -8,14 +8,6 @@
         "role": "5"
     },
     {
-        "name": null,
-        "lastName": null,
-        "dni": null,
-        "mail": null,
-        "pass": null,
-        "role": null
-    },
-    {
         "name": "H\u00e9ctor",
         "lastName": "Soto",
         "dni": "32668887",
@@ -33,18 +25,18 @@
     },
     {
         "name": "nacho",
-        "lastName": "chiaradia",
-        "dni": "nacho@gmail.com",
-        "mail": "123123123",
-        "pass": "123",
-        "role": "1"
-    },
-    {
-        "name": "nacho",
         "lastName": "rios",
         "dni": "38456296",
         "mail": "nacho123@gmail.com",
         "pass": "123456789",
+        "role": "5"
+    },
+    {
+        "name": "ddds",
+        "lastName": "ddd",
+        "dni": "40",
+        "mail": "vero@tomich",
+        "pass": "123",
         "role": "1"
     }
 ]
