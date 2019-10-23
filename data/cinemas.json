@@ -1,8 +1,20 @@
 [
     {
+        "name": "Cines del paseo",
+        "capacity": "200",
+        "adress": "San luis",
+        "value": "150"
+    },
+    {
         "name": "Ambassador",
-        "capacity": "50",
+        "capacity": "100",
         "adress": "Cordoba",
         "value": "100"
+    },
+    {
+        "name": "Cines del shopping",
+        "capacity": "130",
+        "adress": "Luro",
+        "value": "90"
     }
 ]

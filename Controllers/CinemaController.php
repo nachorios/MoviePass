@@ -21,7 +21,7 @@ class CinemaController{
     {
       require_once(VIEWS_PATH . 'navbar.php');
 //      $arrayCinemas = $this->cinemaDAOJson->GetAll();
-      $cinemasDao = $this->cinemaDAOJson; //probando
+      $cinemasList = $this->cinemaDAOJson; 
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 

@@ -32,13 +32,13 @@
                          <th>Accion</th>
                     </thead>
 <?php
-//viene cargado el dao cines del metodo que muestra la vista en cinema controller
+//usamos a cinemasList que viene de dao cines del metodo que muestra la vista en cinema controller
 if(isset($_GET['delete']))
-{ //borramos por el dato que esta en get
-    $cinemasDao->Delete($_GET['delete']);
+{ //usamos el metodo de el atributo cinemasList, cinemasList fue igualado a cinemasDAOJSON en ShowCinemasList y borramos por el dato que esta en get
+    $cinemasList->Delete($_GET['delete']);
 }
-//aca se carga
-$arrayCinemas = $cinemasDao->GetAll();
+//aca se carga arrayCinemas con los datos de cinemas.json
+$arrayCinemas = $cinemasList->GetAll();
 
 if(!empty($arrayCinemas))
 {
@@ -49,7 +49,14 @@ if(!empty($arrayCinemas))
                         <td><?php echo $cinema->getCapacity() ?></td>
                         <td><?php echo $cinema->getAdress() ?></td>
                         <td><?php echo $cinema->getValue() ?></td>
-                        <td> <a href="?delete=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-danger">Borrar</button> </a> </td>
+                        <td>
+                          <a href="?delete=<?php echo $cinema->getName()  ?>">
+                            <button type="submit" class="btn btn-danger">Borrar</button>
+                          </a>
+                         </td>
+                         <td>
+                           <button type="submit" class="btn btn-info">Editar</button>
+                         </td>
                     </tbody>
 <?php   }
         } ?>
