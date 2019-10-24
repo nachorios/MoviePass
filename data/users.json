@@ -38,5 +38,13 @@
         "mail": "vero@tomich",
         "pass": "123",
         "role": "1"
+    },
+    {
+        "name": "1",
+        "lastName": "1",
+        "dni": "12345",
+        "mail": "asd@asd",
+        "pass": "1",
+        "role": "1"
     }
 ]

@@ -17,5 +17,7 @@
   </div>
   <input type="text" name="editCinema" class="form-control" id="editCinema" value="<?php if(isset($_GET['edit'])){ echo $_GET['edit']; }?>" hidden> </input>
   
-  <button type="submit" class="btn btn-success btn-lg">Editar</button>
+  <div class="text-center">
+    <button type="submit" class="btn btn-info btn-lg">Editar</button>
+  </div>
 </form>
