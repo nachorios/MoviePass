@@ -8,7 +8,7 @@
        </section>
   </main>
 
-<?php include(FORM_PATH . "search-movie-form.php") ?>
+<?php include(FORMS_PATH . "search-movie-form.php") ?>
 
 <script>
      function cambiar() {

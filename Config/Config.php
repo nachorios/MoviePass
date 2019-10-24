@@ -2,7 +2,8 @@
 
 define("ROOT", dirname(__DIR__) . "/");//URL absoluta a la carpeta root de el proyecto.
 define("VIEWS_PATH", "Views/");//Carpeta donde se almacenan nuestras vistas.
-define("FORM_PATH", "Forms/");//Carpeta donde se almacenan nuestros formularios.
+define("FORMS_PATH", "Forms/");//Carpeta donde se almacenan nuestros formularios.
+define("MODALS_PATH", "css/modals/");//Carpeta donde se almacenan nuestros formularios.
 define('URL', 'http://localhost/MoviePass');
 define("IMG_PATH", URL ."//Images/");//Carpeta donde se almacenan nuestras imagenes.
 
