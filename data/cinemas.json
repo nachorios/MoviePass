@@ -1,32 +1,20 @@
 [
     {
         "name": "Ambassador",
-        "capacity": "100",
+        "capacity": "200",
         "adress": "Cordoba",
-        "value": "100"
+        "value": "101"
     },
     {
         "name": "Cine Bangkok",
-        "capacity": "500",
+        "capacity": "200",
         "adress": "Krungthepmahanakhon Amonrattanakosin Mahintharayutthaya Mahadilokphop Noppharatratchathaniburirom Udomratchaniwetmahasathan Amonphimanawatansathit Sakkathattiyawitsanukamprasit",
         "value": "1000"
     },
     {
-        "name": "ASDF",
-        "capacity": "333",
-        "adress": "SDFSDF",
-        "value": "\"\"\"#"
-    },
-    {
-        "name": "SDFS",
-        "capacity": "3000",
-        "adress": "SDF",
-        "value": "234"
-    },
-    {
-        "name": "Ambassador",
-        "capacity": "100",
-        "adress": "Cordoba",
-        "value": "100"
+        "name": "eee",
+        "capacity": "33",
+        "adress": "333",
+        "value": "333"
     }
 ]

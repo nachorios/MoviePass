@@ -33,23 +33,27 @@ class CinemaController{
 
     public function AddJson($name, $capacity, $adress, $value){
         $cinema = new Cinema($name, $capacity, $adress, $value);
-
-        $this->cinemaDAOJson->Add($cinema);
+        $flag = $this->cinemaDAOJson->Add($cinema);
+        return $flag;
     }
 
     public function registerCinema($name, $capacity, $adress, $value)
     {
-      $cinemaRegistered = $this->AddJson($name, $capacity, $adress, $value);
-      $this->ShowCinemasList(); //cambiar por viewcontroller
-      //$this->viewController->ShowCinemasList();
+      $agregado = $this->AddJson($name, $capacity, $adress, $value);
+
+      require_once(VIEWS_PATH . 'navbar.php');
+      $cinemasList = $this->cinemaDAOJson; 
+      require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
     public function editCinema($name, $capacity, $adress, $value, $oldName)
     {
       $this->cinemaDAOJson->Delete($oldName);
-      $cinemaRegistered = $this->AddJson($name, $capacity, $adress, $value);
-      $this->ShowCinemasList(); //cambiar por viewcontroller
-      //$this->viewController->ShowCinemasList();
+      $this->AddJson($name, $capacity, $adress, $value);
+      $editado = true;
+      require_once(VIEWS_PATH . 'navbar.php');
+      $cinemasList = $this->cinemaDAOJson; 
+      require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
     public function deleteCinema($name){

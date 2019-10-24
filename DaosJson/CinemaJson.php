@@ -45,13 +45,30 @@
         }
         public function Add($value){
             $this->RetrieveData();
-            array_push($this->cinemaList, $value);
+            $flag = false;
+            if($this->GetCinema($value->getName()) == null) {
+                array_push($this->cinemaList, $value);
+                $flag = true;
+            }
             $this->SaveData();
+            return $flag;
         }
         public function GetAll(){
             $this->RetrieveData();
 
             return $this->cinemaList;
+        }
+        public function GetCinema($cinemaName){
+            $this->RetrieveData();
+            $cinema = null;
+            foreach($this->cinemaList as $cinemas) {
+                if($cinemaName == $cinemas->getName()) {
+                    $cinema = $cinemas;
+                    break;
+                }
+            }
+
+            return $cinema;
         }
         public function Delete($value){
             $this->RetrieveData();
