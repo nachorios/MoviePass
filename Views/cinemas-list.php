@@ -56,7 +56,7 @@ if(isset($agregado)) {
   }
 }
 ?>
- 
+
 <div class = "modal fade" id = "borrado-exito" role = "dialog">
      <div class = "modal-dialog modal-sm text-info">
           <div class = "modal-content">
@@ -205,17 +205,17 @@ if(!empty($arrayCinemas))
         } ?>
                 </table>
                 <div class="container col-5">
-                <?php 
+                <?php
                 if(isset($_SESSION['loggedUser'])) {
                     if($_SESSION['loggedUser']->getRole()>1) {
-                      ?> 
-                         <button type="button" data-toggle="modal" data-target="#newCinema" class="btn btn-success btn-block btn-lg"">Agregar nuevo cine</button>
+                      ?>
+                         <button type="button" data-toggle="modal" data-target="#newCinema" class="btn btn-success btn-block btn-lg">Agregar nuevo cine</button>
                       <?php
                     }
                    }?>
-                ?>
+                
                 </div>
           </div>
      </div>
-     
+
 </div>
