@@ -147,11 +147,7 @@ if(isset($agregado)) {
                 </div>
                 <!--body-->
                 <div class="modal-body">
-                  <?php     if(isset($_SESSION['loggedUser'])) {
-                              if($_SESSION['loggedUser']->getRole()>1) {
-                                include(FORM_PATH.'/cinema-add-form.php');
-                              }
-                             }?>
+                  <?php include(FORM_PATH.'/cinema-add-form.php'); ?>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>
@@ -187,7 +183,7 @@ if(!empty($arrayCinemas))
                     <tbody class="text-light">
                         <td><?php echo $cinema->getName() ?></td>
                         <td><?php echo $cinema->getCapacity() ?></td>
-                        <td><a class="text-light font-weight-bold" href="<?php
+                        <td><a class="text-light font-weight-bold" target="_blank" href="<?php
                         $url = 'https://www.google.com.ar/maps/place/%calle%,+Mar+del+Plata,+Buenos+Aires';
                         $lugar = str_replace(" ", "+",$cinema->getAdress());
                         $url = str_replace("%calle%", $lugar, $url);
@@ -209,7 +205,15 @@ if(!empty($arrayCinemas))
         } ?>
                 </table>
                 <div class="container col-5">
-                <button type="button" data-toggle="modal" data-target="#newCinema" class="btn btn-success btn-block btn-lg"">Agregar nuevo cine</button>
+                <?php 
+                if(isset($_SESSION['loggedUser'])) {
+                    if($_SESSION['loggedUser']->getRole()>1) {
+                      ?> 
+                         <button type="button" data-toggle="modal" data-target="#newCinema" class="btn btn-success btn-block btn-lg"">Agregar nuevo cine</button>
+                      <?php
+                    }
+                   }?>
+                ?>
                 </div>
           </div>
      </div>
