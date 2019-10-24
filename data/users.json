@@ -46,5 +46,13 @@
         "mail": "asd@asd",
         "pass": "1",
         "role": "1"
+    },
+    {
+        "name": "Luis",
+        "lastName": "Monteza",
+        "dni": "12345",
+        "mail": "luis.monteza@hotmail.com",
+        "pass": "asd",
+        "role": "1"
     }
 ]
