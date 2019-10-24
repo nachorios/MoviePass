@@ -68,7 +68,7 @@
                     <h4 class = "modal-title">Error</h4>
                </div>
                <div class = "modal-body">
-                    <p>Nombre de usuario o contraseña incorrecta.</p>
+                    <p>Mail de usuario o contraseña incorrecta.</p>
                </div>
                <div class = "modal-footer">
                     <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
