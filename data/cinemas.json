@@ -1,20 +1,14 @@
 [
     {
-        "name": "Ambassador",
-        "capacity": "200",
-        "adress": "Cordoba",
-        "value": "101"
-    },
-    {
-        "name": "Cine Bangkok",
-        "capacity": "200",
-        "adress": "Krungthepmahanakhon Amonrattanakosin Mahintharayutthaya Mahadilokphop Noppharatratchathaniburirom Udomratchaniwetmahasathan Amonphimanawatansathit Sakkathattiyawitsanukamprasit",
-        "value": "1000"
-    },
-    {
         "name": "eee",
         "capacity": "33",
         "adress": "333",
         "value": "333"
+    },
+    {
+        "name": "Ambassador",
+        "capacity": "200",
+        "adress": "Cordoba 1673",
+        "value": "101"
     }
 ]

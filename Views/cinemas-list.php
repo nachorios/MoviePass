@@ -187,7 +187,12 @@ if(!empty($arrayCinemas))
                     <tbody class="text-light">
                         <td><?php echo $cinema->getName() ?></td>
                         <td><?php echo $cinema->getCapacity() ?></td>
-                        <td><?php echo $cinema->getAdress() ?></td>
+                        <td><a class="text-light font-weight-bold" href="<?php
+                        $url = 'https://www.google.com.ar/maps/place/%calle%,+Mar+del+Plata,+Buenos+Aires';
+                        $lugar = str_replace(" ", "+",$cinema->getAdress());
+                        $url = str_replace("%calle%", $lugar, $url);
+                        echo $url;
+                        ?>"><?php echo $cinema->getAdress() ?></a></td>
                         <td><?php echo $cinema->getValue() ?></td>
                         <?php
                           if(isset($_SESSION['loggedUser'])) {
