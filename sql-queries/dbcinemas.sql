@@ -93,3 +93,19 @@ CREATE TABLE rols(
 
   CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
 );
+
+CREATE TABLE pay_credit_card(
+  id_credit_card INT AUTO_INCREMENT,
+  code_authorization VARCHAR(100), /*se especifica en las pautas del tp solicitará la autorización del pago a la corresp*/
+  pay_date DATE,
+  total_pay_cc INT, /*cc = credit card*/
+
+  CONSTRAINT pk_id_credit_card PRIMARY KEY (id_credit_card)
+);
+
+CREATE TABLE credit_account(
+  id_credit_account INT AUTO_INCREMENT,
+  business VARCHAR(50),
+
+  CONSTRAINT pk_id_credit_card PRIMARY KEY(id_credit_account)
+);
