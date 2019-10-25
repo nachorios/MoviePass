@@ -26,6 +26,8 @@ class CinemaController{
     }
 
     public function Add($name, $capacity, $adress, $value){
+// aqui deberia pasar el $newCinema porque los datos se obtienen en el retrieve data en cinema json,
+// no se aprovecha la funcionalidad
         $cinema = new Cinema($name, $capacity, $adress, $value);
 
         $this->cinemaDAO->Add($cinema);

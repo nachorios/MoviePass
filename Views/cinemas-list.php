@@ -49,7 +49,23 @@
      }
 ?>
 
-<?php include(MODALS_PATH . 'cinema-list-modals.php'); ?>
+<?php 
+     //aca se carga arrayCinemas con los datos de cinemas.json
+     $arrayCinemas = $cinemasList->GetAll();
+     include(MODALS_PATH . 'cinema-list-modals.php'); 
+?>
+
+<script>
+     function editarCine(cine) {
+          var data = document.getElementById(cine).value;  
+          var dataAux = data.split('/');
+          document.getElementById('nameCinema').value = dataAux[0];
+          document.getElementById('capacityCinema').value = dataAux[1];
+          document.getElementById('adressCinema').value = dataAux[2];
+          document.getElementById('valueCinema').value = dataAux[3];
+          document.getElementById('editCinema').value = cine;
+     }
+</script>
 
 <div class="container-fluid text-center ">
      <div class="row mt-5 d-flex justify-content-center" style="background-color: rgb(0,0,0,0.4)">
@@ -71,8 +87,6 @@
                               }?>
                     </thead>
           <?php
-               //aca se carga arrayCinemas con los datos de cinemas.json
-               $arrayCinemas = $cinemasList->GetAll();
                if(!empty($arrayCinemas)) {
                     foreach ($arrayCinemas as $cinema) {
           ?>
@@ -90,8 +104,13 @@
                           if(isset($_SESSION['loggedUser'])) {
                               if($_SESSION['loggedUser']->getRole()>1) {
                                 ?>
-                                   <td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?edit=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button> </a> </td>
+                                   <td><button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getCapacity() . '/' . $cinema->getAdress() . '/' . $cinema->getValue() ?>" id="<?php echo $cinema->getName()?>" onclick = "editarCine('<?php echo $cinema->getName()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
+                                   
                                    <td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
+                                   
+                                   <!--<td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?edit=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button> </a> </td>
+                                   <td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
+                                   -->
                               <?php
                               }
                           }
