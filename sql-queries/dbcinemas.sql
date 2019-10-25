@@ -40,10 +40,10 @@ CREATE TABLE performance(
 
 CREATE TABLE cinemas(
   id_cinema INT AUTO_INCREMENT,
+  name VARCHAR(50),
   capacity INT,
   addres VARCHAR(50),
-  name VARCHAR(50),
-  entry_value INT, /*valor de la entrada*/
+  value INT, /*valor de la entrada*/
 
   CONSTRAINT pk_id_cinema PRIMARY KEY (id_cinema)
 );
@@ -58,12 +58,38 @@ CREATE TABLE tickets(
 );
 
 /*compra*/
-CREATE TABLE purchase(
+CREATE TABLE buyouts(
   id_purchase INT AUTO_INCREMENT,
-  number_ticket INT, /*cantidad de entradas*/
-  discount INT, /*descuento*/
-  date_purchase DATE, /*fecha compra*/
+  quan INT, /*cantidad de entradas*/
+  disc INT, /*descuento*/
+  date_buyout DATE, /*fecha compra*/
   total INT,
 
   CONSTRAINT id_purchase PRIMARY KEY (id_purchase)
+);
+
+CREATE TABLE users(
+  id_user INT AUTO_INCREMENT,
+  mail VARCHAR(50),
+  pass VARCHAR(40),
+  role INT,
+
+  CONSTRAINT pk_id_user PRIMARY KEY (id_user)
+);
+
+CREATE TABLE persons(
+  id_person INT AUTO_INCREMENT,
+  name VARCHAR(80),
+  lastname VARCHAR(80),
+  dni INT,
+
+  CONSTRAINT pk_id_person PRIMARY KEY (id_person),
+  CONSTRAINT uniq_dni UNIQUE (dni)
+);
+
+CREATE TABLE rols(
+  id_rol INT AUTO_INCREMENT,
+  description VARCHAR(20),
+
+  CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
 );
