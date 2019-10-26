@@ -21,11 +21,13 @@ class CinemaController{
     {
       require_once(VIEWS_PATH . 'navbar.php');
 //      $arrayCinemas = $this->cinemaDAOJson->GetAll();
-      $cinemasList = $this->cinemaDAOJson; 
+      $cinemasList = $this->cinemaDAOJson;
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
     public function Add($name, $capacity, $adress, $value){
+// aqui deberia pasar el $newCinema porque los datos se obtienen en el retrieve data en cinema json,
+// no se aprovecha la funcionalidad
         $cinema = new Cinema($name, $capacity, $adress, $value);
 
         $this->cinemaDAO->Add($cinema);
@@ -39,10 +41,10 @@ class CinemaController{
 
     public function registerCinema($name, $capacity, $adress, $value)
     {
-      $agregado = $this->AddJson($name, $capacity, $adress, $value);
+      $agregado = $this->AddJson($name, $capacity, $adress, $value);     // cuidado con el espanglish
 
       require_once(VIEWS_PATH . 'navbar.php');
-      $cinemasList = $this->cinemaDAOJson; 
+      $cinemasList = $this->cinemaDAOJson;
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
@@ -50,9 +52,9 @@ class CinemaController{
     {
       $this->cinemaDAOJson->Delete($oldName);
       $this->AddJson($name, $capacity, $adress, $value);
-      $editado = true;
+      $editado = true;                                             // cuidado con el espanglish
       require_once(VIEWS_PATH . 'navbar.php');
-      $cinemasList = $this->cinemaDAOJson; 
+      $cinemasList = $this->cinemaDAOJson;
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 

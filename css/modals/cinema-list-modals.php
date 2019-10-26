@@ -68,7 +68,7 @@
     </div>
 <!---->
 <!-- EDITAR CINE -->
-    <div class="modal fade" id="mimodal">
+    <div class="modal fade" id="editar-modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!--header-->
