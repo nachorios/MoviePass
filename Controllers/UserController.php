@@ -45,6 +45,40 @@
             }
         }
 
+        public function facebookLogin() {
+            
+        include('Config/fb-config.php');
+             
+            try{
+                $accessToken = $helper->getAccessToken();
+        
+            } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+                echo "Exception: " . $e->getMessage();
+                exit();
+            } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                echo "Exception: " . $e->getMessage();
+                exit();
+            }
+        
+            if(!$accessToken) {
+                require_once(VIEWS_PATH . 'header.php');
+                require_once(VIEWS_PATH . 'navbar.php');
+                require_once(VIEWS_PATH . "login.php");
+                exit();
+            }
+
+            $oAuth2Client = $fb->getOAuth2Client();
+            if (!$accessToken->isLongLived()) {
+                $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+            }
+            $response = $fb->get("/me?fields=id, first_name, last_name, email", $accessToken);
+            $userData = $response->getGraphNode()->asArray();
+            $_SESSION['loggedUser'] = new User($userData['first_name'], $userData['last_name'],0, $userData['email']);
+            require_once(VIEWS_PATH . 'header.php');
+            require_once(VIEWS_PATH . 'navbar.php');
+            require_once(VIEWS_PATH . "index.php");
+        }
+
         public function logout() {
             unset($_SESSION['loggedUser']);
             require_once(VIEWS_PATH . 'header.php');

@@ -9,6 +9,7 @@
         <div class="collapse navbar-collapse ml-auto" id="uno">
             <ul class="navbar-nav ml-auto font-weight-bold" style="font-size: 1.2em;margin-right:5px;"  >
                 <li class="nav-item"><a href="<?php echo URL ?>/Cinema/ShowCinemasList/" class="nav-link text-light">Cines</a></li>
+                <li class="nav-item"><a href="<?php echo URL ?>/Billboard/ShowView/" class="nav-link text-light">Cartelera</a></li>
                 <li class="nav-item"><a href="#" class="nav-link text-light">Horarios</a></li>
                 <li class="nav-item"><a href="#" class="nav-link text-light">Precios</a></li>
                 <li class="nav-item"><a href="<?php echo URL ?>/Movie/ShowListView/" class="nav-link text-light">Peliculas</a></li>

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo URL ?>/css/bootstrap.css" />
     <link rel="stylesheet" href="<?php echo URL ?>/css/bootstrap.min.css" />
     <link rel="stylesheet" href="<?php echo URL ?>/css/fondocinecss.css" />    
+    <link rel="stylesheet" href="<?php echo URL ?>/css/testjs.js" />    
     <title>MyTicket</title>
 
 </head>
