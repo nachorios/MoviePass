@@ -5,13 +5,13 @@ USE dbcinemas;
 CREATE TABLE genres(
   id_genre INT,
   description VARCHAR (300),
-  id INT NOT NULL, /*id_movie*/
+  /*id INT NOT NULL,*/ /*id_movie*/ /*aca no va el id de movie porque lo tiene movies_x_genres ya que es una relacion de n a m*/
 
   CONSTRAINT pk_id_genre PRIMARY KEY (id_genre)
 );
 
 CREATE TABLE movies(
-  id INT,
+  id_movie INT,
   popularity INT,
   vote_count INT,
   video BIT,
@@ -26,7 +26,7 @@ CREATE TABLE movies(
   overview VARCHAR(300),
   release_data DATE,
 
-  CONSTRAINT pk_id_movie PRIMARY KEY (id)
+  CONSTRAINT pk_id_movie PRIMARY KEY (id_movie)
 );
 
 CREATE TABLE movies_x_genres(
@@ -35,7 +35,7 @@ CREATE TABLE movies_x_genres(
   id_genre INT,
 
   CONSTRAINT pk_id_movies_x_genre PRIMARY KEY (id_movies_x_genre),
-  CONSTRAINT fk_id_movie_movie_x_genre FOREIGN KEY (id_movie) REFERENCES movies(id),
+  CONSTRAINT fk_id_movie_movie_x_genre FOREIGN KEY (id_movie) REFERENCES movies(id_movie),
   CONSTRAINT fk_id_genre_movie_x_genre FOREIGN KEY (id_genre) REFERENCES genres(id_genre)
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE billboard(
   id_movie int,
 
   CONSTRAINT pk_id_performance PRIMARY KEY (id_billboard),
-  constraint fk_id_movie foreign key (id_movie) references movies (id)
+  constraint fk_id_movie foreign key (id_movie) references movies (id_movie)
 );
 
 CREATE TABLE cinemas(
@@ -74,32 +74,6 @@ CREATE TABLE showings(
   CONSTRAINT fk_id_performance_movie FOREIGN KEY (id_movie) REFERENCES movies(id_movie)
 );
 
-/*compra*/
-CREATE TABLE buyouts(
-  id_buyout INT AUTO_INCREMENT,
-  quan INT, /*cantidad de entradas*/
-  disc INT, /*descuento*/
-  date_buyout DATE, /*fecha compra*/
-  total INT,
-  id_user INT,
-
-  CONSTRAINT id_buyout PRIMARY KEY (id_buyout),
-  CONSTRAINT id_buyout_user FOREIGN KEY (id_user) REFERENCES users(id_user)
-);
-
-/*entradas*/
-CREATE TABLE tickets(
-  id_ticket INT AUTO_INCREMENT,
-  entry_number INT,  /*numero de entrada*/
-  qr BIT,
-  id_showing INT,
-  id_buyout INT,
-
-  CONSTRAINT pk_id_ticket PRIMARY KEY (id_ticket),
-  CONSTRAINT fk_id_ticket_showing FOREIGN KEY (id_showing) REFERENCES showings(id_showing),
-  CONSTRAINT fk_id_ticket_boyout FOREIGN KEY (id_buyout) REFERENCES bouyouts(id_buyout)
-);
-
 CREATE TABLE rols(
   id_rol INT AUTO_INCREMENT,
   description VARCHAR(20),
@@ -119,6 +93,33 @@ CREATE TABLE users(
   CONSTRAINT pk_id_user PRIMARY KEY (id_user),
   CONSTRAINT fk_id_user_rol FOREIGN KEY (id_rol) REFERENCES rols(id_rol),
   CONSTRAINT uniq_dni UNIQUE (dni)
+);
+
+/*compra*/
+CREATE TABLE buyouts(
+  id_buyout INT AUTO_INCREMENT,
+  quan INT, /*cantidad de entradas*/
+  disc INT, /*descuento*/
+  date_buyout DATE, /*fecha compra*/
+  total INT,
+  id_user INT,
+
+  CONSTRAINT id_buyout PRIMARY KEY (id_buyout),
+  CONSTRAINT id_buyout_user FOREIGN KEY (id_user) REFERENCES users(id_user)
+);
+
+
+/*entradas*/
+CREATE TABLE tickets(
+  id_ticket INT AUTO_INCREMENT,
+  entry_number INT,  /*numero de entrada*/
+  qr BIT,
+  id_showing INT,
+  id_buyout INT,
+
+  CONSTRAINT pk_id_ticket PRIMARY KEY (id_ticket),
+  CONSTRAINT fk_id_ticket_showing FOREIGN KEY (id_showing) REFERENCES showings(id_showing),
+  CONSTRAINT fk_id_ticket_boyout FOREIGN KEY (id_buyout) REFERENCES buyouts(id_buyout)
 );
 
 CREATE TABLE credit_accounts(
