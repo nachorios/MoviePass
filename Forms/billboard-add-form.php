@@ -8,7 +8,7 @@
         $("#add").click(function(e){
             if(i < maxColumnas) {
                 i++;
-                var html = '<div id="'+i+'" class=" text-dark row" style="background-color:rgb(0,0,0,0.5);"> <div class="form-group col m-2"> <label for="date" class="text-light"> Añadir fecha: </label> <input type="date" id="date" name="date" value="<?php echo date("Y-m-d"); ?>" min="<?php echo date("Y-m-d"); ?>" max="<?php  /*echo date("Y-m-31");*/  ?>" required> </div> <div class="form-group col m-2"> <label for="time" class="text-light"> Seleccionar horario: </label> <input type="time" id="time" name="time" min="15:00" max="23:00" required> </div> <a href="#" class="m-2" id="remove"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-minus"></i></button></a> </div>';
+                var html = '<div id="'+i+'" class=" text-dark row" style="background-color:rgb(0,0,0,0.5);"> <div class="form-group col m-2"> <label for="date" class="text-light"> Añadir fecha: </label> <input type="date" id="date" name="date[]" value="<?php echo date("Y-m-d"); ?>" min="<?php echo date("Y-m-d"); ?>" max="<?php  /*echo date("Y-m-31");*/  ?>" required> </div> <div class="form-group col m-2"> <label for="time" class="text-light"> Seleccionar horario: </label> <input type="time" id="time" name="time[]" min="15:00" max="23:00" required> </div> <a href="#" class="m-2" id="remove"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-minus"></i></button></a> </div>';
                 $("#container").append(html);
                 if(i%2) {
                     document.getElementById(i).style.backgroundColor = "rgba(0,0,0,0.25)";
@@ -31,7 +31,7 @@
     });
 </script>
 
-<form action="#" method="GET" class="p-3 mb-2 bg-dark">
+<form action="<?php echo URL?>/Billboard/add" method="POST" class="p-3 mb-2 bg-dark">
 <div class="form-group">
     <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
     <select class="form-control" id="select-cinema" name="cinema" id="" required>
@@ -46,7 +46,7 @@
     <select class="form-control" name="movie" id="select-movie" required>
         <option value="" selected disabled>Peliculas</option>
     <?php foreach($movieList->getNowApi() as $movie): ?>
-        <option name="nameMovie" value="<?php echo $movie->getTitle(); ?>"><?php echo $movie->getTitle(); ?></option>
+        <option name="nameMovie" value="<?php echo $movie->getId(); ?>"><?php echo $movie->getTitle(); ?></option>
     <?php endforeach; ?>
     </select>
 </div>
@@ -54,11 +54,11 @@
     <div class="text-dark row" style="background-color:rgb(0,0,0,0.5);">
         <div class="form-group col m-2">
             <label for="date" class="text-light"> Añadir fecha: </label>
-            <input type="date" id="date" name="date" value="<?php echo date("Y-m-d"); ?>" min="<?php echo date("Y-m-d"); ?>" max="<?php /*echo date("Y-m-31");*/ ?>" required>
+            <input type="date" id="date" name="date[]" value="<?php echo date("Y-m-d"); ?>" min="<?php echo date("Y-m-d"); ?>" max="<?php /*echo date("Y-m-31");*/ ?>" required>
         </div>
         <div class="form-group col m-2">
             <label for="time" class="text-light"> Seleccionar horario: </label>
-            <input type="time" id="time" name="time" min="15:00" max="23:00" required>    
+            <input type="time" id="time" name="time[]" min="15:00" max="23:00" required>    
         </div>
         <a href="#" class="m-2" id="add"><button type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></a>
     </div>

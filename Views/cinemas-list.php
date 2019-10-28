@@ -93,12 +93,35 @@
                     <tbody class="text-light">
                         <td><?php echo $cinema->getName() ?></td>
                         <td><?php echo $cinema->getCapacity() ?></td>
-                        <td><a class="text-light font-weight-bold" target="_blank" href="<?php
-                        $url = 'https://www.google.com.ar/maps/place/%calle%,+Mar+del+Plata,+Buenos+Aires';
-                        $lugar = str_replace(" ", "+",$cinema->getAdress());
-                        $url = str_replace("%calle%", $lugar, $url);
-                        echo $url;
-                        ?>"><?php echo $cinema->getAdress() ?></a></td>
+                        <td>
+
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#<?php echo str_replace(" ", "-",$cinema->getAdress()); ?>"><?php echo $cinema->getAdress() ?></button>
+
+                         <!--Modal: Name-->
+                         <div class="modal fade" id="<?php echo str_replace(" ", "-",$cinema->getAdress()); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg" role="document">
+                              <!--Content-->
+                                   <div class="modal-content">
+                                        <!--Body-->
+                                        <div class="modal-body mb-0 p-0">
+                                        <!--Google map-->
+                                             <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">     
+                                                  <div id="googleMap" style="width:100%;height:400px;">
+                                                  <?php echo '<iframe frameborder="0" width="798" height="500" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $cinema->getAdress())) . '&z=14&output=embed"></iframe>'; ?>
+                                                  </div>
+                                             </div>
+                                        <!--Google Maps-->
+                                        </div>
+                                        <!--Footer-->
+                                        <div class="modal-footer justify-content-center">
+                                        <button type="button" class="btn btn-outline-secondary btn-md" data-dismiss="modal">Cerrar <i class="fa fa-check-circle"></i></button>
+                                        </div>
+                                   </div>
+                              <!--/.Content-->
+                              </div>
+                         </div>
+
+                        </td>
                         <td><?php echo $cinema->getValue() ?></td>
                         <?php
                           if(isset($_SESSION['loggedUser'])) {

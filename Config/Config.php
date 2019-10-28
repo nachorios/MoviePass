@@ -4,7 +4,7 @@ define("ROOT", dirname(__DIR__) . "/");//URL absoluta a la carpeta root de el pr
 define("VIEWS_PATH", "Views/");//Carpeta donde se almacenan nuestras vistas.
 define("FORMS_PATH", "Forms/");//Carpeta donde se almacenan nuestros formularios.
 define("MODALS_PATH", "css/modals/");//Carpeta donde se almacenan nuestros formularios.
-define('URL', 'http://localhost:8080/MoviePass');
+define('URL', 'http://localhost/MoviePass');
 define("IMG_PATH", URL ."//Images/");//Carpeta donde se almacenan nuestras imagenes.
 
 define("DB_HOST", "localhost");//Nombre del dominio del host.

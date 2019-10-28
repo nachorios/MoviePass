@@ -50,6 +50,26 @@
             return $arrayTodecode['genres'];
         }
 
+        public function getMovieById($id) {
+            $genrelist= array();
+            $jsonContent= file_get_contents('https://api.themoviedb.org/3/movie/'.$id.'?api_key=1e5c581fb6ceaf853ff088a424f4cfcb&language=es-ES', true);
+            $movieData = ($jsonContent) ? json_decode($jsonContent, true) : array();
+            $movie= new Movie();
+            $movie->setId($movieData['id']);
+            $movie->setPopularity($movieData['popularity']);
+            $movie->setVote_count($movieData['vote_count']);
+            $movie->setVideo($movieData['video']);
+            $movie->setPoster_path($movieData['poster_path']);
+            $movie->setAdult($movieData['adult']);
+            $movie->setBackdrop_path($movieData['backdrop_path']);
+            $movie->setOriginal_language($movieData['original_language']);
+            $movie->setOriginal_title($movieData['original_title']);
+            $movie->setTitle($movieData['title']);
+            $movie->setVote_average($movieData['vote_average']);
+            $movie->setOverview($movieData['overview']);
+            $movie->setRelease_date($movieData['release_date']);
+            return $movie;
+        }
 
         /**
          * Funcion para agregar mediante un INSERT una pelicula a la base de datos.
