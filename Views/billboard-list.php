@@ -7,8 +7,23 @@
                });
           </script><?php
      }
+     if(isset($edited)) {
+        if($edited) {
+            ?><script>
+             $(function(){
+                  $('#edicion-exito').modal('show');
+             });
+        </script><?php
+        } else {
+            ?><script>
+            $(function(){
+                 $('#edicion-error').modal('show');
+            });
+       </script><?php
+        }
+   }
      if(isset($_GET['delete']))
-     { //usamos el metodo de el atributo cinemasList, cinemasList fue igualado a cinemasDAOJSON en ShowCinemasList y borramos por el dato que esta en get
+     {
           $billboardList->Delete($_GET['delete'],$_GET['movie']);
           $borrado = true;
      }
@@ -25,11 +40,10 @@
      function editBillboard(billboard) {
           var data = document.getElementById(billboard).value;  
           var dataAux = data.split('/');
-          document.getElementById('nameCinema').value = dataAux[0];
-          document.getElementById('capacityCinema').value = dataAux[1];
-          document.getElementById('adressCinema').value = dataAux[2];
-          document.getElementById('valueCinema').value = dataAux[3];
-          document.getElementById('editCinema').value = billboard;
+          document.getElementById('select-cinema').value = dataAux[0];
+          document.getElementById('select-movie').value = dataAux[1];
+          document.getElementById('oldCinema').value = dataAux[0];
+          document.getElementById('oldMovie').value = dataAux[1];
      }
 </script>
 
@@ -40,6 +54,7 @@
                 include(FORMS_PATH . 'billboard-add-form.php'); 
             }
         }
+        $id = 0;
         foreach($billboardList->getAll() as $billboard):
         $cinema = $billboard->getCinema();
         $movie = $movieList->getMovieById($billboard->getMovie());
@@ -50,9 +65,9 @@
     <div class ="col-md-6 float-left" >
         <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
 
-            <div class="col p-4 d-flex flex-column position-static">
+            <div class="col p-2 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary"><?php echo $cinema ?></strong>
-                <h4 class="mb-0"><?php echo substr($movie->getTitle(), 0, 25); if(strlen($movie->getTitle()) > 25) echo '...'; ?></h4>
+                <h5 class="mb-0"><?php echo substr($movie->getTitle(), 0, 34); if(strlen($movie->getTitle()) > 34) echo '...'; ?></h5>
                 <div class="mb-1 text-muted">
                     Puntaje: <?php echo $movie->getVote_average() ?>
                 </div>
@@ -73,7 +88,10 @@
                     </tbody>
                 </table>
 
-                <p class="card-text mb-auto" ><?php echo substr($movie->getOverview(), 0, 100); if(strlen($movie->getOverview()) > 100) echo '...'; ?></p>
+                <p class="card-text mb-auto" > </p>
+                <?php if(count($date)<2): ?>
+                    <p class="card-text mb-auto font-italic" ><?php echo substr($movie->getOverview(), 0, 100); if(strlen($movie->getOverview()) > 100) echo '...'; ?></p>
+                <?php endif; ?>
                 <a href="#" class="">Más información</a>
                 <?php
         if(isset($_SESSION['loggedUser'])) {
@@ -81,18 +99,19 @@
                 ?> 
                     <button type="button" value="" id="borrar" onclick = "window.location = '<?php echo URL ?>/Billboard/ShowView?delete=<?php echo $cinema.'&movie='.$billboard->getMovie();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
                         
-                    <button type="button" value="" id="" onclick = "editarCine('');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
+                    <button type="button" value='<?php echo $cinema.'/'.$billboard->getMovie() ?>' id="<?php echo $id ?>" onclick = "editBillboard('<?php echo $id ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
         <?php }
         } ?>  
             </div>
  
             <div class="col-auto d-none d-lg-block">
-                <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" style="" alt=<?php $movie->getTitle() ?> width="200" height="350">
+                <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" style="" alt=<?php $movie->getTitle() ?> width="350" height="450" style="max-height: 100px;">
             </div>  
               
         </div>
     </div>
     <?php
+        $id++;
         endforeach;
     ?>
 <div class="clearfix"></div>

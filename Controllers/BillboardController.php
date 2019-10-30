@@ -30,6 +30,23 @@ class BillboardController {
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
+    public function editCinema($cinema, $idMovie, $day, $hour, $oldMovie, $oldCinema)
+    {
+        $oldBillboard = $this->billboardDAO->GetBillboard($oldCinema, $oldMovie);
+        $this->billboardDAO->Delete($oldCinema, $oldMovie);
+        $billboard = new Billboard($day, $hour, $idMovie, $cinema);
+        $edited = $this->billboardDAO->Add($billboard);
+        if(!$edited) {
+            $this->billboardDAO->Add($oldBillboard);
+        }
+        $movieList = $this->movieDAO;
+        $cinemasList = $this->cinemaDAO; 
+        $billboardList = $this->billboardDAO; 
+        require_once(VIEWS_PATH . 'header.php');
+        require_once(VIEWS_PATH . 'navbar.php');
+        require_once(VIEWS_PATH . "billboard-list.php");
+    }
+
     /*----Vistas----*/
     public function ShowView() //pruebas
     {

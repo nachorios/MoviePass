@@ -31,7 +31,7 @@
     });
 </script>
 
-<form action="<?php echo URL?>/Billboard/add" method="POST" class="p-3 mb-2 bg-dark">
+<form action="<?php echo URL?>/Billboard/add" method="POST" class="p-3 mb-2 bg-dark rounded">
 <div class="form-group">
     <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
     <select class="form-control" id="select-cinema" name="cinema" id="" required>
