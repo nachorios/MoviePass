@@ -17,10 +17,11 @@
             try {
             
 
-                $query = "INSERT INTO " . $this->tableName . "(id_movies) VALUES (:id_movies);";
+                $query = "INSERT INTO " . $this->tableName . "(id_movies, id_cinema) VALUES (:id_movies, :id_cinema);";
 
                 $parameters = Array();
                 $parameters["id_movies"] = $bill->getMovie();
+                $parameters["id_cinema"] = $bill->getCinema();
 
                 $this->connection = Connection::GetInstance();
 
@@ -68,25 +69,24 @@
         public function GetAll() {
 
             try {
-                $movieList = array();
+                $billboardList = array();
 
-                $query = "SELECT * FROM ".$this->tableName;
-
+                $query = "select d.days as 'day', d.hours as 'hour', b.id_movies as 'idMovie', b.id_cinema as 'cinema'
+                from billboard as b
+                join dates as d
+                on b.id_billboard = d.id_billboard";
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
 
                 foreach ($resultSet as $row):
 
-                    $movie = new Movie();
-                    $movie->setTitle($row["title"]);
-                    $movie->setTime($row["time"]);
-                    $movie->setLanguage($row["language"]);
-                    array_push($movieList, $movie);
+                    $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $row["idMovie"], $row["cinema"]);
+                    array_push($billboardList, $billboard);
 
                 endforeach;
 
-                return $movieList;
+                return $billboardList;
             } catch(Exception $e) {
                 throw $e;
             }

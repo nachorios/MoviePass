@@ -46,6 +46,7 @@ CREATE TABLE movies_x_genres(
 CREATE TABLE billboard(
   id_billboard INT AUTO_INCREMENT,
   id_movies int,
+  id_cinema varchar(25),
 
   CONSTRAINT pk_id_performance PRIMARY KEY (id_billboard),
   constraint fk_id_movies foreign key (id_movies) references movies (id_movie)
@@ -59,6 +60,11 @@ create table dates(
     CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard)
 );
 
+
+select d.days as 'day', d.hours as 'hour', b.id_movies as 'idMovie', b.id_cinema as 'cinema'
+from billboard as b
+join dates as d
+on b.id_billboard = d.id_billboard;
 
 CREATE TABLE cinemas(
   id_cinema INT AUTO_INCREMENT,
