@@ -4,7 +4,7 @@ use DaosJson\CinemaJson as CinemaDAO;
 use Models\Cinema as Cinema;
 use Daos\MovieDAO as MovieDAO;
 use Models\Movie as Movie;
-use DaosJson\BillboardJson as BillboardDAO;
+use Daos\BillboardDAO as BillboardDAO;
 use Models\Billboard as Billboard;
 
 class BillboardController {

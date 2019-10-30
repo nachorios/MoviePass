@@ -1,6 +1,8 @@
+drop database dbcinemas;
 CREATE DATABASE dbcinemas;
 
 USE dbcinemas;
+
 
 CREATE TABLE genres(
   id_genre INT,
@@ -43,13 +45,20 @@ CREATE TABLE movies_x_genres(
 /*cartelera*/
 CREATE TABLE billboard(
   id_billboard INT AUTO_INCREMENT,
-  dia DATE,
-  hora VARCHAR(30),
-  id_movie int,
+  id_movies int,
 
   CONSTRAINT pk_id_performance PRIMARY KEY (id_billboard),
-  constraint fk_id_movie foreign key (id_movie) references movies (id_movie)
+  constraint fk_id_movies foreign key (id_movies) references movies (id_movie)
 );
+create table dates(
+	id_dates int auto_increment,
+    id_billboard int not null,
+    days varchar(30),
+    hours varchar(30),
+    CONSTRAINT pk_id_dates PRIMARY KEY (id_dates),
+    CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard)
+);
+
 
 CREATE TABLE cinemas(
   id_cinema INT AUTO_INCREMENT,

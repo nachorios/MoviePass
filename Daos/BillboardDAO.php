@@ -17,18 +17,38 @@
             try {
             
 
-                $query = "INSERT INTO " . $this->tableName . "(days, hours, id_movies) VALUES (:days, :hours, :id_movies);";
+                $query = "INSERT INTO " . $this->tableName . "(id_movies) VALUES (:id_movies);";
 
-                $parameters["days"] = $bill->getDay();
-                $parameters["hours"] = $bill->getHour();
+                $parameters = Array();
                 $parameters["id_movies"] = $bill->getMovie();
 
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
-
+                $this->connection->executeQuery($query, $parameters);
+                $this->AddDate($bill->getDay(), $bill->getHour(), $this->connection->getPdo()->lastInsertId());
             } catch(Exception $e) {
                 throw $e;
+            }
+        }
+
+        public function AddDate($days, $hours, $id) {
+            for($i = 0; $i < count($days); $i++) {
+                try {
+            
+
+                    $query = "INSERT INTO" . " dates " . "(id_billboard, days, hours) VALUES (:id_billboard, :days, :hours);";
+    
+                    $parameters = Array();
+                    $parameters["id_billboard"] = $id;
+                    $parameters["days"] = $days[$i];
+                    $parameters["hours"] = $hours[$i];
+    
+                    $this->connection = Connection::GetInstance();
+    
+                    $this->connection->executeQuery($query, $parameters);
+                } catch(Exception $e) {
+                    throw $e;
+                }
             }
         }
 
