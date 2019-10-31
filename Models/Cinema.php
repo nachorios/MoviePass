@@ -1,6 +1,7 @@
 <?php namespace Models;
 
 class Cinema{
+  //private $id_cinema
     private $name;
     private $capacity;
     private $adress;
@@ -13,6 +14,9 @@ class Cinema{
         $this->value = $value;
     }
 
+/*    public function getIdCinema(){
+        return $this->id_cinema;
+    }*/
     public function getName(){
         return $this->name;
     }
@@ -26,6 +30,9 @@ class Cinema{
         return $this->value;
     }
 
+    /*public function setIdCinema($id_cinema){
+        $this->id_cinema=$id_cinema;
+    }*/
     public function setName($name){
         $this->name=$name;
     }
@@ -38,5 +45,5 @@ class Cinema{
     public function setValue($value){
         $this->value=$value;
     }
-    
+
 }

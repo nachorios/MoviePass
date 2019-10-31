@@ -41,6 +41,10 @@ class CinemaController{
 
     public function registerCinema($name, $capacity, $adress, $value)
     {
+      //esto lo agrego para que tambien me guarde el objeto en la bbdd, aun no funcion por eso lo dejo comentado
+      /*$cinema = new Cinema($name, $capacity, $adress, $value);
+      $this->cinemaDAO->Add($cinema);*/
+
       $agregado = $this->AddJson($name, $capacity, $adress, $value);     // cuidado con el espanglish
 
       require_once(VIEWS_PATH . 'navbar.php');
