@@ -1,11 +1,21 @@
 <?php
     include(MODALS_PATH . 'billboard-list-modals.php');
      if(isset($added)) {
-          ?><script>
-               $(function(){
-                    $('#registro-exito').modal('show');
-               });
-          </script><?php
+         if($added) {
+
+            ?><script>
+            $(function(){
+                 $('#registro-exito').modal('show');
+            });
+       </script><?php
+         } else {
+
+            ?><script>
+            $(function(){
+                 $('#registro-error').modal('show');
+            });
+       </script><?php
+         }
      }
      if(isset($edited)) {
         if($edited) {

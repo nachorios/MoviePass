@@ -67,6 +67,23 @@
         </div>
     </div>
 <!---->
+<!-- EDITAR CINE ERROR -->
+<div class = "modal fade" id = "registro-error" role = "dialog">
+        <div class = "modal-dialog modal-sm text-danger">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                        <h4 class = "modal-title">Error al agregar pelicula</h4>
+                </div>
+                <div class = "modal-body">
+                        <p>Se puede agregar una sola vez la misma pelicula por cine.</p>
+                </div>
+                <div class = "modal-footer">
+                        <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
 <!-- EDITAR CINE -->
 <div class="modal fade bd-example-modal-lg" id="editar-modal">
         <div class="modal-dialog modal-lg ">
