@@ -1,4 +1,13 @@
-<form action="<?php echo URL?>/cinema/editCinema" method="POST">
+<script>
+
+  function loadingEdit() {
+        document.getElementById('loading-edit').removeAttribute("hidden");
+        document.getElementById('btn-edit').remove();
+        return;
+    }
+</script>
+
+<form action="<?php echo URL?>/cinema/editCinema" onsubmit="loadingEdit()" method="POST">
   <div class="form-group">
     <label for="nameCinema"> Nombre del cine: </label>
     <input type="text" name="name" class="form-control" id="nameCinema" value="" required> </input>
@@ -18,6 +27,12 @@
   <input type="text" name="editCinema" class="form-control" id="editCinema" value="" hidden> </input>
   
   <div class="text-center">
-    <button type="submit" class="btn btn-info btn-lg">Editar</button>
+      <div id="loading-edit" hidden> 
+      <button class="btn btn-info btn-lg" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Editando...
+      </button>
+      </div>
+    <button type="submit" id="btn-edit" class="btn btn-info btn-lg">Editar cine</button>
   </div>
 </form>

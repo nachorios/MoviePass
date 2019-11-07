@@ -1,4 +1,4 @@
-<script>
+<script type="text/javascript">
     $(document).ready(function(e){
         //variables
         var i = 0;
@@ -29,9 +29,15 @@
 
         //populate values from the first row
     });
+
+    function loadingEdit() {
+        document.getElementById('loading-edit').removeAttribute("hidden");
+        document.getElementById('btn-edit').remove();
+        return;
+    }
 </script>
 
-<form action="<?php echo URL?>/Billboard/editCinema" method="POST" class="p-3 mb-2 bg-dark">
+<form action="<?php echo URL?>/Billboard/editCinema" onsubmit="loadingEdit()" method="POST" name="frm" class="p-3 mb-2 bg-dark">
     <div class="form-group">
         <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
         <select class="form-control" id="select-cinema" name="cinema" required>
@@ -68,6 +74,13 @@
     <input type="text" name="oldCinema" class="form-control" id="oldCinema" value="" hidden> </input>
     
     <div class="mt-3">
-        <button type="submit" data-toggle="modal" class="btn btn-info btn-block btn-lg ">Confirmar edicion de cartelera</button>
+        <div class='text-center' id="loading-edit" hidden> 
+        <button class="btn btn-info btn-block btn-lg" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Editando...
+        </button>
+        </div>
+        <button type="submit" id="btn-edit" class="btn btn-info btn-block btn-lg">Confirmar edicion de cartelera</button>
+        
     </div>
 </form>
