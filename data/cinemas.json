@@ -16,5 +16,11 @@
         "capacity": "100",
         "adress": "Diagonal Pueyrred\u00f3n 3050",
         "value": "200"
+    },
+    {
+        "name": "Cines del shopping",
+        "capacity": "100",
+        "adress": "Rivadavia 3050",
+        "value": "200"
     }
 ]

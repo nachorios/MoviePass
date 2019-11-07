@@ -22,9 +22,9 @@ class CinemaController{
       require_once(VIEWS_PATH . 'navbar.php');
       //$arrayCinemas = $this->cinemaDAOJson->GetAll();
 
-      //$cinemasList = $this->cinemaDAO; //PARA PDO
+      $cinemasList = $this->cinemaDAO; //PARA PDO
 
-      $cinemasList = $this->cinemaDAOJson; // para json
+      //$cinemasList = $this->cinemaDAOJson; // para json
 
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
@@ -50,7 +50,7 @@ class CinemaController{
       $agregado = $this->cinemaDAO->Add($cinema); // DE PDO
       echo $agregado;
 
-      //$agregado = $this->AddJson($name, $capacity, $adress, $value); //DE JSON  // cuidado con el espanglish, recordar que retorna flag para el modal
+      $agregado = $this->AddJson($name, $capacity, $adress, $value); //DE JSON  // cuidado con el espanglish, recordar que retorna flag para el modal
 
       require_once(VIEWS_PATH . 'navbar.php');
       $cinemasList = $this->cinemaDAOJson;
