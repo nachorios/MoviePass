@@ -13,7 +13,14 @@
 
         public function getNowApi()
         {
-            return $this->retrieveData();
+            $movies;
+            if(!isset($_SESSION['movies'])) {
+                $_SESSION['movies'] = $this->retrieveData();
+                $movies = $_SESSION['movies'];
+            } else {
+                $movies = $_SESSION['movies'];
+            }
+            return $movies;
         }
         private function retrieveData()
         {
@@ -63,6 +70,7 @@
             $movie->setAdult($movieData['adult']);
             $movie->setBackdrop_path($movieData['backdrop_path']);
             $movie->setOriginal_language($movieData['original_language']);
+            $movie->setGenre_ids($movieData['genres']);
             $movie->setOriginal_title($movieData['original_title']);
             $movie->setTitle($movieData['title']);
             $movie->setVote_average($movieData['vote_average']);

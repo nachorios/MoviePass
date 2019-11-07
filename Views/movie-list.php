@@ -26,6 +26,9 @@
                          url += "?show_genre=" + genre;
                     }
                }
+               let p = document.getElementById('loading');
+               p.removeAttribute("hidden");
+               document.getElementById('peliculas').remove();
                window.location = url;
           };
      }
@@ -44,12 +47,18 @@
                          url += "?show_genre=" + genre;
                     }
                }
+               let p = document.getElementById('loading');
+               p.removeAttribute("hidden");
+               document.getElementById('peliculas').remove();
                window.location = url;
           };
      }
 </script>
 
-
+<div class="text-center">
+     <div id="loading" class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" hidden></div>
+</div>
+<div id="peliculas">
 <?php
 if (!empty($arrayMovies)):
      foreach ($arrayMovies as $movie):
@@ -82,7 +91,7 @@ if (!empty($arrayMovies)):
           }    
      }
 ?>
-          <div class="container-fluid">
+          <div class="container-fluid" id="peliculas">
                <div class="row mt-5" style="background-color: rgb(0,0,0,0.4);">
                     <div class="col-4  my-5" >
                          <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" alt=<?php $movie->getTitle() ?> 
@@ -105,3 +114,4 @@ if (!empty($arrayMovies)):
      endforeach;
 endif;
 ?>
+</div>

@@ -1,11 +1,21 @@
 <?php
     include(MODALS_PATH . 'billboard-list-modals.php');
      if(isset($added)) {
-          ?><script>
-               $(function(){
-                    $('#registro-exito').modal('show');
-               });
-          </script><?php
+         if($added) {
+
+            ?><script>
+            $(function(){
+                 $('#registro-exito').modal('show');
+            });
+       </script><?php
+         } else {
+
+            ?><script>
+            $(function(){
+                 $('#registro-error').modal('show');
+            });
+       </script><?php
+         }
      }
      if(isset($edited)) {
         if($edited) {
@@ -45,6 +55,16 @@
           document.getElementById('oldCinema').value = dataAux[0];
           document.getElementById('oldMovie').value = dataAux[1];
      }
+
+     function loadingDelete(id) {
+        document.getElementById('loading-delete-'+id).removeAttribute("hidden");
+        document.getElementById('borrar-'+id).remove();
+        return;
+    }
+
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();   
+    });
 </script>
 
 <div class="container">
@@ -92,15 +112,53 @@
                 <?php if(count($date)<2): ?>
                     <p class="card-text mb-auto font-italic" ><?php echo substr($movie->getOverview(), 0, 100); if(strlen($movie->getOverview()) > 100) echo '...'; ?></p>
                 <?php endif; ?>
-                <a href="#" class="">Más información</a>
+                <button class="btn btn-secondary btn-sm mb-2" data-toggle="popover" title="<?php echo $movie->getTitle() ?>" data-html="true" 
+                data-content='
+                <ul class="list-unstyled">
+                    <h4>Sinopsis</h4>
+                    <li><?php echo $movie->getOverview(); ?></li>
+                    <br/>
+                    <li><h6>Datos de interes: </h6>
+                        <ul>
+                            <li>Fecha de Estreno: <?php echo $movie->getRelease_date(); ?></li>
+                            <li>Titulo original: <?php echo $movie->getOriginal_title(); ?></li>
+                            <li>Puntuacion: <?php echo $movie->getVote_average(); ?></li>
+                        </ul>
+                    </li>
+                    <!--<li>Faucibus porta lacus fringilla vel</li>-->
+                    <br/>
+                    <li><h6>Generos: </h6>
+                        <ul>
+                            <?php 
+                                $movieGenres = $movie->getGenre_ids();
+                                foreach($movieGenres as $genre):
+                            ?>
+                            <li> <?php echo $genre['name']; ?> </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </li>
+                </ul>
+                '>
+                Más información</button>
+                
                 <?php
         if(isset($_SESSION['loggedUser'])) {
             if($_SESSION['loggedUser']->getRole()>1) {
                 ?> 
-                    <button type="button" value="" id="borrar" onclick = "window.location = '<?php echo URL ?>/Billboard/ShowView?delete=<?php echo $cinema.'&movie='.$billboard->getMovie();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
+                    <div class='text-center' id="loading-delete-<?php echo $id ?>" hidden> 
+                        <button class="btn btn-danger col p-2" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Eliminando...
+                        </button>
+                    </div>
+                    <button type="button" value="" id="borrar-<?php echo $id ?>" onclick="loadingDelete(<?php echo $id ?>); window.location = '<?php echo URL ?>/Billboard/ShowView?delete=<?php echo $cinema.'&movie='.$billboard->getMovie();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
                         
                     <button type="button" value='<?php echo $cinema.'/'.$billboard->getMovie() ?>' id="<?php echo $id ?>" onclick = "editBillboard('<?php echo $id ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
-        <?php }
+        <?php } else {
+            ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i>Agregar al Carrito</button> <?php
+        }
+        } else {
+            ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i> Agregar al Carrito</button> <?php
         } ?>  
             </div>
  

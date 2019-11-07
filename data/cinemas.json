@@ -1,5 +1,6 @@
 [
     {
+<<<<<<< HEAD
         "name": "Ambassador",
         "capacity": "199",
         "adress": "Cordoba 1673",
@@ -16,5 +17,17 @@
         "capacity": "100",
         "adress": "Diagonal Pueyrred\u00f3n 3050",
         "value": "200"
+=======
+        "name": "Cinemacenter",
+        "capacity": "78",
+        "adress": "Diagonal Pueyrred\u00f3n 3050",
+        "value": "255"
+    },
+    {
+        "name": "Ambassador",
+        "capacity": "200",
+        "adress": "Cordoba 1673",
+        "value": "1012"
+>>>>>>> 06035e6774e5344c2cb1baf55a968def8fdca0b0
     }
 ]

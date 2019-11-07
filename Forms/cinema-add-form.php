@@ -1,5 +1,14 @@
+<script>
+
+  function loadingAdd() {
+        document.getElementById('loading-add').removeAttribute("hidden");
+        document.getElementById('btn-add').remove();
+        return;
+    }
+</script>
+
 <div class="container">
-<form action="<?php echo URL?>/cinema/registerCinema" method="POST">
+<form action="<?php echo URL?>/cinema/registerCinema" onsubmit="loadingAdd()" method="POST">
   <div class="form-group">
     <label for="nameCinema"> Nombre del cine: </label>
     <input type="text" name="name" class="form-control" id="nameCinema" placeholder="Ingresar nombre del cine" required> </input>
@@ -17,7 +26,13 @@
     <input type="number" min="0" name="value" class="form-control" id="valueCine" placeholder="Ingresar valor unico de entrada" required> </input>
   </div>
   <div class="text-center">
-    <button type="submit" class="btn btn-success btn-lg">Agregar</button>
+      <div id="loading-add" hidden> 
+      <button class="btn btn-success btn-lg" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Agregando...
+      </button>
+      </div>
+    <button type="submit" id="btn-add" class="btn btn-success btn-lg">Agregar</button>
   </div>
 </form>
 </div>
