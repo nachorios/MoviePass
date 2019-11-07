@@ -140,6 +140,7 @@
                 </ul>
                 '>
                 Más información</button>
+                
                 <?php
         if(isset($_SESSION['loggedUser'])) {
             if($_SESSION['loggedUser']->getRole()>1) {
@@ -153,7 +154,11 @@
                     <button type="button" value="" id="borrar-<?php echo $id ?>" onclick="loadingDelete(<?php echo $id ?>); window.location = '<?php echo URL ?>/Billboard/ShowView?delete=<?php echo $cinema.'&movie='.$billboard->getMovie();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
                         
                     <button type="button" value='<?php echo $cinema.'/'.$billboard->getMovie() ?>' id="<?php echo $id ?>" onclick = "editBillboard('<?php echo $id ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
-        <?php }
+        <?php } else {
+            ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i>Agregar al Carrito</button> <?php
+        }
+        } else {
+            ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i> Agregar al Carrito</button> <?php
         } ?>  
             </div>
  
