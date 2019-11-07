@@ -70,11 +70,12 @@ CREATE TABLE cinemas(
   id_cinema INT AUTO_INCREMENT,
   name VARCHAR(50),
   capacity INT,
-  addres VARCHAR(50),
-  value INT, /*valor de la entrada*/
+  address VARCHAR(50),  
+  entry_value INT, /*valor de la entrada*/
 
   CONSTRAINT pk_id_cinema PRIMARY KEY (id_cinema)
 );
+
 
 /*funcion de cine*/
 CREATE TABLE showings(

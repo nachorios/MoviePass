@@ -54,17 +54,17 @@
              }
         }
 
-        public function ExecuteNonQuery($query, $parameters = array()) {
+/*        public function ExecuteNonQuery($query, $parameters = array()) {
              try {
                   // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-                  $this->pdoStatement = $this->pdo->prepare($query);
+                  $this->pdoStatement = $this->pdo->prepare($query);*/
 
 /*                  foreach($parameters as $parameterName => $value) {
                        // Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
                        $this->pdoStatement->bindParam(":$parameterName", $parameters[$parameterName]);
                   }*/
 //die(var_dump($this->pdoStatement));
-                  $this->pdoStatement->execute();
+/*                  $this->pdoStatement->execute();
 
                   return $this->pdoStatement->rowCount();    // devuelve la cantidad de filas afectadas
              }
@@ -73,5 +73,27 @@
                   throw $ex;
              }
         }
+*/
 
+public function executeNonQuery($query, $parameters = array())
+     {
+          /*echo "<pre>";
+          var_dump($parameters);
+          echo "</pre>";*/
+          try
+          {
+               // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
+               $this->pdoStatement = $this->pdo->prepare($query);
+               foreach($parameters as $parameterName => $value) {
+                    // Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
+                    $this->pdoStatement->bindParam(":$parameterName", $parameters[$parameterName]);
+               }
+               $this->pdoStatement->execute();
+               return $this->pdoStatement->rowCount();
+          }
+          catch(\PDOException $ex)
+          {
+               throw $ex;
+          }
+     }
    }
