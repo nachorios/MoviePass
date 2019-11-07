@@ -70,7 +70,7 @@
           document.getElementById('valueCinema').value = dataAux[3];
           document.getElementById('editCinema').value = cine;
      }
-     
+
     function loading(element, type, text) {
         //document.getElementById('loading-add').removeAttribute("hidden");
         element.innerHTML = '<button class="btn btn-'+type+'" type="button" disabled> <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span>'+text+'</span> </button>';
@@ -139,18 +139,9 @@
                               if($_SESSION['loggedUser']->getRole()>1) {
                                 ?>
                                    <td><button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getCapacity() . '/' . $cinema->getAdress() . '/' . $cinema->getValue() ?>" id="<?php echo $cinema->getName()?>" onclick = "editarCine('<?php echo $cinema->getName()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
-<<<<<<< HEAD
 
-                                   <td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
-
-                                   <!--<td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?edit=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button> </a> </td>
-                                   <td> <a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
-                                   -->
-=======
-                                   
                                    <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
-                                   
->>>>>>> 06035e6774e5344c2cb1baf55a968def8fdca0b0
+
                               <?php
                               }
                           }

@@ -22,9 +22,9 @@ class CinemaController{
       require_once(VIEWS_PATH . 'navbar.php');
       //$arrayCinemas = $this->cinemaDAOJson->GetAll();
 
-      $cinemasList = $this->cinemaDAO; //PARA PDO
+      //$cinemasList = $this->cinemaDAO; //PARA PDO
 
-      //$cinemasList = $this->cinemaDAOJson; // para json
+      $cinemasList = $this->cinemaDAOJson; // para json
 
       require_once(VIEWS_PATH . "cinemas-list.php");
     }

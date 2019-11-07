@@ -25,11 +25,7 @@
 
                 $this->connection = Connection::GetInstance();
 
-<<<<<<< HEAD
-                $this->connection->executeQuery($query, $parameters); // ExecuteNonQuery
-=======
                 $this->connection->ExecuteNonQuery($query, $parameters);
->>>>>>> 06035e6774e5344c2cb1baf55a968def8fdca0b0
                 $this->AddDate($bill->getDay(), $bill->getHour(), $this->connection->getPdo()->lastInsertId());
             } catch(Exception $e) {
                 throw $e;
@@ -49,13 +45,8 @@
                     $parameters["hours"] = $hours[$i];
 
                     $this->connection = Connection::GetInstance();
-<<<<<<< HEAD
 
-                    $this->connection->executeQuery($query, $parameters);
-=======
-    
                     $this->connection->ExecuteNonQuery($query, $parameters);
->>>>>>> 06035e6774e5344c2cb1baf55a968def8fdca0b0
                 } catch(Exception $e) {
                     throw $e;
                 }
@@ -102,7 +93,7 @@
                             //agregar fecha
                             //agregar horario
                         }
-                    }  
+                    }
                     if(!$flag) {
                         $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $row["idMovie"], $row["cinema"], $row["id"]);
                         array_push($billboardList, $billboard);
@@ -116,9 +107,6 @@
 
         }
 
-<<<<<<< HEAD
-    }
-=======
         private function mapear($value) {
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){
@@ -128,4 +116,3 @@
         }
 
     }
->>>>>>> 06035e6774e5344c2cb1baf55a968def8fdca0b0
