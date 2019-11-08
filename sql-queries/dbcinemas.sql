@@ -41,7 +41,6 @@ CREATE TABLE movies_x_genres(
   CONSTRAINT fk_id_genre_movie_x_genre FOREIGN KEY (id_genre) REFERENCES genres(id_genre)
 );
 
-
 /*cartelera*/
 CREATE TABLE billboard(
   id_billboard INT AUTO_INCREMENT,
@@ -51,6 +50,7 @@ CREATE TABLE billboard(
   CONSTRAINT pk_id_performance PRIMARY KEY (id_billboard),
   constraint fk_id_movies foreign key (id_movies) references movies (id_movie)
 );
+
 create table dates(
 	id_dates int auto_increment,
     id_billboard int not null,
@@ -60,11 +60,6 @@ create table dates(
     CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard)
 );
 
-
-select d.days as 'day', d.hours as 'hour', b.id_movies as 'idMovie', b.id_cinema as 'cinema'
-from billboard as b
-join dates as d
-on b.id_billboard = d.id_billboard;
 
 CREATE TABLE cinemas(
   id_cinema INT AUTO_INCREMENT,
@@ -76,22 +71,10 @@ CREATE TABLE cinemas(
   CONSTRAINT pk_id_cinema PRIMARY KEY (id_cinema)
 );
 
-/*funcion de cine*/
-CREATE TABLE showings(
-  id_showing INT AUTO_INCREMENT,
-  dia DATE,
-  hora VARCHAR(30),
-  id_cinema INT,
-  id_movie INT,
-
-  CONSTRAINT pk_id_showing PRIMARY KEY (id_showing),
-  CONSTRAINT fk_id_performance_cinema FOREIGN KEY (id_cinema) REFERENCES cinemas(id_cinema),
-  CONSTRAINT fk_id_performance_movie FOREIGN KEY (id_movie) REFERENCES movies(id_movie)
-);
-
 CREATE TABLE rols(
   id_rol INT AUTO_INCREMENT,
-  description VARCHAR(20),
+  rolDescription VARCHAR(20),
+  rol int,
 
   CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
 );
@@ -105,7 +88,7 @@ CREATE TABLE users(
   dni INT,
   id_rol INT,
 
-  CONSTRAINT pk_id_user PRIMARY KEY (id_user),
+  CONSTRAINT pk_id_user PRIMARY KEY (mail),
   CONSTRAINT fk_id_user_rol FOREIGN KEY (id_rol) REFERENCES rols(id_rol),
   CONSTRAINT uniq_dni UNIQUE (dni)
 );
@@ -117,10 +100,10 @@ CREATE TABLE buyouts(
   disc INT, /*descuento*/
   date_buyout DATE, /*fecha compra*/
   total INT,
-  id_user INT,
+   mail VARCHAR(50),
 
   CONSTRAINT id_buyout PRIMARY KEY (id_buyout),
-  CONSTRAINT id_buyout_user FOREIGN KEY (id_user) REFERENCES users(id_user)
+  CONSTRAINT id_buyout_user FOREIGN KEY (mail) REFERENCES users(mail)
 );
 
 
