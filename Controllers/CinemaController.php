@@ -34,7 +34,7 @@ class CinemaController{
 // no se aprovecha la funcionalidad
         $cinema = new Cinema($name, $capacity, $adress, $value);
 
-        $this->cinemaDAO->Add($cinema);
+        //$this->cinemaDAO->Add($cinema); // no se porque estaba este add de pdo
     }
 
     public function AddJson($name, $capacity, $adress, $value){
@@ -47,28 +47,48 @@ class CinemaController{
     {
       //esto lo agrego para que tambien me guarde el objeto en la BBDD, aun no funcion por eso lo dejo comentado
       $cinema = new Cinema($name, $capacity, $adress, $value);
-      $agregado = $this->cinemaDAO->Add($cinema); // DE PDO
-      echo $agregado;
+      $agregado = $this->cinemaDAO->Add($cinema); // DE PDO //tambien retorna flag para el modal
 
-      $agregado = $this->AddJson($name, $capacity, $adress, $value); //DE JSON  // cuidado con el espanglish, recordar que retorna flag para el modal
 
+      //$agregado = $this->AddJson($name, $capacity, $adress, $value); //DE JSON  // cuidado con el espanglish, recordar que retorna flag para el modal
+
+      //$this->ShowCinemasList(); //ver como reutilizar funcion
       require_once(VIEWS_PATH . 'navbar.php');
-      $cinemasList = $this->cinemaDAOJson;
+      $cinemasList = $this->cinemaDAO; //muestra lista de dao al registrar
+      //$cinemasList = $this->cinemaDAOJson; //muestra lista del json al registrar
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
     public function editCinema($name, $capacity, $adress, $value, $oldName)
     {
-      $this->cinemaDAOJson->Delete($oldName);
-      $this->AddJson($name, $capacity, $adress, $value);
-      $editado = true;                                             // cuidado con el espanglish
+      $editado = false;
+
+      //$this->cinemaDAOJson->Delete($oldName);
+      //$this->AddJson($name, $capacity, $adress, $value);
+//die(var_dump($oldName));
+
+      $cinema = new Cinema($name, $capacity, $adress, $value); //pdo
+      $proof = $this->cinemaDAO->Update($cinema,$oldName); /*pdo*/
+      //echo $proof; //muestra 1 si se modifico bien o 0 si no
+      if($proof = 1)
+      {
+        $editado = true;
+      }
+      else
+      {
+        $editado = false;
+      }
+
+      //$editado = true;                                             // cuidado con el espanglish
       require_once(VIEWS_PATH . 'navbar.php');
-      $cinemasList = $this->cinemaDAOJson;
+      //$cinemasList = $this->cinemaDAOJson; //muestra lista de json al editar
+      $cinemasList = $this->cinemaDAO; //muestra lista de dao al editar
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
     public function deleteCinema($name){
-        $this->cinemaDAOJson->Delete($name);
+        //$this->cinemaDAOJson->Delete($name); //json
+        $this->cinemaDAO->Delete($name); //pdo
     }
 
     public function allCinema(){

@@ -77,7 +77,7 @@
                     unset($this->cinemaList[$key]);
                 }
             }
-            $this->SaveData();
+            $this->SaveData(); 
 
         }
     }

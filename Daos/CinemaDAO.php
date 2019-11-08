@@ -26,20 +26,21 @@ try{
 
 
             $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
-            /*echo "<pre>";
-            var_dump($rowCount);
-            echo "</pre>";*/
-            if($rowCount == 1) //si el cine fue cargado con exito ExecuteNonQuery devuelve 1
+
+            if($rowCount == 1) //si el cine fue cargado con exito ExecuteNonQuery devuelve 1 (que es la cantidad de filas modificadas)
             {
               $flag = true; //retorno el flag para mostrar el modal
             }
 
-            return $flag;
-
       }catch(PDOException $e){
-          echo $e->getMessage();
+
+        throw $e->getMessage(); //lo elevo para que no lo muestre
+
       }catch(Exception $e){
           echo $e->getMessage();
+
+      }finally{
+        return $flag;
       }
   }
 
@@ -56,6 +57,9 @@ try{
       } catch (PDOException $e) {
         throw $e;
       }
+      catch(Exception $e){
+          echo $e->getMessage();
+        }
       if(!empty($resultSet))
         {
             return $this->mapear($resultSet);
@@ -64,14 +68,52 @@ try{
             return false;
     }
 
-    public function Update()
-    {
 
+    public function Update(Cinema $cinema, $oldName)
+    {
+      $query = "UPDATE cinemas SET name = :name, capacity = :capacity, address = :address, entry_value = :entry_value  WHERE name = :oldName";
+
+      try
+      {
+        $this->connection = Connection::getInstance();
+        $parameters = array();
+        $parameters["name"] = $cinema->getName();
+        $parameters["capacity"] = $cinema->getCapacity();
+        $parameters["address"] = $cinema->getAdress();
+        $parameters["entry_value"] = $cinema->getValue();
+
+        $parameters["oldName"] = $oldName;
+
+        $rowCount = $this->connection->executeNonQuery($query, $parameters);
+
+        return $rowCount;
+
+      }catch (PDOException $e) {
+        throw $e->getMessage();
+      }
+      catch(Exception $e){
+          echo $e->getMessage();
+        }
     }
 
-    public function Delete()
+    public function Delete($name)
     {
+      $query = "DELETE FROM cinemas WHERE (name = :name)";
 
+      try {
+
+        $this->connection = Connection::getInstance();
+
+        $parameters['name'] = $name;
+
+        return $this->connection->ExecuteNonQuery($query, $parameters);
+
+      } catch (PDOException $e) {
+        throw $e->getMessage();
+      }
+      catch(Exception $e){
+          echo $e->getMessage();
+        }
     }
 
     protected function mapear($value)

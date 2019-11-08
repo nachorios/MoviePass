@@ -22,7 +22,14 @@
                     $('#edicion-exito').modal('show');
                });
           </script><?php
-     }
+        } else {
+               ?><script> //intente hacer un error para cuando haces una modificacion erronea - ignacio chiaradia 8/11
+                    $(function(){
+                         $('#edicion-error').modal('show');
+                    });
+               </script><?php
+          }
+
 
      if(isset($borrado)) {
           ?><script>

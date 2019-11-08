@@ -6,21 +6,15 @@
         "value": "1010"
     },
     {
-        "name": "Cines del paseo Aldrey",
-        "capacity": "200",
-        "adress": "Sarmiento 2685",
-        "value": "300"
-    },
-    {
         "name": "Cines del paseo",
         "capacity": "100",
         "adress": "Diagonal Pueyrred\u00f3n 3050",
         "value": "200"
     },
     {
-        "name": "Cines del shopping",
+        "name": "Cines del paseo Aldrey",
         "capacity": "100",
         "adress": "Rivadavia 3050",
-        "value": "200"
+        "value": "100"
     }
 ]

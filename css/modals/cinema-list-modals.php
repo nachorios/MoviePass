@@ -87,6 +87,23 @@
         </div>
     </div>
 <!---->
+<!-- EDITAR CINE ERROR--> <!--intente hacer un error para cuando haces una modificacion erronea - ignacio chiaradia 8/11 -->
+    <div class="modal fade" id="editar-modal">
+        <div class="modal-dialog">
+          <div class = "modal-content">
+              <div class = "modal-header">
+                      <h4 class = "modal-title">Cine existente</h4>
+              </div>
+              <div class = "modal-body">
+                      <p>El cine que esta intentando modificar ya existe.</p>
+              </div>
+              <div class = "modal-footer">
+                    <!--<button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
 <!-- AGREGAR CINE -->
 <div class="modal fade" id="newCinema">
         <div class="modal-dialog">
