@@ -41,7 +41,7 @@ CREATE TABLE performance(
 CREATE TABLE cinemas(
   id_cinema INT AUTO_INCREMENT,
   capacity INT,
-  addres VARCHAR(50),
+  address VARCHAR(50),
   name VARCHAR(50),
   entry_value INT, /*valor de la entrada*/
 

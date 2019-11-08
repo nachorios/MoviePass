@@ -20,8 +20,12 @@ class CinemaController{
     public function ShowCinemasList()
     {
       require_once(VIEWS_PATH . 'navbar.php');
-//      $arrayCinemas = $this->cinemaDAOJson->GetAll();
-      $cinemasList = $this->cinemaDAOJson;
+      //$arrayCinemas = $this->cinemaDAOJson->GetAll();
+
+      $cinemasList = $this->cinemaDAO; //PARA PDO
+
+      //$cinemasList = $this->cinemaDAOJson; // para json
+
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
@@ -41,11 +45,12 @@ class CinemaController{
 
     public function registerCinema($name, $capacity, $adress, $value)
     {
-      //esto lo agrego para que tambien me guarde el objeto en la bbdd, aun no funcion por eso lo dejo comentado
-      /*$cinema = new Cinema($name, $capacity, $adress, $value);
-      $this->cinemaDAO->Add($cinema);*/
+      //esto lo agrego para que tambien me guarde el objeto en la BBDD, aun no funcion por eso lo dejo comentado
+      $cinema = new Cinema($name, $capacity, $adress, $value);
+      $agregado = $this->cinemaDAO->Add($cinema); // DE PDO
+      echo $agregado;
 
-      $agregado = $this->AddJson($name, $capacity, $adress, $value);     // cuidado con el espanglish
+      $agregado = $this->AddJson($name, $capacity, $adress, $value); //DE JSON  // cuidado con el espanglish, recordar que retorna flag para el modal
 
       require_once(VIEWS_PATH . 'navbar.php');
       $cinemasList = $this->cinemaDAOJson;

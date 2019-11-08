@@ -64,11 +64,20 @@ create table dates(
 CREATE TABLE cinemas(
   id_cinema INT AUTO_INCREMENT,
   name VARCHAR(50),
-  capacity INT,
-  addres VARCHAR(50),
-  value INT, /*valor de la entrada*/
-
+  address VARCHAR(50),  
+  
   CONSTRAINT pk_id_cinema PRIMARY KEY (id_cinema)
+);
+
+create table saloon(
+	id_saloon int auto_increment,
+    name varchar (50),
+    capacity INT,
+    entry_value INT, /*valor de la entrada*/
+    id_cinema INT,
+    
+    constraint pk_id_saloon primary key (id_saloon),
+    constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinemas)
 );
 
 CREATE TABLE rols(

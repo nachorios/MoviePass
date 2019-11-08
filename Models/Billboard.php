@@ -5,12 +5,14 @@ class Billboard{
     private $hour;
     private $idMovie;
     private $cinema;
+    private $idBill;
 
-    public function  __construct($day, $hour, $idMovie, $cinema){
+    public function  __construct($day, $hour, $idMovie, $cinema, $idBill = 0){
         $this->day = $day;
         $this->hour = $hour;
         $this->idMovie = $idMovie;
         $this->cinema = $cinema;
+        $this->idBill = $idBill;
     }
 
     public function setDay($day){
@@ -43,5 +45,9 @@ class Billboard{
 
     public function getCinema(){
         return $this->cinema;
+    }
+
+    public function getId(){
+        return $this->idBill;
     }
 }

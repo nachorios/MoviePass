@@ -49,15 +49,20 @@
      }
 ?>
 
-<?php 
-     //aca se carga arrayCinemas con los datos de cinemas.json
-     $arrayCinemas = $cinemasList->GetAll();
-     include(MODALS_PATH . 'cinema-list-modals.php'); 
+<?php
+     //aca se carga arrayCinemas con los datos de cinemas.json o con los datos del dao
+     $arrayCinemas = $cinemasList->GetAll(); //para json y pdo (la firma de los metodos es la misma)
+
+     /*echo "<pre>";
+     var_dump($arrayCinemas);
+     echo "</pre>";*/
+
+     include(MODALS_PATH . 'cinema-list-modals.php');
 ?>
 
 <script>
      function editarCine(cine) {
-          var data = document.getElementById(cine).value;  
+          var data = document.getElementById(cine).value;
           var dataAux = data.split('/');
           document.getElementById('nameCinema').value = dataAux[0];
           document.getElementById('capacityCinema').value = dataAux[1];
@@ -65,7 +70,7 @@
           document.getElementById('valueCinema').value = dataAux[3];
           document.getElementById('editCinema').value = cine;
      }
-     
+
     function loading(element, type, text) {
         //document.getElementById('loading-add').removeAttribute("hidden");
         element.innerHTML = '<button class="btn btn-'+type+'" type="button" disabled> <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span>'+text+'</span> </button>';
@@ -85,8 +90,8 @@
                          <?php
                             if(isset($_SESSION['loggedUser'])) {
                                    if($_SESSION['loggedUser']->getRole()>1) {
-                                   ?> 
-                                   <th>Modificar</th> 
+                                   ?>
+                                   <th>Modificar</th>
                                    <th>Eliminar</th
                                    ><?php
                                    }
@@ -111,7 +116,7 @@
                                         <!--Body-->
                                         <div class="modal-body mb-0 p-0">
                                         <!--Google map-->
-                                             <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">     
+                                             <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
                                                   <div id="googleMap" style="width:100%;height:400px;">
                                                   <?php echo '<iframe frameborder="0" width="798" height="500" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $cinema->getAdress())) . '&z=14&output=embed"></iframe>'; ?>
                                                   </div>
@@ -134,9 +139,9 @@
                               if($_SESSION['loggedUser']->getRole()>1) {
                                 ?>
                                    <td><button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getCapacity() . '/' . $cinema->getAdress() . '/' . $cinema->getValue() ?>" id="<?php echo $cinema->getName()?>" onclick = "editarCine('<?php echo $cinema->getName()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
-                                   
+
                                    <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
-                                   
+
                               <?php
                               }
                           }
@@ -154,7 +159,7 @@
                       <?php
                     }
                    }?>
-                
+
                 </div>
           </div>
      </div>

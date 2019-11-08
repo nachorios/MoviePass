@@ -15,7 +15,7 @@
          */
         public function Add(Billboard $bill) {
             try {
-            
+
 
                 $query = "INSERT INTO " . $this->tableName . "(id_movies, id_cinema) VALUES (:id_movies, :id_cinema);";
 
@@ -25,7 +25,7 @@
 
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->executeQuery($query, $parameters);
+                $this->connection->ExecuteNonQuery($query, $parameters);
                 $this->AddDate($bill->getDay(), $bill->getHour(), $this->connection->getPdo()->lastInsertId());
             } catch(Exception $e) {
                 throw $e;
@@ -35,18 +35,18 @@
         public function AddDate($days, $hours, $id) {
             for($i = 0; $i < count($days); $i++) {
                 try {
-            
+
 
                     $query = "INSERT INTO" . " dates " . "(id_billboard, days, hours) VALUES (:id_billboard, :days, :hours);";
-    
+
                     $parameters = Array();
                     $parameters["id_billboard"] = $id;
                     $parameters["days"] = $days[$i];
                     $parameters["hours"] = $hours[$i];
-    
+
                     $this->connection = Connection::GetInstance();
-    
-                    $this->connection->executeQuery($query, $parameters);
+
+                    $this->connection->ExecuteNonQuery($query, $parameters);
                 } catch(Exception $e) {
                     throw $e;
                 }
@@ -71,7 +71,7 @@
             try {
                 $billboardList = array();
 
-                $query = "select d.days as 'day', d.hours as 'hour', b.id_movies as 'idMovie', b.id_cinema as 'cinema'
+                $query = "select d.days as 'day', d.hours as 'hour', b.id_movies as 'idMovie', b.id_cinema as 'cinema', b.id_billboard as 'id'
                 from billboard as b
                 join dates as d
                 on b.id_billboard = d.id_billboard";
@@ -80,17 +80,39 @@
                 $resultSet = $this->connection->Execute($query);
 
                 foreach ($resultSet as $row):
-
-                    $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $row["idMovie"], $row["cinema"]);
-                    array_push($billboardList, $billboard);
+                    $flag = false;
+                    foreach($billboardList as $bill) {
+                        if($bill->getId() == $row["id"]) {
+                            $auxDate = $bill->getDay();
+                            $auxHour = $bill->getHour();
+                            array_push($auxDate, $row["day"]);
+                            array_push($auxHour, $row["hour"]);
+                            $bill->setDay($auxDate);
+                            $bill->setHour($auxHour);
+                            $flag = true;
+                            //agregar fecha
+                            //agregar horario
+                        }
+                    }
+                    if(!$flag) {
+                        $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $row["idMovie"], $row["cinema"], $row["id"]);
+                        array_push($billboardList, $billboard);
+                    }
 
                 endforeach;
-
                 return $billboardList;
             } catch(Exception $e) {
                 throw $e;
             }
 
+        }
+
+        private function mapear($value) {
+            $value = is_array($value) ? $value : [];
+            $resp = array_map(function($p){
+                return new Billboard(Array($p["day"]), Array($p["hour"]), $p["idMovie"], $p["cinema"], $p["id"]);
+            }, $value);
+               return count($resp) > 1 ? $resp : $resp['0'];
         }
 
     }

@@ -1,14 +1,26 @@
 [
     {
-        "name": "Cinemacenter",
-        "capacity": "78",
-        "adress": "Diagonal Pueyrred\u00f3n 3050",
-        "value": "255"
+        "name": "Ambassador",
+        "capacity": "199",
+        "adress": "Cordoba 1673",
+        "value": "1010"
     },
     {
-        "name": "Ambassador",
+        "name": "Cines del paseo Aldrey",
         "capacity": "200",
-        "adress": "Cordoba 1673",
-        "value": "1012"
+        "adress": "Sarmiento 2685",
+        "value": "300"
+    },
+    {
+        "name": "Cines del paseo",
+        "capacity": "100",
+        "adress": "Diagonal Pueyrred\u00f3n 3050",
+        "value": "200"
+    },
+    {
+        "name": "Cines del shopping",
+        "capacity": "100",
+        "adress": "Rivadavia 3050",
+        "value": "200"
     }
 ]
