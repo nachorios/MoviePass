@@ -1,49 +1,44 @@
 <?php namespace Models;
 
 class Cinema{
-  //private $id_cinema
+    private $id_cinema
     private $name;
-    private $capacity;
     private $adress;
-    private $value;
+    private $saloon;
 
-    public function  __construct($name, $capacity, $adress, $value){
+    public function  __construct($name, $adress, $saloon, $id_cinema = 0){
         $this->name = $name;
-        $this->capacity = $capacity;
         $this->adress = $adress;
-        $this->value = $value;
+        $this->saloon = $saloon;
+        $this->id_cinema = $id_cinema;
     }
 
-/*    public function getIdCinema(){
+    public function getIdCinema(){
         return $this->id_cinema;
-    }*/
+    }
     public function getName(){
         return $this->name;
-    }
-    public function getCapacity(){
-        return $this->capacity;
     }
     public function getAdress(){
         return $this->adress;
     }
-    public function getValue(){
-        return $this->value;
+
+    public function getSaloon(){
+        return $this->saloon;
     }
 
-    /*public function setIdCinema($id_cinema){
+    public function setIdCinema($id_cinema){
         $this->id_cinema=$id_cinema;
-    }*/
+    }
     public function setName($name){
         $this->name=$name;
-    }
-    public function setCapacity($capacity){
-        $this->capacity=$capacity;
     }
     public function setAdress($adress){
         $this->adress=$adress;
     }
-    public function setValue($value){
-        $this->value=$value;
+
+    public function setSaloon($saloon){
+        $this->saloon=$saloon;
     }
 
 }

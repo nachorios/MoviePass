@@ -15,7 +15,7 @@ class CinemaDAO{
 
             $query = "INSERT INTO cinemas (name, capacity, address, entry_value) VALUES (:name, :capacity, :address, :entry_value)";
 
-try{
+      try{
             $this->connection = Connection::GetInstance();
 
             $flag = false;
