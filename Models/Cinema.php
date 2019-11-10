@@ -1,7 +1,7 @@
 <?php namespace Models;
 
 class Cinema{
-    private $id_cinema
+    private $id_cinema;
     private $name;
     private $adress;
     private $saloon;

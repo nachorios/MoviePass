@@ -2,6 +2,7 @@
 
 use Daos\CinemaDAO as CinemaDAO;
 use DaosJson\CinemaJson as CinemaJson;
+use Models\Saloon as Saloon;
 use Models\Cinema as Cinema;
 use Controllers\ViewController as ViewC;
 
@@ -43,12 +44,11 @@ class CinemaController{
         return $flag;
     }
 
-    public function registerCinema($name, $capacity, $adress, $value)
+    public function registerCinema($nameCinema, $address, $nameSaloon, $capacity, $value)
     {
       //esto lo agrego para que tambien me guarde el objeto en la BBDD, aun no funcion por eso lo dejo comentado
-      $cinema = new Cinema($name, $capacity, $adress, $value);
-      $agregado = $this->cinemaDAO->Add($cinema); // DE PDO //tambien retorna flag para el modal
-
+      $newCinema = new Cinema($nameCinema, $address, new Saloon($nameSaloon, $capacity, $value));
+      $agregado = $this->cinemaDAO->Add($newCinema); // DE PDO //tambien retorna flag para el modal
 
       //$agregado = $this->AddJson($name, $capacity, $adress, $value); //DE JSON  // cuidado con el espanglish, recordar que retorna flag para el modal
 

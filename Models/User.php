@@ -5,12 +5,14 @@ class User extends Person{
     private $mail;
     private $pass;
     private $role;
+    private $profileImage;
 
-    public function  __construct($name="", $lastName="", $dni=0, $mail="", $pass="", $role=1){
-        parent::__construct($name, $lastName, $dni);
+    public function  __construct($name="", $lastName="", $dni=0, $mail="", $pass="", $role=1, $profileImage=null, $birthday=null){
+        parent::__construct($name, $lastName, $dni, $birthday);
         $this->mail = $mail;
         $this->pass = $pass;
         $this->role = $role;
+        $this->profileImage = $profileImage;
     }
 
     public function setMail($mail){
@@ -35,5 +37,13 @@ class User extends Person{
 
     public function setRole($role){
         $this->role = $role;
+    }
+
+    public function getProfileImage() {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage($profileImage) {
+        $this->profileImage = $profileImage;
     }
 }
