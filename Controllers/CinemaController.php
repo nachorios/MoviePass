@@ -71,7 +71,7 @@ class CinemaController{
 
       $saloon = new Saloon($name, $capacity, $value);
 
-      $proof = $this->saloonDAO->Update($saloon,$id_cinema);
+      $proof = $this->saloonDAO->Update($saloon,$id_salon);
 
       //echo $proof; //muestra 1 si se modifico bien o 0 si no
       if($proof = 1)

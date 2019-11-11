@@ -1,5 +1,5 @@
 
-<form action="<?php echo URL?>/Saloon/editSaloon" onsubmit="loadingEdit()" method="POST">
+<form action="<?php echo URL?>/cinema/editSaloon" onsubmit="loadingEdit()" method="POST">
 <div class="form-group col m-2">
         <label for="nameCinema"> Nombre del salon: </label>
         <input type="text" name="name-saloon" class="form-control" id="name-saloon" placeholder="Nombre del salon" required> </input>

@@ -87,7 +87,7 @@ class SaloonDAO{
     private function mapear($value) {
         $value = is_array($value) ? $value : [];
         $resp = array_map(function($p){
-            return new Saloon($p["name"], $p["capacity"], $p["entry_value"], $p["id_cinema"]);
+            return new Saloon($p["name"], $p["capacity"], $p["entry_value"], $p["id_saloon"], $p["id_cinema"]);
         }, $value);
            return count($resp) > 1 ? $resp : $resp;
     }
