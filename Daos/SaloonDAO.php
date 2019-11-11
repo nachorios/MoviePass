@@ -12,12 +12,12 @@ class SaloonDAO{
     private $tableName = "saloon";
 
     public function Add($saloon, $id){
-        
+
         try{
         $query = "INSERT INTO saloon (name, capacity, entry_value, id_cinema) VALUES (:name, :capacity, :entry_value, :id_cinema)";
-    
+
         $this->connection = Connection::GetInstance();
-            
+
         $parameters["name"] = $saloon->getName();
         $parameters["capacity"] = $saloon->getCapacity();
         $parameters["entry_value"] = $saloon->getValue();
@@ -28,15 +28,15 @@ class SaloonDAO{
         }catch(Exception $e) {
             throw $e;
         }
-    
-    
+
+
     }
 
     public function GetXCinema($id){
         try{
             $query =" select saloon.*
             from saloon
-        
+
             where saloon.id_cinema = :id";
 
             $this->connection = Connection::GetInstance();
@@ -56,6 +56,33 @@ class SaloonDAO{
             return false;
     }
 
+
+    public function Update(Saloon $saloon, $id_saloon)
+    {
+      $query = "UPDATE saloon SET name = :name, capacity = :capacity, entry_value = :entry_value WHERE id_saloon = :id_saloon";
+
+      try
+      {
+        $this->connection = Connection::getInstance();
+        $parameters = array();
+        $parameters["name"] = $saloon->getName();
+        $parameters["capacity"] = $saloon->getCapacity();
+        $parameters["entry_value"] = $saloon->getValue();
+
+        $parameters["id_saloon"] = $id_saloon;
+
+        $rowCount = $this->connection->executeNonQuery($query, $parameters);
+
+
+      }catch (PDOException $e) {
+        throw $e->getMessage();
+      }
+      catch(Exception $e){
+          echo $e->getMessage();
+        } finally {
+          return $rowCount;
+        }
+    }
 
     private function mapear($value) {
         $value = is_array($value) ? $value : [];
