@@ -69,6 +69,7 @@
           var dataAux = data.split('/');
           document.getElementById('nameCinema').value = dataAux[0];
           document.getElementById('adressCinema').value = dataAux[1];
+          document.getElementById('id_cinema').value = dataAux[2];
           document.getElementById('editCinema').value = cine;
      }
 
@@ -100,7 +101,7 @@
                foreach ($arrayCinemas as $cinema) { ?>
                <a class="list-group-item list-group-item-action <?php if($first){ $first = false; echo 'active'; } ?>" id="list-<?php echo $cinema->getName(); ?>-list" data-toggle="list" href="#list-<?php echo $cinema->getName(); ?>" role="tab" aria-controls="<?php echo $cinema->getName(); ?>"><?php echo $cinema->getName(); ?></a>
                <?php }
-          }?>  
+          }?>
           </div>
      </div>
      <div class="col-8">
@@ -110,19 +111,19 @@
                foreach ($arrayCinemas as $cinema): ?>
                <div class="tab-pane fade <?php if($first){ $first = false; echo 'show active'; } ?>" id="list-<?php echo $cinema->getName(); ?>" role="tabpanel" >
                     <div class="jumbotron">
-                         <h2 class="display-4"> <?php echo $cinema->getName(); ?> 
+                         <h2 class="display-4"> <?php echo $cinema->getName(); ?>
                          <?php
                          if(isset($_SESSION['loggedUser'])) {
                               if($_SESSION['loggedUser']->getRole()>1) { ?>
                          <div class="btn-group">
-                              <button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getAdress() ?>" id="<?php echo $cinema->getName()?>" onclick = "editarCine('<?php echo $cinema->getName()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"> Editar</i></button>
-                              <button type="button" onclick="loading(this, 'danger', ''); window.location='<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>'" class="btn btn-danger"><i class="fa fa-trash-o"> Eliminar</i></button>
+                              <button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getAdress() /*. '/' . $cinema->getIdCinema*/ ?>" id="<?php echo $cinema->getIdCinema()?>" onclick = "editarCine('<?php echo $cinema->getIdCinema()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"> Editar</i></button>
+                              <button type="button" onclick="loading(this, 'danger', ''); window.location='<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getIdCinema()  ?>'" class="btn btn-danger"><i class="fa fa-trash-o"> Eliminar</i></button>
                          </div>
                               <?php }
-                          }?> 
+                          }?>
                          </h2>
-                         <p class="lead">Direccion del cine: 
-          
+                         <p class="lead">Direccion del cine:
+
                          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#<?php echo str_replace(" ", "-",$cinema->getAdress()); ?>"><?php echo $cinema->getAdress() ?></button>
                          <!--Modal Direccion-->
                          <div class="modal fade" id="<?php echo str_replace(" ", "-",$cinema->getAdress()); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -148,7 +149,7 @@
                               </div>
                          </div>
                          <!--Fin Modal Direccion-->
-          
+
                          <hr class="my-4">
                          <h3 class="text-center"> <u>Salas de cine disponibles</u> </h3>
                          <table class="table text-center">
@@ -190,11 +191,11 @@
                          </table>
                     </div>
                </div>
-          <?php endforeach; 
-          endif; ?>            
+          <?php endforeach;
+          endif; ?>
           </div>
      </div>
-     
+
      <div class="mb-4 <?php echo (!empty($arrayCinemas)) ? 'col-2' : 'container' ?>">
           <div class="list-group" id="myList" role="tablist">
           <?php
@@ -202,7 +203,7 @@
                if($_SESSION['loggedUser']->getRole()>1) { ?>
                     <button type="button" data-toggle="modal" data-target="#newCinema" class="btn btn-success btn-block btn-lg">Agregar nuevo cine</button>
           <?php }
-          }?> 
+          }?>
           </div>
      </div>
 </div>

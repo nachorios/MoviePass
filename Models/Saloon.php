@@ -2,10 +2,12 @@
 
 class Saloon{
 
+    private $id;
     private $name;
     private $capacity;
-    private $value;
-    private $id;
+    private $value; /*entry_value*/
+    private $id_cinema;
+
 
     public function  __construct($name, $capacity, $value, $id = 0){
         $this->name = $name;

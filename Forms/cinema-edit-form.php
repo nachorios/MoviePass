@@ -24,10 +24,11 @@
     <label for="valueCinema"> Valor entrada: </label>
     <input type="number" min="0" name="value" class="form-control" id="valueCinema" value="" required> </input>
   </div>-->
+  <input  name="id_cinema" type=hidden value="" id="id_cinema"> </input>
   <input type="text" name="editCinema" class="form-control" id="editCinema" value="" hidden> </input>
-  
+
   <div class="text-center">
-      <div id="loading-edit" hidden> 
+      <div id="loading-edit" hidden>
       <button class="btn btn-info btn-lg" type="button" disabled>
           <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           Editando...

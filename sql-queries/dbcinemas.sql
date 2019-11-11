@@ -65,9 +65,11 @@ create table dates(
 CREATE TABLE cinemas(
   id_cinema INT AUTO_INCREMENT,
   name VARCHAR(50),
-  address VARCHAR(50),  
-  
-  CONSTRAINT pk_id_cinema PRIMARY KEY (id_cinema)
+  address VARCHAR(50),
+
+  CONSTRAINT pk_id_cinema PRIMARY KEY (id_cinema),
+  CONSTRAINT uniq_name UNIQUE (name),
+  CONSTRAINT uniq_address UNIQUE (address)
 );
 
 create table saloon(
@@ -76,7 +78,7 @@ create table saloon(
     capacity INT,
     entry_value INT, /*valor de la entrada*/
     id_cinema INT,
-    
+
     constraint pk_id_saloon primary key (id_saloon),
     constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema)
 );
