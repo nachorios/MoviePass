@@ -73,11 +73,12 @@
      }
 
      function editarSaloon(saloon) {
-          var data = document.getElementById(saloon).value;
+          var data = document.getElementById('salon-'+saloon).value;
           var dataAux = data.split('/');
           document.getElementById('name-saloon').value = dataAux[0];
           document.getElementById('value-saloon').value = dataAux[1];
           document.getElementById('capacity-saloon').value = dataAux[2];
+          document.getElementById('editSaloon').value = dataAux[3];
      }
 
     function loading(element, type, text) {
@@ -177,7 +178,7 @@
                                         if(isset($_SESSION['loggedUser'])) {
                                         if($_SESSION['loggedUser']->getRole()>1) {
                                              ?>
-                                             <td><button type="button" value="<?php echo $salon->getName() . '/' . $salon->getValue(). '/'. $salon->getCapacity() . '/'. echo $salon->getId()  ?>" id="<?php echo $salon->getId()?>" onclick = "editarSaloon('<?php echo $salon->getId() ?>');" data-toggle="modal" data-target="#editar-salon-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
+                                             <td><button type="button" value="<?php echo $salon->getName() . '/' . $salon->getValue(). '/'. $salon->getCapacity() . '/'. $salon->getId()  ?>" id="salon-<?php echo $salon->getId()?>" onclick = "editarSaloon('<?php echo $salon->getId() ?>');" data-toggle="modal" data-target="#editar-salon-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
 
                                              <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete-saloon=<?php echo $salon->getId()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
 

@@ -12,6 +12,7 @@
         <label for="capacityCinema"> Capacidad de sala: </label>
         <input type="number" min="0" max="200" name="capacity-saloon" class="form-control" id="capacity-saloon" placeholder="Capacidad de butacas" required> </input>
       </div>
+    <input type="text" name="editSaloon" class="form-control" id="editSaloon" value="" hidden> </input>
 
       <div class="text-center">
         <div id="loading-edit" hidden> 

@@ -50,7 +50,7 @@ class CinemaController{
 
       $proof = $this->cinemaDAO->Update($cinema,$id_cinema); //pdo
 
-      echo $proof; //muestra 1 si se modifico bien o 0 si no
+      //echo $proof; //muestra 1 si se modifico bien o 0 si no
       if($proof = 1)
       {
         $editado = true;
@@ -60,6 +60,28 @@ class CinemaController{
         $editado = false;
       }
 
+      require_once(VIEWS_PATH . 'navbar.php');
+      $cinemasList = $this->cinemaDAO; //muestra lista de dao al editar
+      require_once(VIEWS_PATH . "cinemas-list.php");
+    }
+
+    public function editSaloon($name, $capacity, $value, $id_salon) {
+
+      $editado = false;
+
+      $saloon = new Saloon($name, $capacity, $value);
+
+      $proof = $this->saloonDAO->Update($saloon,$id_cinema);
+
+      //echo $proof; //muestra 1 si se modifico bien o 0 si no
+      if($proof = 1)
+      {
+        $editado = true;
+      }
+      else
+      {
+        $editado = false;
+      }
 
       require_once(VIEWS_PATH . 'navbar.php');
       $cinemasList = $this->cinemaDAO; //muestra lista de dao al editar
