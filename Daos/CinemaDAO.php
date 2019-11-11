@@ -3,12 +3,18 @@
 use \Exception as Exception;
 use \PDOException as PDOException;
 use Models\Cinema as Cinema;
+use Daos\SaloonDAO as SaloonDAO;
 use Daos\Connection as Connection;
 use Interfaces\IDAO as IDAO;
 
 class CinemaDAO{
 
     private $connection;
+    private $saloonDAO;
+
+    public function getConnection() {
+      return $this->connection;
+    }
 
     public function Add($cinema){
 
@@ -81,13 +87,15 @@ class CinemaDAO{
 
         $rowCount = $this->connection->executeNonQuery($query, $parameters);
 
-        return $rowCount;
 
       }catch (PDOException $e) {
         throw $e->getMessage();
       }
       catch(Exception $e){
           echo $e->getMessage();
+        } finally {
+
+          return $rowCount;
         }
     }
 
@@ -113,6 +121,7 @@ class CinemaDAO{
 
     protected function mapear($value)
     {
+    $this->saloonDAO = new SaloonDAO();
 		$value = is_array($value) ? $value : [];
 
 		$resp = array_map(function($p){
@@ -122,11 +131,12 @@ class CinemaDAO{
 
             //return $cinema;
 
-		    return new Cinema( $p['name'], $p['address'],/*,$p['saloon']*/$p['id_cinema']); //(asi tengo los datos en la bbdd de phpmyadmin)
+		    return new Cinema( $p['name'], $p['address'],$this->saloonDAO->GetXCinema($p['id_cinema']),$p['id_cinema']); //(asi tengo los datos en la bbdd de phpmyadmin)
      }, $value);
 
         /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
-     return count($resp) > 0 ? $resp : null;
+     return count($resp) > 0 ? $resp : $resp;
   }
+
 }
 
