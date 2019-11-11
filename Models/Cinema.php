@@ -4,12 +4,12 @@ class Cinema{
     private $id_cinema;
     private $name;
     private $adress;
-//    private $saloon;
+    private $saloon;
 
-      public function  __construct($name, $adress, /*$saloon,*/ $id_cinema = 0){
+      public function  __construct($name, $adress, $saloon = array(), $id_cinema = 0){
         $this->name = $name;
         $this->adress = $adress;
-//        $this->saloon = $saloon;
+        $this->saloon = $saloon;
         $this->id_cinema = $id_cinema;
     }
 
@@ -23,9 +23,9 @@ class Cinema{
         return $this->adress;
     }
 
-/*    public function getSaloon(){
+    public function getSaloon(){
         return $this->saloon;
-    }*/
+    }
 
     public function setIdCinema($id_cinema){
         $this->id_cinema=$id_cinema;
@@ -37,8 +37,8 @@ class Cinema{
         $this->adress=$adress;
     }
 
-/*    public function setSaloon($saloon){
+    public function setSaloon($saloon){
         $this->saloon=$saloon;
-    }*/
+    }
 
 }

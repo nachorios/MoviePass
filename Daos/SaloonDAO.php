@@ -4,22 +4,23 @@ use \Exception as Exception;
 use \PDOException as PDOException;
 use Models\Cinema as Cinema;
 use Daos\Connection as Connection;
+use Models\Saloon as Saloon;
 
 class SaloonDAO{
 
     private $connection;
     private $tableName = "saloon";
 
-    public function Add(Saloon $saloon, $id){
+    public function Add($saloon, $id){
         
         try{
-        $query = "INSERT INTO saloon (name, capacity, entry_value, id_cinema) VALUES (:name, :capacity, :address, :entry_value, :id_cinema)";
+        $query = "INSERT INTO saloon (name, capacity, entry_value, id_cinema) VALUES (:name, :capacity, :entry_value, :id_cinema)";
     
         $this->connection = Connection::GetInstance();
             
-        $parameters["name"] = $cinema->getName();
-        $parameters["capacity"] = $cinema->getCapacity();
-        $parameters["entry_value"] = $cinema->getValue();
+        $parameters["name"] = $saloon->getName();
+        $parameters["capacity"] = $saloon->getCapacity();
+        $parameters["entry_value"] = $saloon->getValue();
         $parameters["id_cinema"] = $id;
 
 
@@ -36,7 +37,7 @@ class SaloonDAO{
             $query =" select saloon.*
             from saloon
         
-            where saloon.id_cinema = id";
+            where saloon.id_cinema = :id";
 
             $this->connection = Connection::GetInstance();
 
@@ -61,7 +62,7 @@ class SaloonDAO{
         $resp = array_map(function($p){
             return new Saloon($p["name"], $p["capacity"], $p["entry_value"], $p["id_cinema"]);
         }, $value);
-           return count($resp) > 1 ? $resp : $resp['0'];
+           return count($resp) > 1 ? $resp : $resp;
     }
 
 
