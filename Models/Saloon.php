@@ -9,11 +9,12 @@ class Saloon{
     private $id_cinema;
 
 
-    public function  __construct($name, $capacity, $value, $id = 0){
+    public function  __construct($name, $capacity, $value, $id = 0, $id_cinema = 0){
         $this->name = $name;
         $this->capacity = $capacity;
         $this->value = $value;
         $this->id = $id;
+        $this->id_cinema = $id_cinema;
     }
 
 
@@ -32,6 +33,10 @@ class Saloon{
         return $this->id;
     }
 
+    public function getIdCinema(){
+        return $this->id_cinema;
+    }
+
 
     public function setName($name){
         $this->name=$name;
@@ -46,6 +51,10 @@ class Saloon{
 
     public function setId($id){
         $this->id=$id;
+    }
+
+    public function setIdCinema($id_cinema){
+        $this->id_cinema = $id_cinema;
     }
 
 }
