@@ -99,7 +99,7 @@
           <?php if(!empty($arrayCinemas)) {
                $first = true;
                foreach ($arrayCinemas as $cinema) { ?>
-               <a class="list-group-item list-group-item-action <?php if($first){ $first = false; echo 'active'; } ?>" id="list-<?php echo $cinema->getName(); ?>-list" data-toggle="list" href="#list-<?php echo $cinema->getName(); ?>" role="tab" aria-controls="<?php echo $cinema->getName(); ?>"><?php echo $cinema->getName(); ?></a>
+               <a class="list-group-item list-group-item-action <?php if($first){ $first = false; echo 'active'; } ?>" id="list-<?php echo $cinema->getIdCinema(); ?>-list" data-toggle="list" href="#list-<?php echo $cinema->getIdCinema(); ?>" role="tab" aria-controls="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></a>
                <?php }
           }?>
           </div>
@@ -109,7 +109,7 @@
           <?php if(!empty($arrayCinemas)):
                $first = true;
                foreach ($arrayCinemas as $cinema): ?>
-               <div class="tab-pane fade <?php if($first){ $first = false; echo 'show active'; } ?>" id="list-<?php echo $cinema->getName(); ?>" role="tabpanel" >
+               <div class="tab-pane fade <?php if($first){ $first = false; echo 'show active'; } ?>" id="list-<?php echo $cinema->getIdCinema(); ?>" role="tabpanel" >
                     <div class="jumbotron">
                          <h2 class="display-4"> <?php echo $cinema->getName(); ?>
                          <?php
