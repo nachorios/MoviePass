@@ -116,7 +116,7 @@
                          if(isset($_SESSION['loggedUser'])) {
                               if($_SESSION['loggedUser']->getRole()>1) { ?>
                          <div class="btn-group">
-                              <button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getAdress() /*. '/' . $cinema->getIdCinema*/ ?>" id="<?php echo $cinema->getIdCinema()?>" onclick = "editarCine('<?php echo $cinema->getIdCinema()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"> Editar</i></button>
+                              <button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getAdress() . '/' . $cinema->getIdCinema() ?>" id="<?php echo $cinema->getIdCinema()?>" onclick = "editarCine('<?php echo $cinema->getIdCinema()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"> Editar</i></button>
                               <button type="button" onclick="loading(this, 'danger', ''); window.location='<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getIdCinema()  ?>'" class="btn btn-danger"><i class="fa fa-trash-o"> Eliminar</i></button>
                          </div>
                               <?php }
@@ -168,25 +168,26 @@
                                         }?>
                               </thead>
                               <tbody>
-                              <?php for($i = 0; $i < count($cinema->getSaloon()->getValue()); $i++): ?>
+                              <?php foreach($cinema->getSaloon() as $salon):?>
+                              
                                    <tr>
-                                        <td><?php echo $cinema->getSaloon()->getName()[$i] ?></td>
-                                        <td><?php echo $cinema->getSaloon()->getValue()[$i] ?></td>
-                                        <td><?php echo $cinema->getSaloon()->getCapacity()[$i] ?></td>
+                                        <td><?php echo $salon->getName() ?></td>
+                                        <td><?php echo $salon->getValue() ?></td>
+                                        <td><?php echo $salon->getCapacity() ?></td>
                                         <?php
                                         if(isset($_SESSION['loggedUser'])) {
                                         if($_SESSION['loggedUser']->getRole()>1) {
                                              ?>
-                                             <td><button type="button" value="<?php echo $cinema->getSaloon()->getName()[$i] . '/' . $cinema->getSaloon()->getValue()[$i]. '/'. $cinema->getSaloon()->getCapacity()[$i] ?>" id="<?php echo $cinema->getSaloon()->getId()?>" onclick = "editarSaloon('<?php echo $cinema->getSaloon()->getId() ?>');" data-toggle="modal" data-target="#editar-salon-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
+                                             <td><button type="button" value="<?php echo $salon->getName() . '/' . $salon->getValue(). '/'. $salon->getCapacity() . '/'. echo $salon->getId()  ?>" id="<?php echo $salon->getId()?>" onclick = "editarSaloon('<?php echo $salon->getId() ?>');" data-toggle="modal" data-target="#editar-salon-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
 
-                                             <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete-saloon=<?php echo $cinema->getSaloon()->getId()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
+                                             <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete-saloon=<?php echo $salon->getId()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
 
                                         <?php
                                         }
                                         }
                                    ?>
                                    </tr>
-                              <?php endfor; ?>
+                                   <?php endforeach; ?>
                               </tbody>
                          </table>
                     </div>
