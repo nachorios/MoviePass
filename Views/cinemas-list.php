@@ -72,9 +72,10 @@
           var data = document.getElementById(cine).value;
           var dataAux = data.split('/');
           document.getElementById('nameCinema').value = dataAux[0];
-          document.getElementById('capacityCinema').value = dataAux[1];
-          document.getElementById('adressCinema').value = dataAux[2];
-          document.getElementById('valueCinema').value = dataAux[3];
+          //document.getElementById('capacityCinema').value = dataAux[1];
+          document.getElementById('adressCinema').value = dataAux[1];
+          document.getElementById('id_cinema').value = dataAux[2];
+          //document.getElementById('valueCinema').value = dataAux[3];
           document.getElementById('editCinema').value = cine;
      }
 
@@ -91,9 +92,9 @@
                <table class="table">
                     <thead class="text-light">
                          <th>Nombre</th>
-                         <th>Capacidad</th>
+                  <!--       <th>Capacidad</th> NO VA MAS-->
                          <th>Dirección</th>
-                         <th>Valor unico de entrada</th>
+                  <!--       <th>Valor unico de entrada</th> NO VA MAS-->
                          <?php
                             if(isset($_SESSION['loggedUser'])) {
                                    if($_SESSION['loggedUser']->getRole()>1) {
@@ -110,7 +111,7 @@
           ?>
                     <tbody class="text-light">
                         <td><?php echo $cinema->getName() ?></td>
-                        <td><?php echo $cinema->getCapacity() ?></td>
+                <!--        <td><?php //echo $cinema->getCapacity() ?></td>  NO VA MAS-->
                         <td>
 
                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#<?php echo str_replace(" ", "-",$cinema->getAdress()); ?>"><?php echo $cinema->getAdress() ?></button>
@@ -140,14 +141,14 @@
                          </div>
 
                         </td>
-                        <td><?php echo $cinema->getValue() ?></td>
+                  <!--      <td><?php //echo $cinema->getValue() ?></td>  NO VA MAS-->
                         <?php
                           if(isset($_SESSION['loggedUser'])) {
                               if($_SESSION['loggedUser']->getRole()>1) {
                                 ?>
-                                   <td><button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getCapacity() . '/' . $cinema->getAdress() . '/' . $cinema->getValue() ?>" id="<?php echo $cinema->getName()?>" onclick = "editarCine('<?php echo $cinema->getName()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
+                                   <td><button type="button" value="<?php echo $cinema->getName() . '/' . /*$cinema->getCapacity() . '/' .*/ $cinema->getAdress() . '/' . $cinema->getIdCinema() ?>" id="<?php echo $cinema->getIdCinema()?>" onclick = "editarCine('<?php echo $cinema->getIdCinema()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td> <!-- cambie los getName por id -->
 
-                                   <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getName()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
+                                   <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getIdCinema() /*TENER EN CUENTA, CAMBIE EL GET*/  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
 
                               <?php
                               }

@@ -9,20 +9,18 @@ use Interfaces\IDAO as IDAO;
 class CinemaDAO{
 
     private $connection;
-    private $tableName = "cinemas";
 
     public function Add($cinema){
 
-            $query = "INSERT INTO cinemas (name, capacity, address, entry_value) VALUES (:name, :capacity, :address, :entry_value)";
+            $query = "INSERT INTO cinemas (name, address/*, saloon*/) VALUES (:name, :address/*, :saloon*/)";
 
       try{
             $this->connection = Connection::GetInstance();
 
             $flag = false;
             $parameters["name"] = $cinema->getName();
-            $parameters["capacity"] = $cinema->getCapacity();
             $parameters["address"] = $cinema->getAdress();
-            $parameters["entry_value"] = $cinema->getValue();
+            //$parameters["saloon"] = $cinema->getSaloon();
 
 
             $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
@@ -69,20 +67,19 @@ class CinemaDAO{
     }
 
 
-    public function Update(Cinema $cinema, $oldName)
+    public function Update(Cinema $cinema, $id_cinema)
     {
-      $query = "UPDATE cinemas SET name = :name, capacity = :capacity, address = :address, entry_value = :entry_value  WHERE name = :oldName";
+      $query = "UPDATE cinemas SET name = :name, address = :address/*, saloon*/ WHERE id_cinema = :id_cinema";
 
       try
       {
         $this->connection = Connection::getInstance();
         $parameters = array();
         $parameters["name"] = $cinema->getName();
-        $parameters["capacity"] = $cinema->getCapacity();
         $parameters["address"] = $cinema->getAdress();
-        $parameters["entry_value"] = $cinema->getValue();
+        //$parameters["saloon"] = $cinema->getSaloon();
 
-        $parameters["oldName"] = $oldName;
+        $parameters["id_cinema"] = $id_cinema;
 
         $rowCount = $this->connection->executeNonQuery($query, $parameters);
 
@@ -96,15 +93,15 @@ class CinemaDAO{
         }
     }
 
-    public function Delete($name)
+    public function Delete($id_cinema)
     {
-      $query = "DELETE FROM cinemas WHERE (name = :name)";
+      $query = "DELETE FROM cinemas WHERE (id_cinema = :id_cinema)";
 
       try {
 
         $this->connection = Connection::getInstance();
 
-        $parameters['name'] = $name;
+        $parameters['id_cinema'] = $id_cinema;
 
         return $this->connection->ExecuteNonQuery($query, $parameters);
 
@@ -124,11 +121,10 @@ class CinemaDAO{
 
 			//$cinema = new Cinema();
             //$cinema->setName($p['name']);
-            //$cinema->setCapacity($p['capacity']);
 
             //return $cinema;
 
-		    return new Cinema( $p['name'], $p['capacity'], $p['address'],$p['entry_value']); //(asi tengo los datos en la bbdd de phpmyadmin)
+		    return new Cinema( $p['name'], $p['address'],/*,$p['saloon']*/$p['id_cinema']); //(asi tengo los datos en la bbdd de phpmyadmin)
      }, $value);
 
         /* devuelve un arreglo si tiene datos y sino devuelve nulo*/

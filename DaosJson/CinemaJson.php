@@ -12,9 +12,9 @@
             foreach($this->cinemaList as $cinema)
             {
                 $valuesArray["name"] = $cinema->getName();
-                $valuesArray["capacity"] = $cinema->getCapacity();
                 $valuesArray["adress"] = $cinema->getAdress();
-                $valuesArray["value"] = $cinema->getValue();
+                //$valuesArray["saloon"] = $cinema->getSaloon();
+                $valuesArray["id_cinema"] = $cinema->getIdCinema();
 
                 array_push($arrayToEncode, $valuesArray);
             }
@@ -36,49 +36,91 @@
                 foreach($arrayToDecode as $valuesArray)
                 {
 
-                    $cinema = new Cinema($valuesArray["name"], $valuesArray["capacity"], $valuesArray["adress"], $valuesArray["value"]);
+                    $cinema = new Cinema($valuesArray["name"], $valuesArray["adress"], $valuesArray["id_cinema"]);
 
                     array_push($this->cinemaList, $cinema);
 
                 }
             }
         }
+
         public function Add($value){
             $this->RetrieveData();
+
             $flag = false;
-            if($this->GetCinema($value->getName()) == null) {
+
+            $value->setIdCinema($this->GetNextId());
+
+            if($this->GetCinema($value->getName(), $value->getAdress()) == null) {
                 array_push($this->cinemaList, $value);
                 $flag = true;
             }
+
             $this->SaveData();
             return $flag;
         }
-        public function GetAll(){
+
+        public function GetCinema($name, $address){ //lo hago por el name porque si el id es unico
             $this->RetrieveData();
 
-            return $this->cinemaList;
-        }
-        public function GetCinema($cinemaName){
-            $this->RetrieveData();
             $cinema = null;
             foreach($this->cinemaList as $cinemas) {
-                if($cinemaName == $cinemas->getName()) {
+                if($name == $cinemas->getName() || $address == $cinemas->getAdress()) {
                     $cinema = $cinemas;
-                    break;
+                    //break;
                 }
             }
 
             return $cinema;
         }
+
+        public function GetAll(){
+            $this->RetrieveData();
+
+            return $this->cinemaList;
+        }
+
         public function Delete($value){
             $this->RetrieveData();
             foreach($this->cinemaList as $key => $cinema){
-                if($cinema->getName() == $value){
+                if($cinema->getIdCinema() == $value){
                     unset($this->cinemaList[$key]);
                 }
             }
-            $this->SaveData(); 
+            $this->SaveData();
 
+        }
+
+        public function Update($newCinema, $id_cinema)
+        {
+
+          $flag = false;
+          $this->RetrieveData();
+
+            foreach($this->cinemaList as $key => $cinema)
+            {
+                if($cinema->getIdCinema() == $id_cinema)
+                {
+                  $cinema->setName($newCinema->getName());
+                  $cinema->setAdress($newCinema->getAdress());
+                  $flag = true;
+                }
+            }
+
+            $this->SaveData();
+            return $flag;
+        }
+
+        private function GetNextId()
+        {
+            $id = 0;
+
+            foreach($this->cinemaList as $cinema)
+            {
+                $id = ($cinema->getIdCinema() > $id) ? $cinema->getIdCinema() : $id;
+            }
+
+            return $id + 1;
         }
     }
 ?>

@@ -1,20 +1,17 @@
 [
     {
-        "name": "Ambassador",
-        "capacity": "199",
-        "adress": "Cordoba 1673",
-        "value": "1010"
+        "name": "Cines del paseo Aldrey",
+        "adress": "San luis 2020",
+        "id_cinema": 2
     },
     {
         "name": "Cines del paseo",
-        "capacity": "100",
         "adress": "Diagonal Pueyrred\u00f3n 3050",
-        "value": "200"
+        "id_cinema": 4
     },
     {
-        "name": "Cines del paseo Aldrey",
-        "capacity": "100",
-        "adress": "Rivadavia 3050",
-        "value": "100"
+        "name": "Ambassador",
+        "adress": "Cordoba 1673",
+        "id_cinema": 5
     }
 ]
