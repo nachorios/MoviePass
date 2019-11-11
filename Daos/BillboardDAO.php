@@ -17,11 +17,12 @@
             try {
 
 
-                $query = "INSERT INTO " . $this->tableName . "(id_movies, id_cinema) VALUES (:id_movies, :id_cinema);";
+                $query = "INSERT INTO " . $this->tableName . "(id_movies, id_cinema, id_saloon) VALUES (:id_movies, :id_cinema, :id_saloon);";
 
                 $parameters = Array();
                 $parameters["id_movies"] = $bill->getMovie();
                 $parameters["id_cinema"] = $bill->getCinema();
+                $parameters["id_saloon"] = $bill->getSaloon();
 
                 $this->connection = Connection::GetInstance();
 
@@ -95,7 +96,7 @@
                         }
                     }
                     if(!$flag) {
-                        $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $row["idMovie"], $row["cinema"], $row["id"]);
+                        $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $row["idMovie"], $row["cinema"], $row["id"]), $row["id_saloon"];
                         array_push($billboardList, $billboard);
                     }
 
@@ -110,7 +111,7 @@
         private function mapear($value) {
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){
-                return new Billboard(Array($p["day"]), Array($p["hour"]), $p["idMovie"], $p["cinema"], $p["id"]);
+                return new Billboard(Array($p["day"]), Array($p["hour"]), $p["idMovie"], $p["cinema"], $p["id"]), $p["id_saloon"];
             }, $value);
                return count($resp) > 1 ? $resp : $resp['0'];
         }

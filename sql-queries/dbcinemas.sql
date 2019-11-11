@@ -46,6 +46,7 @@ CREATE TABLE billboard(
   id_billboard INT AUTO_INCREMENT,
   id_movies int,
   id_cinema varchar(25),
+  id_saloon int,
 
   CONSTRAINT pk_id_performance PRIMARY KEY (id_billboard),
   constraint fk_id_movies foreign key (id_movies) references movies (id_movie)
