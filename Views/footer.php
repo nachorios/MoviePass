@@ -15,13 +15,13 @@
             <div class="col-12 col-sm-4 col-xl-4 ">
                 <p style="font-size: 1.5em">Contactate con nosotros</p>
                 <div class="facebook">
-                    <a href="#"><img src="<?php echo IMG_PATH ?>facebook.png" alt="" style="width:50px; lenght:50px;" class="my-5 align-middle"></a><span style="font-size:1.5em" class="align-middle"> /MyTicket</span>
+                    <a href="https://www.facebook.com/MyTicket-101361227997834/" target="blank"><img src="<?php echo IMG_PATH ?>facebook.png" alt="" style="width:50px; lenght:50px;" class="my-5 align-middle"></a><span style="font-size:1.5em" class="align-middle"> /MyTicket</span>
                 </div>
                 <div class="facebook">
-                    <a href="#"><img src="<?php echo IMG_PATH?>/instagram.png" alt="" style="width:50px; lenght:50px;" class="my-5"></a><span style="font-size:1.5em" class="align-middle"> @MyTicket</span>
+                    <a href="https://www.instagram.com/myticketmdq" target="blank" ><img src="<?php echo IMG_PATH?>/instagram.png" alt="" style="width:50px; lenght:50px;" class="my-5"></a><span style="font-size:1.5em" class="align-middle"> @MyTicket</span>
                 </div>
                 <div class="facebook">
-                    <a href="#"><img src="<?php echo IMG_PATH?>/twitter.png" alt="" style="width:50px; lenght:50px;" class="my-5"></a><span style="font-size:1.5em" class="align-middle"> @MyTicket</span>
+                <a href="https://twitter.com/MyTicket17" target="blank" ><img src="<?php echo IMG_PATH?>/twitter.png" alt="" style="width:50px; lenght:50px;" class="my-5"></a><span style="font-size:1.5em" class="align-middle"> @MyTicket</span>
                 </div>
             </div>
             <div class="col-12 col-sm-4 col-xl-4 " style="margin-top:5%;">

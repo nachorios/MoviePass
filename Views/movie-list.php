@@ -2,7 +2,7 @@
        <section class="mb-5">
             <div class="container-fluid">
                  <div class="row-fluid">
-                      <h2 class="display-2 text-center text-light ">Peliculas en proyeccion</h2>
+                      <h2 class="display-2 text-center text-light ">Peliculas estrenadas</h2>
                  </div>
             </div>
        </section>
@@ -94,8 +94,8 @@ if (!empty($arrayMovies)):
           <div class="container-fluid" id="peliculas">
                <div class="row mt-5" style="background-color: rgb(0,0,0,0.4);">
                     <div class="col-4  my-5" >
-                         <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" alt=<?php $movie->getTitle() ?> 
-                         class="rounded">
+                    <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" alt=<?php $movie->getTitle() ?> 
+                         style="width:33vh;" class="rounded img-fluid">
                     </div>
                     <div class="col-8  my-5">
                          <table class="table">
