@@ -4,8 +4,9 @@
     {
         public function Index($message = "")
         {
+            //if(!empty(debo traer una variables $funcion)){}else{}
             require_once(VIEWS_PATH.'navbar.php');
-            require_once(VIEWS_PATH."index.php");
+            require_once(VIEWS_PATH."home.php");
         }
         public function Login($message = "")
         {

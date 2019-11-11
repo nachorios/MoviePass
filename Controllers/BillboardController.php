@@ -19,19 +19,19 @@ class BillboardController {
         $this->billboardDAO = new BillboardDAO();
     }
 
-    public function Add($cinema, $idMovie, $day, $hour){
+    public function Add($cinema, $idMovie, $day, $hour, $saloon){
         $billboard = new Billboard($day, $hour, $idMovie, $cinema);
         $added = $this->billboardDAO->Add($billboard);
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO; 
         $billboardList = $this->billboardDAO; 
+        $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5'); 
         require_once(VIEWS_PATH . 'header.php');
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
-    public function editCinema($cinema, $idMovie, $day, $hour, $oldMovie, $oldCinema)
-    {
+    public function editCinema($cinema, $idMovie, $day, $hour, $saloon, $oldMovie, $oldCinema){
         $oldBillboard = $this->billboardDAO->GetBillboard($oldCinema, $oldMovie);
         $this->billboardDAO->Delete($oldCinema, $oldMovie);
         $billboard = new Billboard($day, $hour, $idMovie, $cinema);
@@ -42,6 +42,7 @@ class BillboardController {
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO; 
         $billboardList = $this->billboardDAO; 
+        $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5'); //solo para hacer pruebas
         require_once(VIEWS_PATH . 'header.php');
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
@@ -55,6 +56,7 @@ class BillboardController {
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO; 
         $billboardList = $this->billboardDAO; 
+        $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5');  //solo para hacer pruebas
         require_once(VIEWS_PATH."billboard-list.php");
     }
     /*--------------*/

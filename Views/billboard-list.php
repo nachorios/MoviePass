@@ -112,33 +112,30 @@
                 <?php if(count($date)<2): ?>
                     <p class="card-text mb-auto font-italic" ><?php echo substr($movie->getOverview(), 0, 100); if(strlen($movie->getOverview()) > 100) echo '...'; ?></p>
                 <?php endif; ?>
-                <button class="btn btn-secondary btn-sm mb-2" data-toggle="popover" title="<?php echo $movie->getTitle() ?>" data-html="true" 
-                data-content='
-                <ul class="list-unstyled">
-                    <h4>Sinopsis</h4>
-                    <li><?php echo $movie->getOverview(); ?></li>
-                    <br/>
-                    <li><h6>Datos de interes: </h6>
-                        <ul>
-                            <li>Fecha de Estreno: <?php echo $movie->getRelease_date(); ?></li>
-                            <li>Titulo original: <?php echo $movie->getOriginal_title(); ?></li>
-                            <li>Puntuacion: <?php echo $movie->getVote_average(); ?></li>
-                        </ul>
-                    </li>
-                    <!--<li>Faucibus porta lacus fringilla vel</li>-->
-                    <br/>
-                    <li><h6>Generos: </h6>
-                        <ul>
-                            <?php 
-                                $movieGenres = $movie->getGenre_ids();
-                                foreach($movieGenres as $genre):
-                            ?>
-                            <li> <?php echo $genre['name']; ?> </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </li>
-                </ul>
-                '>
+                <button class="btn btn-secondary btn-sm mb-2" data-placement="left" data-toggle="popover" title="<?php echo $movie->getTitle() ?>" data-html="true" 
+                data-content=' <ul class="list-unstyled">
+                                    <h4><u>Sinopsis</u></h4>
+                                    <li><?php echo str_replace("'", "”", str_replace("\"","”", $movie->getOverview())); ?></li>
+                                    <br>
+                                    <li><h6>Datos de interes: </h6>
+                                        <ul>
+                                            <li>Fecha de Estreno: <?php echo $movie->getRelease_date(); ?></li>
+                                            <li>Titulo original: <?php echo $movie->getOriginal_title(); ?></li>
+                                            <li>Puntuacion: <?php echo $movie->getVote_average(); ?></li>
+                                        </ul>
+                                    </li>
+                                    <br/>
+                                    <li><h6>Generos: </h6>
+                                        <ul>
+                                            <?php 
+                                                $movieGenres = $movie->getGenre_ids();
+                                                foreach($movieGenres as $genre):
+                                            ?>
+                                            <li> <?php echo $genre['name']; ?> </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </li>
+                                </ul>'>
                 Más información</button>
                 
                 <?php

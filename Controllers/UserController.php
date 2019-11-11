@@ -71,9 +71,10 @@
             if (!$accessToken->isLongLived()) {
                 $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
             }
-            $response = $fb->get("/me?fields=id, first_name, last_name, email", $accessToken);
+            $response = $fb->get("/me?fields=id, first_name, last_name, email, birthday, picture.type(large)", $accessToken);
             $userData = $response->getGraphNode()->asArray();
-            $_SESSION['loggedUser'] = new User($userData['first_name'], $userData['last_name'],0, $userData['email']);
+            $date = $userData['birthday'];
+            $_SESSION['loggedUser'] = new User($userData['first_name'], $userData['last_name'], null, $userData['email'], null, 1, $userData['picture']['url'], $date);
             require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "index.php");
@@ -84,6 +85,13 @@
             require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "index.php");
+        }
+
+        public function profile() {
+            require_once(VIEWS_PATH . 'header.php');
+            $disable_cache = true;
+            require_once(VIEWS_PATH . 'navbar.php');
+            require_once(VIEWS_PATH . "profile.php");
         }
 
         public function AddJson($name, $lastName, $dni, $mail, $pass, $role){

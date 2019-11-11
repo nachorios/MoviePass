@@ -12,20 +12,20 @@
     <label for="nameCinema"> Nombre del cine: </label>
     <input type="text" name="name" class="form-control" id="nameCinema" value="" required> </input>
   </div>
-<!--  <div class="form-group">
+  <!--<div class="form-group">
     <label for="capacityCinema"> Capacidad de sala: </label>
     <input type="number" min="0" max="200" name="capacity" class="form-control" id="capacityCinema" value="" required> </input>
-  </div> -->
+  </div>-->
   <div class="form-group">
     <label for="adressCinema"> Direccion: </label>
     <input type="text" name="adress" class="form-control" id="adressCinema" value="" required> </input>
   </div>
-<!--  <div class="form-group">
+  <!--<div class="form-group">
     <label for="valueCinema"> Valor entrada: </label>
     <input type="number" min="0" name="value" class="form-control" id="valueCinema" value="" required> </input>
-  </div> -->
+  </div>-->
   <input  name="id_cinema" type=hidden value="" id="id_cinema"> </input>
-  <input type="text" name="editCinema" type="hidden" class="form-control" id="editCinema" value="" hidden> </input>
+  <input type="text" name="editCinema" class="form-control" id="editCinema" value="" hidden> </input>
 
   <div class="text-center">
       <div id="loading-edit" hidden>

@@ -60,10 +60,6 @@
      //aca se carga arrayCinemas con los datos de cinemas.json o con los datos del dao
      $arrayCinemas = $cinemasList->GetAll(); //para json y pdo (la firma de los metodos es la misma)
 
-     /*echo "<pre>";
-     var_dump($arrayCinemas);
-     echo "</pre>";*/
-
      include(MODALS_PATH . 'cinema-list-modals.php');
 ?>
 
@@ -72,11 +68,17 @@
           var data = document.getElementById(cine).value;
           var dataAux = data.split('/');
           document.getElementById('nameCinema').value = dataAux[0];
-          //document.getElementById('capacityCinema').value = dataAux[1];
           document.getElementById('adressCinema').value = dataAux[1];
           document.getElementById('id_cinema').value = dataAux[2];
-          //document.getElementById('valueCinema').value = dataAux[3];
           document.getElementById('editCinema').value = cine;
+     }
+
+     function editarSaloon(saloon) {
+          var data = document.getElementById(saloon).value;
+          var dataAux = data.split('/');
+          document.getElementById('name-saloon').value = dataAux[0];
+          document.getElementById('value-saloon').value = dataAux[1];
+          document.getElementById('capacity-saloon').value = dataAux[2];
      }
 
     function loading(element, type, text) {
@@ -84,39 +86,46 @@
         element.innerHTML = '<button class="btn btn-'+type+'" type="button" disabled> <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span>'+text+'</span> </button>';
         return;
     }
+
+     $('#myList a').on('click', function (e) {
+          e.preventDefault()
+          $(this).tab('show')
+     })
 </script>
 
-<div class="container-fluid text-center ">
-     <div class="row mt-5 d-flex justify-content-center" style="background-color: rgb(0,0,0,0.4)">
-          <div class="col-8  my-5">
-               <table class="table">
-                    <thead class="text-light">
-                         <th>Nombre</th>
-                  <!--       <th>Capacidad</th> NO VA MAS-->
-                         <th>Dirección</th>
-                  <!--       <th>Valor unico de entrada</th> NO VA MAS-->
+<div class="row mt-4">
+     <div class="col-2">
+          <div class="list-group" id="myList" role="tablist">
+          <?php if(!empty($arrayCinemas)) {
+               $first = true;
+               foreach ($arrayCinemas as $cinema) { ?>
+               <a class="list-group-item list-group-item-action <?php if($first){ $first = false; echo 'active'; } ?>" id="list-<?php echo $cinema->getName(); ?>-list" data-toggle="list" href="#list-<?php echo $cinema->getName(); ?>" role="tab" aria-controls="<?php echo $cinema->getName(); ?>"><?php echo $cinema->getName(); ?></a>
+               <?php }
+          }?>
+          </div>
+     </div>
+     <div class="col-8">
+          <div class="tab-content" id="nav-tabContent">
+          <?php if(!empty($arrayCinemas)):
+               $first = true;
+               foreach ($arrayCinemas as $cinema): ?>
+               <div class="tab-pane fade <?php if($first){ $first = false; echo 'show active'; } ?>" id="list-<?php echo $cinema->getName(); ?>" role="tabpanel" >
+                    <div class="jumbotron">
+                         <h2 class="display-4"> <?php echo $cinema->getName(); ?>
                          <?php
-                            if(isset($_SESSION['loggedUser'])) {
-                                   if($_SESSION['loggedUser']->getRole()>1) {
-                                   ?>
-                                   <th>Modificar</th>
-                                   <th>Eliminar</th
-                                   ><?php
-                                   }
-                              }?>
-                    </thead>
-          <?php
-               if(!empty($arrayCinemas)) {
-                    foreach ($arrayCinemas as $cinema) {
-          ?>
-                    <tbody class="text-light">
-                        <td><?php echo $cinema->getName() ?></td>
-                <!--        <td><?php //echo $cinema->getCapacity() ?></td>  NO VA MAS-->
-                        <td>
+                         if(isset($_SESSION['loggedUser'])) {
+                              if($_SESSION['loggedUser']->getRole()>1) { ?>
+                         <div class="btn-group">
+                              <button type="button" value="<?php echo $cinema->getName() . '/' . $cinema->getAdress() /*. '/' . $cinema->getIdCinema*/ ?>" id="<?php echo $cinema->getIdCinema()?>" onclick = "editarCine('<?php echo $cinema->getIdCinema()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"> Editar</i></button>
+                              <button type="button" onclick="loading(this, 'danger', ''); window.location='<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getIdCinema()  ?>'" class="btn btn-danger"><i class="fa fa-trash-o"> Eliminar</i></button>
+                         </div>
+                              <?php }
+                          }?>
+                         </h2>
+                         <p class="lead">Direccion del cine:
 
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#<?php echo str_replace(" ", "-",$cinema->getAdress()); ?>"><?php echo $cinema->getAdress() ?></button>
-
-                         <!--Modal: Name-->
+                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#<?php echo str_replace(" ", "-",$cinema->getAdress()); ?>"><?php echo $cinema->getAdress() ?></button>
+                         <!--Modal Direccion-->
                          <div class="modal fade" id="<?php echo str_replace(" ", "-",$cinema->getAdress()); ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-lg" role="document">
                               <!--Content-->
@@ -139,37 +148,62 @@
                               <!--/.Content-->
                               </div>
                          </div>
+                         <!--Fin Modal Direccion-->
 
-                        </td>
-                  <!--      <td><?php //echo $cinema->getValue() ?></td>  NO VA MAS-->
-                        <?php
-                          if(isset($_SESSION['loggedUser'])) {
-                              if($_SESSION['loggedUser']->getRole()>1) {
-                                ?>
-                                   <td><button type="button" value="<?php echo $cinema->getName() . '/' . /*$cinema->getCapacity() . '/' .*/ $cinema->getAdress() . '/' . $cinema->getIdCinema() ?>" id="<?php echo $cinema->getIdCinema()?>" onclick = "editarCine('<?php echo $cinema->getIdCinema()  ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td> <!-- cambie los getName por id -->
+                         <hr class="my-4">
+                         <h3 class="text-center"> <u>Salas de cine disponibles</u> </h3>
+                         <table class="table text-center">
+                              <thead class="text-dark">
+                                   <th>Nombre</th>
+                                   <th>Capacidad</th>
+                                   <th>Valor unico de entrada</th>
+                                   <?php
+                                        if(isset($_SESSION['loggedUser'])) {
+                                             if($_SESSION['loggedUser']->getRole()>1) {
+                                             ?>
+                                             <th>Modificar</th>
+                                             <th>Eliminar</th
+                                             ><?php
+                                             }
+                                        }?>
+                              </thead>
+                              <tbody>
+                              <?php for($i = 0; $i < count($cinema->getSaloon()->getValue()); $i++): ?>
+                                   <tr>
+                                        <td><?php echo $cinema->getSaloon()->getName()[$i] ?></td>
+                                        <td><?php echo $cinema->getSaloon()->getValue()[$i] ?></td>
+                                        <td><?php echo $cinema->getSaloon()->getCapacity()[$i] ?></td>
+                                        <?php
+                                        if(isset($_SESSION['loggedUser'])) {
+                                        if($_SESSION['loggedUser']->getRole()>1) {
+                                             ?>
+                                             <td><button type="button" value="<?php echo $cinema->getSaloon()->getName()[$i] . '/' . $cinema->getSaloon()->getValue()[$i]. '/'. $cinema->getSaloon()->getCapacity()[$i] ?>" id="<?php echo $cinema->getSaloon()->getId()?>" onclick = "editarSaloon('<?php echo $cinema->getSaloon()->getId() ?>');" data-toggle="modal" data-target="#editar-salon-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
 
-                                   <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete=<?php echo $cinema->getIdCinema() /*TENER EN CUENTA, CAMBIE EL GET*/  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
+                                             <td><a href="<?php echo URL ?>/Cinema/ShowCinemasList?delete-saloon=<?php echo $cinema->getSaloon()->getId()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
 
-                              <?php
-                              }
-                          }
-                        ?>
-                      </tbody>
-          <?php   }
-          }?>
-                </table>
-                <div class="container col-5">
-                <?php
-                if(isset($_SESSION['loggedUser'])) {
-                    if($_SESSION['loggedUser']->getRole()>1) {
-                      ?>
-                         <button type="button" data-toggle="modal" data-target="#newCinema" class="btn btn-success btn-block btn-lg">Agregar nuevo cine</button>
-                      <?php
-                    }
-                   }?>
-
-                </div>
+                                        <?php
+                                        }
+                                        }
+                                   ?>
+                                   </tr>
+                              <?php endfor; ?>
+                              </tbody>
+                         </table>
+                    </div>
+               </div>
+          <?php endforeach;
+          endif; ?>
           </div>
      </div>
 
+     <div class="mb-4 <?php echo (!empty($arrayCinemas)) ? 'col-2' : 'container' ?>">
+          <div class="list-group" id="myList" role="tablist">
+          <?php
+          if(isset($_SESSION['loggedUser'])) {
+               if($_SESSION['loggedUser']->getRole()>1) { ?>
+                    <button type="button" data-toggle="modal" data-target="#newCinema" class="btn btn-success btn-block btn-lg">Agregar nuevo cine</button>
+          <?php }
+          }?>
+          </div>
+     </div>
 </div>

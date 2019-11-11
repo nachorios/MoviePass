@@ -4,11 +4,13 @@ abstract class Person{
     private $name;
     private $lastName;
     private $dni;
+    private $birthday;
 
-    public function __construct($name, $lastName, $dni){
+    public function __construct($name, $lastName, $dni=0, $birthday=null){
         $this->name = $name;
         $this->lastName = $lastName;
         $this->dni = $dni;
+        $this->birthday = $birthday;
     }
 
     public function getName(){
@@ -33,5 +35,13 @@ abstract class Person{
 
     public function setDni($dni){
         $this->dni = $dni;
+    }
+
+    public function setBirthday($birthday) {
+        $this->birthday = $birthday;
+    }
+
+    public function getBirthday() {
+        return $this->birthday;
     }
 }

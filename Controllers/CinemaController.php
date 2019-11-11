@@ -2,6 +2,7 @@
 
 use Daos\CinemaDAO as CinemaDAO;
 use DaosJson\CinemaJson as CinemaJson;
+use Models\Saloon as Saloon;
 use Models\Cinema as Cinema;
 use Controllers\ViewController as ViewC;
 
@@ -29,11 +30,25 @@ class CinemaController{
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
-    public function registerCinema($name, $adress/*$saloon,*/)
+/*    public function Add($name, $capacity, $adress, $value){
+// aqui deberia pasar el $newCinema porque los datos se obtienen en el retrieve data en cinema json,
+// no se aprovecha la funcionalidad
+        $cinema = new Cinema($name, $capacity, $adress, $value);
+
+        //$this->cinemaDAO->Add($cinema); // no se porque estaba este add de pdo
+    }
+
+    public function AddJson($name, $capacity, $adress, $value){
+        $cinema = new Cinema($name, $capacity, $adress, $value);
+        $flag = $this->cinemaDAOJson->Add($cinema);
+        return $flag;
+    }
+*/
+    public function registerCinema($nameCinema, $address, $nameSaloon, $capacity, $value)
     {
       //esto lo agrego para que tambien me guarde el objeto en la BBDD, aun no funcion por eso lo dejo comentado
-      $cinema = new Cinema($name, $adress/*$saloon,*/);
-      //$agregado = $this->cinemaDAO->Add($cinema); // DE PDO //tambien retorna flag para el modal
+      $newCinema = new Cinema($nameCinema, $address, new Saloon($nameSaloon, $capacity, $value));
+      $agregado = $this->cinemaDAO->Add($newCinema); // DE PDO //tambien retorna flag para el modal
 
       $agregado = $this->cinemaDAOJson->Add($cinema); //DE JSON  // cuidado con el espanglish, recordar que retorna flag para el modal
 

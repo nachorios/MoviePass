@@ -68,8 +68,8 @@
     </div>
 <!---->
 <!-- EDITAR CINE -->
-    <div class="modal fade" id="editar-modal">
-        <div class="modal-dialog">
+    <div class="modal fade bd-example-modal-lg" id="editar-modal">
+        <div class="modal-dialog modal-dialog modal-lg">
             <div class="modal-content">
                 <!--header-->
                 <div class="modal-header color-info">
@@ -105,8 +105,8 @@
     </div>
 <!---->
 <!-- AGREGAR CINE -->
-<div class="modal fade" id="newCinema">
-        <div class="modal-dialog">
+<div class="modal fade bd-example-modal-lg" id="newCinema">
+        <div class="modal-dialog  modal-dialog modal-lg">
             <div class="modal-content">
                 <!--header-->
                 <div class="modal-header">
@@ -116,6 +116,25 @@
                 <!--body-->
                 <div class="modal-body">
                   <?php include(FORMS_PATH.'/cinema-add-form.php'); ?>
+                </div>
+                <div class="modal-footer">
+                    <!--<button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+<!--EDITAR SALON-->
+<div class="modal fade bd-example-modal-lg" id="editar-salon-modal">
+        <div class="modal-dialog modal-dialog modal-lg">
+            <div class="modal-content">
+                <!--header-->
+                <div class="modal-header color-info">
+                    <h4 class="modal-title">Editar</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!--body-->
+                <div class="modal-body">
+                  <?php include(FORMS_PATH ."/saloon-edit-form.php") ?>
                 </div>
                 <div class="modal-footer">
                     <!--<button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>-->

@@ -112,3 +112,6 @@ select.form-control + .chosen-container-multi .chosen-choices {
   background-image:none;
 }
 
+#file_uploaded:hover {
+  cursor: pointer;
+}
