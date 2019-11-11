@@ -82,6 +82,12 @@ create table saloon(
     constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema)
 );
 
+select saloon.*
+from saloon
+join cinemas
+on saloon.id_cinema = cinemas.id_cinema;
+
+
 CREATE TABLE rols(
   id_rol INT AUTO_INCREMENT,
   rolDescription VARCHAR(20),

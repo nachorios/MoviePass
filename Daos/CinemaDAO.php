@@ -37,8 +37,6 @@ class CinemaDAO{
       }catch(Exception $e){
           echo $e->getMessage();
 
-      }finally{
-        return $flag;
       }
   }
 
@@ -129,5 +127,6 @@ class CinemaDAO{
 
         /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
      return count($resp) > 0 ? $resp : null;
+  }
 }
-}
+

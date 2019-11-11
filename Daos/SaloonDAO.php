@@ -35,22 +35,31 @@ class SaloonDAO{
         try{
             $query =" select saloon.*
             from saloon
-            join cinemas
-            on saloon.id_cinema = cinemas.id_cinema";
+        
+            where saloon.id_cinema = id";
 
             $this->connection = Connection::GetInstance();
 
+            $parameters['id'] = $id;
+
+            $resultSet = $this->connection->execute($query, $parameters);
 
         }catch(Exception $e) {
             throw $e;
         }
+        if(!empty($resultSet))
+        {
+            return $this->mapear($resultSet);
+        }
+        else
+            return false;
     }
 
 
     private function mapear($value) {
         $value = is_array($value) ? $value : [];
         $resp = array_map(function($p){
-            return new Billboard(Array($p["day"]), Array($p["hour"]), $p["idMovie"], $p["cinema"], $p["id"]);
+            return new Saloon($p["name"], $p["capacity"], $p["entry_value"], $p["id_cinema"]);
         }, $value);
            return count($resp) > 1 ? $resp : $resp['0'];
     }
