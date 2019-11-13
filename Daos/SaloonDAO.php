@@ -84,6 +84,26 @@ class SaloonDAO{
         }
     }
 
+    public function Delete($id_saloon)
+    {
+      $query = "DELETE FROM saloon WHERE (id_saloon = :id_saloon)";
+
+      try {
+
+        $this->connection = Connection::getInstance();
+
+        $parameters['id_saloon'] = $id_saloon;
+
+        return $this->connection->ExecuteNonQuery($query, $parameters);
+
+      } catch (PDOException $e) {
+        echo $e->getMessage();
+      }
+      catch(Exception $e){
+          echo $e->getMessage();
+        }
+    }
+
     private function mapear($value) {
         $value = is_array($value) ? $value : [];
         $resp = array_map(function($p){

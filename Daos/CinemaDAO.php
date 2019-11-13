@@ -38,7 +38,7 @@ class CinemaDAO{
 
       }catch(PDOException $e){
 
-        throw $e->getMessage(); //lo elevo para que no lo muestre
+        echo $e->getMessage(); //lo elevo para que no lo muestre
 
       }catch(Exception $e){
           echo $e->getMessage();
@@ -73,8 +73,7 @@ class CinemaDAO{
 
     public function Update(Cinema $cinema, $id_cinema)
     {
-      $query = "UPDATE cinemas SET name = :name, address = :address/*, saloon*/ WHERE id_cinema = :id_cinema";
-
+      $query = "UPDATE cinemas SET name = :name, address = :address WHERE id_cinema = :id_cinema";
       try
       {
         $this->connection = Connection::getInstance();
@@ -89,7 +88,7 @@ class CinemaDAO{
 
 
       }catch (PDOException $e) {
-        throw $e->getMessage();
+        echo $e->getMessage();
       }
       catch(Exception $e){
           echo $e->getMessage();
@@ -112,7 +111,7 @@ class CinemaDAO{
         return $this->connection->ExecuteNonQuery($query, $parameters);
 
       } catch (PDOException $e) {
-        throw $e->getMessage();
+        echo $e->getMessage();
       }
       catch(Exception $e){
           echo $e->getMessage();

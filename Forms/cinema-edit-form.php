@@ -18,13 +18,12 @@
   </div>-->
   <div class="form-group">
     <label for="adressCinema"> Direccion: </label>
-    <input type="text" name="adress" class="form-control" id="adressCinema" value="" required> </input>
+    <input type="text" name="address" class="form-control" id="addressCinema" value="" required> </input>
   </div>
   <!--<div class="form-group">
     <label for="valueCinema"> Valor entrada: </label>
     <input type="number" min="0" name="value" class="form-control" id="valueCinema" value="" required> </input>
   </div>-->
-  <input  name="id_cinema" type=hidden value="" id="id_cinema"> </input>
   <input type="text" name="editCinema" class="form-control" id="editCinema" value="" hidden> </input>
 
   <div class="text-center">

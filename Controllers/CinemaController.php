@@ -30,12 +30,37 @@ class CinemaController{
       $newCinema = new Cinema($nameCinema, $address);
       $agregado = $this->cinemaDAO->Add($newCinema);
 
+      $lastID = $this->cinemaDAO->getConnection()->getPdo()->lastInsertId();
+
       $arraySaloon = array();
       for($i = 0 ; $i < count($nameSaloon); $i++) {
         $salon = new Saloon($nameSaloon[$i], $capacity[$i], $value[$i]);
         array_push($arraySaloon, $salon);
-        $this->saloonDAO->Add($salon, $this->cinemaDAO->getConnection()->getPdo()->lastInsertId());
+        $this->saloonDAO->Add($salon, $lastID);
       }
+
+      require_once(VIEWS_PATH . 'navbar.php');
+      $cinemasList = $this->cinemaDAO; //muestra lista de dao al registrar
+      require_once(VIEWS_PATH . "cinemas-list.php");
+    }
+
+    public function registerSaloon($nameSaloon, $capacity, $value, $id_cinema)
+    {
+      $salon = new Saloon($nameSaloon, $capacity, $value);
+      $this->saloonDAO->Add($salon, $id_cinema);
+
+      require_once(VIEWS_PATH . 'navbar.php');
+      $cinemasList = $this->cinemaDAO; //muestra lista de dao al registrar
+      require_once(VIEWS_PATH . "cinemas-list.php");
+    }
+
+    public function deleteCinema() {
+      
+      $proof = $this->cinemaDAO->Delete($_GET['delete']);
+      if($proof == 1) 
+        $borrado = true;
+      else
+        $borrado = false;
 
       require_once(VIEWS_PATH . 'navbar.php');
       $cinemasList = $this->cinemaDAO; //muestra lista de dao al registrar
@@ -51,7 +76,7 @@ class CinemaController{
       $proof = $this->cinemaDAO->Update($cinema,$id_cinema); //pdo
 
       //echo $proof; //muestra 1 si se modifico bien o 0 si no
-      if($proof = 1)
+      if($proof == 1)
       {
         $editado = true;
       }
@@ -65,7 +90,7 @@ class CinemaController{
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
-    public function editSaloon($name, $capacity, $value, $id_salon) {
+    public function editSaloon($name, $value, $capacity, $id_salon) {
 
       $editado = false;
 
@@ -88,7 +113,16 @@ class CinemaController{
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
-    public function deleteCinema($id_cinema){
-        $this->cinemaDAO->Delete($id_cinema); //pdo
+    public function deleteSaloon() {
+      
+      $proof = $this->saloonDAO->Delete($_GET['delete-saloon']);
+      if($proof == 1) 
+        $borrado = true;
+      else
+        $borrado = false;
+
+      require_once(VIEWS_PATH . 'navbar.php');
+      $cinemasList = $this->cinemaDAO; //muestra lista de dao al registrar
+      require_once(VIEWS_PATH . "cinemas-list.php");
     }
 }
