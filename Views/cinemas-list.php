@@ -1,6 +1,7 @@
 <?php
 
-     if(isset($editado)) {
+     if(isset($editedCinema)) {
+          if($editedCinema) {
           ?><script>
                $(function(){
                     $('#edicion-exito').modal('show');
@@ -13,10 +14,10 @@
                     });
                </script><?php
           }
+     }
 
-
-     if(isset($borrado)) {
-          if($borrado) {
+     if(isset($deletedCinema)) {
+          if($deletedCinema) {
                ?><script>
                     $(function(){
                          $('#borrado-exito').modal('show');
@@ -31,8 +32,8 @@
           }
      }
 
-     if(isset($agregado)) {
-          if($agregado) {
+     if(isset($addedCinema)) {
+          if($addedCinema) {
                ?><script>
                     $(function(){
                          $('#registro-exito').modal('show');
@@ -42,6 +43,66 @@
                ?><script>
                     $(function(){
                          $('#registro-error').modal('show');
+                    });
+               </script><?php
+          }
+     }
+     if(isset($addedSaloon)) {
+          if($addedSaloon) {
+               ?><script>
+                    $(function(){
+                         $('#registro-salon-exito').modal('show');
+                    });
+               </script><?php
+          } else {
+               ?><script>
+                    $(function(){
+                         $('#registro-salon-error').modal('show');
+                    });
+               </script><?php
+          }
+     }
+     if(isset($addedSaloon)) {
+          if($addedSaloon) {
+               ?><script>
+                    $(function(){
+                         $('#registro-salon-exito').modal('show');
+                    });
+               </script><?php
+          } else {
+               ?><script>
+                    $(function(){
+                         $('#registro-salon-error').modal('show');
+                    });
+               </script><?php
+          }
+     }
+     if(isset($editedSaloon)) {
+          if($editedSaloon) {
+               ?><script>
+                    $(function(){
+                         $('#edicion-salon-exito').modal('show');
+                    });
+               </script><?php
+          } else {
+               ?><script>
+                    $(function(){
+                         $('#edicion-salon-error').modal('show');
+                    });
+               </script><?php
+          }
+     }
+     if(isset($deletedSaloon)) {
+          if($deletedSaloon) {
+               ?><script>
+                    $(function(){
+                         $('#borrado-salon-exito').modal('show');
+                    });
+               </script><?php
+          } else {
+               ?><script>
+                    $(function(){
+                         $('#borrado-salon-error').modal('show');
                     });
                </script><?php
           }

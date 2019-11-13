@@ -12,7 +12,7 @@ class SaloonDAO{
     private $tableName = "saloon";
 
     public function Add($saloon, $id){
-
+      $flag = false;
         try{
         $query = "INSERT INTO saloon (name, capacity, entry_value, id_cinema) VALUES (:name, :capacity, :entry_value, :id_cinema)";
 
@@ -25,11 +25,13 @@ class SaloonDAO{
 
 
         $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
+        if($rowCount > 0)
+          $flag = true;
         }catch(Exception $e) {
-            throw $e;
+            //throw $e;
         }
 
-
+        return $flag;
     }
 
     public function GetXCinema($id){
@@ -60,7 +62,7 @@ class SaloonDAO{
     public function Update(Saloon $saloon, $id_saloon)
     {
       $query = "UPDATE saloon SET name = :name, capacity = :capacity, entry_value = :entry_value WHERE id_saloon = :id_saloon";
-
+      $flag = false;
       try
       {
         $this->connection = Connection::getInstance();
@@ -72,16 +74,16 @@ class SaloonDAO{
         $parameters["id_saloon"] = $id_saloon;
 
         $rowCount = $this->connection->executeNonQuery($query, $parameters);
-
+        if($rowCount > 0)
+          $flag = true;
 
       }catch (PDOException $e) {
-        throw $e->getMessage();
+        //echo $e->getMessage();
       }
       catch(Exception $e){
-          echo $e->getMessage();
-        } finally {
-          return $rowCount;
+          //echo $e->getMessage();
         }
+        return $flag;
     }
 
     public function Delete($id_saloon)

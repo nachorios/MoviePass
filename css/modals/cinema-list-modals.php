@@ -50,6 +50,23 @@
      </div>
 </div>
 <!---->
+<!-- EDITAR CINE ERROR--> <!--intente hacer un error para cuando haces una modificacion erronea - ignacio chiaradia 8/11 -->
+<div class="modal fade" id="edicion-modal">
+        <div class="modal-dialog">
+          <div class = "modal-content">
+              <div class = "modal-header">
+                      <h4 class = "modal-title">Cine existente</h4>
+              </div>
+              <div class = "modal-body">
+                      <p>El cine que esta intentando modificar ya existe.</p>
+              </div>
+              <div class = "modal-footer">
+                    <!--<button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
 <!-- AGREGAR CINE EXITO -->
     <div class = "modal fade" id = "registro-exito" role = "dialog">
         <div class = "modal-dialog modal-sm text-success">
@@ -84,6 +101,9 @@
         </div>
     </div>
 <!---->
+
+<!--FORMS EDITAR Y AGREGAR CINE -->
+
 <!-- EDITAR CINE -->
     <div class="modal fade bd-example-modal-lg" id="editar-modal">
         <div class="modal-dialog modal-dialog modal-lg">
@@ -98,23 +118,6 @@
                   <?php include(FORMS_PATH ."/cinema-edit-form.php") ?>
                 </div>
                 <div class="modal-footer">
-                    <!--<button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>-->
-                </div>
-            </div>
-        </div>
-    </div>
-<!---->
-<!-- EDITAR CINE ERROR--> <!--intente hacer un error para cuando haces una modificacion erronea - ignacio chiaradia 8/11 -->
-    <div class="modal fade" id="editar-modal">
-        <div class="modal-dialog">
-          <div class = "modal-content">
-              <div class = "modal-header">
-                      <h4 class = "modal-title">Cine existente</h4>
-              </div>
-              <div class = "modal-body">
-                      <p>El cine que esta intentando modificar ya existe.</p>
-              </div>
-              <div class = "modal-footer">
                     <!--<button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>-->
                 </div>
             </div>
@@ -140,6 +143,112 @@
             </div>
         </div>
     </div>
+
+
+    <!-- AGREGAR SALON EXITO -->
+    <div class = "modal fade" id = "registro-salon-exito" role = "dialog">
+        <div class = "modal-dialog modal-sm text-success">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                        <h4 class = "modal-title">Salon Agregado</h4>
+                </div>
+                <div class = "modal-body">
+                        <p>El Salon se ha agregado con exito.</p>
+                </div>
+                <div class = "modal-footer">
+                        <button type = "button" class = "btn btn-success" data-dismiss = "modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
+<!-- AGREGAR SALON ERROR -->
+    <div class = "modal fade" id = "registro-salon-error" role = "dialog">
+        <div class = "modal-dialog modal-sm text-danger">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                        <h4 class = "modal-title">Salon existente</h4>
+                </div>
+                <div class = "modal-body">
+                        <p>El salon que esta intentando agregar ya existe.</p>
+                </div>
+                <div class = "modal-footer">
+                        <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
+<!-- BORRAR SALON -->
+<div class = "modal fade" id = "borrado-salon-exito" role = "dialog">
+        <div class = "modal-dialog modal-sm text-danger">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                        <h4 class = "modal-title">Salon borrado</h4>
+                </div>
+                <div class = "modal-body">
+                        <p>El Salon se ha borrado con exito.</p>
+                </div>
+                <div class = "modal-footer">
+                        <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
+<!-- BORRAR SALON ERROR -->
+<div class = "modal fade" id = "borrado-salon-error" role = "dialog">
+        <div class = "modal-dialog modal-sm text-danger">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                        <h4 class = "modal-title">Salon inexistente</h4>
+                </div>
+                <div class = "modal-body">
+                        <p>El Salon que intenta borrar no existe.</p>
+                </div>
+                <div class = "modal-footer">
+                        <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
+<!-- EDITAR SALON EXITO-->
+<div class = "modal fade" id = "edicion-salon-exito" role = "dialog">
+     <div class = "modal-dialog modal-sm text-info">
+          <div class = "modal-content">
+               <div class = "modal-header">
+                    <h4 class = "modal-title">Salon editado</h4>
+               </div>
+               <div class = "modal-body">
+                    <p>El Salon se ha editado con exito.</p>
+               </div>
+               <div class = "modal-footer">
+                    <button type = "button" class = "btn btn-info" data-dismiss = "modal">Aceptar</button>
+               </div>
+          </div>
+     </div>
+</div>
+<!---->
+<!-- EDITAR SALON ERROR--> <!--intente hacer un error para cuando haces una modificacion erronea - ignacio chiaradia 8/11 -->
+<div class = "modal fade" id = "edicion-salon-error" role = "dialog">
+        <div class = "modal-dialog modal-sm text-danger">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                        <h4 class = "modal-title">Salon existente.</h4>
+                </div>
+                <div class = "modal-body">
+                        <p>El Salon que esta intentando modificar    ya existe.</p>
+                </div>
+                <div class = "modal-footer">
+                        <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
+<!--FORMS EDITAR Y AGREGAR SALON -->
+
 <!--EDITAR SALON-->
 <div class="modal fade bd-example-modal-lg" id="editar-salon-modal">
         <div class="modal-dialog modal-dialog modal-lg">

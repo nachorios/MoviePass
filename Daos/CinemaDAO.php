@@ -20,14 +20,12 @@ class CinemaDAO{
 
             $query = "INSERT INTO cinemas (name, address/*, saloon*/) VALUES (:name, :address/*, :saloon*/)";
 
+            $flag = false;
       try{
             $this->connection = Connection::GetInstance();
 
-            $flag = false;
             $parameters["name"] = $cinema->getName();
             $parameters["address"] = $cinema->getAdress();
-            //$parameters["saloon"] = $cinema->getSaloon();
-
 
             $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
 
@@ -37,13 +35,13 @@ class CinemaDAO{
             }
 
       }catch(PDOException $e){
-
-        echo $e->getMessage(); //lo elevo para que no lo muestre
+        //echo $e->getMessage(); //lo elevo para que no lo muestre
 
       }catch(Exception $e){
-          echo $e->getMessage();
+          //echo $e->getMessage();
 
       }
+      return $flag;
   }
 
 
@@ -74,6 +72,7 @@ class CinemaDAO{
     public function Update(Cinema $cinema, $id_cinema)
     {
       $query = "UPDATE cinemas SET name = :name, address = :address WHERE id_cinema = :id_cinema";
+      $flag = false;
       try
       {
         $this->connection = Connection::getInstance();
@@ -85,13 +84,17 @@ class CinemaDAO{
         $parameters["id_cinema"] = $id_cinema;
 
         $rowCount = $this->connection->executeNonQuery($query, $parameters);
-
+        
+        if($rowCount == 1) //si el cine fue cargado con exito ExecuteNonQuery devuelve 1 (que es la cantidad de filas modificadas)
+            {
+              $flag = true; //retorno el flag para mostrar el modal
+            }
 
       }catch (PDOException $e) {
-        echo $e->getMessage();
+        //echo $e->getMessage();
       }
       catch(Exception $e){
-          echo $e->getMessage();
+          //echo $e->getMessage();
         } finally {
 
           return $rowCount;
