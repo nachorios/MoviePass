@@ -26,8 +26,8 @@ class BillboardController {
         $billboard = new Billboard($day, $hour, $idMovie, $cinema, null, $saloon);
         $added = $this->billboardDAO->Add($billboard);
         $movieList = $this->movieDAO;
-        $cinemasList = $this->cinemaDAO; 
-        $billboardList = $this->billboardDAO; 
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
     }
@@ -44,25 +44,25 @@ class BillboardController {
             $this->billboardDAO->Add($oldBillboard);
         }
         $movieList = $this->movieDAO;
-        $cinemasList = $this->cinemaDAO; 
-        $billboardList = $this->billboardDAO; 
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
-    public function deleteBillboard() 
+    public function deleteBillboard()
     {
         if(isset($_GET['delete'])) {
             $proof = $this->billboardDAO->Delete($_GET['delete']);
-            if($proof == 1) 
+            if($proof == 1)
             $deletedCinema = true;
             else
             $deletedCinema = false;
         }
-        
+
         $movieList = $this->movieDAO;
-        $cinemasList = $this->cinemaDAO; 
-        $billboardList = $this->billboardDAO; 
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
       }
@@ -77,4 +77,21 @@ class BillboardController {
         require_once(VIEWS_PATH."billboard-list.php");
     }
     /*--------------*/
+
+ // editBillBoard_PDO ESTA EN PROCESO
+    public function editBillBoard_PDO($idCinema, $idMovie, $day, $hour, $idSaloon, $oldMovie, $oldCinema){
+        $oldBillboard = $this->billboardDAO->GetBillboard($oldCinema, $oldMovie);
+        $this->billboardDAO->Delete($oldCinema, $oldMovie);
+        $billboard = new Billboard($day, $hour, $idMovie, $cinema);
+        $edited = $this->billboardDAO->Add($billboard);
+        if(!$edited) {
+            $this->billboardDAO->Add($oldBillboard);
+        }
+        $movieList = $this->movieDAO;
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
+        require_once(VIEWS_PATH . 'header.php');
+        require_once(VIEWS_PATH . 'navbar.php');
+        require_once(VIEWS_PATH . "billboard-list.php");
+    }
 }
