@@ -89,6 +89,64 @@
         }
         return timeReply;
     }
+
+    function actualizarEditSalas() {
+        var s1 = document.getElementById('select-edit-cinema');
+        var value = s1.options[s1.selectedIndex].id;
+        var data = value.slice(0, -1); //le quitamos la ultima '/' para evitar errores.s
+        var optionArray = data.split("/");
+        
+        alert('hola');
+
+        //$("#select-saloon").empty();
+        var elements = document.getElementsByClassName("select-edit-class");
+        for(i = 0; i < elements.length; i++) {
+            var e = elements[i];
+            while (e.options.length > 1) {                
+                e.remove(1);
+            } 
+            for(var option in optionArray){
+                var pair = optionArray[option].split("-");
+                var newOption = document.createElement("option");
+                newOption.innerHTML = pair[0];
+                newOption.value = pair[1];
+                newOption.setAttribute("name", "saloon[]");
+
+                e.options.add(newOption);
+            }
+        }
+    }
+
+    function actualizarEditSalasNoEditadas() {
+        alert('hola');
+        var s1 = document.getElementById('select-edit-cinema');
+        var value = s1.options[s1.selectedIndex].id;
+        var data = value.slice(0, -1); //le quitamos la ultima '/' para evitar errores.s
+        var optionArray = data.split("/");
+        
+        //$("#select-saloon").empty();
+        var elements = document.getElementsByClassName("select-edit-class");
+        for(i = 0; i < elements.length; i++) {
+            var e = elements[i];
+            if (e.options.length == 1) {
+                while (e.options.length > 1) {                
+                    e.remove(1);
+                } 
+                for(var option in optionArray){
+                    var pair = optionArray[option].split("-");
+                    var newOption = document.createElement("option");
+                    newOption.innerHTML = pair[0];
+                    //newOption.value = pair[1];
+                    newOption.setAttribute("name", "saloon[]");
+                    newOption.setAttribute("value", pair[1]);
+
+                    e.options.add(newOption);
+                }
+            }
+            
+        }
+    }
+
 </script>
 <?php 
     $cinemas = $cinemasList->GetAll();
@@ -98,10 +156,10 @@
 <form action="<?php echo URL?>/Billboard/editBillboard"  oninput="validationEditCheck();" onsubmit="loadingEdit();" id="billboard-edit-form" method="POST" name="frm" class="p-3 mb-2 bg-dark">
     <div class="form-group">
         <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
-        <select class="form-control" id="select-cinema" name="cinema" required>
+        <select class="form-control" id="select-edit-cinema" onchange="actualizarEditSalas()" name="cinema" required>
             <option value="" disabled>Cines</option>
         <?php foreach($cinemas as $cinema): ?>
-            <option name="nameCinema" value="<?php echo $cinema->getName(); ?>"><?php echo $cinema->getName(); ?></option>
+            <option name="nameCinema" value="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></option>
         <?php endforeach; ?>
         </select>
     </div>
@@ -125,9 +183,10 @@
                 <input type="time" name="time-edit[]" min="15:00" max="23:00" required>    
             </div>
             <div class="form-group col m-2 ">
-                <label for="saloon-select-edit" class="text-light"> Seleccionar Sala: </label>
-                <select name="saloon-select" id="select-saloon-edit" required>
+                <label for="saloon-select" class="text-light"> Seleccionar Sala: </label>
+                <select name="saloon-select[]" id="select-edit-saloon" onmouseover="actualizarEditSalasNoEditadas()" class="select-edit-class" required>
                     <option value="" selected disabled>Salas</option>
+                    <!--<option name="saloon" value=""></option>-->
                 </select>
             </div>
             <a href="#" class="m-2" id="add-edit"><button type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></a>

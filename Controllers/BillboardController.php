@@ -69,8 +69,8 @@ class BillboardController {
     {
         require_once( VIEWS_PATH . 'navbar.php');
         $movieList = $this->movieDAO;
-        $cinemasList = $this->cinemaDAO; 
-        $billboardList = $this->billboardDAO; 
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
         require_once(VIEWS_PATH."billboard-list.php");
     }
     /*--------------*/

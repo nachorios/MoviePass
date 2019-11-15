@@ -68,6 +68,7 @@
         var timeReply = new Boolean(false);//creo la bandera
 
         var values = $("input[name='time[]']").map(function(){return $(this).val();}).get();//obtiene todas los horarios del formulario
+        var valuesDates = $("input[name='date[]']").map(function(){return $(this).val();}).get();//obtiene todas las fechas del formulario
         for (i = 0; i < values.length; i++) {
             for (j = 0; j < values.length; j++) {
                 var h1 = parseInt(values[i].replace(":", ""));
@@ -78,7 +79,7 @@
                 } else {
                     timeBeetween = h1-h2;
                 }
-                if(timeBeetween < 15 && i !== j) {//si los horarios son iguales y si no se esta comparando el mismo dato
+                if(timeBeetween < 15 && values[i] != values[j] && i !== j) {//si los horarios son iguales y si no se esta comparando el mismo dato
                     document.getElementById('btn-add').setCustomValidity("Las funciones deben tener como minimo 15 minutos entre ellas.");//creo la validacion(alerta)
                     timeReply = true;//indico que se encontraron 2 fechas iguales
                 }
@@ -143,9 +144,9 @@
 
 </script>
 <?php 
-$cinemas = $cinemasList->GetAll();
-if($cinemas != null && !is_array($cinemas))
-$cinemas = array($cinemas);
+    $cinemas = $cinemasList->GetAll();
+    if($cinemas != null && !is_array($cinemas))
+        $cinemas = array($cinemas);
 ?>
 <form action="<?php echo URL?>/Billboard/add#" oninput="validationCheck();" onsubmit="loadingAdd();" id="billboard-add-form" method="POST" class="p-3 mb-2 bg-dark rounded">
 <div class="form-group">

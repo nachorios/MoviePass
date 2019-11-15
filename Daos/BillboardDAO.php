@@ -17,6 +17,7 @@
          * Funcion para agregar mediante un INSERT una pelicula a la base de datos.
          */
         public function Add(Billboard $bill) {
+            $flag = false;
             try {
 
 
@@ -28,12 +29,15 @@
 
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
                 $id = $this->connection->getPdo()->lastInsertId();
                 $this->AddDate($bill->getDay(), $bill->getHour(), $bill->getSaloon(), $id);
+                if($rowCount > 0)
+                    $flag = true;
             } catch(Exception $e) {
-                throw $e;
+                //throw $e;
             }
+            return $flag;
         }
 
         public function AddDate($days, $hours, $saloon, $id) {
@@ -118,6 +122,26 @@
                 throw $e;
             }
 
+        }
+
+        public function Delete($id_billboard)
+        {
+          $query = "DELETE FROM billboard WHERE (id_billboard = :id_billboard)";
+
+          try {
+
+            $this->connection = Connection::getInstance();
+
+            $parameters['id_billboard'] = $id_billboard;
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+          } catch (PDOException $e) {
+            echo $e->getMessage();
+          }
+          catch(Exception $e){
+              echo $e->getMessage();
+            }
         }
 
         private function mapear($value) {
