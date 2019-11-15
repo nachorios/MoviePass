@@ -32,12 +32,7 @@
        </script><?php
         }
    }
-     if(isset($_GET['delete']))
-     {
-          $billboardList->Delete($_GET['delete'],$_GET['movie']);
-          $borrado = true;
-     }
-     if(isset($borrado)) {
+     if(isset($deletedCinema)) {
         ?><script>
              $(function(){
                   $('#borrado-exito').modal('show');
@@ -49,6 +44,7 @@
 <script>
      function editBillboard(billboard) {
           var data = document.getElementById(billboard).value;  
+         //alert(data);
           var dataAux = data.split('/');
           document.getElementById('select-cinema').value = dataAux[0];
           document.getElementById('select-movie').value = dataAux[1];
@@ -81,7 +77,6 @@
         $time = $billboard->getHour();
         $saloons = $billboard->getSaloon();
         $date = $billboard->getDay();
-        
     ?>
         
     <div class ="col-md-6 float-left" >
@@ -152,7 +147,7 @@
                             Eliminando...
                         </button>
                     </div>
-                    <button type="button" value="" id="borrar-<?php echo $id ?>" onclick="loadingDelete(<?php echo $id ?>); window.location = '<?php echo URL ?>/Billboard/ShowView?delete=<?php echo $cinema->getIdCinema() .'&movie='. $movie->getId();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
+                    <button type="button" value="" id="borrar-<?php echo $id ?>" onclick="loadingDelete(<?php echo $id ?>); window.location = '<?php echo URL ?>/Billboard/deleteBillboard?delete=<?php echo $billboard->getId();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
                         
                     <button type="button" value='<?php echo $cinema->getIdCinema() .'/'. $movie->getId(); ?>' id="<?php echo $id ?>" onclick = "editBillboard('<?php echo $id ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
         <?php } else {

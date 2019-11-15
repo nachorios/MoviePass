@@ -17,6 +17,7 @@
          * Funcion para agregar mediante un INSERT una pelicula a la base de datos.
          */
         public function Add(Billboard $bill) {
+            $flag = false;
             try {
 
 
@@ -28,12 +29,15 @@
 
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
                 $id = $this->connection->getPdo()->lastInsertId();
                 $this->AddDate($bill->getDay(), $bill->getHour(), $bill->getSaloon(), $id);
+                if($rowCount > 0)
+                    $flag = true;
             } catch(Exception $e) {
-                throw $e;
+                //throw $e;
             }
+            return $flag;
         }
 
         public function AddDate($days, $hours, $saloon, $id) {
@@ -140,7 +144,7 @@
             }
         }
 
-        public function Update($billboard, $date, $id_billboard, $id_dates)
+        public function Update($billboard, $id_billboard, $id_dates)
         {
           $query = "UPDATE billboard SET id_movie = :id_movie, id_cinema = :id_cinema WHERE id_billboard = :id_billboard";
           $flag = false;

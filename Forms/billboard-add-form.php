@@ -68,6 +68,7 @@
         var timeReply = new Boolean(false);//creo la bandera
 
         var values = $("input[name='time[]']").map(function(){return $(this).val();}).get();//obtiene todas los horarios del formulario
+        var valuesDates = $("input[name='date[]']").map(function(){return $(this).val();}).get();//obtiene todas las fechas del formulario
         for (i = 0; i < values.length; i++) {
             for (j = 0; j < values.length; j++) {
                 var h1 = parseInt(values[i].replace(":", ""));
@@ -78,7 +79,7 @@
                 } else {
                     timeBeetween = h1-h2;
                 }
-                if(timeBeetween < 15 && i !== j) {//si los horarios son iguales y si no se esta comparando el mismo dato
+                if(timeBeetween < 15 && values[i] != values[j] && i !== j) {//si los horarios son iguales y si no se esta comparando el mismo dato
                     document.getElementById('btn-add').setCustomValidity("Las funciones deben tener como minimo 15 minutos entre ellas.");//creo la validacion(alerta)
                     timeReply = true;//indico que se encontraron 2 fechas iguales
                 }
@@ -142,13 +143,17 @@
     }
 
 </script>
-
+<?php 
+    $cinemas = $cinemasList->GetAll();
+    if($cinemas != null && !is_array($cinemas))
+        $cinemas = array($cinemas);
+?>
 <form action="<?php echo URL?>/Billboard/add#" oninput="validationCheck();" onsubmit="loadingAdd();" id="billboard-add-form" method="POST" class="p-3 mb-2 bg-dark rounded">
 <div class="form-group">
     <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
     <select class="form-control" id="select-add-cinema" onchange="actualizarSalas()" name="cinema" id="select-cinema" required>
         <option value="" selected disabled>Cines</option>
-    <?php foreach($cinemasList->GetAll() as $cinema): ?>
+    <?php foreach($cinemas as $cinema):  ?>
         <option name="nameCinema" id="<?php foreach($cinema->getSaloon() as $saloons){ echo $saloons->getName() .'-'. $saloons->getId().'/'; } ?>" value="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></option>
     <?php endforeach; ?>
     </select>

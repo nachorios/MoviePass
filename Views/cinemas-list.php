@@ -238,7 +238,7 @@
                                                   ?>
                                                   <td><button type="button" value="<?php echo $salon->getName() . '/' . $salon->getValue(). '/'. $salon->getCapacity() . '/'. $salon->getId()  ?>" id="salon-<?php echo $salon->getId()?>" onclick = "editarSaloon('<?php echo $salon->getId() ?>');" data-toggle="modal" data-target="#editar-salon-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
 
-                                                  <td><a href="<?php echo URL ?>/Cinema/deleteSaloon?delete-saloon=<?php echo $salon->getId()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
+                                                  <td><a href="<?php echo URL ?>/Saloon/deleteSaloon?delete-saloon=<?php echo $salon->getId()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
 
                                              <?php
                                              }

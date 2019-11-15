@@ -28,12 +28,11 @@ class BillboardController {
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
-        require_once(VIEWS_PATH . 'header.php');
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
-    public function editCinema($cinema, $idMovie, $day, $hour, $saloon, $oldMovie, $oldCinema){
+    public function editBillboard($cinema, $idMovie, $day, $hour, $saloon, $oldMovie, $oldCinema){
         $oldBillboard = $this->billboardDAO->GetBillboard($oldCinema, $oldMovie);
         $this->billboardDAO->Delete($oldCinema, $oldMovie);
         $billboard = new Billboard($day, $hour, $idMovie, $cinema);
@@ -44,15 +43,30 @@ class BillboardController {
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
-        require_once(VIEWS_PATH . 'header.php');
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
+    public function deleteBillboard()
+    {
+        if(isset($_GET['delete'])) {
+            $proof = $this->billboardDAO->Delete($_GET['delete']);
+            if($proof == 1)
+            $deletedCinema = true;
+            else
+            $deletedCinema = false;
+        }
+
+        $movieList = $this->movieDAO;
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
+        require_once(VIEWS_PATH . 'navbar.php');
+        require_once(VIEWS_PATH . "billboard-list.php");
+      }
+
     /*----Vistas----*/
     public function ShowView() //pruebas
     {
-        require_once( VIEWS_PATH . 'header.php');
         require_once( VIEWS_PATH . 'navbar.php');
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
@@ -60,18 +74,6 @@ class BillboardController {
         require_once(VIEWS_PATH."billboard-list.php");
     }
     /*--------------*/
-    public function deleteBillboard() {
-
-      $proof = $this->billboardDAO->Delete($_GET['delete']);
-      if($proof == 1)
-        $deletedBillboard = true;
-      else
-        $deletedBillboard = false;
-
-      require_once(VIEWS_PATH . 'navbar.php');
-      $billboardList = $this->billboardDAO; //muestra lista de dao al registrar
-      require_once(VIEWS_PATH . "billboard-list.php");
-    }
 
  // editBillBoard_PDO ESTA EN PROCESO
     public function editBillBoard_PDO($idCinema, $idMovie, $day, $hour, $idSaloon, $oldMovie, $oldCinema){
