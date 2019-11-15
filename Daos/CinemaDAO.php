@@ -68,6 +68,28 @@ class CinemaDAO{
             return false;
     }
 
+    public function GetCinemaById($id){
+      try{
+          $query =" select c.*
+          from cinemas as c
+          where c.id_cinema = :id";
+
+          $this->connection = Connection::GetInstance();
+
+          $parameters['id'] = $id;
+
+          $resultSet = $this->connection->execute($query, $parameters);
+
+      }catch(Exception $e) {
+          throw $e;
+      }
+      if(!empty($resultSet))
+      {
+          return $this->mapear($resultSet);
+      }
+      else
+          return false;
+  }
 
     public function Update(Cinema $cinema, $id_cinema)
     {
@@ -135,9 +157,8 @@ class CinemaDAO{
 
 		    return new Cinema( $p['name'], $p['address'],$this->saloonDAO->GetXCinema($p['id_cinema']),$p['id_cinema']); //(asi tengo los datos en la bbdd de phpmyadmin)
      }, $value);
-
         /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
-     return count($resp) > 0 ? $resp : $resp;
+     return count($resp) > 1 ? $resp : $resp[0];
   }
 
 }

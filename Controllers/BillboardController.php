@@ -1,10 +1,10 @@
 <?php namespace Controllers;
 
-use DaosJson\CinemaJson as CinemaDAO;
+use Daos\CinemaDAO as CinemaDAO;
 use Models\Cinema as Cinema;
 use Daos\MovieDAO as MovieDAO;
 use Models\Movie as Movie;
-use DaosJson\BillboardJson as BillboardDAO;
+use Daos\BillboardDAO as BillboardDAO;
 use Models\Billboard as Billboard;
 
 class BillboardController {
@@ -20,12 +20,14 @@ class BillboardController {
     }
 
     public function Add($cinema, $idMovie, $day, $hour, $saloon){
-        $billboard = new Billboard($day, $hour, $idMovie, $cinema);
+        /*echo '<pre>';
+        var_dump($_POST);
+        echo '</pre>';*/
+        $billboard = new Billboard($day, $hour, $idMovie, $cinema, null, $saloon);
         $added = $this->billboardDAO->Add($billboard);
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
-        $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5');
         require_once(VIEWS_PATH . 'header.php');
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
@@ -42,7 +44,6 @@ class BillboardController {
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
-        $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5'); //solo para hacer pruebas
         require_once(VIEWS_PATH . 'header.php');
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
@@ -56,7 +57,6 @@ class BillboardController {
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
-        $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5');  //solo para hacer pruebas
         require_once(VIEWS_PATH."billboard-list.php");
     }
     /*--------------*/

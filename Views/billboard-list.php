@@ -77,23 +77,26 @@
         $id = 0;
         foreach($billboardList->getAll() as $billboard):
         $cinema = $billboard->getCinema();
-        $movie = $movieList->getMovieById($billboard->getMovie());
+        $movie = $billboard->getMovie();
         $time = $billboard->getHour();
+        $saloons = $billboard->getSaloon();
         $date = $billboard->getDay();
+        
     ?>
         
     <div class ="col-md-6 float-left" >
         <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
 
             <div class="col p-2 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary"><?php echo $cinema ?></strong>
+                <strong class="d-inline-block mb-2 text-primary"><?php echo $cinema->getName() ?></strong>
                 <h5 class="mb-0"><?php echo substr($movie->getTitle(), 0, 34); if(strlen($movie->getTitle()) > 34) echo '...'; ?></h5>
                 <div class="mb-1 text-muted">
                     Puntaje: <?php echo $movie->getVote_average() ?>
                 </div>
-                <table class="table-sm table-hover">
+                <table class="table-sm table-hover text-center">
                     <thead >
                         <th>Fecha</th>
+                        <th>Sala</th>
                         <th>Hora</th>
                     </thead>
                     <tbody>
@@ -101,6 +104,7 @@
                             
                         <tr class="table-secondary">
                             <td><?php echo $date["$i"] ?></td>
+                            <td><?php echo $saloons["$i"]->getName() ?></td>
                             <td><?php echo $time["$i"] ?></td>
                         </tr>
 
@@ -148,9 +152,9 @@
                             Eliminando...
                         </button>
                     </div>
-                    <button type="button" value="" id="borrar-<?php echo $id ?>" onclick="loadingDelete(<?php echo $id ?>); window.location = '<?php echo URL ?>/Billboard/ShowView?delete=<?php echo $cinema.'&movie='.$billboard->getMovie();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
+                    <button type="button" value="" id="borrar-<?php echo $id ?>" onclick="loadingDelete(<?php echo $id ?>); window.location = '<?php echo URL ?>/Billboard/ShowView?delete=<?php echo $cinema->getIdCinema() .'&movie='. $movie->getId();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
                         
-                    <button type="button" value='<?php echo $cinema.'/'.$billboard->getMovie() ?>' id="<?php echo $id ?>" onclick = "editBillboard('<?php echo $id ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
+                    <button type="button" value='<?php echo $cinema->getIdCinema() .'/'. $movie->getId(); ?>' id="<?php echo $id ?>" onclick = "editBillboard('<?php echo $id ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
         <?php } else {
             ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i>Agregar al Carrito</button> <?php
         }

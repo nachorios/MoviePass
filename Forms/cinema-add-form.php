@@ -61,7 +61,7 @@
     <input type="number" min="0" name="value" class="form-control" id="valueCine" placeholder="Ingresar valor unico de entrada" required> </input>
   </div>-->
 
-    <h3 class="text-center"><u>Agregar salones</u></h3>
+    <h3 class="text-center"><u>Agregar salas</u></h3>
     <div class="container mb-2" id="container">
     <div class="text-dark row rounded-top" style="background-color:rgb(0,0,0,0.5);">
       <div class="form-group col m-2">
