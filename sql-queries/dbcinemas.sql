@@ -41,15 +41,35 @@ CREATE TABLE movies_x_genres(
   CONSTRAINT fk_id_genre_movie_x_genre FOREIGN KEY (id_genre) REFERENCES genres(id_genre)
 );
 
+
+CREATE TABLE cinemas(
+  id_cinema INT AUTO_INCREMENT,
+  name VARCHAR(50),
+  address VARCHAR(50),
+
+  CONSTRAINT pk_id_cinema PRIMARY KEY (id_cinema),
+  CONSTRAINT uniq_name UNIQUE (name),
+  CONSTRAINT uniq_address UNIQUE (address)
+);
+create table saloon(
+	id_saloon int auto_increment,
+    name varchar (50),
+    capacity INT,
+    entry_value INT, /*valor de la entrada*/
+    id_cinema INT,
+
+    constraint pk_id_saloon primary key (id_saloon),
+    constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema) ON DELETE CASCADE
+);
 /*cartelera*/
 CREATE TABLE billboard(
   id_billboard INT AUTO_INCREMENT,
   id_movie int,
   id_cinema int,
 
-  CONSTRAINT pk_id_performance PRIMARY KEY (id_billboard),
-  constraint fk_id_movie foreign key (id_movie) references movies (id_movie),
-  constraint fk_iid_cinema foreign key (id_cinema) references movies (id_cinema)
+  CONSTRAINT pk_id_billboard PRIMARY KEY (id_billboard)
+  -- CONSTRAINT fk_id_movies foreign key (id_movie) references movies (id_movie),
+  -- CONSTRAINT fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema)
 );
 
 create table dates(
@@ -62,32 +82,18 @@ create table dates(
     CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard)
 );
 
-
-CREATE TABLE cinemas(
-  id_cinema INT AUTO_INCREMENT,
-  name VARCHAR(50),
-  address VARCHAR(50),
-
-  CONSTRAINT pk_id_cinema PRIMARY KEY (id_cinema),
-  CONSTRAINT uniq_name UNIQUE (name),
-  CONSTRAINT uniq_address UNIQUE (address)
-);
-
-create table saloon(
-	id_saloon int auto_increment,
-    name varchar (50),
-    capacity INT,
-    entry_value INT, /*valor de la entrada*/
-    id_cinema INT,
-
-    constraint pk_id_saloon primary key (id_saloon),
-    constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema)
-);
-
 select saloon.*
 from saloon
 join cinemas
 on saloon.id_cinema = cinemas.id_cinema;
+
+select d.days as 'day', d.hours as 'hour', d.id_saloon as 'saloon', b.id_movie as 'idMovie', c.name as 'cinema', b.id_billboard as 'id'
+	from billboard as b
+	join dates as d
+	on b.id_billboard = d.id_billboard
+    join cinemas as c
+    on b.id_cinema = c.id_cinema;
+
 
 
 CREATE TABLE rols(
