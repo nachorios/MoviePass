@@ -112,7 +112,7 @@
                     }
                     if(!$flag) {
                         $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $this->movieDAO->getMovieById($row["idMovie"]), $this->cinemaDAO->GetCinemaById($row["cinema"]), $row["id"], $this->saloonDAO->GetSalonById($row["saloon"]));
-                        
+
                         array_push($billboardList, $billboard);
                     }
 
@@ -141,6 +141,83 @@
           }
           catch(Exception $e){
               echo $e->getMessage();
+            }
+        }
+
+        public function Update($billboard, $id_billboard, $id_dates)
+        {
+          $query = "UPDATE billboard SET id_movie = :id_movie, id_cinema = :id_cinema WHERE id_billboard = :id_billboard";
+          $flag = false;
+
+          try
+          {
+            $this->connection = Connection::getInstance();
+            $parameters = array();
+            $parameters["id_billboard"] = $billboard->getId();
+            $parameters["id_movie"] = $billboard->getMovie();
+            $parameters["id_cinema"] = $billboard->getCinema();
+
+
+            $parameters["id_billboard"] = $id_billboard;
+
+            $rowCount = $this->connection->executeNonQuery($query, $parameters);
+
+            //$id = $this->connection->getPdo()->lastInsertId();
+            $this->UpdateDate($id_billboard, $billboard->getDay(), $billboard->getHour(), $billboard->getSaloon(), $id_dates);
+
+
+            if($rowCount == 1)
+                {
+                  $flag = true; //retorno el flag para mostrar el modal
+                }
+
+          }catch (PDOException $e) {
+            //echo $e->getMessage();
+          }
+          catch(Exception $e){
+              //echo $e->getMessage();
+            } finally {
+
+              return $rowCount;
+            }
+        }
+
+        public function UpdateDate($id_billboard, $days, $hours, $id_saloon, $id_dates)
+        {
+          for($i = 0; $i < count($days); $i++) {
+          try
+          {
+          $query = "UPDATE dates SET id_billboard = :id_billboard, days = :days, hours = :hours, id_saloon = :id_saloon WHERE id_dates = :id_dates";
+          $flag = false;
+
+
+            $this->connection = Connection::getInstance();
+
+            $parameters = array();
+            $parameters["id_billboard"] = $id;
+            $parameters["days"] = $days[$i];
+            $parameters["hours"] = $hours[$i];
+            $parameters["id_saloon"] = $saloon[$i];
+
+            $parameters["id_dates"] = $id_dates;
+
+            $rowCount = $this->connection->executeNonQuery($query, $parameters);
+
+            if($rowCount == 1)
+                {
+                  $flag = true;
+                }
+
+          }catch (PDOException $e) {
+            //echo $e->getMessage();
+          }
+          catch(Exception $e){
+              //echo $e->getMessage();
+            }
+          } //cierre del for
+             finally {
+
+              return $rowCount;
             }
         }
 

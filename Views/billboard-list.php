@@ -44,11 +44,11 @@
 <script>
      function editBillboard(billboard) {
           var data = document.getElementById(billboard).value;  
+         //alert(data);
           var dataAux = data.split('/');
           document.getElementById('select-cinema').value = dataAux[0];
           document.getElementById('select-movie').value = dataAux[1];
-          document.getElementById('oldCinema').value = dataAux[0];
-          document.getElementById('oldMovie').value = dataAux[1];
+          document.getElementById('idBillboard').value = dataAux[2];
      }
 
      function loadingDelete(id) {
@@ -76,7 +76,6 @@
         $time = $billboard->getHour();
         $saloons = $billboard->getSaloon();
         $date = $billboard->getDay();
-        
     ?>
         
     <div class ="col-md-6 float-left" >
@@ -149,7 +148,7 @@
                     </div>
                     <button type="button" value="" id="borrar-<?php echo $id ?>" onclick="loadingDelete(<?php echo $id ?>); window.location = '<?php echo URL ?>/Billboard/deleteBillboard?delete=<?php echo $billboard->getId();  ?>';" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
                         
-                    <button type="button" value='<?php echo $cinema->getIdCinema() .'/'. $movie->getId(); ?>' id="<?php echo $id ?>" onclick = "editBillboard('<?php echo $id ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
+                    <button type="button" value='<?php echo $cinema->getIdCinema() .'/'. $movie->getId() .'/'. $billboard->getId(); ?>' id="<?php echo $id ?>" onclick = "editBillboard('<?php echo $id ?>');" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
         <?php } else {
             ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i>Agregar al Carrito</button> <?php
         }
