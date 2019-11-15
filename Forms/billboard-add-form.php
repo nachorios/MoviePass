@@ -142,13 +142,17 @@
     }
 
 </script>
-
+<?php 
+$cinemas = $cinemasList->GetAll();
+if($cinemas != null && !is_array($cinemas))
+$cinemas = array($cinemas);
+?>
 <form action="<?php echo URL?>/Billboard/add#" oninput="validationCheck();" onsubmit="loadingAdd();" id="billboard-add-form" method="POST" class="p-3 mb-2 bg-dark rounded">
 <div class="form-group">
     <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
     <select class="form-control" id="select-add-cinema" onchange="actualizarSalas()" name="cinema" id="select-cinema" required>
         <option value="" selected disabled>Cines</option>
-    <?php foreach($cinemasList->GetAll() as $cinema): ?>
+    <?php foreach($cinemas as $cinema):  ?>
         <option name="nameCinema" id="<?php foreach($cinema->getSaloon() as $saloons){ echo $saloons->getName() .'-'. $saloons->getId().'/'; } ?>" value="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></option>
     <?php endforeach; ?>
     </select>

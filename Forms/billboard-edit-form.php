@@ -90,13 +90,17 @@
         return timeReply;
     }
 </script>
-
-<form action="<?php echo URL?>/Billboard/editCinema"  oninput="validationEditCheck();" onsubmit="loadingEdit();" id="billboard-edit-form" method="POST" name="frm" class="p-3 mb-2 bg-dark">
+<?php 
+    $cinemas = $cinemasList->GetAll();
+    if($cinemas != null && !is_array($cinemas))
+        $cinemas = array($cinemas);
+?>
+<form action="<?php echo URL?>/Billboard/editBillboard"  oninput="validationEditCheck();" onsubmit="loadingEdit();" id="billboard-edit-form" method="POST" name="frm" class="p-3 mb-2 bg-dark">
     <div class="form-group">
         <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
         <select class="form-control" id="select-cinema" name="cinema" required>
             <option value="" disabled>Cines</option>
-        <?php foreach($cinemasList->GetAll() as $cinema): ?>
+        <?php foreach($cinemas as $cinema): ?>
             <option name="nameCinema" value="<?php echo $cinema->getName(); ?>"><?php echo $cinema->getName(); ?></option>
         <?php endforeach; ?>
         </select>
@@ -124,9 +128,6 @@
                 <label for="saloon-select-edit" class="text-light"> Seleccionar Sala: </label>
                 <select name="saloon-select" id="select-saloon-edit" required>
                     <option value="" selected disabled>Salas</option>
-                <?php foreach($saloonList as $saloon): ?>
-                    <option name="saloon-edit" value="<?php echo $saloon; ?>"><?php echo $saloon; ?></option>
-                <?php endforeach; ?>
                 </select>
             </div>
             <a href="#" class="m-2" id="add-edit"><button type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></a>
