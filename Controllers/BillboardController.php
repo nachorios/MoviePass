@@ -32,7 +32,10 @@ class BillboardController {
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
-    public function editBillboard($cinema, $idMovie, $day, $hour, $saloon, $oldMovie, $oldCinema){
+    public function editBillboard($cinema, $idMovie, $day, $hour, $saloon, $idBillboard){
+        echo '<pre>';
+        var_dump($_POST);
+        echo '</pre>';
         $oldBillboard = $this->billboardDAO->GetBillboard($oldCinema, $oldMovie);
         $this->billboardDAO->Delete($oldCinema, $oldMovie);
         $billboard = new Billboard($day, $hour, $idMovie, $cinema);

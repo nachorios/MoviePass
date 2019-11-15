@@ -189,8 +189,8 @@
         </div>
     </div>
   
-    <input type="text" name="oldMovie" class="form-control" id="oldMovie" value="" hidden> </input>
-    <input type="text" name="oldCinema" class="form-control" id="oldCinema" value="" hidden> </input>
+    <input type="text" name="idBillboard" class="form-control" id="idBillboard" value="" hidden> </input>
+    <!--<input type="text" name="oldCinema" class="form-control" id="oldCinema" value="" hidden> </input>-->
     
     <div class="mt-3">
         <div class='text-center' id="loading-edit" hidden> 
