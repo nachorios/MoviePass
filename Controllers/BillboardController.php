@@ -23,9 +23,9 @@ class BillboardController {
         $billboard = new Billboard($day, $hour, $idMovie, $cinema);
         $added = $this->billboardDAO->Add($billboard);
         $movieList = $this->movieDAO;
-        $cinemasList = $this->cinemaDAO; 
-        $billboardList = $this->billboardDAO; 
-        $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5'); 
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
+        $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5');
         require_once(VIEWS_PATH . 'header.php');
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
@@ -40,8 +40,8 @@ class BillboardController {
             $this->billboardDAO->Add($oldBillboard);
         }
         $movieList = $this->movieDAO;
-        $cinemasList = $this->cinemaDAO; 
-        $billboardList = $this->billboardDAO; 
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
         $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5'); //solo para hacer pruebas
         require_once(VIEWS_PATH . 'header.php');
         require_once(VIEWS_PATH . 'navbar.php');
@@ -54,10 +54,22 @@ class BillboardController {
         require_once( VIEWS_PATH . 'header.php');
         require_once( VIEWS_PATH . 'navbar.php');
         $movieList = $this->movieDAO;
-        $cinemasList = $this->cinemaDAO; 
-        $billboardList = $this->billboardDAO; 
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
         $saloonList = array('Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5');  //solo para hacer pruebas
         require_once(VIEWS_PATH."billboard-list.php");
     }
     /*--------------*/
+    public function deleteBillboard() {
+
+      $proof = $this->billboardDAO->Delete($_GET['delete']);
+      if($proof == 1)
+        $deletedBillboard = true;
+      else
+        $deletedBillboard = false;
+
+      require_once(VIEWS_PATH . 'navbar.php');
+      $billboardList = $this->billboardDAO; //muestra lista de dao al registrar
+      require_once(VIEWS_PATH . "billboard-list.php");
+    }
 }

@@ -3,8 +3,8 @@
 use \Exception as Exception;
 use \PDOException as PDOException;
 use Models\Cinema as Cinema;
-use Daos\SaloonDAO as SaloonDAO;
 use Daos\Connection as Connection;
+use Daos\SaloonDAO as SaloonDAO;
 use Interfaces\IDAO as IDAO;
 
 class CinemaDAO{
@@ -84,7 +84,7 @@ class CinemaDAO{
         $parameters["id_cinema"] = $id_cinema;
 
         $rowCount = $this->connection->executeNonQuery($query, $parameters);
-        
+
         if($rowCount == 1) //si el cine fue cargado con exito ExecuteNonQuery devuelve 1 (que es la cantidad de filas modificadas)
             {
               $flag = true; //retorno el flag para mostrar el modal
@@ -97,7 +97,7 @@ class CinemaDAO{
           //echo $e->getMessage();
         } finally {
 
-          return $rowCount;
+          return $rowCount; //buscar manera de que al fallar editar un cine no muestre el $rowCount por que tira como que $rowCount no esta definido
         }
     }
 
@@ -141,4 +141,3 @@ class CinemaDAO{
   }
 
 }
-

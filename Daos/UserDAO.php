@@ -8,18 +8,19 @@ use Daos\Connection as Connection;
 class UserDAO implements IUserDAO {
 
     private $connection;
-    private $tableName = "Users";
+    //private $tableName = "Users";
 
     public function Add(User $user){
-        try{
-            $query = "INSERT INTO" . $this->tableName . "(name, lastName, dni, mail, pass, role) VALUES (:name, :lastName, :dni, :mail, :pass, :role);";
 
+            $query = "INSERT INTO users (name, lastName, dni, mail, pass, id_rol) VALUES (:name, :lastName, :dni, :mail, :pass, :id_rol)";
+    try{
+      
             $parameters["name"] = $user->getName();
             $parameters["lastName"] = $user->getLastName();
             $parameters["dni"] = $user->getDni();
             $parameters["mail"] = $user->getMail();
             $parameters["pass"] = $user->getPass();
-            $parameters["role"] = $user->getRole();
+            $parameters["id_rol"] = $user->getRole();
 
             $this->connection = Connection::GetInstance();
 

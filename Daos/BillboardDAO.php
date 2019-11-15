@@ -108,6 +108,26 @@
 
         }
 
+        public function Delete($id_billboard)
+        {
+          $query = "DELETE FROM billboard WHERE (id_billboard = :id_billboard)";
+
+          try {
+
+            $this->connection = Connection::getInstance();
+
+            $parameters['id_billboard'] = $id_billboard;
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+          } catch (PDOException $e) {
+            echo $e->getMessage();
+          }
+          catch(Exception $e){
+              echo $e->getMessage();
+            }
+        }
+
         private function mapear($value) {
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){

@@ -80,7 +80,8 @@ create table saloon(
     id_cinema INT,
 
     constraint pk_id_saloon primary key (id_saloon),
-    constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema)
+    constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema),
+    CONSTRAINT uniq_name UNIQUE(name)
 );
 
 select saloon.*
