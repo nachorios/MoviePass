@@ -32,23 +32,30 @@ class BillboardController {
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
-    public function editBillboard($cinema, $idMovie, $day, $hour, $saloon, $idBillboard){
-        echo '<pre>';
-        var_dump($_POST);
-        echo '</pre>';
-        $oldBillboard = $this->billboardDAO->GetBillboard($oldCinema, $oldMovie);
-        $this->billboardDAO->Delete($oldCinema, $oldMovie);
-        $billboard = new Billboard($day, $hour, $idMovie, $cinema);
-        $edited = $this->billboardDAO->Add($billboard);
-        if(!$edited) {
-            $this->billboardDAO->Add($oldBillboard);
-        }
+    public function editBillboard($cinema, $idMovie, /*$day, $hour, $saloon,*/ $idBillboard){
+        
+        $edited = $this->billboardDAO->Update($cinema, $idMovie, $idBillboard);
+        
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
     }
+
+    /*public function editFunction(){
+        echo '<pre>';
+        var_dump($_POST);
+        echo '</pre>';
+        
+        //$edited = $this->billboardDAO->Update($cinema, $idMovie, $idBillboard);
+        
+        $movieList = $this->movieDAO;
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
+        require_once(VIEWS_PATH . 'navbar.php');
+        require_once(VIEWS_PATH . "billboard-list.php");
+    }*/
 
     public function deleteBillboard()
     {

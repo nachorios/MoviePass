@@ -144,31 +144,31 @@
             }
         }
 
-        public function Update($billboard, $id_billboard, $id_dates)
+        public function Update($id_cinema, $id_movie, $id_billboard)
         {
-          $query = "UPDATE billboard SET id_movie = :id_movie, id_cinema = :id_cinema WHERE id_billboard = :id_billboard";
+
+          $query = "
+          UPDATE billboard as b
+          SET 
+            b.id_cinema = :id_cinema, 
+            b.id_movie = :id_movie 
+          WHERE 
+            id_billboard = :id_billboard;";
           $flag = false;
+          try {
 
-          try
-          {
             $this->connection = Connection::getInstance();
+
             $parameters = array();
-            $parameters["id_billboard"] = $billboard->getId();
-            $parameters["id_movie"] = $billboard->getMovie();
-            $parameters["id_cinema"] = $billboard->getCinema();
-
-
+            $parameters["id_cinema"] = $id_cinema;
+            $parameters["id_movie"] = $id_movie;
             $parameters["id_billboard"] = $id_billboard;
 
             $rowCount = $this->connection->executeNonQuery($query, $parameters);
 
-            //$id = $this->connection->getPdo()->lastInsertId();
-            $this->UpdateDate($id_billboard, $billboard->getDay(), $billboard->getHour(), $billboard->getSaloon(), $id_dates);
-
-
             if($rowCount == 1)
                 {
-                  $flag = true; //retorno el flag para mostrar el modal
+                  $flag = true;
                 }
 
           }catch (PDOException $e) {
@@ -176,9 +176,8 @@
           }
           catch(Exception $e){
               //echo $e->getMessage();
-            } finally {
-
-              return $rowCount;
+            }finally {
+              return $flag;
             }
         }
 
@@ -213,12 +212,12 @@
           }
           catch(Exception $e){
               //echo $e->getMessage();
-            }
-          } //cierre del for
-             finally {
+            }finally {
 
               return $rowCount;
             }
+          } //cierre del for
+             
         }
 
         private function mapear($value) {

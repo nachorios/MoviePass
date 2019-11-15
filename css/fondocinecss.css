@@ -115,3 +115,7 @@ select.form-control + .chosen-container-multi .chosen-choices {
 #file_uploaded:hover {
   cursor: pointer;
 }
+
+#edit-funtion-table {
+  cursor: pointer;
+}

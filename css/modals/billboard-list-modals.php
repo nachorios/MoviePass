@@ -84,7 +84,7 @@
         </div>
     </div>
 <!---->
-<!-- EDITAR CINE -->
+<!-- EDITAR BILLBOARD -->
 <div class="modal fade bd-example-modal-lg" id="editar-modal">
         <div class="modal-dialog modal-lg ">
             <div class="modal-content">
@@ -96,6 +96,23 @@
                 <!--body-->
                 <div class="modal-body">
                   <?php include(FORMS_PATH ."/billboard-edit-form.php") ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
+<!-- EDITAR FUNCTION -->
+<div class="modal fade bd-example-modal-lg" id="editar-function-modal">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+                <!--header-->
+                <div class="modal-header color-info">
+                    <h4 class="modal-title">Editar</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!--body-->
+                <div class="modal-body">
+                  <?php include(FORMS_PATH ."/function-edit-form.php") ?>
                 </div>
             </div>
         </div>
