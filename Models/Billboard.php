@@ -53,7 +53,11 @@ class Billboard{
         return $this->idBill;
     }
 
-    
+    public function setIdBill($idBill)
+    {
+      $this->idBill = $idBill;
+    }
+
     public function setSaloon($saloon){
         $this->saloon = $saloon;
     }

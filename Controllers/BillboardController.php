@@ -72,4 +72,21 @@ class BillboardController {
       $billboardList = $this->billboardDAO; //muestra lista de dao al registrar
       require_once(VIEWS_PATH . "billboard-list.php");
     }
+
+ // editBillBoard_PDO ESTA EN PROCESO
+    public function editBillBoard_PDO($idCinema, $idMovie, $day, $hour, $idSaloon, $oldMovie, $oldCinema){
+        $oldBillboard = $this->billboardDAO->GetBillboard($oldCinema, $oldMovie);
+        $this->billboardDAO->Delete($oldCinema, $oldMovie);
+        $billboard = new Billboard($day, $hour, $idMovie, $cinema);
+        $edited = $this->billboardDAO->Add($billboard);
+        if(!$edited) {
+            $this->billboardDAO->Add($oldBillboard);
+        }
+        $movieList = $this->movieDAO;
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
+        require_once(VIEWS_PATH . 'header.php');
+        require_once(VIEWS_PATH . 'navbar.php');
+        require_once(VIEWS_PATH . "billboard-list.php");
+    }
 }
