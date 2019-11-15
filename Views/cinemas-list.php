@@ -112,7 +112,8 @@
 <?php
      //aca se carga arrayCinemas con los datos de cinemas.json o con los datos del dao
      $arrayCinemas = $cinemasList->GetAll(); //para json y pdo (la firma de los metodos es la misma)
-
+     if($arrayCinemas != null && !is_array($arrayCinemas))
+          $arrayCinemas = array($arrayCinemas);
      include(MODALS_PATH . 'cinema-list-modals.php');
 ?>
 
