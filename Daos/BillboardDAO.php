@@ -4,6 +4,9 @@
     use Models\Movie as Movie;
     use Models\Billboard as Billboard;
     use Daos\Connection as Connection;
+    use Daos\SaloonDAO as SaloonDAO;
+    use Daos\MovieDAO as MovieDAO;
+    use Daos\cinemaDAO as cinemaDAO;
 
     class BillboardDAO{
 
@@ -17,33 +20,34 @@
             try {
 
 
-                $query = "INSERT INTO " . $this->tableName . "(id_movies, id_cinema, id_saloon) VALUES (:id_movies, :id_cinema, :id_saloon);";
+                $query = "INSERT INTO " . $this->tableName . "(id_movie, id_cinema) VALUES (:id_movie, :id_cinema);";
 
                 $parameters = Array();
-                $parameters["id_movies"] = $bill->getMovie();
+                $parameters["id_movie"] = $bill->getMovie();
                 $parameters["id_cinema"] = $bill->getCinema();
-                $parameters["id_saloon"] = $bill->getSaloon();
 
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
-                $this->AddDate($bill->getDay(), $bill->getHour(), $this->connection->getPdo()->lastInsertId());
+                $id = $this->connection->getPdo()->lastInsertId();
+                $this->AddDate($bill->getDay(), $bill->getHour(), $bill->getSaloon(), $id);
             } catch(Exception $e) {
                 throw $e;
             }
         }
 
-        public function AddDate($days, $hours, $id) {
+        public function AddDate($days, $hours, $saloon, $id) {
             for($i = 0; $i < count($days); $i++) {
                 try {
 
 
-                    $query = "INSERT INTO" . " dates " . "(id_billboard, days, hours) VALUES (:id_billboard, :days, :hours);";
+                    $query = "INSERT INTO" . " dates " . "(id_billboard, days, hours, id_saloon) VALUES (:id_billboard, :days, :hours, :id_saloon);";
 
                     $parameters = Array();
                     $parameters["id_billboard"] = $id;
                     $parameters["days"] = $days[$i];
                     $parameters["hours"] = $hours[$i];
+                    $parameters["id_saloon"] = $saloon[$i];
 
                     $this->connection = Connection::GetInstance();
 
@@ -72,13 +76,19 @@
             try {
                 $billboardList = array();
 
-                $query = "select d.days as 'day', d.hours as 'hour', b.id_movies as 'idMovie', b.id_cinema as 'cinema', b.id_billboard as 'id'
+                $query = "select d.days as 'day', d.hours as 'hour', d.id_saloon as 'saloon', b.id_movie as 'idMovie', c.id_cinema as 'cinema', b.id_billboard as 'id'
                 from billboard as b
                 join dates as d
-                on b.id_billboard = d.id_billboard";
+                on b.id_billboard = d.id_billboard
+                join cinemas as c
+                on b.id_cinema = c.id_cinema";
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
+
+                $this->saloonDAO = new SaloonDAO();
+                $this->movieDAO = new MovieDAO();
+                $this->cinemaDAO = new cinemaDAO();
 
                 foreach ($resultSet as $row):
                     $flag = false;
@@ -86,17 +96,19 @@
                         if($bill->getId() == $row["id"]) {
                             $auxDate = $bill->getDay();
                             $auxHour = $bill->getHour();
+                            $auxSaloon = $bill->getSaloon();
                             array_push($auxDate, $row["day"]);
                             array_push($auxHour, $row["hour"]);
+                            array_push($auxSaloon, $this->saloonDAO->GetSalonById($row["saloon"])[0]);
                             $bill->setDay($auxDate);
                             $bill->setHour($auxHour);
+                            $bill->setSaloon($auxSaloon);
                             $flag = true;
-                            //agregar fecha
-                            //agregar horario
                         }
                     }
                     if(!$flag) {
-                        $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $row["idMovie"], $row["cinema"], $row["id"]), $row["id_saloon"];
+                        $billboard = new Billboard(Array($row["day"]), Array($row["hour"]), $this->movieDAO->getMovieById($row["idMovie"]), $this->cinemaDAO->GetCinemaById($row["cinema"]), $row["id"], $this->saloonDAO->GetSalonById($row["saloon"]));
+                        
                         array_push($billboardList, $billboard);
                     }
 
@@ -111,7 +123,7 @@
         private function mapear($value) {
             $value = is_array($value) ? $value : [];
             $resp = array_map(function($p){
-                return new Billboard(Array($p["day"]), Array($p["hour"]), $p["idMovie"], $p["cinema"], $p["id"]), $p["id_saloon"];
+                return new Billboard(Array($p["day"]), Array($p["hour"]), $p["idMovie"], $p["cinema"], $p["id"], $p["id_saloon"]);
             }, $value);
                return count($resp) > 1 ? $resp : $resp['0'];
         }

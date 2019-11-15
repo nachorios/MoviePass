@@ -58,6 +58,29 @@ class SaloonDAO{
             return false;
     }
 
+    public function GetSalonById($id){
+      try{
+          $query =" select s.id_saloon, s.name, s.capacity, s.entry_value, s.id_cinema
+          from saloon as s
+          where s.id_saloon = :id";
+
+          $this->connection = Connection::GetInstance();
+
+          $parameters['id'] = $id;
+
+          $resultSet = $this->connection->execute($query, $parameters);
+
+      }catch(Exception $e) {
+          throw $e;
+      }
+      if(!empty($resultSet))
+      {
+          return $this->mapear($resultSet);
+      }
+      else
+          return false;
+  }
+
 
     public function Update(Saloon $saloon, $id_saloon)
     {
@@ -111,7 +134,7 @@ class SaloonDAO{
         $resp = array_map(function($p){
             return new Saloon($p["name"], $p["capacity"], $p["entry_value"], $p["id_saloon"], $p["id_cinema"]);
         }, $value);
-           return count($resp) > 1 ? $resp : $resp;
+           return /*count($resp) > 1 ? $resp :*/ $resp;
     }
 
 

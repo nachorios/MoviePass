@@ -13,7 +13,7 @@
                     dia = '0'+dia;
                 }
                 var fecha = "<?php echo (date("Y-m"))?>-"+dia;
-                var html = '<div id="'+i+'" class=" text-dark row" style="background-color:rgb(0,0,0,0.5);"> <div class="form-group col m-2"> <label for="date" class="text-light"> Añadir fecha: </label> <input type="date" name="date[]" value="'+fecha+'" min="<?php echo date("Y-m-d"); ?>" max="<?php  /*echo date("Y-m-31");*/  ?>" required> </div> <div class="form-group col m-2"> <label for="time" class="text-light"> Seleccionar horario: </label> <input type="time" name="time[]" min="15:00" max="23:00" required> </div> <div class="form-group col m-2 "> <label for="time" class="text-light"> Seleccionar Sala: </label> <select name="time" id="select-time" required> <option value="" selected disabled>Salas</option> <option name="nameMovie[]" value="sala-1">Sala 1</option> <option name="nameMovie[]" value="sala-2">Sala 2</option> <option name="nameMovie[]" value="sala-3">Sala 3</option> <option name="nameMovie[]" value="sala-4">Sala 4</option> </select> </div> <a href="#" class="m-2" id="remove"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-minus"></i></button></a> </div>';
+                var html = '<div id="'+i+'" class=" text-dark row" style="background-color:rgb(0,0,0,0.5);"> <div class="form-group col m-2"> <label for="date" class="text-light"> Añadir fecha: </label> <input type="date" name="date[]" value="'+fecha+'" min="<?php echo date("Y-m-d"); ?>" max="<?php  /*echo date("Y-m-31");*/  ?>" required> </div> <div class="form-group col m-2"> <label for="time" class="text-light"> Seleccionar horario: </label> <input type="time" name="time[]" min="15:00" max="23:00" required> </div> <div class="form-group col m-2 "> <label for="time" class="text-light"> Seleccionar Sala: </label> <select name="saloon-select[]" id="select-saloon" class="select-class" onmouseover="actualizarSalasNoEditadas()" required> <option value="" selected disabled>Salas</option> </select> </div> <a href="#" class="m-2" id="remove"><button type="button" class="btn btn-warning btn-sm"><i class="fa fa-minus"></i></button></a> </div>';
                 $("#container").append(html);
                 if(i%2) {
                     document.getElementById(i).style.backgroundColor = "rgba(0,0,0,0.25)";
@@ -86,15 +86,70 @@
         }
         return timeReply;
     }
+
+    function actualizarSalas() {
+        var s1 = document.getElementById('select-add-cinema');
+        var value = s1.options[s1.selectedIndex].id;
+        var data = value.slice(0, -1); //le quitamos la ultima '/' para evitar errores.s
+        var optionArray = data.split("/");
+        
+        //$("#select-saloon").empty();
+        var elements = document.getElementsByClassName("select-class");
+        for(i = 0; i < elements.length; i++) {
+            var e = elements[i];
+            while (e.options.length > 1) {                
+                e.remove(1);
+            } 
+            for(var option in optionArray){
+                var pair = optionArray[option].split("-");
+                var newOption = document.createElement("option");
+                newOption.innerHTML = pair[0];
+                newOption.value = pair[1];
+                newOption.setAttribute("name", "saloon[]");
+
+                e.options.add(newOption);
+            }
+        }
+    }
+
+    function actualizarSalasNoEditadas() {
+        var s1 = document.getElementById('select-add-cinema');
+        var value = s1.options[s1.selectedIndex].id;
+        var data = value.slice(0, -1); //le quitamos la ultima '/' para evitar errores.s
+        var optionArray = data.split("/");
+        
+        //$("#select-saloon").empty();
+        var elements = document.getElementsByClassName("select-class");
+        for(i = 0; i < elements.length; i++) {
+            var e = elements[i];
+            if (e.options.length == 1) {
+                while (e.options.length > 1) {                
+                    e.remove(1);
+                } 
+                for(var option in optionArray){
+                    var pair = optionArray[option].split("-");
+                    var newOption = document.createElement("option");
+                    newOption.innerHTML = pair[0];
+                    //newOption.value = pair[1];
+                    newOption.setAttribute("name", "saloon[]");
+                    newOption.setAttribute("value", pair[1]);
+
+                    e.options.add(newOption);
+                }
+            }
+            
+        }
+    }
+
 </script>
 
 <form action="<?php echo URL?>/Billboard/add#" oninput="validationCheck();" onsubmit="loadingAdd();" id="billboard-add-form" method="POST" class="p-3 mb-2 bg-dark rounded">
 <div class="form-group">
     <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
-    <select class="form-control" id="select-cinema" name="cinema" id="" required>
+    <select class="form-control" id="select-add-cinema" onchange="actualizarSalas()" name="cinema" id="select-cinema" required>
         <option value="" selected disabled>Cines</option>
     <?php foreach($cinemasList->GetAll() as $cinema): ?>
-        <option name="nameCinema" value="<?php echo $cinema->getName(); ?>"><?php echo $cinema->getName(); ?></option>
+        <option name="nameCinema" id="<?php foreach($cinema->getSaloon() as $saloons){ echo $saloons->getName() .'-'. $saloons->getId().'/'; } ?>" value="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></option>
     <?php endforeach; ?>
     </select>
 </div>
@@ -119,11 +174,9 @@
         </div>
         <div class="form-group col m-2 ">
             <label for="saloon-select" class="text-light"> Seleccionar Sala: </label>
-            <select name="saloon-select" id="select-saloon" required>
+            <select name="saloon-select[]" id="select-saloon" onmouseover="actualizarSalasNoEditadas()" class="select-class" required>
                 <option value="" selected disabled>Salas</option>
-            <?php foreach($saloonList as $saloon): ?>
-                <option name="saloon" value="<?php echo $saloon; ?>"><?php echo $saloon; ?></option>
-            <?php endforeach; ?>
+                <!--<option name="saloon" value=""></option>-->
             </select>
         </div>
         <a href="#" class="m-2" id="add"><button type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></a>

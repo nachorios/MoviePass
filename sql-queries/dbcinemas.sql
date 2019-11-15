@@ -44,12 +44,12 @@ CREATE TABLE movies_x_genres(
 /*cartelera*/
 CREATE TABLE billboard(
   id_billboard INT AUTO_INCREMENT,
-  id_movies int,
-  id_cinema varchar(25),
-  id_saloon int,
+  id_movie int,
+  id_cinema int,
 
   CONSTRAINT pk_id_performance PRIMARY KEY (id_billboard),
-  constraint fk_id_movies foreign key (id_movies) references movies (id_movie)
+  constraint fk_id_movie foreign key (id_movie) references movies (id_movie),
+  constraint fk_iid_cinema foreign key (id_cinema) references movies (id_cinema)
 );
 
 create table dates(
@@ -57,6 +57,7 @@ create table dates(
     id_billboard int not null,
     days varchar(30),
     hours varchar(30),
+    id_saloon int,
     CONSTRAINT pk_id_dates PRIMARY KEY (id_dates),
     CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard)
 );
