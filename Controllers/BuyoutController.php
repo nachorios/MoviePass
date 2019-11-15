@@ -2,6 +2,8 @@
 
     use Daos\BuyoutDAO as BuyoutDAO;
     use Models\Buyout as Buyout;
+    use Models\User as User;
+    use Daos\UserDAO;
 
     class BuyoutController{
         private $buyOutDAO;
@@ -10,10 +12,12 @@
             $this->buyOutDAO = new BuyoutDAO();
         }
 
-        public function Add($cant, $desc, $date, $total){
+        public function Add($cant, $desc, $date, $total, $mail){
             $buy = new Buyout($cant, $desc, $date, $total);
             
-            $this->buyOutDAO->Add($buy);
+            $this->buyOutDAO->Add($buy, $mail);
+            require_once(VIEWS_PATH . 'header.php');
+            require_once(VIEWS_PATH . 'navbar.php');
         }
     }
     

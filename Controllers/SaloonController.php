@@ -1,15 +1,19 @@
 <?php namespace Controllers;
 
+use Daos\CinemaDAO as CinemaDAO;
 use Daos\SaloonDAO as SaloonDAO;
 use Models\Saloon as Saloon;
+use Models\Cinema as Cinema;
 use Controllers\ViewController as ViewC;
 
 class SaloonController{
     private $saloonDAO;
+    private $cinemaDAO;
 
 
     public function __construct(){
         $this->saloonDAO = new SaloonDAO();
+        $this->cinemaDAO = new CinemaDAO();
     }
 
     public function editSaloon($name, $value, $capacity, $id_salon) 
