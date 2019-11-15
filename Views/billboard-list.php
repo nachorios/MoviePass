@@ -44,6 +44,7 @@
 <script>
      function editBillboard(billboard) {
           var data = document.getElementById(billboard).value;  
+         //alert(data);
           var dataAux = data.split('/');
           document.getElementById('select-cinema').value = dataAux[0];
           document.getElementById('select-movie').value = dataAux[1];
@@ -76,7 +77,6 @@
         $time = $billboard->getHour();
         $saloons = $billboard->getSaloon();
         $date = $billboard->getDay();
-        
     ?>
         
     <div class ="col-md-6 float-left" >
