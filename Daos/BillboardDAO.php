@@ -71,6 +71,28 @@
       return $result;
   }
 
+  public function GetAllWithThisMovie($id_movie) {
+    $query = "select b.id_movie as 'id_movie' , b.id_cinema as 'id_cinema' , b.id_billboard as 'id_billboard'
+    from billboard as b where b.id_movie = :id_movie;";
+    $result = array();
+      try {
+          $this->connection = Connection::GetInstance();
+
+          $parameters = Array();
+          $parameters['id_movie'] = $id_movie;
+
+          $resultSet = $this->connection->Execute($query, $parameters);
+          $billboardList = array();
+          if(!empty($resultSet)) {
+            $result = $this->mapear($resultSet);
+          }
+          
+      } catch(Exception $e) {
+          //throw $e;
+      }
+      return $result;
+  }
+
   public function Delete($id_billboard) {
     $query = "DELETE FROM billboard WHERE (id_billboard = :id_billboard)";
     $flag = false;

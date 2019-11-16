@@ -45,11 +45,10 @@
                 }
             }
 
-            $billboardList = $this->billboardDAO->GetAll();
+            $billboardList = $this->billboardDAO->GetAllWithThisMovie($idMovie);
 
-            $cinemasList = $this->cinemaDAO->getAll();
-            if(!is_array($cinemasList))
-                $cinemasList = array($cinemasList);
+            if(!is_array($billboardList))
+                $billboardList = array($billboardList);
             $movie = $this->movieDAO->getById($idMovie);
             $functionList;
 
