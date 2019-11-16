@@ -12,8 +12,8 @@
             $this->buyOutDAO = new BuyoutDAO();
         }
 
-        public function Add($cant, $desc, $date, $total, $mail){
-            $buy = new Buyout($cant, $desc, $date, $total);
+        public function Add($cant, $desc, $date, $total, $id_movie, $mail){
+            $buy = new Buyout($cant, $desc, $date, $id_movie, $total);
             
             $this->buyOutDAO->Add($buy, $mail);
             require_once(VIEWS_PATH . 'header.php');
