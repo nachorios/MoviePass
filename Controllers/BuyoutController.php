@@ -25,8 +25,8 @@
             $this->billboardDAO = new BillboardDAO();
         }
 
-        public function Add($cant, $desc, $date, $total, $mail){
-            $buy = new Buyout($cant, $desc, $date, $total);
+        public function Add($cant, $desc, $date, $total, $id_movie, $id_cinema, $mail){
+            $buy = new Buyout($cant, $desc, $date, $id_movie, $total, $id_cinema);
             
             $this->buyOutDAO->Add($buy, $mail);
             require_once(VIEWS_PATH . 'header.php');
