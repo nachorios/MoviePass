@@ -24,14 +24,29 @@
 
     function validationEditCheck() {
         var replyEditDate = datesEditCheck();
-        var replyEditTime = timesEditCheck();
-        if(replyEditDate == false && replyEditTime == false) {
-            document.getElementById('btn-edit').setCustomValidity("");//limpio las validaciones
+        var replyEditSaloon = saloonEditCheck();
+        if(replyEditDate == false && replyEditSaloon == false) {
             document.getElementById('btn-edit').setCustomValidity("");//limpio las validaciones
         }
     }
 
-    function timesEditCheck() {
+    function saloonEditCheck() {
+        var form = document.getElementById('billboard-add-form');//obtengo el formulario
+        var saloonReply = new Boolean(false);//creo la bandera
+
+        var values = $("select[name='saloon-edit-select']").map(function(){return $(this).val();}).get();//obtiene todas las fechas del formulario
+        for (i = 0; i < values.length; i++) {
+            for (j = 0; j < values.length; j++) {
+                if(values[i] == values[j] && i != j) {//si las fechas son iguales y si no se esta comparando el mismo dato
+                    document.getElementById('btn-add').setCustomValidity("Solo puedes elegir una funcion por sala.");//creo la validacion(alerta)
+                    saloonReply = true;//indico que se encontraron 2 fechas iguales
+                }
+            }
+        }
+        return saloonReply;
+    }
+
+    /*function timesEditCheck() {
         var form = document.getElementById('billboard-edit-form');//obtengo el formulario
         var timeReply = new Boolean(false);//creo la bandera
 
@@ -53,11 +68,11 @@
             }
         }
         return timeReply;
-    }
+    }*/
 
 </script>
 
-<form action="<?php echo URL?>/billboard/editFunction"  oninput="validationEditCheck();" onsubmit="loadingEdit();" id="billboard-edit-form" method="POST" name="frm" class="p-3 mb-2">
+<form action="<?php echo URL?>/billboard/editFunction" oninput="validationEditCheck();" onsubmit="loadingEdit();" id="billboard-edit-form" method="POST" name="frm" class="p-3 mb-2">
     <div class="container" id="container-edit">
         <div class="text-dark row">
             <div class="form-group col m-2">
@@ -78,7 +93,7 @@
         </div>
     </div>
   
-    <input type="text" name="idBillboardEdit" class="form-control" id="idBillboardEdit" value="" hidden> </input>
+    <input type="text" name="function-edit" class="form-control" id="function-edit" value="" hidden> </input>
     <!--<input type="text" name="oldCinema" class="form-control" id="oldCinema" value="" hidden> </input>-->
     
     <div class="mt-3">

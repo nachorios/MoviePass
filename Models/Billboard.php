@@ -1,44 +1,24 @@
 <?php namespace Models;
 
 class Billboard{
-    private $day;
-    private $hour;
-    private $saloon;
-    private $cinema;
-    private $idMovie;
     private $idBill;
+    private $cinema;
+    private $movie;
+    private $functions;
 
-    public function  __construct($day, $hour, $idMovie, $cinema, $idBill = 0, $saloon = array()){
-        $this->day = $day;
-        $this->hour = $hour;
-        $this->idMovie = $idMovie;
+    public function  __construct($movie, $cinema, $idBill, $functions){
+        $this->movie = $movie;
         $this->cinema = $cinema;
         $this->idBill = $idBill;
-        $this->saloon = $saloon;
+        $this->functions = $functions;
     }
 
-    public function setDay($day){
-        $this->day = $day;
-    }
-
-    public function getDay(){
-        return $this->day;
-    }
-
-    public function setHour($hour){
-        $this->hour = $hour;
-    }
-
-    public function getHour(){
-        return $this->hour;
-    }
-
-    public function setMovie($idMovie){
-        $this->idMovie = $idMovie;
+    public function setMovie($movie){
+        $this->movie = $movie;
     }
 
     public function getMovie(){
-        return $this->idMovie;
+        return $this->movie;
     }
 
     public function setCinema($cinema){
@@ -58,11 +38,11 @@ class Billboard{
       $this->idBill = $idBill;
     }
 
-    public function setSaloon($saloon){
-        $this->saloon = $saloon;
+    public function setFunctions($functions){
+        $this->functions = $functions;
     }
 
-    public function getSaloon(){
-        return $this->saloon;
+    public function getFunctions(){
+        return $this->functions;
     }
 }
