@@ -151,6 +151,7 @@
      })
 </script>
 
+<div class="container">
 <div class="row mt-4">
      <div class="col-2">
           <div class="list-group" id="myList" role="tablist">
@@ -275,4 +276,6 @@
           }?>
           </div>
      </div>
+</div>
+
 </div>

@@ -1,19 +1,22 @@
 <script>
      function actualizarPrecio() {
+          var id = $("input[name='function']:checked").val();
           var price = document.getElementById('ticket-price');
-          var uniq_price = $("input[name='function']:checked").val().split('-')[0];
+          var uniq_price = document.getElementById('value-'+id).innerText;
+          var max_amount = document.getElementById('capacity-'+id).innerText;
           price.value = document.getElementById('num-tickets').value * uniq_price;
+          document.getElementById('num-tickets').max = max_amount;
      }
      function finalizarCompra() {
-          var idFunction = $("input[name='function']:checked").val().split('-')[0];
+          var idFunction = $("input[name='function']:checked").val().split('-')[1];
           window.location.href = "<?php echo URL . '/Boyout/checkout?function=' ?>" + idFunction;
      }
 </script>  
 <div class="container">
      
 <div class="row">
-     <div class="col-3">
-          <h4 class="text-light">Seleccionar cine: </h4>
+     <div class="col-2">
+          <h5 class="text-light">Seleccionar cine: </h5>
           <div class="list-group" id="myList" role="tablist">
                <?php if(!empty($billboardList)) {
                     $first = true;
@@ -25,7 +28,7 @@
           </div>
      </div>
 
-     <div class="col-6">
+     <div class="col-7 p-0">
           <div class="tab-content" id="nav-tabContent">
           <?php if(!empty($billboardList)):
                $first = true;
@@ -34,10 +37,10 @@
                <div class="tab-pane fade <?php if($first){ $first = false; echo 'show active'; } ?>" id="list-<?php echo $cinema->getIdCinema(); ?>" role="tabpanel" >
                     <div class="jumbotron">
                          <h2 class="display-4"> <?php echo $cinema->getName(); ?> </h2>
-                         
+                         <p class="lead">Pelicula elegida: <b><?php echo $movie->getTitle(); ?></b>
                          <hr class="my-4">
-                         <h3 class="text-center"> <u>Selecionar función</u> </h3>
-                         <table class="table text-center">
+                         <h3 class="text-center"><u>Selecionar función:</u></h3>
+                         <table class="table table-sm text-center">
                               <thead class="text-dark">
                                    <th>Sala</th>
                                    <th>Fecha</th>
@@ -53,9 +56,9 @@
                                         <td><?php echo $func->getSaloon()->getName() ?></td>
                                         <td><?php echo $func->getDate() ?></td>
                                         <td><?php echo $func->getHour() ?></td>
-                                        <td><?php echo $func->getSaloon()->getValue().'.00 $' ?></td>
-                                        <td><?php echo $func->getSaloon()->getCapacity() ?></td>
-                                        <td><input onclick="actualizarPrecio();" type="radio" value="<?php echo $func->getSaloon()->getValue() .'-'. $func->getId(); ?>" name="function" requiered></td>
+                                        <td id="value-<?php echo $func->getId(); ?>"><?php echo $func->getSaloon()->getValue() ?></td>
+                                        <td id="capacity-<?php echo $func->getId(); ?>"><?php echo $func->getSaloon()->getCapacity() ?></td>
+                                        <td><input form="buyticket" onclick="actualizarPrecio();" type="radio" value="<?php echo $func->getId(); ?>" name="function" requiered></td>
                                    </tr>
                                    
                                    <?php endforeach; ?>
@@ -74,20 +77,22 @@
                     <img class="card-img-top" src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" alt="Card image cap">
                     <div class="card-body">
                          <h5 class="card-title"><?php echo $movie->getTitle(); ?></h5>
-                         <div class="form-group">
-                              <label for="">Numero de entradas: </label>
-                              <input type="number" onchange="actualizarPrecio();" id="num-tickets" value="1" class="form-control text-center" min="0">
-                         </div>
-                         <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                   <span class="input-group-text">$</span>
+                         <form action="<?php echo URL . '/Boyout/checkout'?>" id="buyticket" method="GET" onsubmit="finalizarCompra();">
+                              <div class="form-group">
+                                   <label for="">Numero de entradas: </label>
+                                   <input type="number" name="num-tickets" onchange="actualizarPrecio();" id="num-tickets" value="0" max="0" class="form-control text-center" min="1" required>
                               </div>
-                              <input type="text" class="form-control text-center" id="ticket-price" aria-label="" value="0" readonly>
-                              <div class="input-group-append">
-                                   <span class="input-group-text">.00</span>
+                              <div class="input-group mb-3">
+                                   <div class="input-group-prepend">
+                                        <span class="input-group-text">Total $</span>
+                                   </div>
+                                   <input type="text" name="total-price" class="form-control text-center" id="ticket-price" aria-label="" value="0" readonly>
+                                   <div class="input-group-append">
+                                        <span class="input-group-text">.00</span>
+                                   </div>
                               </div>
-                         </div>
-                         <a onclick="finalizarCompra();" class="btn btn-warning">Comprar Entradas</a>
+                              <button type="submit" class="btn btn-warning">Comprar Entradas</button>
+                         </form>
                     </div>
                </div>
           </div>
