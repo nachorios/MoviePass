@@ -194,8 +194,6 @@
         <?php } else {
             ?> <button type="button" onclick="window.location.href = '<?php echo URL . '/Buyout/ShowView?movie='. $movie->getId() .'&cinema='. $cinema->getIdCinema() ?>'; " class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i>Agregar al Carrito</button> <?php
         }
-        } else {
-            ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i> Agregar al Carrito</button> <?php
         } ?>  
             </div>
  
