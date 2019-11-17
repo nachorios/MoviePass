@@ -116,7 +116,8 @@ CREATE TABLE users(
 
   CONSTRAINT pk_id_user PRIMARY KEY (mail),
   CONSTRAINT fk_id_user_rol FOREIGN KEY (id_rol) REFERENCES rols(id_rol),
-  CONSTRAINT uniq_dni UNIQUE (dni)
+  CONSTRAINT uniq_dni UNIQUE (dni),
+  CONSTRAINT uniq_mail UNIQUE (mail)
 );
 
 /*compra*/

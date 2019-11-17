@@ -13,15 +13,18 @@
             $this->userDAOJson = new UserJson();
         }
 
-        public function Add($name, $lastName, $dni, $mail, $pass, $role){
+/*        public function Add($name, $lastName, $dni, $mail, $pass, $role){
             $user = new User($name, $lastName, $dni, $mail, $pass, $role);
 
             $this->userDAO->Add($user);
-        }
+        }*/
 
         public function register($mail, $pass, $replyPass, $name, $lastName, $dni, $role) {
-            $userRegistered = $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
-            require_once(VIEWS_PATH . 'header.php');
+            //$userRegistered = $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
+
+            $newUser = new User($name, $lastName, $dni, $mail, $pass, $role);
+            $userRegistered = $this->userDAO->Add($newUser);
+
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "login.php");
         }
@@ -36,7 +39,14 @@
                     break;
                 }
             }
-            require_once(VIEWS_PATH . 'header.php');
+                
+            /**********parte pdo*********/
+
+            $userFound = $this->userDAO->getUserByMailPass($mail, $pass);
+            echo "asdasd";
+            var_dump($userFound);
+
+
             require_once(VIEWS_PATH . 'navbar.php');
             if ($logeado) {
                 require_once(VIEWS_PATH . "home.php");
@@ -46,12 +56,12 @@
         }
 
         public function facebookLogin() {
-            
+
         include('Config/fb-config.php');
-             
+
             try{
                 $accessToken = $helper->getAccessToken();
-        
+
             } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                 echo "Exception: " . $e->getMessage();
                 exit();
@@ -59,9 +69,9 @@
                 echo "Exception: " . $e->getMessage();
                 exit();
             }
-        
+
             if(!$accessToken) {
-                require_once(VIEWS_PATH . 'header.php');
+
                 require_once(VIEWS_PATH . 'navbar.php');
                 require_once(VIEWS_PATH . "login.php");
                 exit();
@@ -75,20 +85,20 @@
             $userData = $response->getGraphNode()->asArray();
             $date = $userData['birthday'];
             $_SESSION['loggedUser'] = new User($userData['first_name'], $userData['last_name'], null, $userData['email'], null, 1, $userData['picture']['url'], $date);
-            require_once(VIEWS_PATH . 'header.php');
+
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "home.php");
         }
 
         public function logout() {
             unset($_SESSION['loggedUser']);
-            require_once(VIEWS_PATH . 'header.php');
+
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "home.php");
         }
 
         public function profile() {
-            require_once(VIEWS_PATH . 'header.php');
+
             $disable_cache = true;
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "profile.php");
