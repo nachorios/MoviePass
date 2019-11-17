@@ -19,8 +19,8 @@
                price.value = document.getElementById('num-tickets').value * uniq_price;
           }
      }
-</script>  
-<div class="container">  
+</script>
+<div class="container">
      <div class="row">
           <div class="col-2">
                <h5 class="text-light">Seleccionar cine: </h5>
@@ -65,7 +65,7 @@
                                              <td id="capacity-<?php echo $func->getId(); ?>"><?php echo $func->getSaloon()->getCapacity() ?></td>
                                              <td><input form="buyticket" onclick="actualizarPrecio();" type="radio" value="<?php echo $func->getId(); ?>" name="id-function" requiered></td>
                                         </tr>
-                                        
+
                                         <?php endforeach; ?>
                                    </tbody>
                               </table>
@@ -97,7 +97,7 @@
                                              <span class="input-group-text">.00$</span>
                                         </div>
                                    </div>
-                                   
+
                                    <input type="text" name="id-cinema" id="id-cinema" hidden>
                                    <input type="checkbox" name="is-desc" id="is-desc" hidden>
                                    <input type="text" name="id-movie" id="id-movie" value="<?php echo $movie->getId(); ?>" hidden>

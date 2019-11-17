@@ -24,6 +24,6 @@
                             <input type="number" id="dni" min="0" max="99999999" name="dni" class="form-control form-control-lg" placeholder="Ingrese su dni" required>
                        </div>
                        <input type="text" name="role" value="1" class="form-control form-control-lg" hidden>
-                       
+
                        <button class="btn btn-dark btn-block btn-lg" type="submit">Registrarse</button>
                   </form>
