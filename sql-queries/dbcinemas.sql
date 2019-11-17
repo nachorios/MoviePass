@@ -82,11 +82,6 @@ create table functions(
     CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard) ON DELETE CASCADE
 );
 
-select saloon.*
-from saloon
-join cinemas
-on saloon.id_cinema = cinemas.id_cinema;
-
 CREATE TABLE rols(
   id_rol INT AUTO_INCREMENT,
   rolDescription VARCHAR(20),
@@ -105,22 +100,30 @@ CREATE TABLE users(
 
   CONSTRAINT pk_id_user PRIMARY KEY (mail),
   CONSTRAINT fk_id_user_rol FOREIGN KEY (id_rol) REFERENCES rols(id_rol),
-  CONSTRAINT uniq_dni UNIQUE (dni),
-  CONSTRAINT uniq_mail UNIQUE (mail)
+  CONSTRAINT uniq_dni UNIQUE (dni)
 );
+
 
 /*compra*/
 CREATE TABLE buyouts(
   id_buyout INT AUTO_INCREMENT,
   quan INT, /*cantidad de entradas*/
-  disc INT, /*descuento*/
-  date_buyout DATE, /*fecha compra*/
+  dates varchar(30),
+  
   total INT,
-   mail VARCHAR(50),
+  mail VARCHAR(50),
+  id_movie int,
+  id_cinema INT,
+  id_function int,
+  
 
   CONSTRAINT id_buyout PRIMARY KEY (id_buyout),
-  CONSTRAINT id_buyout_user FOREIGN KEY (mail) REFERENCES users(mail)
+  CONSTRAINT fkbuyout_user FOREIGN KEY (mail) REFERENCES users(mail),
+  constraint fkid_cinema foreign key (id_cinema) references cinemas (id_cinema),
+  CONSTRAINT fkid_movies foreign key (id_movie) references movies (id_movie),
+  constraint fkid_function foreign key (id_function) references functions (id_function)
 );
+
 
 
 /*entradas*/

@@ -31,8 +31,8 @@
 
         public function login($mail, $pass) {
             $logged = false;
-            /*
-            $userList = $this->userDAOJson->GetAll();
+
+            /*$userList = $this->userDAOJson->GetAll();            
             foreach($userList as $user) {
                 if($mail == $user->getMail() && $pass == $user->getPass()) {
                     $_SESSION['loggedUser'] = $user;
@@ -40,14 +40,21 @@
                     break;
                 }
             }*/
-                
             /**********parte pdo*********/
 
+            // se retorna el objeto que se encontro (ya se verifica que esta en la bbdd), si no null
             $userFound = $this->userDAO->getUserByMailPass($mail, $pass);
-            if ($userFound != null) {
-                $logged = true;
-                $_SESSION['loggedUser'] = $userFound;
-                require_once(VIEWS_PATH . 'navbar.php');
+            //echo "usuario:";
+            //var_dump($userFound);
+
+            if($userFound != NULL)
+            {
+               $_SESSION['loggedUser'] = $userFound;
+               $logged = true;
+            }
+
+            require_once(VIEWS_PATH . 'navbar.php');
+            if ($logged) {
                 require_once(VIEWS_PATH . "home.php");
             } else {
                 require_once(VIEWS_PATH . 'navbar.php');

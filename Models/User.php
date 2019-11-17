@@ -7,7 +7,7 @@ class User extends Person{
     private $role;
     private $profileImage;
 
-    public function  __construct($name="", $lastName="", $dni=0, $mail="", $pass="", $role=1, $profileImage=null, $birthday=null){
+  public function  __construct($name="", $lastName="", $dni=0, $mail="", $pass="", $role=1, $profileImage=null, $birthday=null){
         parent::__construct($name, $lastName, $dni, $birthday);
         $this->mail = $mail;
         $this->pass = $pass;
