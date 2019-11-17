@@ -71,6 +71,19 @@
       return $result;
   }
 
+  public function GetAllMoviesInBillboard() {
+    $query = "select id_movie from billboard;";
+    $result = array();
+      try {
+          $this->connection = Connection::GetInstance();
+          $resultSet = $this->connection->Execute($query);
+          $result = $resultSet;
+      } catch(Exception $e) {
+          //throw $e;
+      }
+      return $result;
+  }
+
   public function GetAllWithThisMovie($id_movie) {
     $query = "select b.id_movie as 'id_movie' , b.id_cinema as 'id_cinema' , b.id_billboard as 'id_billboard'
     from billboard as b where b.id_movie = :id_movie;";

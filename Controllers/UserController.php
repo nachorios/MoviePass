@@ -1,16 +1,16 @@
 <?php namespace Controllers;
 
     use Daos\UserDAO as UserDAO;
-    use DaosJson\UserJson as UserJson;
+    use Daos\BuyoutDAO as BuyoutDAO;
     use Models\User as User;
 
     class UserController{
         private $userDAO;
-        private $userDAOJson;
+        private $buyoutDAO;
 
         public function __construct(){
             $this->userDAO = new UserDAO();
-            $this->userDAOJson = new UserJson();
+            $this->buyoutDAO = new BuyoutDAO();
         }
 
 /*        public function Add($name, $lastName, $dni, $mail, $pass, $role){
@@ -30,27 +30,27 @@
         }
 
         public function login($mail, $pass) {
+            $logged = false;
+            /*
             $userList = $this->userDAOJson->GetAll();
-            $logeado = false;
             foreach($userList as $user) {
                 if($mail == $user->getMail() && $pass == $user->getPass()) {
                     $_SESSION['loggedUser'] = $user;
-                    $logeado = true;
+                    $logged = true;
                     break;
                 }
-            }
+            }*/
                 
             /**********parte pdo*********/
 
             $userFound = $this->userDAO->getUserByMailPass($mail, $pass);
-            echo "asdasd";
-            var_dump($userFound);
-
-
-            require_once(VIEWS_PATH . 'navbar.php');
-            if ($logeado) {
+            if ($userFound != null) {
+                $logged = true;
+                $_SESSION['loggedUser'] = $userFound;
+                require_once(VIEWS_PATH . 'navbar.php');
                 require_once(VIEWS_PATH . "home.php");
             } else {
+                require_once(VIEWS_PATH . 'navbar.php');
                 require_once(VIEWS_PATH . "login.php");
             }
         }
@@ -101,6 +101,27 @@
         }
 
         public function TicketList() {
+            $user = $_SESSION['loggedUser'];
+            $userTickets = $this->buyoutDAO->getTicketsByUser($user->getMail());
+
+            $newUserTickets = array();
+            if(isset($_GET['date'])) {
+                foreach ($userTickets as $ticket/* -> buyout */) {
+                    if($ticket->getDate() == $_GET['date']) {
+                        array_push($newUserTickets, $ticket);
+                    }
+                }
+            }
+            if(isset($_GET['movie'])) {
+                foreach ($userTickets as $ticket/* -> buyout */) {
+                    if($ticket->getMovie() == $_GET['movie']) {
+                        array_push($newUserTickets, $ticket);
+                    }
+                }
+            }
+
+            $userTickets = $newUserTickets;
+
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "profile-tickets-list.php");
         }

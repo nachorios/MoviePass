@@ -31,8 +31,8 @@
           }
      }
 
-     if(isset($logeado)) {
-          if(!$logeado) {
+     if(isset($logged)) {
+          if(!$logged) {
                ?>
                <script>
                     $(function(){
