@@ -26,6 +26,6 @@ function loadingFb() {
           Ingresando...
       </button>
     </div>
-    <a class="text-decoration-none" id="btn-fb" onclick="loadingFb();" href="<?php include('Config/fb-config.php'); echo $loginUrl; ?>"> <button class="btn btn-primary btn-block btn-lg mb-3" type="button"><i class="fa fa-facebook-official"></i> Iniciar con Facebook</button> </a>
+    <a class="text-decoration-none" id="btn-fb" onclick="loadingFb();" href="<?php echo $loginUrl; ?>"> <button class="btn btn-primary btn-block btn-lg mb-3" type="button"><i class="fa fa-facebook-official"></i> Iniciar con Facebook</button> </a>
     <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-dark btn-block btn-lg">Registrarse</button>
 </form>

@@ -45,6 +45,7 @@
                     if(isset($_SESSION['loggedUser'])):
                     ?>
                         <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/Profile/'" type="button">Ver Perfil</button>
+                        <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/TicketList/'" type="button">Consultar entradas</button>
                         <div class="dropdown-divider"></div>
                         <button class="dropdown-item" type="button">Configuración</button>
                     <?php

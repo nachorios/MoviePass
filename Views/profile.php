@@ -93,8 +93,8 @@
                                 <h4><small><u class="font-italic">Dni</u></h4>
                                 <h4><?php echo $usuario->getDni() ?></h4>
                             <?php else: ?>
-                                <h4><small><u class="font-italic">Fecha de nacimiento</u></h4>
-                                <h4><?php echo explode(" ", $usuario->getBirthday()->date)[0] ?></h4>
+                                <!--<h4><small><u class="font-italic">Fecha de nacimiento</u></h4>
+                                <h4><?php echo explode(" ", $usuario->getBirthday()->date)[0] ?></h4>-->
                             <?php endif; ?>
                         </td>
                     </tr>

@@ -108,7 +108,7 @@
                               <div class="form-group">
                                    <label for="cardNumber">Tarjeta de credito</label>
                                    <div class="input-group">
-                                        <input form="buyticket" type="text" name="cardNumber" placeholder="Numero de tarjeta" class="form-control" required>
+                                        <input form="buyticket" type="number" min="0" name="cardNumber" placeholder="Numero de tarjeta" class="form-control" required>
                                         <div class="input-group-append">
                                              <span class="input-group-text text-muted">
                                                   <i class="fa fa-cc-visa mx-1"></i>
@@ -122,8 +122,8 @@
                                         <div class="form-group">
                                              <label><span class="hidden-xs">Vencimiento</span></label>
                                              <div class="input-group">
-                                             <input form="buyticket" type="number" placeholder="Mes" name="" class="form-control" min="0" max="12" required>
-                                             <input form="buyticket" type="number" placeholder="Año" name="" class="form-control" min="0" required>
+                                                  <input form="buyticket" type="number" placeholder="Mes" name="" class="form-control" min="0" max="12" required>
+                                                  <input form="buyticket" type="number" placeholder="Año" name="" class="form-control" min="0" required>
                                              </div>
                                         </div>
                                    </div>

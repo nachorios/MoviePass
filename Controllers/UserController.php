@@ -21,7 +21,6 @@
 
         public function register($mail, $pass, $replyPass, $name, $lastName, $dni, $role) {
             $userRegistered = $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
-            require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "login.php");
         }
@@ -36,7 +35,6 @@
                     break;
                 }
             }
-            require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . 'navbar.php');
             if ($logeado) {
                 require_once(VIEWS_PATH . "home.php");
@@ -61,7 +59,6 @@
             }
         
             if(!$accessToken) {
-                require_once(VIEWS_PATH . 'header.php');
                 require_once(VIEWS_PATH . 'navbar.php');
                 require_once(VIEWS_PATH . "login.php");
                 exit();
@@ -73,25 +70,27 @@
             }
             $response = $fb->get("/me?fields=id, first_name, last_name, email, birthday, picture.type(large)", $accessToken);
             $userData = $response->getGraphNode()->asArray();
-            $date = $userData['birthday'];
+            $date = /*$userData['birthday']*/null;
             $_SESSION['loggedUser'] = new User($userData['first_name'], $userData['last_name'], null, $userData['email'], null, 1, $userData['picture']['url'], $date);
-            require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "home.php");
         }
 
         public function logout() {
             unset($_SESSION['loggedUser']);
-            require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "home.php");
         }
 
         public function profile() {
-            require_once(VIEWS_PATH . 'header.php');
             $disable_cache = true;
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "profile.php");
+        }
+
+        public function TicketList() {
+            require_once(VIEWS_PATH . 'navbar.php');
+            require_once(VIEWS_PATH . "profile-tickets-list.php");
         }
 
         public function AddJson($name, $lastName, $dni, $mail, $pass, $role){
