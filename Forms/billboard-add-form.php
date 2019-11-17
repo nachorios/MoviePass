@@ -55,15 +55,30 @@
     }
 
     function validationCheck() {
+        var replySaloon = saloonCheck();
         var replyDate = datesCheck();
-        var replyTime = timesCheck();
-        if(replyDate == false && replyTime == false) {
-            document.getElementById('btn-add').setCustomValidity("");//limpio las validaciones
+        if(replyDate == false && replySaloon == false) {
             document.getElementById('btn-add').setCustomValidity("");//limpio las validaciones
         }
     }
 
-    function timesCheck() {
+    function saloonCheck() {    
+        var form = document.getElementById('billboard-add-form');//obtengo el formulario
+        var saloonReply = new Boolean(false);//creo la bandera
+
+        var values = $("select[name='saloon-select[]']").map(function(){return $(this).val();}).get();//obtiene todas las fechas del formulario
+        for (i = 0; i < values.length; i++) {
+            for (j = 0; j < values.length; j++) {
+                if(values[i] == values[j] && i != j) {//si las fechas son iguales y si no se esta comparando el mismo dato
+                    document.getElementById('btn-add').setCustomValidity("Solo puedes elegir una funcion por sala.");//creo la validacion(alerta)
+                    saloonReply = true;//indico que se encontraron 2 fechas iguales
+                }
+            }
+        }
+        return saloonReply;
+    }
+
+    /*function timesCheck() {
         var form = document.getElementById('billboard-add-form');//obtengo el formulario
         var timeReply = new Boolean(false);//creo la bandera
 
@@ -86,7 +101,7 @@
             }
         }
         return timeReply;
-    }
+    }*/
 
     function actualizarSalas() {
         var s1 = document.getElementById('select-add-cinema');
@@ -148,7 +163,7 @@
     if($cinemas != null && !is_array($cinemas))
         $cinemas = array($cinemas);
 ?>
-<form action="<?php echo URL?>/Billboard/add#" oninput="validationCheck();" onsubmit="loadingAdd();" id="billboard-add-form" method="POST" class="p-3 mb-2 bg-dark rounded">
+<form action="<?php echo URL?>/Billboard/add#" onclick="validationCheck();" onsubmit="loadingAdd();" id="billboard-add-form" method="POST" class="p-3 mb-2 bg-dark rounded">
 <div class="form-group">
     <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
     <select class="form-control" id="select-add-cinema" onchange="actualizarSalas()" name="cinema" id="select-cinema" required>

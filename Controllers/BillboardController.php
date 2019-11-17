@@ -5,6 +5,7 @@ use Models\Cinema as Cinema;
 use Daos\MovieDAO as MovieDAO;
 use Models\Movie as Movie;
 use Daos\BillboardDAO as BillboardDAO;
+use Daos\FunctionDAO as FunctionDAO;
 use Models\Billboard as Billboard;
 
 class BillboardController {
@@ -12,19 +13,20 @@ class BillboardController {
     private $movieDAO;
     private $cinemaDAO;
     private $billboardDAO;
+    private $functionDAO;
 
     public function __construct() {
         $this->cinemaDAO = new CinemaDAO();
         $this->movieDAO = new MovieDAO();
         $this->billboardDAO = new BillboardDAO();
+        $this->functionDAO = new FunctionDAO();
     }
 
-    public function Add($cinema, $idMovie, $day, $hour, $saloon){
+    public function Add($idCinema, $idMovie, $day, $hour, $idSaloon){
         /*echo '<pre>';
         var_dump($_POST);
         echo '</pre>';*/
-        $billboard = new Billboard($day, $hour, $idMovie, $cinema, null, $saloon);
-        $added = $this->billboardDAO->Add($billboard);
+        $added = $this->billboardDAO->Add($idMovie, $idCinema, $idSaloon, $day, $hour);
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
@@ -33,7 +35,6 @@ class BillboardController {
     }
 
     public function editBillboard($cinema, $idMovie, /*$day, $hour, $saloon,*/ $idBillboard){
-        
         $edited = $this->billboardDAO->Update($cinema, $idMovie, $idBillboard);
         
         $movieList = $this->movieDAO;
@@ -43,19 +44,14 @@ class BillboardController {
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
-    /*public function editFunction(){
-        echo '<pre>';
-        var_dump($_POST);
-        echo '</pre>';
-        
-        //$edited = $this->billboardDAO->Update($cinema, $idMovie, $idBillboard);
-        
+    public function editFunction($days, $hours, $id_saloon, $id_function){
+        $edited = $this->functionDAO->Update($days, $hours, $id_saloon, $id_function);
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "billboard-list.php");
-    }*/
+    }
 
     public function deleteBillboard()
     {

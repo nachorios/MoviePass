@@ -57,7 +57,7 @@
             return $arrayTodecode['genres'];
         }
 
-        public function getMovieById($id) {
+        public function GetById($id) {
             $genrelist= array();
             $jsonContent= file_get_contents('https://api.themoviedb.org/3/movie/'.$id.'?api_key=1e5c581fb6ceaf853ff088a424f4cfcb&language=es-ES', true);
             $movieData = ($jsonContent) ? json_decode($jsonContent, true) : array();

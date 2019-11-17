@@ -34,16 +34,16 @@ class SaloonDAO{
         return $flag;
     }
 
-    public function GetXCinema($id){
+    public function GetCinemaSaloonById($id_cinema){
         try{
             $query =" select saloon.*
             from saloon
 
-            where saloon.id_cinema = :id";
+            where saloon.id_cinema = :id_cinema";
 
             $this->connection = Connection::GetInstance();
 
-            $parameters['id'] = $id;
+            $parameters['id_cinema'] = $id_cinema;
 
             $resultSet = $this->connection->execute($query, $parameters);
 
@@ -58,15 +58,15 @@ class SaloonDAO{
             return false;
     }
 
-    public function GetSalonById($id){
+    public function GetById($id_saloon){
       try{
           $query =" select s.id_saloon, s.name, s.capacity, s.entry_value, s.id_cinema
           from saloon as s
-          where s.id_saloon = :id";
+          where s.id_saloon = :id_saloon";
 
           $this->connection = Connection::GetInstance();
 
-          $parameters['id'] = $id;
+          $parameters['id_saloon'] = $id_saloon;
 
           $resultSet = $this->connection->execute($query, $parameters);
 
@@ -134,7 +134,7 @@ class SaloonDAO{
         $resp = array_map(function($p){
             return new Saloon($p["name"], $p["capacity"], $p["entry_value"], $p["id_saloon"], $p["id_cinema"]);
         }, $value);
-           return /*count($resp) > 1 ? $resp :*/ $resp;
+           return count($resp) > 1 ? $resp : $resp[0];
     }
 
 

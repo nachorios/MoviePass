@@ -1,8 +1,7 @@
-drop database dbcinemas;
+drop database if exists dbcinemas;
 CREATE DATABASE dbcinemas;
 
 USE dbcinemas;
-
 
 CREATE TABLE genres(
   id_genre INT,
@@ -51,6 +50,7 @@ CREATE TABLE cinemas(
   CONSTRAINT uniq_name UNIQUE (name),
   CONSTRAINT uniq_address UNIQUE (address)
 );
+
 create table saloon(
 	id_saloon int auto_increment,
     name varchar (50),
@@ -59,8 +59,7 @@ create table saloon(
     id_cinema INT,
 
     constraint pk_id_saloon primary key (id_saloon),
-    constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema) ON DELETE CASCADE,
-    CONSTRAINT uniq_name UNIQUE(name)
+    constraint fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema) ON DELETE CASCADE
 );
 /*cartelera*/
 CREATE TABLE billboard(
@@ -73,29 +72,20 @@ CREATE TABLE billboard(
   -- CONSTRAINT fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema)
 );
 
-create table dates(
-	id_dates int auto_increment,
+create table functions(
+	id_function int auto_increment,
     id_billboard int not null,
-    days varchar(30),
-    hours varchar(30),
     id_saloon int,
-    CONSTRAINT pk_id_dates PRIMARY KEY (id_dates),
-    CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard)
+    date varchar(30),
+    hour varchar(30),
+    CONSTRAINT pk_id_function PRIMARY KEY (id_function),
+    CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard) ON DELETE CASCADE
 );
 
 select saloon.*
 from saloon
 join cinemas
 on saloon.id_cinema = cinemas.id_cinema;
-
-select d.days as 'day', d.hours as 'hour', d.id_saloon as 'saloon', b.id_movie as 'idMovie', c.name as 'cinema', b.id_billboard as 'id'
-	from billboard as b
-	join dates as d
-	on b.id_billboard = d.id_billboard
-    join cinemas as c
-    on b.id_cinema = c.id_cinema;
-
-
 
 CREATE TABLE rols(
   id_rol INT AUTO_INCREMENT,
@@ -106,7 +96,6 @@ CREATE TABLE rols(
 );
 
 CREATE TABLE users(
-  id_user INT AUTO_INCREMENT,
   mail VARCHAR(50),
   pass VARCHAR(40),
   name VARCHAR(80),
@@ -139,11 +128,11 @@ CREATE TABLE tickets(
   id_ticket INT AUTO_INCREMENT,
   entry_number INT,  /*numero de entrada*/
   qr BIT,
-  id_showing INT,
+  /*id_showing INT,*/
   id_buyout INT,
 
   CONSTRAINT pk_id_ticket PRIMARY KEY (id_ticket),
-  CONSTRAINT fk_id_ticket_showing FOREIGN KEY (id_showing) REFERENCES showings(id_showing),
+  /*CONSTRAINT fk_id_ticket_showing FOREIGN KEY (id_showing) REFERENCES showings(id_showing),*/
   CONSTRAINT fk_id_ticket_boyout FOREIGN KEY (id_buyout) REFERENCES buyouts(id_buyout)
 );
 

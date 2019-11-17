@@ -56,16 +56,16 @@
         var dataAux = data.split('/');
         
 
-        document.getElementById('time-edit').value = dataAux[1];
         document.getElementById('date-edit').value = dataAux[0];
+        document.getElementById('time-edit').value = dataAux[1];
+        document.getElementById('function-edit').value = dataAux[2];
     
-        var saloons = dataAux[2].split('-').slice(0, -1);
+        var saloons = dataAux[4].split('-').slice(0, -1);
         var selectEdit = document.getElementById('select-edit-saloon');
         
         while (selectEdit.options.length > 1) {                
             selectEdit.remove(1);
         }
-        document.getElementById('select-edit-saloon').value = dataAux[2];
         for(var i = 0; i < saloons.length; i++){
             var newOption = document.createElement("option");
             newOption.value = saloons[i];
@@ -75,7 +75,7 @@
 
             selectEdit.options.add(newOption);
         }
-
+        selectEdit.value = dataAux[3];
         
      }
 
@@ -98,12 +98,12 @@
             }
         }
         $id = 0;
-        foreach($billboardList->getAll() as $billboard):
+        $billboards = $billboardList->getAll();
+        if(!is_array($billboards))
+            $billboards = array($billboards);
+        foreach($billboards as $billboard):
         $cinema = $billboard->getCinema();
         $movie = $billboard->getMovie();
-        $time = $billboard->getHour();
-        $saloons = $billboard->getSaloon();
-        $date = $billboard->getDay();
     ?>
         
     <div class ="col-md-6 float-left" >
@@ -125,25 +125,31 @@
                         <th>Hora</th>
                     </thead>
                     <tbody>
-                        <?php for($i = 0; $i < count($time); $i++): ?>
+                        <?php foreach($billboard->getFunctions() as $func): 
+                            if(isset($_SESSION['loggedUser'])){
+                                if($_SESSION['loggedUser']->getRole()>1){ ?> 
                         <tr class="table-secondary" id="<?php 
-                            $id = $date["$i"] .'/'. $time["$i"] ;
+                            $id = $func->getDate() .'/'. $func->getHour() .'/'. $func->getId() .'/'. $func->getSaloon()->getId() ;
                             $saloonList = ""; 
-                            foreach($cinema->getSaloon() as $saloon){ 
-                                $saloonList .= $saloon->getId().'-'. $saloon->getName().'-'; 
+                            foreach($billboard->getFunctions() as $funcId){ 
+                                $saloonList .= $funcId->getSaloon()->getId().'-'. $funcId->getSaloon()->getName().'-'; 
                             } 
-                            echo $id .'/'. $saloonList; ?>" onclick = "editSaloon(this);" data-toggle="modal" data-target="#editar-function-modal" >
-                            <td><?php echo $date["$i"] ?></td>
-                            <td><?php echo $saloons["$i"]->getName() ?></td>
-                            <td><?php echo $time["$i"] ?></td>
+                            echo $id .'/'. $saloonList; ?>" onclick="editSaloon(this);" 
+                            data-toggle="modal" data-target="#editar-function-modal" data-toggle="tooltip" title="Has clic para editar." >
+                            
+                        <?php } else { echo '<tr class="table-secondary">'; } 
+                                } else { echo '<tr class="table-secondary">'; } ?>
+                            <td><?php echo $func->getDate() ?></td>
+                            <td><?php echo $func->getSaloon()->getName() ?></td>
+                            <td><?php echo $func->getHour() ?></td>
                         </tr>
 
-                        <?php endfor;?>
+                        <?php endforeach;?>
                     </tbody>
                 </table>
 
                 <p class="card-text mb-auto" > </p>
-                <?php if(count($date)<2): ?>
+                <?php if(count($billboard->getFunctions())<2): ?>
                     <p class="card-text mb-auto font-italic" ><?php echo substr($movie->getOverview(), 0, 100); if(strlen($movie->getOverview()) > 100) echo '...'; ?></p>
                 <?php endif; ?>
                 <button class="btn btn-secondary btn-sm mb-2" data-placement="left" data-toggle="popover" title="<?php echo $movie->getTitle() ?>" data-html="true" 
@@ -186,7 +192,7 @@
                         
                     <button type="button" value='<?php echo $cinema->getIdCinema() .'/'. $movie->getId() .'/'. $billboard->getId(); ?>' id="editar-<?php echo $id ?>" onclick = "editBillboard(this);" data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button>
         <?php } else {
-            ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i>Agregar al Carrito</button> <?php
+            ?> <button type="button" onclick="window.location.href = '<?php echo URL . '/Buyout/ShowView?movie='. $movie->getId() .'&cinema='. $cinema->getIdCinema() ?>'; " class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i>Agregar al Carrito</button> <?php
         }
         } else {
             ?> <button type="button"  class="btn btn-warning mb-2"><i class="fa fa-shopping-bag"></i> Agregar al Carrito</button> <?php
