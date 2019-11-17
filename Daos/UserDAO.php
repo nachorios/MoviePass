@@ -42,47 +42,41 @@ class UserDAO implements IUserDAO {
 
     public function getUserByMailPass($mail, $pass)
     {
-      try{
-          $query = "SELECT id_user FROM users WHERE mail = :mail AND pass = :pass";
-          //$query = "SELECT id_user FROM users WHERE mail AND pass";
+          //$query = "SELECT * FROM users WHERE mail = :mail AND pass = :pass";
+          //$query = "SELECT * FROM users WHERE :mail AND :pass LIMIT 1";
+
+// si lo hago de la maera tradicional no me funciona, asi si
+          $query = "SELECT * FROM users WHERE mail = \"$mail\" AND pass = \"$pass\" LIMIT 1";
 
 
-          $this->connection = Connection::GetInstance();
+          //$parameters['mail'] = $mail;
+          //$parameters['pass'] = $pass;
 
-          $parameters['mail'] = $mail;
-          $parameters['pass'] = $pass;
+      try {
+        $this->connection = Connection::getInstance();
+        $resultSet = $this->connection->execute($query);
 
-          $resultSet = $this->connection->executeNonQuery($query, $parameters);
-
-          if(!empty($resultSet))
-          {
-            echo "pasaaaa1";
-            echo $this->mapear($resultSet);
-            return $this->mapear($resultSet);
-          }
-          else
-          {
-            echo "pasaaaa2";
-            return false;
-          }
-
-      }catch(Exception $e) {
-          throw $e;
+        if(!empty($resultSet))
+        {
+          return $this->mapear($resultSet);
+        }
+      } catch (PDOException $e) {
+        //throw $e;
+      } catch(Exception $e){
+        //echo $e->getMessage();
       }
+      return NULL; // si no encuentra el usuario
     }
 
     protected function mapear($value)
     {
+  		$value = is_array($value) ? $value : [];
 
-		$value = is_array($value) ? $value : [];
+  		$resp = array_map(function($p){
+          return new User( $p['name'], $p['lastname'],$p['dni'],$p['mail'],$p['pass'],$p['id_rol']); //(asi tengo los datos en la bbdd de phpmyadmin)
+       }, $value);
+          /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
 
-		$resp = array_map(function($p){
-
-      return new User( $p['name'], $p['lastName'],$p['dni'],$p['mail'],$p['pass'],$p['id_rol']); //(asi tengo los datos en la bbdd de phpmyadmin)
-     }, $value);
-        /* devuelve un arreglo si tiene datos y sino devuelve nulo*/
-     return count($resp) > 1 ? $resp : $resp[0];
-  }
-
-
+       return count($resp) > 1 ? $resp : $resp[0];
+     }
 }
