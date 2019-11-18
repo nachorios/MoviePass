@@ -35,7 +35,7 @@
             /**
              * Concatena controllers (namespace del paquete) con el nombre de la clase controladora a instanciar
              */
-            $class = "controllers\\". $controller;
+            $class = "Controllers\\". $controller;
 
             /**
              * Crea la instancia controladora

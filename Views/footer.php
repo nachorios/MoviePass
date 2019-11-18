@@ -32,7 +32,8 @@
         </div>
     </div>
     <div class="text-center text-light font-weight-bold container-fluid " style="background-color:rgb(0,0,0,0.8);" >
-        <p class="text-center">MyTicket todos los derechos reservados®</p>
+        <p class="text-center">MyTicket todos los derechos reservados® -<a href="<?php echo URL . "/Home/PrivacyPolicy/" ?>politica-de-privacidad"> Politicas de privacidad</a></p>
+        
     </div>
 
 </footer>

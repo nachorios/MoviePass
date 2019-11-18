@@ -30,6 +30,26 @@ class BuyoutDAO{
         }
     } 
 
+    public function getTicketsByUser($mail) {
+        /*$result = false;
+        $query ="SELECT id_buyout FROM tickets WHERE mail = :mail;";
+        $parameters = array();
+        $parameters['mail'] = $mail;
+        try{
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->execute($query, $parameters);
+            
+            if(!empty($resultSet)) {
+            $result = $this->mapear($resultSet);
+            }
+        }catch(Exception $e) {
+            throw $e;
+        }
+            return $result;*/
+            return array();
+    }
+
     private function mapear($value) {
         $value = is_array($value) ? $value : [];
         $resp = array_map(function($p){

@@ -12,12 +12,12 @@ class UserDAO implements IUserDAO {
 
     public function Add($user){
       try{
-            $query = "INSERT INTO users (mail, pass, name, lastName, dni, id_rol) VALUES (:mail, :pass, :name, :lastName, :dni, :id_rol)";
+            $query = "INSERT INTO users (mail, pass, name, lastname, dni, id_rol) VALUES (:mail, :pass, :name, :lastname, :dni, :id_rol)";
             $flag = false;
 
 
             $parameters["name"] = $user->getName();
-            $parameters["lastName"] = $user->getLastName();
+            $parameters["lastname"] = $user->getLastName();
             $parameters["dni"] = $user->getDni();
             $parameters["mail"] = $user->getMail();
             $parameters["pass"] = $user->getPass();
@@ -26,14 +26,14 @@ class UserDAO implements IUserDAO {
             $this->connection = Connection::GetInstance();
 
             $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
-
+            var_dump($rowCount);
             if($rowCount == 1) //si el usuario fue cargado con exito ExecuteNonQuery devuelve 1 (que es la cantidad de filas modificadas)
             {
               $flag = true;
             }
         }
         catch(Exception $e) {
-        throw $e;
+          throw $e;
         }
         finally{
           return $flag;

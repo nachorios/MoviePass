@@ -13,5 +13,12 @@
             require_once(VIEWS_PATH.'navbar.php');
             require_once(VIEWS_PATH."login.php");
         }
+
+        public function PrivacyPolicy()
+        {
+            require_once(VIEWS_PATH.'navbar.php');
+            require_once(VIEWS_PATH."PrivacyPolicy.php");
+        }
+
     }
 ?>
