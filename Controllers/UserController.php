@@ -121,28 +121,51 @@
 
         public function TicketList() {
             $user = $_SESSION['loggedUser'];
-            $userTickets = $this->buyoutDAO->getTicketsByUser($user->getMail());
-
+            $userTickets = $this->buyoutDAO->GetTicketsByUserMail($user->getMail());
+            if(!is_array($userTickets))
+                $userTickets = array($userTickets);
             $newUserTickets = array();
-            if(isset($_GET['date'])) {
+            if(isset($_GET['date']) && !empty($_GET['date'])) {
                 foreach ($userTickets as $ticket/* -> buyout */) {
-                    if($ticket->getDate() == $_GET['date']) {
+                    $dateGET = strtotime($_GET['date']); 
+                    $date = strtotime($ticket->getDate()); 
+                    if(date('d/M/Y', $date) == date('d/M/Y', $date)) {
                         array_push($newUserTickets, $ticket);
                     }
                 }
+                $userTickets = $newUserTickets;
             }
-            if(isset($_GET['movie'])) {
+            if(isset($_GET['movie']) && !empty($_GET['movie'])) {
                 foreach ($userTickets as $ticket/* -> buyout */) {
-                    if($ticket->getMovie() == $_GET['movie']) {
+                    if(strpos($ticket->getMovie()->getTitle(), $_GET['movie']) !== false) {
                         array_push($newUserTickets, $ticket);
                     }
                 }
+                $userTickets = $newUserTickets;
             }
-
-            $userTickets = $newUserTickets;
-
+                
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "profile-tickets-list.php");
+        }
+
+        public function AdminTicketList() {
+            $user = $_SESSION['loggedUser'];
+            $userBouyouts = $this->buyoutDAO->getAll($user->getMail());
+            if(!is_array($userBouyouts))
+                $userBouyouts = array($userBouyouts);
+
+            
+            $buysDAO = $this->buyoutDAO;
+            if(isset($_GET['date-start']) && isset($_GET['date-end'])) {
+                $startDate = $_GET['date-start'];
+                $endDate = $_GET['date-end'];
+            } else {
+                $startDate = null;
+                $endDate = null;
+            }
+
+            require_once(VIEWS_PATH . 'navbar.php');
+            require_once(VIEWS_PATH . "admin-tickets-list.php");
         }
 
         public function AddJson($name, $lastName, $dni, $mail, $pass, $role){

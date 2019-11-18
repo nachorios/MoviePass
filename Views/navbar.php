@@ -67,6 +67,7 @@
                         <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/TicketList/'" type="button">Consultar entradas</button>
                         <div class="dropdown-divider"></div>
                         <?php if($_SESSION['loggedUser']->getRole()>1): ?>
+                        <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/AdminTicketList/'" type="button">Consultar Ventas</button>
                             <button class="dropdown-item" data-toggle="modal" data-target="#setRol" type="button">Dar Administrador</button>
                         <?php endif; ?>
                     <?php

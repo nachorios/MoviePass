@@ -18,22 +18,22 @@
     </form>
     <table class="table">
         <thead>
-            <th>Numero de Entrada</th>
+            <th>Cantidad de entradas</th>
             <th>Pelicula</th>
             <th>Fecha</th>
             <th>Hora</th>
             <th>Sala</th>
-            <th>Codigo QR</th>
+            <!--<th>Codigo QR</th>-->
         </thead>
         <tbody>
-        <?php $i=0; foreach(array(1) as $ticket): $i++;?>
+        <?php foreach($userTickets as $ticket):?>
             <tr>
-                <td><?php echo 'numero' ?></td>
-                <td><?php echo  $i ?></td>
-                <td><?php echo "$i-11-2019" ?></td>
-                <td><?php echo '18:15' ?></td>
+                <td><?php echo $ticket->getQuan(); ?></td>
+                <td><?php echo $ticket->getMovie()->getTitle(); ?></td>
+                <td><?php echo $ticket->getDate(); ?></td>
+                <td><?php echo $ticket->getFunction()->getSaloon()->getName(); ?></td>
                 <td><?php echo 'salonsato' ?></td>
-                <td><a href="<?php echo URL ?>/User/viewQR">QR</a></td>
+                <!--<td>QR</td>-->
             </tr>
         <?php endforeach; ?>
         </tbody>

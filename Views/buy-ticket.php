@@ -14,9 +14,9 @@
                document.getElementById("desc").removeAttribute("hidden");
                document.getElementById("is-desc").checked = true;
           } else {
+               price.value = document.getElementById('num-tickets').value * uniq_price;
                document.getElementById("desc").setAttribute("hidden", true);
                document.getElementById("is-desc").checked = false;
-               price.value = document.getElementById('num-tickets').value * uniq_price;
           }
      }
 </script>

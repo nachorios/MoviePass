@@ -71,7 +71,6 @@ CREATE TABLE billboard(
   -- CONSTRAINT fk_id_movies foreign key (id_movie) references movies (id_movie),
   -- CONSTRAINT fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema)
 );
-
 create table functions(
 	id_function int auto_increment,
     id_billboard int not null,
@@ -79,6 +78,7 @@ create table functions(
     date varchar(30),
     hour varchar(30),
     CONSTRAINT pk_id_function PRIMARY KEY (id_function),
+    CONSTRAINT pk_id_saloon FOREIGN KEY (id_saloon) references saloon (id_saloon) ON DELETE CASCADE,
     CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard) ON DELETE CASCADE
 );
 
@@ -99,10 +99,8 @@ CREATE TABLE users(
   id_rol INT,
 
   CONSTRAINT pk_id_user PRIMARY KEY (mail),
-  CONSTRAINT fk_id_user_rol FOREIGN KEY (id_rol) REFERENCES rols(id_rol),
   CONSTRAINT uniq_dni UNIQUE (dni)
 );
-
 
 /*compra*/
 CREATE TABLE buyouts(
@@ -119,8 +117,6 @@ CREATE TABLE buyouts(
 
   CONSTRAINT idbuyout PRIMARY KEY (id_buyout)
 );
-
-
 
 /*entradas*/
 CREATE TABLE tickets(

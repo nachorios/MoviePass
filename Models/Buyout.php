@@ -4,33 +4,33 @@ class Buyout{
     private $quan;
     private $date;
     private $total;
-    private $id_movie;
-    private $id_cinema;
-    private $id_function;
+    private $movie;
+    private $cinema;
+    private $funcion;
 
-    public function __construct($quan, $total, $id_movie, $id_cinema, $id_function, $date){
+    public function __construct($quan, $total, $movie, $cinema, $funcion, $date){
         $this->quan = $quan;
         $this->total = $total;
-        $this->id_movie = $id_movie;
-        $this->id_cinema = $id_cinema;
-        $this->id_function = $id_function;
+        $this->movie = $movie;
+        $this->cinema = $cinema;
+        $this->funcion = $funcion;
         $this->date = $date;
     }
 
-    public function setIdMovie($id_movie){
-        $this->id_movie = $id_movie;
+    public function setMovie($movie){
+        $this->movie = $movie;
     }
 
-    public function setIdCinema($id_cinema){
-        $this->id_id_cinema = $id_cinema;
+    public function setCinema($cinema){
+        $this->id_cinema = $cinema;
     }
 
     public function setQuan($quan){
         $this->quan=$quan;
     }
 
-    public function setIdFunction($id_function){
-        $this->id_function = $id_function;
+    public function setFuncion($funcion){
+        $this->funcion = $funcion;
     }
 
     public function setDate($date){
@@ -41,12 +41,12 @@ class Buyout{
         $this->total=$total;
     }
 
-    public function getIdMovie(){
-        return $this->id_movie;
+    public function getMovie(){
+        return $this->movie;
     }
 
-    public function getIdCinema(){
-        return $this->id_cinema;
+    public function getCinema(){
+        return $this->cinema;
     }
 
     public function getQuan(){
@@ -61,7 +61,7 @@ class Buyout{
         return $this->total;
     }
 
-    public function getIdFunction(){
-        return $this->id_function;
+    public function getFunction(){
+        return $this->funcion;
     }
 }
