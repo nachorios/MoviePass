@@ -20,6 +20,7 @@ class BuyoutDAO{
     }
 
     public function Add(Buyout $buyout, $mail, $credit_number){
+        $flag = false;
         try{
             $query = "INSERT INTO buyouts (quan, total, id_movie, id_cinema, mail, id_function, date, credit_number) 
                                    VALUES (:quan, :total, :id_movie, :id_cinema, :mail, :id_function, :date, :credit_number);";
@@ -35,11 +36,13 @@ class BuyoutDAO{
             $parameters["credit_number"] = $credit_number;
 
             $this->connection = Connection::GetInstance();
-            $this->connection->executeNonQuery($query, $parameters);
-
+            $proof = $this->connection->executeNonQuery($query, $parameters);
+            if($proof > 0)
+                $flag = true;
         }catch(Exception $e) {
             throw $e;
         }
+        return $flag;
     } 
 
     public function GetAll() {
@@ -59,7 +62,7 @@ class BuyoutDAO{
       }
 
     public function GetCountMovieTickets($id_movie) {
-        $query = "select count(b.quan) as 'cantidad'
+        $query = "select sum(b.quan) as 'cantidad'
         from buyouts as b
         where b.id_movie = :id_movie";
         $result = 0;
@@ -77,13 +80,32 @@ class BuyoutDAO{
     }
 
     public function GetCountCinemaTickets($id_cinema) {
-        $query = "select count(b.quan) 
+        $query = "select sum(b.quan) 
         from buyouts as b
         where b.id_cinema = :id_cinema;";
         $result = 0;
 
         $parameters = Array();
         $parameters["id_cinema"] = $id_cinema;
+            try {
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->Execute($query, $parameters);
+                $result = $result[0][0];
+            } catch(Exception $e) {
+                //throw $e;
+            }
+        return $result;
+    }
+
+    public function GetCountSaloonTickets($id_saloon) {
+        $query = "select sum(b.quan) 
+        from buyouts as b
+        join functions as f
+        on b.id_function = f.id_function AND f.id_saloon = :id_saloon;";
+        $result = 0;
+
+        $parameters = Array();
+        $parameters["id_saloon"] = $id_saloon;
             try {
                 $this->connection = Connection::GetInstance();
                 $result = $this->connection->Execute($query, $parameters);

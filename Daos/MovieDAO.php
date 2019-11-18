@@ -1,11 +1,10 @@
 <?php namespace Daos;
 
     use \Exception as Exception;
-    use Daos\Interfaces\IMovieDAO as IMovieDAO;
     use Models\Movie as Movie;
     use Daos\Connection as Connection;
 
-    class MovieDAO implements IMovieDAO {
+    class MovieDAO {
 
         private $connection;
         private $tableName = "movies";

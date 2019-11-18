@@ -66,14 +66,14 @@
                                         <th>Seleccionar</th>
                                    </thead>
                                    <tbody>
-                                   <?php if(!empty($billboard->getFunctions())) foreach($billboard->getFunctions() as $func):?>
-
+                                   <?php if(!empty($billboard->getFunctions())) foreach($billboard->getFunctions() as $func): ?>
+                                        
                                         <tr>
                                              <td><?php echo $func->getSaloon()->getName() ?></td>
                                              <td><?php echo $func->getDate() ?></td>
                                              <td><?php echo $func->getHour() ?></td>
                                              <td id="value-<?php echo $func->getId(); ?>"><?php echo $func->getSaloon()->getValue() ?></td>
-                                             <td id="capacity-<?php echo $func->getId(); ?>"><?php echo $func->getSaloon()->getCapacity() ?></td>
+                                             <td id="capacity-<?php echo $func->getId(); ?>"><?php echo $func->getSaloon()->getCapacity() - $buysDAO->GetCountSaloonTickets($func->getSaloon()->getId()); ?></td>
                                              <td><input form="buyticket" onclick="actualizarPrecio();" type="radio" value="<?php echo $func->getId(); ?>" name="id-function" requiered></td>
                                         </tr>
 
@@ -97,7 +97,7 @@
                               <form action="<?php echo URL . '/Buyout/add'?>" id="buyticket" method="post" onsubmit="finalizarCompra();">
                                    <div class="form-group">
                                         <label for="">Numero de entradas: </label>
-                                        <input type="number" name="num-tickets" onchange="actualizarPrecio();" id="num-tickets" value="0" max="0" class="form-control text-center" min="1" required>
+                                        <input type="number" name="num-tickets" onchange="actualizarPrecio();" id="num-tickets" value="0" max="0" class="form-control text-center" min="0" required>
                                    </div>
                                    <div class="input-group mb-3">
                                         <div class="input-group-prepend">

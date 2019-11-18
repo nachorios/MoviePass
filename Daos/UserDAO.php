@@ -1,11 +1,10 @@
 <?php namespace Daos;
 
 use \Exception as Exception;
-use Daos\Interfaces\IUserDAO as IUserDAO;
 use Models\User as User;
 use Daos\Connection as Connection;
 
-class UserDAO implements IUserDAO {
+class UserDAO {
 
     private $connection;
     //private $tableName = "Users";

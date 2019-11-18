@@ -17,7 +17,12 @@
             <tr>
                 <th scope="row"><?php echo $buy->getMovie()->getTitle() ?></th>
                 <td><?php echo $buysDAO->GetCountMovieTickets($buy->getMovie()->getId()); ?></td>
-                <td><?php echo 0 ?></td>
+                <td><?php 
+                $auxAmountTickets = $buy->getFunction()->getSaloon()->getCapacity() - $buysDAO->GetCountMovieTickets($buy->getMovie()->getId());
+                if($auxAmountTickets < 0)
+                    echo 0;
+                else
+                    echo $auxAmountTickets;  ?></td>
             </tr>
             <?php endif;
         endforeach; ?>
@@ -37,11 +42,24 @@
             $cinemasAdded = array();
             foreach($userBouyouts as $buy): 
                 if(!in_array($buy->getCinema(), $cinemasAdded)):
-                    array_push($cinemasAdded, $buy->getCinema()) ?>
+                    array_push($cinemasAdded, $buy->getCinema());
+                    $cinemaCapacity = 0; 
+                    $saloons = $buy->getCinema()->getSaloon();
+                    if(!is_array($saloons))
+                        $saloons = array($saloons);
+                    foreach($saloons as $saloon) {
+                        $cinemaCapacity += $buy->getFunction()->getSaloon()->getCapacity();
+                    }
+                    ?>
             <tr>
                 <th scope="row"><?php echo $buy->getCinema()->getName() ?></th>
                 <td><?php echo $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?></td>
-                <td><?php echo 0 ?></td>
+                <td><?php 
+                    $auxAmountCapacity = $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema());
+                    if($auxAmountCapacity < 0) 
+                        echo 0;
+                    else
+                        echo $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?></td>
             </tr>
             <?php endif;
         endforeach; ?>

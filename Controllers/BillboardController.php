@@ -6,6 +6,7 @@ use Daos\MovieDAO as MovieDAO;
 use Models\Movie as Movie;
 use Daos\BillboardDAO as BillboardDAO;
 use Daos\FunctionDAO as FunctionDAO;
+use Daos\BuyoutDAO as BuyoutDAO;
 use Models\Billboard as Billboard;
 
 class BillboardController {
@@ -14,12 +15,14 @@ class BillboardController {
     private $cinemaDAO;
     private $billboardDAO;
     private $functionDAO;
+    private $buyOutDAO;
 
     public function __construct() {
         $this->cinemaDAO = new CinemaDAO();
         $this->movieDAO = new MovieDAO();
         $this->billboardDAO = new BillboardDAO();
         $this->functionDAO = new FunctionDAO();
+        $this->buyOutDAO = new BuyoutDAO();
     }
 
     public function Add($idCinema, $idMovie, $day, $hour, $idSaloon){

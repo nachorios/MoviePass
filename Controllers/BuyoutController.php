@@ -13,13 +13,13 @@
     use Models\User as User;
 
     class BuyoutController{
-        private $buyOutDAO;
+        private $buyoutDAO;
         private $movieDAO;
         private $cinemaDAO;
         private $billboardDAO;
 
         public function __construct(){
-            $this->buyOutDAO = new BuyoutDAO();
+            $this->buyoutDAO = new BuyoutDAO();
             $this->cinemaDAO = new CinemaDAO();
             $this->movieDAO = new MovieDAO();
             $this->billboardDAO = new BillboardDAO();
@@ -30,9 +30,15 @@
             
             $mail = $_SESSION['loggedUser']->getMail();
 
-            $this->buyOutDAO->Add($buy, $mail, $credit_number);
-            require_once(VIEWS_PATH . 'header.php');
+            if($cant > 0) {
+                $buyComplete = $this->buyoutDAO->Add($buy, $mail, $credit_number);
+            } else {
+                $buyComplete = false;
+            }
+
             require_once(VIEWS_PATH . 'navbar.php');
+            include(MODALS_PATH . 'buyout-modals.php');
+            require_once(VIEWS_PATH . 'home.php');
         }
 
         public function ShowView() {
@@ -48,11 +54,11 @@
             }
 
             $billboardList = $this->billboardDAO->GetAllWithThisMovie($idMovie);
+            $buysDAO = $this->buyoutDAO;
 
             if(!is_array($billboardList))
                 $billboardList = array($billboardList);
             $movie = $this->movieDAO->getById($idMovie);
-
             $newBillboardList = array();
             foreach($billboardList as $billboard) {
                 $emptySaloons = 0;
@@ -66,13 +72,16 @@
                             $saloons = array($saloons);
                             foreach($saloons as $saloon) {
                             
-                            if($saloon->getCapacity() > 0) {
+                            if($saloon->getCapacity() - $buysDAO->GetCountSaloonTickets($func->getSaloon()->getId()) == 0) {
                                 $emptySaloons++;
                             }
                         }
                     }
                 }
-                if($emptySaloons>0) {
+                $saloons = $billboard->getCinema()->getSaloon();
+                if(!is_array($saloons))
+                    $saloons = array($saloons);
+                if($emptySaloons < count($saloons)) {
                     array_push($newBillboardList, $billboard);
                 }
             }
