@@ -94,7 +94,7 @@
 
                          <div class="card-body">
                               <h5 class="card-title"><?php echo $movie->getTitle(); ?></h5>
-                              <form action="<?php echo URL . '/Boyout/checkout'?>" id="buyticket" method="GET" onsubmit="finalizarCompra();">
+                              <form action="<?php echo URL . '/Buyout/add'?>" id="buyticket" method="post" onsubmit="finalizarCompra();">
                                    <div class="form-group">
                                         <label for="">Numero de entradas: </label>
                                         <input type="number" name="num-tickets" onchange="actualizarPrecio();" id="num-tickets" value="0" max="0" class="form-control text-center" min="1" required>
@@ -110,7 +110,7 @@
                                    </div>
 
                                    <input type="text" name="id-cinema" id="id-cinema" hidden>
-                                   <input type="checkbox" name="is-desc" id="is-desc" hidden>
+                                   
                                    <input type="text" name="id-movie" id="id-movie" value="<?php echo $movie->getId(); ?>" hidden>
                               </form>
                          </div>
@@ -119,7 +119,7 @@
                               <div class="form-group">
                                    <label for="cardNumber">Tarjeta de credito</label>
                                    <div class="input-group">
-                                        <input form="buyticket" type="number" min="0" name="cardNumber" placeholder="Numero de tarjeta" class="form-control" required>
+                                        <input form="buyticket" type="text" name="credit_number" placeholder="Numero de tarjeta" class="form-control" min="16" max="16"  required>
                                         <div class="input-group-append">
                                              <span class="input-group-text text-muted">
                                                   <i class="fa fa-cc-visa mx-1"></i>
@@ -133,8 +133,8 @@
                                         <div class="form-group">
                                              <label><span class="hidden-xs">Vencimiento</span></label>
                                              <div class="input-group">
-                                                  <input form="buyticket" type="number" placeholder="Mes" name="" class="form-control" min="0" max="12" required>
-                                                  <input form="buyticket" type="number" placeholder="Año" name="" class="form-control" min="0" required>
+                                             <input form="buyticket" type="number" placeholder="Mes" name="" class="form-control" min="1" max="12" required>
+                                             <input form="buyticket" type="number" placeholder="Año" name="" class="form-control" min="0" required>
                                              </div>
                                         </div>
                                    </div>

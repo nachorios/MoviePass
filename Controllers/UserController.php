@@ -22,7 +22,7 @@
         public function register($mail, $pass, $replyPass, $name, $lastName, $dni, $role) {
             //$userRegistered = $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
 
-            $newUser = new User($name, $lastName, $dni, $mail, $pass, $role);
+            $newUser = new User($name, $lastName, $dni, $mail, $pass, $role = 1);
             $userRegistered = $this->userDAO->Add($newUser);
 
             require_once(VIEWS_PATH . 'navbar.php');

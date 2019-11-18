@@ -108,20 +108,16 @@ CREATE TABLE users(
 CREATE TABLE buyouts(
   id_buyout INT AUTO_INCREMENT,
   quan INT, /*cantidad de entradas*/
-  dates varchar(30),
-  
   total INT,
   mail VARCHAR(50),
   id_movie int,
   id_cinema INT,
   id_function int,
+  date varchar (20),
+  credit_number bigint,
   
 
-  CONSTRAINT id_buyout PRIMARY KEY (id_buyout),
-  CONSTRAINT fkbuyout_user FOREIGN KEY (mail) REFERENCES users(mail),
-  constraint fkid_cinema foreign key (id_cinema) references cinemas (id_cinema),
-  CONSTRAINT fkid_movies foreign key (id_movie) references movies (id_movie),
-  constraint fkid_function foreign key (id_function) references functions (id_function)
+  CONSTRAINT idbuyout PRIMARY KEY (id_buyout)
 );
 
 
