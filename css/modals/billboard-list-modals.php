@@ -75,7 +75,7 @@
                         <h4 class = "modal-title">Error al agregar pelicula</h4>
                 </div>
                 <div class = "modal-body">
-                        <p>Se puede agregar una sola vez la misma pelicula por cine.</p>
+                        <p>No se ha podido agregar la pelicula a la cartelera. Se puede agregar una sola vez la misma pelicula por cine y las funciones deben tener 15 minutos entre ellas.</p>
                 </div>
                 <div class = "modal-footer">
                         <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>

@@ -107,6 +107,18 @@
             require_once(VIEWS_PATH . "profile.php");
         }
 
+        public function setRol($mail, $rol) {
+            if(isset($_SESSION['loggedUser']) && $_SESSION['loggedUser']->getRole()>1) {
+                $flag = $this->userDAO->setRolUser($mail, $rol);
+                if($flag) 
+                    echo "<script> alert('¡Has agregado un nuevo administrador!'); </script>";
+                else
+                echo "<script> alert('No se ha logrado agregar un administrador.'); </script>";
+            }
+            require_once(VIEWS_PATH . 'navbar.php');
+            require_once(VIEWS_PATH . "home.php");
+        }
+
         public function TicketList() {
             $user = $_SESSION['loggedUser'];
             $userTickets = $this->buyoutDAO->getTicketsByUser($user->getMail());

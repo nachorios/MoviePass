@@ -17,6 +17,25 @@
             </div>
         </div>
     </div>
+    <!--Desarrollo modal-->
+    <div class="modal fade" id="setRol">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <!--header-->
+                <div class="modal-header">
+                    <h4 class="modal-title">Añade un nuevo administrador</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!--body-->
+                <div class="modal-body">
+                  <?php include(FORMS_PATH ."/add-rol-form.php") ?>
+                </div>
+                <div class="modal-footer">
+                    <!--<button class="btn btn-danger" type="button" data-dismiss="modal">Cerrar</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!--en el style del fondo se coloca el 0.5 al final para indicar la opacidad del fondo,
  si se usa la caracteristica "opacity" convierte a todos los elementos en opacos-->
@@ -47,7 +66,9 @@
                         <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/Profile/'" type="button">Ver Perfil</button>
                         <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/TicketList/'" type="button">Consultar entradas</button>
                         <div class="dropdown-divider"></div>
-                        <button class="dropdown-item" type="button">Configuración</button>
+                        <?php if($_SESSION['loggedUser']->getRole()>1): ?>
+                            <button class="dropdown-item" data-toggle="modal" data-target="#setRol" type="button">Dar Administrador</button>
+                        <?php endif; ?>
                     <?php
                     else:
                     ?>

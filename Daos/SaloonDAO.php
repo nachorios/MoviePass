@@ -55,15 +55,15 @@ class SaloonDAO{
             return $this->mapear($resultSet);
         }
         else
-            return false;
+            return null;
     }
 
     public function GetById($id_saloon){
       try{
-          $query =" select s.id_saloon, s.name, s.capacity, s.entry_value, s.id_cinema
+        $query =" select s.id_saloon, s.name, s.capacity, s.entry_value, s.id_cinema
           from saloon as s
           where s.id_saloon = :id_saloon";
-
+          
           $this->connection = Connection::GetInstance();
 
           $parameters['id_saloon'] = $id_saloon;
@@ -78,7 +78,7 @@ class SaloonDAO{
           return $this->mapear($resultSet);
       }
       else
-          return false;
+          return null;
   }
 
 

@@ -25,23 +25,23 @@
             $arrayIdMovies = $this->billboardDAO->GetAllMoviesInBillboard();
             $arrayMovies = array();
             foreach($arrayIdMovies as $idMovie) {
-                array_push($arrayMovies, $this->movieDAO->GetById($idMovie['id_movie']));
+                $movieAux = $this->movieDAO->GetById($idMovie['id_movie']);
+                if(!in_array($movieAux, $arrayMovies)) {
+                    array_push($arrayMovies, $movieAux);
+                }
             }
             $genreList = $this->movieDAO->getGenreList();
             $newArrayMovies = array();
             foreach($arrayMovies as $movie) {
+                $isThisGenre = false;
+                $isThisDate = false;
                 if (isset($_GET['show_genre'])) {
                     $genre_id = $_GET['show_genre'];
                     if($genre_id != -1) {
-                         $isThisGenre = false;
                          foreach ($movie->getGenre_ids() as $genre) {
-                              if($genre == $genre_id) {
+                              if($genre['id'] == $genre_id) {
                                    $isThisGenre = true;
-                                   break;
                               }
-                         }
-                         if(!$isThisGenre) {
-                              continue;
                          }
                     }
                } 
@@ -49,27 +49,28 @@
                     $date = $_GET['show_date'];
                     if ($date != null) {
                          
-                         $isThisDate = false;
                          if($movie->getRelease_date() == $date) {
                               $isThisDate = true;
                          }
-                        if(!$isThisDate) {
-                            continue;
-                        } 
                     }    
                 }
-                array_push($newArrayMovies, $movie);
+                if($isThisDate || $isThisGenre) {
+                    if(!in_array($movie, $newArrayMovies)) {
+                        array_push($newArrayMovies, $movie);
+                    }
+                }
             }
-            $arrayMovies = $newArrayMovies;
+            if(!empty($newArrayMovies))
+                $arrayMovies = $newArrayMovies;
             require_once(VIEWS_PATH."movie-list.php");
         }
         /*--------------*/
 
-        public function getList()
+        /*public function getList()
 		{
 			$api = $this->movieDAO->getNowApi();
 			return $api;
-		}
+		}*/
 
         /**
          * Agrega una peliculo al DAO

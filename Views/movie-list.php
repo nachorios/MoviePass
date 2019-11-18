@@ -84,7 +84,17 @@
                          <ul class="list-group list-group-flush">
                               <li class="list-group-item">Fecha de estreno: <?php echo $movie->getRelease_date() ?></li>
                               <li class="list-group-item">Calificacion: <?php echo $movie->getVote_average() ?></li>
-                              <li class="list-group-item">Idioma original: <?php echo strtoupper($movie->getOriginal_language()) ?></li>
+                              <li class="list-group-item">Generos:
+                              <?php 
+                                   $movieGenres = $movie->getGenre_ids();
+                                   foreach($movieGenres as $genre):
+                                        echo $genre['name'] . ', ' ;
+                                   endforeach; 
+                              ?>
+                            </li>
+                              
+                              <!--<li class="list-group-item">Idioma original: <?php echo strtoupper($movie->getOriginal_language()) ?></li>-->
+                              
                          </ul>
                     </div>
                     <div class="card-footer">

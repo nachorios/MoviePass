@@ -16,7 +16,7 @@ class SaloonController{
         $this->cinemaDAO = new CinemaDAO();
     }
 
-    public function editSaloon($name, $value, $capacity, $id_salon) 
+    public function editSaloon($name, $capacity, $value, $id_salon) 
     {
       $saloon = new Saloon($name, $capacity, $value);
 

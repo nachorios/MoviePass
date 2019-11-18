@@ -29,7 +29,12 @@
     public function Add($id_movie, $id_cinema, $id_saloon, $day, $hour) {
       $flag = false;
       try {
-        $query = "INSERT INTO " . $this->tableName . "(id_movie, id_cinema) VALUES (:id_movie, :id_cinema);";
+        $sql = "INSERT INTO billboard (id_movie, id_cinema)
+        SELECT * FROM (SELECT :id_movie, :id_cinema) AS tmp
+        WHERE NOT EXISTS (
+            SELECT id_movie, id_cinema FROM billboard WHERE id_movie = :id_movie AND id_cinema = :id_cinema
+        ) LIMIT 1;";
+        //$query = "INSERT INTO " . $this->tableName . "(id_movie, id_cinema) VALUES (:id_movie, :id_cinema);";
 
         $parameters = Array();
         $parameters["id_movie"] = $id_movie;
@@ -37,16 +42,21 @@
 
         $this->connection = Connection::GetInstance();
 
-        $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
+        $rowCount = $this->connection->ExecuteNonQuery($sql, $parameters);
         $id_billboard = $this->connection->getPdo()->lastInsertId();
+        $countProof = 0;
         if($rowCount > 0) {
           for($i = 0; $i < count($day); $i++) {
-            $this->functionDAO->Add($day[$i], $hour[$i], $id_saloon[$i], $id_billboard);
+            $countProof += $this->functionDAO->Add($day[$i], $hour[$i], $id_saloon[$i], $id_billboard);
           }
         }
+        if($countProof == 0) {
+          $this->Delete($id_billboard);
+        } else {
+          if($rowCount > 0)
+            $flag = true;
+        }
         //$this->AddDate($bill->getDay(), $bill->getHour(), $bill->getSaloon(), $id);
-        if($rowCount > 0)
-          $flag = true;
       } catch(Exception $e) {
           //throw $e;
       }
@@ -72,7 +82,7 @@
   }
 
   public function GetAllMoviesInBillboard() {
-    $query = "select id_movie from billboard;";
+    $query = "SELECT DISTINCT id_movie FROM billboard;";
     $result = array();
       try {
           $this->connection = Connection::GetInstance();
@@ -128,7 +138,14 @@
 
   public function Update($id_cinema, $id_movie, $id_billboard) {
 
-    $query = "UPDATE billboard as b SET b.id_cinema = :id_cinema, b.id_movie = :id_movie WHERE id_billboard = :id_billboard;";
+    //$query = "UPDATE billboard as b SET b.id_cinema = :id_cinema, b.id_movie = :id_movie WHERE id_billboard = :id_billboard;";
+    $sql = "UPDATE billboard
+      SET id_cinema = :id_cinema, id_movie = :id_movie
+      WHERE id_billboard = :id_billboard AND NOT EXISTS ( 
+        SELECT id_movie, id_cinema 
+          FROM (SELECT * FROM billboard) as t
+        WHERE t.id_movie = :id_movie AND t.id_cinema = :id_cinema
+      ) LIMIT 1;";
     $flag = false;
     try {
       $this->connection = Connection::getInstance();
@@ -138,7 +155,7 @@
       $parameters["id_movie"] = $id_movie;
       $parameters["id_billboard"] = $id_billboard;
 
-      $rowCount = $this->connection->executeNonQuery($query, $parameters);
+      $rowCount = $this->connection->executeNonQuery($sql, $parameters);
 
       if($rowCount == 1)
         $flag = true;

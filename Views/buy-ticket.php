@@ -9,7 +9,7 @@
           var myDate = new Date();
           var num_tickets = document.getElementById('num-tickets').value;
 
-          if((myDate.getDay() == 6 || myDate.getDay() == 0) && num_tickets > 1/* myDate.getDay() == 2 || myDate.getDay() == 3 */) {
+          if((myDate.getDay() == 1) && num_tickets > 1/* myDate.getDay() == 2 || myDate.getDay() == 3 */) {//CAMBIAR PARA PROBAR DESCUENTOS
                price.value = document.getElementById('num-tickets').value * uniq_price - ((document.getElementById('num-tickets').value * uniq_price)*0.25);
                document.getElementById("desc").removeAttribute("hidden");
                document.getElementById("is-desc").checked = true;
@@ -30,7 +30,18 @@
                               $cinema = $billboard->getCinema(); ?>
                          <a class="list-group-item list-group-item-action " onclick="document.getElementById('id-cinema').value='<?php echo $cinema->getIdCinema(); ?>'" id="list-<?php echo $cinema->getIdCinema(); ?>-list" data-toggle="list" href="#list-<?php echo $cinema->getIdCinema(); ?>" role="tab" aria-controls="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></a>
                          <?php }
-                    }?>
+                    } else {?>
+                    <div class="card text-center border-danger mb-3">
+                    <div class="card-header text-danger">
+                         No hay cines disponibles
+                    </div>
+                    <div class="card-body text-danger">
+                    <blockquote class="blockquote mb-0">
+                         <p>No hay entradas disponibles para esta pelicula.</p>
+                    </blockquote>
+                    </div>
+               </div>
+                    <?php } ?>
                </div>
           </div>
 

@@ -131,8 +131,8 @@
                         <tr class="table-secondary" id="<?php 
                             $id = $func->getDate() .'/'. $func->getHour() .'/'. $func->getId() .'/'. $func->getSaloon()->getId() ;
                             $saloonList = ""; 
-                            foreach($billboard->getFunctions() as $funcId){ 
-                                $saloonList .= $funcId->getSaloon()->getId().'-'. $funcId->getSaloon()->getName().'-'; 
+                            foreach($billboard->getCinema()->getSaloon() as $saloon){ 
+                                $saloonList .= $saloon->getId().'-'. $saloon->getName().'-'; 
                             } 
                             echo $id .'/'. $saloonList; ?>" onclick="editSaloon(this);" 
                             data-toggle="modal" data-target="#editar-function-modal" data-toggle="tooltip" title="Has clic para editar." >
@@ -160,7 +160,7 @@
                     <li><h6>Datos de interes: </h6>
                         <ul>
                             <li>Fecha de Estreno: <?php echo $movie->getRelease_date(); ?></li>
-                            <li>Titulo original: <?php echo $movie->getOriginal_title(); ?></li>
+                            <li>Titulo original:<?php echo str_replace("'", "”", str_replace("\"","”", $movie->getOriginal_title())); ?></li>
                             <li>Puntuacion: <?php echo $movie->getVote_average(); ?></li>
                         </ul>
                     </li>
@@ -206,6 +206,17 @@
     <?php
         $id++;
         endforeach;
-    ?>
+        if(empty($billboards)): ?>
+        <div class="card text-center border-danger mb-3">
+             <div class="card-header text-danger">
+                  No se han encontrado peliculas en cartera...
+             </div>
+             <div class="card-body text-danger">
+             <blockquote class="blockquote mb-0">
+                  <p>Vuelve más tarde.</p>
+             </blockquote>
+             </div>
+        </div>
+   <?php endif; ?>
 <div class="clearfix"></div>
 </div>

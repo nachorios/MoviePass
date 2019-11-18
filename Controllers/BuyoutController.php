@@ -50,7 +50,31 @@
             if(!is_array($billboardList))
                 $billboardList = array($billboardList);
             $movie = $this->movieDAO->getById($idMovie);
-            $functionList;
+
+            $newBillboardList = array();
+            foreach($billboardList as $billboard) {
+                $emptySaloons = 0;
+                if($billboard->getFunctions() != null) {
+                    $functions = $billboard->getFunctions();
+                    if(!is_array($functions))
+                        $functions = array($functions);
+                    foreach($functions as $func) {
+                        $saloons = $func->getSaloon();
+                        if(!is_array($saloons))
+                            $saloons = array($saloons);
+                            foreach($saloons as $saloon) {
+                            
+                            if($saloon->getCapacity() > 0) {
+                                $emptySaloons++;
+                            }
+                        }
+                    }
+                }
+                if($emptySaloons>0) {
+                    array_push($newBillboardList, $billboard);
+                }
+            }
+            $billboardList = $newBillboardList;
 
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . 'buy-ticket.php');
@@ -58,4 +82,33 @@
         }
 
     }
-    
+        /*
+    if(!is_array($billboardList))
+                $billboardList = array($billboardList);
+            $movie = $this->movieDAO->getById($idMovie);
+
+            foreach($billboardList as $billboard) {
+                $newSaloons = array();
+                if($billboard->getCinema()->getSaloon() != null) {
+
+                    $saloons = $billboard->getCinema()->getSaloon();
+                    if(!is_array($saloons))
+                        $saloons = array($saloons);
+
+                    foreach($saloons as $saloon) {
+                        $functionSaloons = $billboard->getCinema()->getSaloon();
+                        if(!is_array($functionSaloons))
+                            $functionSaloons = array($functionSaloons);
+
+                        foreach($functionSaloons as $fSaloon) {
+                            echo $fSaloon->getId() . ' / '. $saloon->getId() . ' / '. $saloon->getCapacity() . ' / '. $saloon->getName() . '<br>';
+                            if($fSaloon->getId() == $saloon->getId() && $saloon->getCapacity() > 0) {
+                                array_push($newSaloons, $saloon);
+                            }
+                        }
+                    }
+                }
+                if(!empty($newSaloons)) {
+                    $billboard->getCinema()->setSaloon($newSaloons);
+                }
+    */

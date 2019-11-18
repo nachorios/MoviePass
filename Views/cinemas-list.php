@@ -112,8 +112,8 @@
 <?php
      //aca se carga arrayCinemas con los datos de cinemas.json o con los datos del dao
      $arrayCinemas = $cinemasList->GetAll(); //para json y pdo (la firma de los metodos es la misma)
-     if($arrayCinemas != null && !is_array($arrayCinemas))
-          $arrayCinemas = array($arrayCinemas);
+     if(!is_array($arrayCinemas))
+         $arrayCinemas = array($arrayCinemas);
      include(MODALS_PATH . 'cinema-list-modals.php');
 ?>
 
@@ -227,31 +227,35 @@
                                         }?>
                               </thead>
                               <tbody>
-                              <?php if(!empty($cinema->getSaloon())) foreach($cinema->getSaloon() as $salon):?>
-
-                                   <tr>
-                                        <td><?php echo $salon->getName() ?></td>
-                                        <td><?php echo $salon->getValue() ?></td>
-                                        <td><?php echo $salon->getCapacity() ?></td>
-                                        <?php
-                                        if(isset($_SESSION['loggedUser'])) {
-                                             if($_SESSION['loggedUser']->getRole()>1) {
-                                                  ?>
-                                                  <td><button type="button" value="<?php echo $salon->getName() . '/' . $salon->getValue(). '/'. $salon->getCapacity() . '/'. $salon->getId()  ?>" id="salon-<?php echo $salon->getId()?>" onclick = "editarSaloon('<?php echo $salon->getId() ?>');" data-toggle="modal" data-target="#editar-salon-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
-
-                                                  <td><a href="<?php echo URL ?>/Saloon/deleteSaloon?delete-saloon=<?php echo $salon->getId()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
-
+                              <?php 
+                              if($cinema->getSaloon() != null):
+                                   $saloons = $cinema->getSaloon();
+                                   if(!is_array($saloons))
+                                        $saloons = array($saloons);
+                                        foreach($saloons as $salon):?>
+                                        <tr>
+                                             <td><?php echo $salon->getName() ?></td>
+                                             <td><?php echo $salon->getCapacity() ?></td>
+                                             <td><?php echo $salon->getValue() ?></td>
                                              <?php
-                                             }
-                                        } ?>
-                                   </tr>
-                                   
-                                   <?php endforeach; ?>
+                                             if(isset($_SESSION['loggedUser'])) {
+                                                  if($_SESSION['loggedUser']->getRole()>1) {
+                                                       ?>
+                                                       <td><button type="button" value="<?php echo $salon->getName() . '/' . $salon->getCapacity(). '/'. $salon->getValue() . '/'. $salon->getId()  ?>" id="salon-<?php echo $salon->getId()?>" onclick = "editarSaloon('<?php echo $salon->getId() ?>');" data-toggle="modal" data-target="#editar-salon-modal" class="btn btn-info"><i class="fa fa-pencil-square-o"></i></button></td>
+
+                                                       <td><a href="<?php echo URL ?>/Saloon/deleteSaloon?delete-saloon=<?php echo $salon->getId()  ?>" onclick="loading(this, 'danger', '');"> <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </a> </td>
+
+                                                  <?php
+                                                  }
+                                             } ?>
+                                        </tr>  
+                                   <?php endforeach;
+                                   endif; ?>
                               </tbody>
                          </table>
                          <?php 
                          if(isset($_SESSION['loggedUser'])):
-                              if($_SESSION['loggedUser']->getRole()>1 && (empty($cinema->getSaloon()) || count($cinema->getSaloon()) < 5)):
+                              if($_SESSION['loggedUser']->getRole()>1 && (empty($cinema->getSaloon()) || !is_array($cinema->getSaloon()) || count($cinema->getSaloon()) < 5)):
                                    ?>
                          <div class="text-center">
                               <button type="button" onclick = "agregarSaloon('<?php echo $cinema->getIdCinema() ?>');" data-toggle="modal" data-target="#agregar-salon-modal" class="btn btn-warning"><i class="fa fa-plus"> Agregar Salón</i></button>
@@ -262,7 +266,18 @@
                     </div>
                </div>
           <?php endforeach;
-          endif; ?>
+          else: ?>
+               <div class="card text-center border-danger mb-3">
+                    <div class="card-header text-danger">
+                         No se han encontrado cines...
+                    </div>
+                    <div class="card-body text-danger">
+                    <blockquote class="blockquote mb-0">
+                         <p>Vuelve más tarde</p>
+                    </blockquote>
+                    </div>
+               </div>
+          <?php endif; ?>
           </div>
      </div>
 

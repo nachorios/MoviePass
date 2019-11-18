@@ -24,7 +24,7 @@ class CinemaController{
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
-    public function registerCinema($nameCinema, $address, $nameSaloon, $capacity, $value)
+    public function registerCinema($nameCinema, $address, $nameSaloon, $value, $capacity)
     {
       
       $newCinema = new Cinema($nameCinema, $address);

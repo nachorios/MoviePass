@@ -168,8 +168,14 @@
     <label for="select-cinema" class="text-light"> Seleccionar Cine: </label>
     <select class="form-control" id="select-add-cinema" onchange="actualizarSalas()" name="cinema" id="select-cinema" required>
         <option value="" selected disabled>Cines</option>
-    <?php foreach($cinemas as $cinema):  ?>
-        <option name="nameCinema" id="<?php foreach($cinema->getSaloon() as $saloons){ echo $saloons->getName() .'-'. $saloons->getId().'/'; } ?>" value="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></option>
+    <?php foreach($cinemas as $cinema):  
+        $saloons = $cinema->getSaloon();
+        if(is_null($saloons))
+            $saloons = array();
+        if(!is_array($saloons))
+            $saloons = array($saloons);
+        ?>
+        <option name="nameCinema" id="<?php foreach($saloons as $saloons){ echo $saloons->getName() .'-'. $saloons->getId().'/'; } ?>" value="<?php echo $cinema->getIdCinema(); ?>"><?php echo $cinema->getName(); ?></option>
     <?php endforeach; ?>
     </select>
 </div>
@@ -196,7 +202,6 @@
             <label for="saloon-select" class="text-light"> Seleccionar Sala: </label>
             <select name="saloon-select[]" id="select-saloon" onmouseover="actualizarSalasNoEditadas()" class="select-class" required>
                 <option value="" selected disabled>Salas</option>
-                <!--<option name="saloon" value=""></option>-->
             </select>
         </div>
         <a href="#" class="m-2" id="add"><button type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></a>

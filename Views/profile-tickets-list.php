@@ -26,17 +26,16 @@
             <th>Codigo QR</th>
         </thead>
         <tbody>
-        <?php $i=0; foreach($userTickets as $ticket): $i++;?>
+        <?php $i=0; foreach(array(1) as $ticket): $i++;?>
             <tr>
                 <td><?php echo 'numero' ?></td>
                 <td><?php echo  $i ?></td>
                 <td><?php echo "$i-11-2019" ?></td>
                 <td><?php echo '18:15' ?></td>
                 <td><?php echo 'salonsato' ?></td>
-                <td><?php echo 'QR' ?></td>
+                <td><a href="<?php echo URL ?>/User/viewQR">QR</a></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
-
 </div>

@@ -18,7 +18,14 @@
     public function Add($date, $hour, $id_saloon, $id_billboard) {
 
         $flag = false;
-        $sql = "INSERT INTO $this->tableName (id_billboard, date, hour, id_saloon) VALUES (:id_billboard, :date, :hour, :id_saloon);";
+        //$sql = "INSERT INTO $this->tableName (id_billboard, date, hour, id_saloon) VALUES (:id_billboard, :date, :hour, :id_saloon);";
+        $sql = "INSERT INTO functions (id_billboard, date, hour, id_saloon) 
+        SELECT :id_billboard, :date, :hour, :id_saloon
+        WHERE NOT EXISTS (
+            SELECT * 
+            FROM functions as f
+            WHERE f.date = :date AND (STR_TO_DATE(f.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL 15 MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL 15 MINUTE))
+        ) LIMIT 1;";
 
         $parameters = Array();
         $parameters["id_billboard"] = $id_billboard;
@@ -59,7 +66,7 @@
 
     public function GetFunctionsByBillboardId($id_billboard) {
         $sql = "SELECT * FROM $this->tableName where id_billboard = :id_billboard;";
-        $result = false;
+        $result = array();
 
         $parameters = array();
         $parameters['id_billboard'] = $id_billboard;
@@ -69,6 +76,9 @@
             $resultSet = $this->connection->execute($sql, $parameters);
             if(!empty($resultSet))
                 $result = $this->mapear($resultSet);
+            if(!is_array($result)) {
+                $result = array($result);
+            }
         } catch (PDOException $e) {
             //throw $e;
         } catch(Exception $e){
@@ -79,7 +89,7 @@
 
     public function GetById($id_function) {
         $sql = "SELECT * FROM $this->tableName where id_function = :id_function;";
-        $result = false;
+        $result = null;
 
         $parameters = array();
         $parameters['id_function'] = $id_function;
@@ -99,7 +109,14 @@
 
     public function Update($date, $hour, $id_saloon, $id_function) {
         try {
-        $sql = "UPDATE $this->tableName SET date = :date, hour = :hour, id_saloon = :id_saloon WHERE id_function = :id_function;";
+        //$sql = "UPDATE $this->tableName SET date = :date, hour = :hour, id_saloon = :id_saloon WHERE id_function = :id_function;";
+        $sql = "UPDATE functions as f
+        SET date = :date, hour = :hour, id_saloon = :id_saloon
+        WHERE id_function = :id_function AND NOT EXISTS ( 
+            SELECT * 
+            FROM (SELECT * FROM functions) as t
+            WHERE t.date = :date AND t.id_function != :id_function AND (t.id_saloon = :id_saloon OR ((STR_TO_DATE(t.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL 15 MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL 15 MINUTE))))
+        ) LIMIT 1;";
         $flag = false;
 
         $this->connection = Connection::getInstance();

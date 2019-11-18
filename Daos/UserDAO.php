@@ -26,7 +26,6 @@ class UserDAO implements IUserDAO {
             $this->connection = Connection::GetInstance();
 
             $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
-            var_dump($rowCount);
             if($rowCount == 1) //si el usuario fue cargado con exito ExecuteNonQuery devuelve 1 (que es la cantidad de filas modificadas)
             {
               $flag = true;
@@ -38,6 +37,28 @@ class UserDAO implements IUserDAO {
         finally{
           return $flag;
         }
+    }
+
+    public function setRolUser($mail, $rol) {
+      $query = "UPDATE users SET id_rol = :id_rol WHERE mail = :mail;";
+      $flag = false;
+      try
+      {
+        $this->connection = Connection::getInstance();
+        $parameters = array();
+        $parameters["mail"] = $mail;
+        $parameters["id_rol"] = $rol;
+        $rowCount = $this->connection->ExecuteNonQuery($query, $parameters);
+        if($rowCount > 0)
+          $flag = true;
+
+      }catch (PDOException $e) {
+        //echo $e->getMessage();
+      }
+      catch(Exception $e){
+          //echo $e->getMessage();
+        }
+        return $flag;
     }
 
     public function getUserByMailPass($mail, $pass)
