@@ -2,18 +2,19 @@
 
 class Buyout{
     private $quan;
-  //  private $dates;
+    private $date;
     private $total;
     private $id_movie;
     private $id_cinema;
     private $id_function;
 
-    public function __construct($quan, $total, $id_movie, $id_cinema, $id_function){
+    public function __construct($quan, $total, $id_movie, $id_cinema, $id_function, $date){
         $this->quan = $quan;
         $this->total = $total;
         $this->id_movie = $id_movie;
         $this->id_cinema = $id_cinema;
         $this->id_function = $id_function;
+        $this->date = $date;
     }
 
     public function setIdMovie($id_movie){
@@ -31,11 +32,11 @@ class Buyout{
     public function setIdFunction($id_function){
         $this->id_function = $id_function;
     }
-/*
-    public function setDate($dates){
-        $this->dates=$dates;
+
+    public function setDate($date){
+        $this->date=$date;
     }
-*/
+
     public function setTotal($total){
         $this->total=$total;
     }
@@ -51,10 +52,10 @@ class Buyout{
     public function getQuan(){
         return $this->quan;
     }
-/*
+
     public function getDate(){
-        return $this->dates;
-    }*/
+        return $this->date;
+    }
 
     public function getTotal(){
         return $this->total;

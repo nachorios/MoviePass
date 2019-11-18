@@ -7,21 +7,23 @@ class BuyoutDAO{
     private $connection;
     private $tableName = "buyouts";
 
-    public function Add(Buyout $buyout, $mail){
+    public function Add(Buyout $buyout, $mail, $credit_number){
         try{
-            $query = "INSERT INTO buyouts (quan, dates, total, id_movie, id_cinema, mail, id_function) VALUES (:quan, :dates, :total, :id_movie, :id_cinema, :mail, :id_function);";
+            $query = "INSERT INTO buyouts (quan, total, id_movie, id_cinema, mail, id_function, date, credit_number) 
+                                   VALUES (:quan, :total, :id_movie, :id_cinema, :mail, :id_function, :date, :credit_number);";
             
             $parameters = Array();
             $parameters["quan"] = $buyout->getQuan();
-            $parameters["dates"] = $buyout->getDate();
+            $parameters["date"] = $buyout->getDate();
             $parameters["total"] = $buyout->getTotal();
             $parameters["id_movie"] = $buyout->getIdMovie();
             $parameters["id_cinema"] = $buyout->getIdCinema();
             $parameters["id_function"] = $buyout->getIdFunction();
             $parameters["mail"] = $mail;
+            $parameters["credit_number"] = $credit_number;
 
             $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->connection->executeNonQuery($query, $parameters);
 
         }catch(Exception $e) {
             throw $e;

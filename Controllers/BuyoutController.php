@@ -24,11 +24,13 @@
             $this->movieDAO = new MovieDAO();
             $this->billboardDAO = new BillboardDAO();
         }
+        public function Add($id_function, $cant, $total, $id_cinema, $id_movie, $credit_number){
+            $date = date("Y-m-d H:i:s");
+            $buy = new Buyout($cant, $total, $id_movie, $id_cinema, $id_function, $date);
+            
+            $mail = $_SESSION['loggedUser']->getMail();
 
-        public function Add($id_function, $cant, $total, $id_cinema, $mail, $id_movie){
-            $buy = new Buyout($cant, $id_movie, $total, $id_cinema, $id_function);
-            var_dump($buy);
-            $this->buyOutDAO->Add($buy, $mail);
+            $this->buyOutDAO->Add($buy, $mail, $credit_number);
             require_once(VIEWS_PATH . 'header.php');
             require_once(VIEWS_PATH . 'navbar.php');
         }
