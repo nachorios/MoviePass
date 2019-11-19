@@ -1,4 +1,4 @@
- 
+
 
 <script>
      function cambiar() {
@@ -85,24 +85,27 @@
                               <li class="list-group-item">Fecha de estreno: <?php echo $movie->getRelease_date() ?></li>
                               <li class="list-group-item">Calificacion: <?php echo $movie->getVote_average() ?></li>
                               <li class="list-group-item">Generos:
-                              <?php 
+                              <?php
                                    $movieGenres = $movie->getGenre_ids();
                                    foreach($movieGenres as $genre):
                                         echo $genre['name'] . ', ' ;
-                                   endforeach; 
+                                   endforeach;
                               ?>
                             </li>
-                              
+
                               <!--<li class="list-group-item">Idioma original: <?php echo strtoupper($movie->getOriginal_language()) ?></li>-->
-                              
+
                          </ul>
                     </div>
+                  <?php if(isset($_SESSION['loggedUser']))
+                  { ?>
                     <div class="card-footer">
                          <small class="text-muted">Comprar entradas de esta pelicula</small>
                          <button onclick="window.location.href = '<?php echo URL . '/Buyout/ShowView?movie='. $movie->getId() ?>'; " class="btn btn-warning"
                               type="button"><i class="fa fa-chevron-right"></i>
-                         </button> 
+                         </button>
                     </div>
+                  <?php } ?>
                </div>
           </div>
      </div>

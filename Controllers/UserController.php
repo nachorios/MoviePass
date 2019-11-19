@@ -13,12 +13,6 @@
             $this->buyoutDAO = new BuyoutDAO();
         }
 
-/*        public function Add($name, $lastName, $dni, $mail, $pass, $role){
-            $user = new User($name, $lastName, $dni, $mail, $pass, $role);
-
-            $this->userDAO->Add($user);
-        }*/
-
         public function register($mail, $pass, $replyPass, $name, $lastName, $dni, $role) {
             //$userRegistered = $this->AddJson($name, $lastName, $dni, $mail, $pass, $role);
 
@@ -32,7 +26,7 @@
         public function login($mail, $pass) {
             $logged = false;
 
-            /*$userList = $this->userDAOJson->GetAll();            
+            /*$userList = $this->userDAOJson->GetAll();
             foreach($userList as $user) {
                 if($mail == $user->getMail() && $pass == $user->getPass()) {
                     $_SESSION['loggedUser'] = $user;
@@ -110,7 +104,7 @@
         public function setRol($mail, $rol) {
             if(isset($_SESSION['loggedUser']) && $_SESSION['loggedUser']->getRole()>1) {
                 $flag = $this->userDAO->setRolUser($mail, $rol);
-                if($flag) 
+                if($flag)
                     echo "<script> alert('¡Has agregado un nuevo administrador!'); </script>";
                 else
                 echo "<script> alert('No se ha logrado agregar un administrador.'); </script>";
@@ -127,8 +121,8 @@
             $newUserTickets = array();
             if(isset($_GET['date']) && !empty($_GET['date'])) {
                 foreach ($userTickets as $ticket/* -> buyout */) {
-                    $dateGET = strtotime($_GET['date']); 
-                    $date = strtotime($ticket->getDate()); 
+                    $dateGET = strtotime($_GET['date']);
+                    $date = strtotime($ticket->getDate());
                     if(date('d/M/Y', $date) == date('d/M/Y', $date)) {
                         array_push($newUserTickets, $ticket);
                     }
@@ -143,7 +137,7 @@
                 }
                 $userTickets = $newUserTickets;
             }
-                
+
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . "profile-tickets-list.php");
         }
@@ -154,7 +148,7 @@
             if(!is_array($userBouyouts))
                 $userBouyouts = array($userBouyouts);
 
-            
+
             $buysDAO = $this->buyoutDAO;
             if(isset($_GET['date-start']) && isset($_GET['date-end'])) {
                 $startDate = $_GET['date-start'];
