@@ -65,7 +65,8 @@
                     }
                 }
             }
-            $arrayMovies = $newArrayMovies;
+            if(isset($_GET['show_genre']) || isset($_GET['show_date']))
+                $arrayMovies = $newArrayMovies;
             require_once(VIEWS_PATH."movie-list.php");
         }
         /*--------------*/
