@@ -22,9 +22,9 @@ class BuyoutDAO{
     public function Add(Buyout $buyout, $mail, $credit_number){
         $flag = false;
         try{
-            $query = "INSERT INTO buyouts (quan, total, id_movie, id_cinema, mail, id_function, date, credit_number) 
+            $query = "INSERT INTO buyouts (quan, total, id_movie, id_cinema, mail, id_function, date, credit_number)
                                    VALUES (:quan, :total, :id_movie, :id_cinema, :mail, :id_function, :date, :credit_number);";
-            
+
             $parameters = Array();
             $parameters["quan"] = $buyout->getQuan();
             $parameters["date"] = $buyout->getDate();
@@ -43,7 +43,7 @@ class BuyoutDAO{
             throw $e;
         }
         return $flag;
-    } 
+    }
 
     public function GetAll() {
         $query = "select * from buyouts;";
@@ -54,7 +54,7 @@ class BuyoutDAO{
               if(!empty($resultSet)) {
                 $result = $this->mapear($resultSet);
               }
-              
+
           } catch(Exception $e) {
               //throw $e;
           }
@@ -80,7 +80,7 @@ class BuyoutDAO{
     }
 
     public function GetCountCinemaTickets($id_cinema) {
-        $query = "select sum(b.quan) 
+        $query = "select sum(b.quan)
         from buyouts as b
         where b.id_cinema = :id_cinema;";
         $result = 0;
@@ -98,7 +98,7 @@ class BuyoutDAO{
     }
 
     public function GetCountSaloonTickets($id_saloon) {
-        $query = "select sum(b.quan) 
+        $query = "select sum(b.quan)
         from buyouts as b
         join functions as f
         on b.id_function = f.id_function AND f.id_saloon = :id_saloon;";
@@ -148,7 +148,7 @@ class BuyoutDAO{
               if(!empty($resultSet)) {
                 $result = $this->mapear($resultSet);
               }
-              
+
           } catch(Exception $e) {
               //throw $e;
           }
@@ -175,6 +175,28 @@ class BuyoutDAO{
                 //throw $e;
             }
         return $result;
+    }
+
+    public function Delete($id_buyout)
+    {
+      $query = "DELETE FROM buyouts WHERE (id_buyout = :id_buyout)";
+      $flag = false;
+      try {
+
+        $this->connection = Connection::getInstance();
+
+        $parameters['id_buyout'] = $id_buyout;
+
+        $proof = $this->connection->ExecuteNonQuery($query, $parameters);
+        if($proof > 0)
+          $flag = true;
+      } catch (PDOException $e) {
+        throw $e->getMessage();
+      }
+      catch(Exception $e){
+        throw $e->getMessage();
+      }
+      return $flag;
     }
 
     public function GetId($date){

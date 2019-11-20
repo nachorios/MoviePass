@@ -19,8 +19,8 @@ function loadingFb() {
             <input type="password" name="pass" id="password" class="form-control form-control-lg" placeholder="Ingresar constraseña" required>
     </div>
     <button class="btn btn-success btn-block btn-lg mb-3" type="submit">Iniciar Sesión</button>
-    
-    <div id="loading-fb" hidden> 
+
+    <div id="loading-fb" hidden>
       <button class="btn btn-primary btn-block btn-lg mb-3" type="button" disabled>
           <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           Ingresando...

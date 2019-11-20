@@ -35,10 +35,10 @@
                 <td><?php echo $ticket->getFunction()->getHour(); ?></td>
                 <td><?php echo $ticket->getFunction()->getSaloon()->getName(); ?></td>
                 <!--<td>QR</td>-->
-                <td><a href="?delete=<?php /*echo $ticket->getIdBill()*/ ?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
-<!--                <button type="button" onclick="loading(this, 'danger', ''); window.location='<?php //echo URL ?>/Cinema/deleteCinema?delete=<?php //echo $cinema->getIdCinema()  ?>'" class="btn btn-danger"><i class="fa fa-trash-o"> Eliminar</i></button>
+                <td><a href="?delete='<?php echo $ticket->getFunction()->getDate() ?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td> 
+<!--                <td><button type="button" onclick="loading(this, 'danger', ''); window.location='<?php// echo URL ?>/Buyout/DeleteTicket?delete=<?php// echo $ticket->getFunction()->getDate()  ?>'" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </td>  -->
 
-                <a href="?delete=<?php //echo $value->getEmail() ?>" class="btn btn-light">
+<!--                <a href="?delete=<?php //echo $value->getEmail() ?>" class="btn btn-light">
                     <object type="image/svg+xml" data="icons/trash-2.svg" width="16" height="16"></object>
                 </a>-->
             </tr>
