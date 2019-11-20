@@ -115,7 +115,7 @@
         WHERE id_function = :id_function AND NOT EXISTS ( 
             SELECT * 
             FROM (SELECT * FROM functions) as t
-            WHERE t.date = :date AND t.id_function != :id_function AND (t.id_saloon = :id_saloon OR ((STR_TO_DATE(t.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL 15 MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL 15 MINUTE))))
+            WHERE t.date = :date AND t.id_function != :id_function AND (((STR_TO_DATE(t.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL 15 MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL 15 MINUTE))))
         ) LIMIT 1;";
         $flag = false;
 

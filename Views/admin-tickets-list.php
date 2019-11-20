@@ -10,23 +10,15 @@
         </thead>
         <tbody>
         <?php
-            $moviesAdded = array();
-            foreach($userBouyouts as $buy):
-                if(!in_array($buy->getMovie(), $moviesAdded)):
-                    array_push($moviesAdded, $buy->getMovie()) ?>
-            <tr>
-                <th scope="row"><?php echo $buy->getMovie()->getTitle() ?></th>
-                <!--accedo a travez de buysdao porque esa es la variable que se genero en BuyoutController-->
-                <td><?php echo $buysDAO->GetCountMovieTickets($buy->getMovie()->getId()); ?></td>
-                <td><?php
-                $auxAmountTickets = $buy->getFunction()->getSaloon()->getCapacity() - $buysDAO->GetCountMovieTickets($buy->getMovie()->getId());
-                if($auxAmountTickets < 0)
-                    echo 0;
-                else
-                    echo $auxAmountTickets;  ?></td>
-            </tr>
-            <?php endif;
-        endforeach; ?>
+            foreach($movieTicketList as $movieTicket):
+            ?>
+                <tr>
+                    <th scope="row"><?php echo $movieTicket->getName() ?></th>
+                    <td><?php echo $movieTicket->getTicketsSold(); ?></td>
+                    <td><?php echo $movieTicket->getTicketsRemaining(); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 
@@ -40,31 +32,15 @@
         </thead>
         <tbody>
         <?php
-            $cinemasAdded = array();
-            foreach($userBouyouts as $buy):
-                if(!in_array($buy->getCinema(), $cinemasAdded)):
-                    array_push($cinemasAdded, $buy->getCinema());
-                    $cinemaCapacity = 0;
-                    $saloons = $buy->getCinema()->getSaloon();
-                    if(!is_array($saloons))
-                        $saloons = array($saloons);
-                    foreach($saloons as $saloon) {
-                        $cinemaCapacity += $buy->getFunction()->getSaloon()->getCapacity();
-                    }
-                    ?>
-            <tr>
-                <th scope="row"><?php echo $buy->getCinema()->getName() ?></th>
-                <td><?php echo $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?></td>
-                <td><?php
-                    $auxAmountCapacity = $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema());
-                    if($auxAmountCapacity < 0)
-                        echo 0;
-                    else
-                        echo $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?>
-                </td>
-            </tr>
-            <?php endif;
-        endforeach; ?>
+            foreach($cinemaTicketList as $cinemaTicket):
+            ?>
+                <tr>
+                    <th scope="row"><?php echo $cinemaTicket->getName() ?></th>
+                    <td><?php echo $cinemaTicket->getTicketsSold(); ?></td>
+                    <td><?php echo $cinemaTicket->getTicketsRemaining(); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 
@@ -96,7 +72,7 @@
         <tbody>
         <?php
             $moviesAmount = array();
-            foreach($userBouyouts as $buy):
+            foreach($userBuyouts as $buy):
                 if(!in_array($buy->getMovie(), $moviesAmount)):
                     array_push($moviesAmount, $buy->getMovie()) ?>
             <tr>
@@ -119,7 +95,7 @@
         <tbody>
         <?php
             $cinemasAmount = array();
-            foreach($userBouyouts as $buy):
+            foreach($userBuyouts as $buy):
                 if(!in_array($buy->getCinema(), $cinemasAmount)):
                     array_push($cinemasAmount, $buy->getCinema()) ?>
             <tr>

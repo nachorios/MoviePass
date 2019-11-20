@@ -32,15 +32,15 @@
                          <?php }
                     } else {?>
                     <div class="card text-center border-danger mb-3">
-                    <div class="card-header text-danger">
-                         No hay cines disponibles
+                         <div class="card-header text-danger">
+                             No hay cines disponibles
+                         </div>
+                         <div class="card-body text-danger">
+                              <blockquote class="blockquote mb-0">
+                                   <p>No hay entradas disponibles para esta pelicula.</p>
+                              </blockquote>
+                         </div>
                     </div>
-                    <div class="card-body text-danger">
-                    <blockquote class="blockquote mb-0">
-                         <p>No hay entradas disponibles para esta pelicula.</p>
-                    </blockquote>
-                    </div>
-               </div>
                     <?php } ?>
                </div>
           </div>

@@ -10,6 +10,7 @@
     use Models\Billboard as Billboard;
     use Models\Buyout as Buyout;
     use Models\Cinema as Cinema;
+    use Models\TicketInfo as TicketInfo;
     use Models\Movie as Movie;
     use Models\User as User;
     use Models\Mail as Mail;
@@ -91,7 +92,8 @@
                     array_push($newBillboardList, $billboard);
                 }
             }
-            $billboardList = $newBillboardList;
+            if(!empty($newBillboardList))
+                $billboardList = $newBillboardList;
 
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . 'buy-ticket.php');
@@ -142,10 +144,10 @@
 
             foreach ($userTickets as $ticket/* -> buyout */) {
 
-                $dateGET = strtotime($_GET['date']);
-                $date = strtotime($ticket->getDate());
-
-                if(date('d/M/Y', $date) == date('d/M/Y', $date)) {
+                $dateGET = strtotime($_GET['date']); 
+                $date = strtotime($ticket->getFunction()->getDate()); 
+                //echo date('d/M/Y', $dateGET) .' - '. date('d/M/Y', $date);
+                if(date('d/M/Y', $dateGET) == date('d/M/Y', $date)) {
                     array_push($newUserTickets, $ticket);
                 }
             }
@@ -168,10 +170,10 @@
 
     public function AdminTicketList() {
         $user = $_SESSION['loggedUser'];
-        $userBouyouts = $this->buyoutDAO->getAll($user->getMail());
-        if(!is_array($userBouyouts))
-            $userBouyouts = array($userBouyouts);
-
+        $billboardList = $this->billboardDAO->getAll();
+        $userBuyouts = $this->buyoutDAO->getAll();
+        if(!is_array($userBuyouts))
+            $userBuyouts = array($userBuyouts);
 
         $buysDAO = $this->buyoutDAO;
         if(isset($_GET['date-start']) && isset($_GET['date-end'])) {
@@ -182,8 +184,121 @@
             $endDate = null;
         }
 
+        $movieTicketList = $this->getMovieTicketList($billboardList, $userBuyouts, $buysDAO);
+        $cinemaTicketList = $this->getCinemaTicketList($billboardList, $userBuyouts, $buysDAO);
+
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "admin-tickets-list.php");
+    }
+
+    public function getMovieTicketList($billboardList, $userBuyouts, $buysDAO) {
+
+        $movieTicketList = array();
+        foreach($billboardList as $bill) {
+            $movie = $bill->getMovie();
+            $buyout = null;
+            foreach($userBuyouts as $buy){
+                if($buy->getMovie()->getId() == $movie->getId()){
+                    $functions = $bill->getFunctions();
+                    if(!is_array($functions))
+                        $functions = array($functions);
+                    foreach($functions as $function) {
+                        if($buy->getFunction()->getId() == $function->getId())
+                        $buyout = $buy;
+                    }
+                }
+            }
+            $ticketsSold = 0;
+            $ticketsTotal = 0;
+            $ticketsRemaining = 0;
+            if($buyout != null) {
+                $ticketsSold = $buysDAO->GetCountMovieTickets($buyout->getMovie()->getId());
+                $functions = $bill->getFunctions();
+                if(!is_array($functions))
+                    $functions = array($functions);
+                foreach($functions as $function) {
+                        $ticketsTotal += $function->getSaloon()->getCapacity();
+                }
+            } else {
+                $functions = $bill->getFunctions();
+                if(!is_array($functions))
+                    $functions = array($functions);
+                foreach($functions as $function) {
+                    $ticketsTotal += $function->getSaloon()->getCapacity();
+                }
+            }
+            $ticketsRemaining = $ticketsTotal - $ticketsSold;
+
+            $exists = false;
+            $movie = $bill->getMovie()->getTitle();
+            foreach($movieTicketList as $movieTicket) {
+                if($movie == $movieTicket->getName()) {
+                    $movieTicket->setTicketsSold($movieTicket->getTicketsSold() + $ticketsSold);
+                    $movieTicket->setTicketsTotal($movieTicket->getTicketsTotal() + $ticketsTotal);
+                    $movieTicket->setTicketsRemaining($movieTicket->getTicketsRemaining() + $ticketsRemaining);
+                    $exists = true;
+                    break;
+                }
+            }
+            if(!$exists)
+                array_push($movieTicketList, new TicketInfo($movie, $ticketsSold, $ticketsTotal, $ticketsRemaining));
+        }
+        return $movieTicketList;
+    }
+
+    public function getCinemaTicketList($billboardList, $userBuyouts, $buysDAO) {
+
+        $cinemaTicketList = array();
+        foreach($billboardList as $bill) {
+            $cinema = $bill->getCinema();
+            $buyout = null;
+            foreach($userBuyouts as $buy){
+                if($buy->getCinema()->getIdCinema() == $cinema->getIdCinema()){
+                    $functions = $bill->getFunctions();
+                    if(!is_array($functions))
+                        $functions = array($functions);
+                    foreach($functions as $function) {
+                        if($buy->getFunction()->getId() == $function->getId())
+                        $buyout = $buy;
+                    }
+                }
+            }
+            $ticketsSold = 0;
+            $ticketsTotal = 0;
+            $ticketsRemaining = 0;
+            if($buyout != null) {
+                $ticketsSold = $buysDAO->GetCountCinemaTickets($buyout->getCinema()->getIdCinema());
+                $functions = $bill->getFunctions();
+                if(!is_array($functions))
+                    $functions = array($functions);
+                foreach($functions as $function) {
+                    $ticketsTotal += $function->getSaloon()->getCapacity();
+                }
+            } else {
+                $functions = $bill->getFunctions();
+                if(!is_array($functions))
+                    $functions = array($functions);
+                foreach($functions as $function) {
+                    $ticketsTotal += $function->getSaloon()->getCapacity();
+                }
+            }
+            $ticketsRemaining = $ticketsTotal - $ticketsSold;
+
+            $exists = false;
+            $cinema = $bill->getCinema()->getName();
+            foreach($cinemaTicketList as $cinemaTicket) {
+                if($cinema == $cinemaTicket->getName()) {
+                    $cinemaTicket->setTicketsSold($cinemaTicket->getTicketsSold() + $ticketsSold);
+                    $cinemaTicket->setTicketsTotal($cinemaTicket->getTicketsTotal() + $ticketsTotal);
+                    $cinemaTicket->setTicketsRemaining($cinemaTicket->getTicketsRemaining() + $ticketsRemaining);
+                    $exists = true;
+                    break;
+                }
+            }
+            if(!$exists)
+                array_push($cinemaTicketList, new TicketInfo($cinema, $ticketsSold, $ticketsTotal, $ticketsRemaining));
+        }
+        return $cinemaTicketList;
     }
 
 }
