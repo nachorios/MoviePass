@@ -177,6 +177,23 @@ class BuyoutDAO{
         return $result;
     }
 
+    public function GetId($date){
+        $query = "select buyouts.id_buyout
+        from buyouts
+        where buyouts.date = :date";
+        $result = 0;
+        try{
+            $parameters["date"] = $date;
+            $this->connection = Connection::GetInstance();
+            $result = $this->connection->Execute($query, $parameters);
+            $result = $result[0][0];
+        }catch(Exception $e) {
+            //throw $e;
+        }
+
+        return $result;
+    }
+
     private function mapear($value) {
         $value = is_array($value) ? $value : [];
         $resp = array_map(function($p){

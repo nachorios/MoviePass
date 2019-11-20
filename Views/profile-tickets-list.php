@@ -1,6 +1,6 @@
 <div class="container text-center bg-light rounded">
     <h1 class="">Entradas Adquiridas</h1>
-    <form action="<?php URL . '/User/TicketList/' ?>">
+    <form action="<?php URL . '/Buyout/TicketList/' ?>"> <!--cambie el user por buyout-->
         <div class="row">
             <div class="form-group col-4">
                 <label for="" class="">Buscar por pelicula: </label>
@@ -24,6 +24,7 @@
             <th>Hora</th>
             <th>Sala</th>
             <!--<th>Codigo QR</th>-->
+            <th>Eliminar</th>
         </thead>
         <tbody>
         <?php foreach($userTickets as $ticket):?>
@@ -34,6 +35,12 @@
                 <td><?php echo $ticket->getFunction()->getHour(); ?></td>
                 <td><?php echo $ticket->getFunction()->getSaloon()->getName(); ?></td>
                 <!--<td>QR</td>-->
+                <td><a href="?delete=<?php /*echo $ticket->getIdBill()*/ ?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+<!--                <button type="button" onclick="loading(this, 'danger', ''); window.location='<?php //echo URL ?>/Cinema/deleteCinema?delete=<?php //echo $cinema->getIdCinema()  ?>'" class="btn btn-danger"><i class="fa fa-trash-o"> Eliminar</i></button>
+
+                <a href="?delete=<?php //echo $value->getEmail() ?>" class="btn btn-light">
+                    <object type="image/svg+xml" data="icons/trash-2.svg" width="16" height="16"></object>
+                </a>-->
             </tr>
         <?php endforeach; ?>
         </tbody>

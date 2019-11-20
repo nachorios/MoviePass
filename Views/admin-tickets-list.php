@@ -9,15 +9,16 @@
             </tr>
         </thead>
         <tbody>
-        <?php 
+        <?php
             $moviesAdded = array();
-            foreach($userBouyouts as $buy): 
+            foreach($userBouyouts as $buy):
                 if(!in_array($buy->getMovie(), $moviesAdded)):
                     array_push($moviesAdded, $buy->getMovie()) ?>
             <tr>
                 <th scope="row"><?php echo $buy->getMovie()->getTitle() ?></th>
+                <!--accedo a travez de buysdao porque esa es la variable que se genero en BuyoutController-->
                 <td><?php echo $buysDAO->GetCountMovieTickets($buy->getMovie()->getId()); ?></td>
-                <td><?php 
+                <td><?php
                 $auxAmountTickets = $buy->getFunction()->getSaloon()->getCapacity() - $buysDAO->GetCountMovieTickets($buy->getMovie()->getId());
                 if($auxAmountTickets < 0)
                     echo 0;
@@ -38,12 +39,12 @@
             </tr>
         </thead>
         <tbody>
-        <?php 
+        <?php
             $cinemasAdded = array();
-            foreach($userBouyouts as $buy): 
+            foreach($userBouyouts as $buy):
                 if(!in_array($buy->getCinema(), $cinemasAdded)):
                     array_push($cinemasAdded, $buy->getCinema());
-                    $cinemaCapacity = 0; 
+                    $cinemaCapacity = 0;
                     $saloons = $buy->getCinema()->getSaloon();
                     if(!is_array($saloons))
                         $saloons = array($saloons);
@@ -54,19 +55,20 @@
             <tr>
                 <th scope="row"><?php echo $buy->getCinema()->getName() ?></th>
                 <td><?php echo $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?></td>
-                <td><?php 
+                <td><?php
                     $auxAmountCapacity = $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema());
-                    if($auxAmountCapacity < 0) 
+                    if($auxAmountCapacity < 0)
                         echo 0;
                     else
-                        echo $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?></td>
+                        echo $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?>
+                </td>
             </tr>
             <?php endif;
         endforeach; ?>
         </tbody>
     </table>
 
-    <form action="<?php URL . '/User/TicketList/' ?>">
+    <form action="<?php URL . '/Buyout/TicketList/' ?>"> <!--cambie el user por buyout-->
         <h4 class="">Busqueda personalizada por fechas</h4>
         <div class="row">
             <div class="form-group col-4">
@@ -92,13 +94,14 @@
             </tr>
         </thead>
         <tbody>
-        <?php 
+        <?php
             $moviesAmount = array();
-            foreach($userBouyouts as $buy): 
+            foreach($userBouyouts as $buy):
                 if(!in_array($buy->getMovie(), $moviesAmount)):
                     array_push($moviesAmount, $buy->getMovie()) ?>
             <tr>
                 <th scope="row"><?php echo $buy->getMovie()->getTitle() ?></th>
+                <!--accedo a travez de buysdao porque esa es la variable que se genero en BuyoutController-->
                 <td><?php echo $buysDAO->GetAmountMovieTickets($buy->getMovie()->getId(), $startDate, $endDate); ?>.00 $</td>
             </tr>
             <?php endif;
@@ -114,13 +117,14 @@
             </tr>
         </thead>
         <tbody>
-        <?php 
+        <?php
             $cinemasAmount = array();
-            foreach($userBouyouts as $buy): 
+            foreach($userBouyouts as $buy):
                 if(!in_array($buy->getCinema(), $cinemasAmount)):
                     array_push($cinemasAmount, $buy->getCinema()) ?>
             <tr>
                 <th scope="row"><?php echo $buy->getCinema()->getName() ?></th>
+                <!--accedo a travez de buysdao porque esa es la variable que se genero en BuyoutController-->
                 <td><?php echo $buysDAO->GetAmountCinemaTickets($buy->getCinema()->getIdCinema(), $startDate, $endDate); ?>.00 $</td>
             </tr>
             <?php endif;

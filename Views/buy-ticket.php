@@ -67,7 +67,7 @@
                                    </thead>
                                    <tbody>
                                    <?php if(!empty($billboard->getFunctions())) foreach($billboard->getFunctions() as $func): ?>
-                                        
+
                                         <tr>
                                              <td><?php echo $func->getSaloon()->getName() ?></td>
                                              <td><?php echo $func->getDate() ?></td>
@@ -110,7 +110,7 @@
                                    </div>
 
                                    <input type="text" name="id-cinema" id="id-cinema" hidden>
-                                   
+
                                    <input type="text" name="id-movie" id="id-movie" value="<?php echo $movie->getId(); ?>" hidden>
                               </form>
                          </div>
@@ -119,7 +119,7 @@
                               <div class="form-group">
                                    <label for="cardNumber">Tarjeta de credito</label>
                                    <div class="input-group">
-                                        <input form="buyticket" type="text" name="credit_number" placeholder="Numero de tarjeta" class="form-control" min="16" max="16"  required>
+                                        <input form="buyticket" type="number" name="credit_number" placeholder="Numero de tarjeta" class="form-control" min="0" max="9999999999999999"  required> <!-- estaba 16 y 16 -->
                                         <div class="input-group-append">
                                              <span class="input-group-text text-muted">
                                                   <i class="fa fa-cc-visa mx-1"></i>
@@ -134,14 +134,14 @@
                                              <label><span class="hidden-xs">Vencimiento</span></label>
                                              <div class="input-group">
                                              <input form="buyticket" type="number" placeholder="Mes" name="" class="form-control" min="1" max="12" required>
-                                             <input form="buyticket" type="number" placeholder="Año" name="" class="form-control" min="0" required>
+                                             <input form="buyticket" type="number" placeholder="Año" name="" class="form-control" min="0" max="99" required>
                                              </div>
                                         </div>
                                    </div>
                                    <div class="col-sm-4">
                                         <div class="form-group mb-4">
                                              <label data-toggle="tooltip" title="Tres digitos detrás de tu tarjeta.">CVV <i class="fa fa-question-circle"></i></label>
-                                             <input form="buyticket" type="text" min="0" max="999" required class="form-control">
+                                             <input form="buyticket" type="number" min="0" max="999" required class="form-control">
                                         </div>
                                    </div>
                               </div>

@@ -50,7 +50,7 @@
                 <li class="nav-item"><a href="<?php echo URL ?>/Cinema/ShowCinemasList/" class="nav-link text-light">Cines</a></li>
                 <li class="nav-item"><a href="<?php echo URL ?>/Billboard/ShowView/" class="nav-link text-light">Cartelera</a></li>
                 <li class="nav-item"><a href="<?php echo URL ?>/Movie/ShowListView/" class="nav-link text-light">Peliculas</a></li>
-                
+
                 <li>
                     <div class="btn-group btn-sm">
                     <div class="btn-group dropleft" role="group">
@@ -62,10 +62,10 @@
                     if(isset($_SESSION['loggedUser'])):
                     ?>
                         <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/Profile/'" type="button">Ver Perfil</button>
-                        <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/TicketList/'" type="button">Consultar entradas</button>
+                        <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/Buyout/TicketList/'" type="button">Consultar entradas</button> <!--cambie user por buyout nacho 19/11-->
                         <div class="dropdown-divider"></div>
                         <?php if($_SESSION['loggedUser']->getRole()>1): ?>
-                        <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/User/AdminTicketList/'" type="button">Consultar Ventas</button>
+                        <button class="dropdown-item" onclick="window.location = '<?php echo URL ?>/Buyout/AdminTicketList/'" type="button">Consultar Ventas</button> <!--cambie user por buyout nacho 19/11-->
                             <button class="dropdown-item" data-toggle="modal" data-target="#setRol" type="button">Dar Administrador</button>
                         <?php endif; ?>
                     <?php
@@ -76,7 +76,7 @@
                             <button class="dropdown-item" data-toggle="modal" data-target="#registerModal" type="button">Registrar usuario</button>
                     <?php
                     endif;?>
-                            
+
                         </div>
                     </div>
                     <?php if(!isset($_SESSION['loggedUser'])): ?>
@@ -84,14 +84,14 @@
                             Iniciar Sesion
                         </button>
                     <?php else: ?>
-                        <button onclick="window.location = '<?php echo URL ?>/User/logout/'" class="btn btn-secondary p-0 m-0"><img src="<?php 
+                        <button onclick="window.location = '<?php echo URL ?>/User/logout/'" class="btn btn-secondary p-0 m-0"><img src="<?php
                         $usuario = $_SESSION['loggedUser'];
                         $fileName = str_replace(".","_",$usuario->getMail()).'.png';
-                        if($usuario->getProfileImage() != null && !file_exists(FILES_PATH . $fileName)) 
+                        if($usuario->getProfileImage() != null && !file_exists(FILES_PATH . $fileName))
                             echo $usuario->getProfileImage();
                         else if (file_exists(FILES_PATH . $fileName)) {
                             echo URL.'/'. FILES_PATH.$fileName;
-                        } else 
+                        } else
                             echo IMG_PATH.'/user.png';
                 ?>" style="width:30px; min-height: 30px; max-height: 30px;" class="float-right text-center" alt="Foto de Perfil"><span class="m-1">Cerrar Sesion </span></button>
                     <?php endif; ?>
