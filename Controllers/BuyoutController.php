@@ -1,5 +1,6 @@
 <?php namespace Controllers;
 
+
     use Daos\BillboardDAO as BillboardDAO;
     use Daos\BuyoutDAO as BuyoutDAO;
     use Daos\CinemaDAO as CinemaDAO;
@@ -11,6 +12,7 @@
     use Models\Cinema as Cinema;
     use Models\Movie as Movie;
     use Models\User as User;
+    use Models\Mail as Mail;
 
     class BuyoutController{
         private $buyoutDAO;
@@ -32,6 +34,9 @@
 
             if($cant > 0) {
                 $buyComplete = $this->buyoutDAO->Add($buy, $mail, $credit_number);
+                $email = new Mail();
+
+                $email->sendMail($mail, $buy);
             } else {
                 $buyComplete = false;
             }
@@ -90,6 +95,13 @@
             require_once(VIEWS_PATH . 'navbar.php');
             require_once(VIEWS_PATH . 'buy-ticket.php');
 
+        }
+
+        public function sendMail($email){
+            $mail = new Mail();
+
+            $mail->sendMail("0", "0", $email , "0");
+            
         }
 
     }
