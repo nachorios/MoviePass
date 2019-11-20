@@ -132,17 +132,23 @@
         if(!is_array($userTickets))
             $userTickets = array($userTickets);
         $newUserTickets = array();
+
         if(isset($_GET['date']) && !empty($_GET['date'])) {
+
             foreach ($userTickets as $ticket/* -> buyout */) {
+
                 $dateGET = strtotime($_GET['date']);
                 $date = strtotime($ticket->getDate());
+
                 if(date('d/M/Y', $date) == date('d/M/Y', $date)) {
                     array_push($newUserTickets, $ticket);
                 }
             }
             $userTickets = $newUserTickets;
         }
+
         if(isset($_GET['movie']) && !empty($_GET['movie'])) {
+
             foreach ($userTickets as $ticket/* -> buyout */) {
                 if(strpos($ticket->getMovie()->getTitle(), $_GET['movie']) !== false) {
                     array_push($newUserTickets, $ticket);

@@ -26,6 +26,7 @@
         public function login($mail, $pass) {
             $logged = false;
 
+            /*************parte json***************/
             /*$userList = $this->userDAOJson->GetAll();
             foreach($userList as $user) {
                 if($mail == $user->getMail() && $pass == $user->getPass()) {

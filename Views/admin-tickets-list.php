@@ -60,7 +60,8 @@
                     if($auxAmountCapacity < 0)
                         echo 0;
                     else
-                        echo $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?></td>
+                        echo $cinemaCapacity - $buysDAO->GetCountCinemaTickets($buy->getCinema()->getIdCinema()); ?>
+                </td>
             </tr>
             <?php endif;
         endforeach; ?>
