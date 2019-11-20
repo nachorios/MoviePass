@@ -6,14 +6,42 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
+use Daos\BillboardDAO as BillboardDAO;
+use Daos\BuyoutDAO as BuyoutDAO;
+use Daos\CinemaDAO as CinemaDAO;
+use Daos\MovieDAO as MovieDAO;
+use Daos\UserDAO as UserDAO;
+
+use Models\Billboard as Billboard;
+use Models\Buyout as Buyout;
+use Models\Cinema as Cinema;
+use Models\Movie as Movie;
+use Models\User as User;
+
 require(ROOT . '/PHPMailer/src/Exception.php');
 require(ROOT . '/PHPMailer/src/PHPMailer.php');
 require(ROOT. '/PHPMailer/src/SMTP.php');
 
 class Mail
 {
+
+   private $buyoutDAO;
+        private $movieDAO;
+        private $cinemaDAO;
+        private $billboardDAO;
+
+        public function __construct(){
+            $this->buyoutDAO = new BuyoutDAO();
+            $this->cinemaDAO = new CinemaDAO();
+            $this->movieDAO = new MovieDAO();
+            $this->billboardDAO = new BillboardDAO();
+        }
+
+
+
     public function sendMail($email, Buyout $buy){
       
+
 
         $mail = new PHPMailer(true);
 
@@ -41,11 +69,15 @@ class Mail
                 $mail->addAttachment(dirname(__DIR__) . '\qrcode.pdf', 'Codigo qr entradas');    // Optional name
             
                 // Content
+                $id = $this->buyoutDAO->GetId($buy->getDate());
+                $cinema = $this->cinemaDAO->GetById($buy->getCinema());
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = 'Confirmacion de compra de entradas';
-                $mail->Body    = "Se adjunta la informacion de la compra con un codigo qr que debera presentar al momemnto de entrar a la funcion" .
-                                "<br>Cantidad: " . $buy->getQuan() . "<br>Total: " . $buy->getTotal() .
-                                "<br>Fecha: " . $buy->getDate();
+                $mail->Body    = "Se adjunta la informacion de la compra con un codigo qr que debera presentar al momento de entrar a la funcion" .
+                                "<br><br>Cantidad: " . $buy->getQuan() . "<br>Total: " . $buy->getTotal() .
+                                "<br>Fecha de compra: " . $buy->getDate() . "<br>Id compra: " . $id . 
+                                "<br>Cine: " . $cinema->getName(). "<br>Direccion: ". $cinema->getAdress();
+                                
              //   $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             
                 $mail->send();
