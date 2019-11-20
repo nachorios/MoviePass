@@ -3,7 +3,7 @@
 use \Exception as Exception;
 use Models\Buyout as Buyout;
 use Daos\MovieDAO as MovieDAO;
-use Daos\cinemaDAO as cinemaDAO;
+use Daos\CinemaDAO as cinemaDAO;
 use Daos\FunctionDAO as FunctionDAO;
 
 class BuyoutDAO{

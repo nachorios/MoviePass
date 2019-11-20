@@ -6,7 +6,7 @@
   use Daos\Connection as Connection;
   use Daos\SaloonDAO as SaloonDAO;
   use Daos\MovieDAO as MovieDAO;
-  use Daos\cinemaDAO as cinemaDAO;
+  use Daos\CinemaDAO as cinemaDAO;
   use Daos\FunctionDAO as FunctionDAO;
 
   class BillboardDAO{

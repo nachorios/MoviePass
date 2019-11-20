@@ -16,7 +16,7 @@
             </div>
         </div>
     </form>
-    <table class="table">
+    <table class="table text-center">
         <thead>
             <th>Cantidad de entradas</th>
             <th>Pelicula</th>
@@ -30,9 +30,9 @@
             <tr>
                 <td><?php echo $ticket->getQuan(); ?></td>
                 <td><?php echo $ticket->getMovie()->getTitle(); ?></td>
-                <td><?php echo $ticket->getDate(); ?></td>
+                <td><?php echo $ticket->getFunction()->getDate(); ?></td>
+                <td><?php echo $ticket->getFunction()->getHour(); ?></td>
                 <td><?php echo $ticket->getFunction()->getSaloon()->getName(); ?></td>
-                <td><?php echo 'salonsato' ?></td>
                 <!--<td>QR</td>-->
             </tr>
         <?php endforeach; ?>

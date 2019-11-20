@@ -128,8 +128,9 @@
             if(isset($_GET['date']) && !empty($_GET['date'])) {
                 foreach ($userTickets as $ticket/* -> buyout */) {
                     $dateGET = strtotime($_GET['date']); 
-                    $date = strtotime($ticket->getDate()); 
-                    if(date('d/M/Y', $date) == date('d/M/Y', $date)) {
+                    $date = strtotime($ticket->getFunction()->getDate()); 
+                    echo date('d/M/Y', $dateGET) .' - '. date('d/M/Y', $date);
+                    if(date('d/M/Y', $dateGET) == date('d/M/Y', $date)) {
                         array_push($newUserTickets, $ticket);
                     }
                 }

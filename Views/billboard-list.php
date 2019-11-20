@@ -131,7 +131,10 @@
                         <tr class="table-secondary" id="<?php 
                             $id = $func->getDate() .'/'. $func->getHour() .'/'. $func->getId() .'/'. $func->getSaloon()->getId() ;
                             $saloonList = ""; 
-                            foreach($billboard->getCinema()->getSaloon() as $saloon){ 
+                            $saloons = $billboard->getCinema()->getSaloon();
+                            if(!is_array($saloons))
+                                $saloons = array($saloons);
+                            foreach($saloons as $saloon){ 
                                 $saloonList .= $saloon->getId().'-'. $saloon->getName().'-'; 
                             } 
                             echo $id .'/'. $saloonList; ?>" onclick="editSaloon(this);" 
