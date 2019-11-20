@@ -1,5 +1,6 @@
 <?php namespace Controllers;
 
+
     use Daos\BillboardDAO as BillboardDAO;
     use Daos\BuyoutDAO as BuyoutDAO;
     use Daos\CinemaDAO as CinemaDAO;
@@ -11,6 +12,7 @@
     use Models\Cinema as Cinema;
     use Models\Movie as Movie;
     use Models\User as User;
+    use Models\Mail as Mail;
 
     class BuyoutController{
         private $buyoutDAO;
@@ -33,6 +35,9 @@
 
             if($cant > 0) {
                 $buyComplete = $this->buyoutDAO->Add($buy, $mail, $credit_number);
+                $email = new Mail();
+
+                $email->sendMail($mail, $buy);
             } else {
                 $buyComplete = false;
             }
