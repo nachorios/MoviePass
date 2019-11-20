@@ -3,7 +3,7 @@
 use \Exception as Exception;
 use Models\Buyout as Buyout;
 use Daos\MovieDAO as MovieDAO;
-use Daos\cinemaDAO as cinemaDAO;
+use Daos\CinemaDAO as cinemaDAO;
 use Daos\FunctionDAO as FunctionDAO;
 
 class BuyoutDAO{
@@ -121,9 +121,11 @@ class BuyoutDAO{
         from buyouts as b
         where b.id_movie = :id_movie";
         if($date_start && $date_end) {
-            $query .= " AND b.date BETWEEN :date_start AND :date_end;";
+            $query .= " AND b.date BETWEEN '$date_start' AND '$date_end';"; //no me permite colocar comillas
+            
+            /*$query .= " AND b.date BETWEEN :date_start AND :date_end;";
             $parameters["date_start"] = $date_start;
-            $parameters["date_end"] = $date_end;
+            $parameters["date_end"] = $date_end;*/
         }
         $result = 0;
 
@@ -160,9 +162,11 @@ class BuyoutDAO{
         from buyouts as b
         where b.id_cinema = :id_cinema";
         if($date_start && $date_end) {
-            $query .= " AND b.date BETWEEN :date_start AND :date_end;";
+            $query .= " AND b.date BETWEEN '$date_start' AND '$date_end';"; //no me permite colocar comillas
+            
+            /*$query .= " AND b.date BETWEEN :date_start AND :date_end;";
             $parameters["date_start"] = $date_start;
-            $parameters["date_end"] = $date_end;
+            $parameters["date_end"] = $date_end;*/
         }
         $result = 0;
 

@@ -115,7 +115,8 @@ CREATE TABLE buyouts(
   credit_number bigint,
   
 
-  CONSTRAINT idbuyout PRIMARY KEY (id_buyout)
+  CONSTRAINT idbuyout PRIMARY KEY (id_buyout),
+  CONSTRAINT fk_id_function FOREIGN KEY (id_function) REFERENCES functions(id_function) ON DELETE CASCADE
 );
 
 /*entradas*/

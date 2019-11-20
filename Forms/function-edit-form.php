@@ -90,6 +90,9 @@
                     <!--<option name="saloon" value=""></option>-->
                 </select>
             </div>
+            <div class="form-group m-2">
+            <button type="button" value="" id="function-delete" onclick="window.location='<?php echo URL ?>/Billboard/deleteFunction?delete='+ this.value;" data-toggle="modal" data-target="#borrar-modal" class="btn btn-danger"><i class="fa fa-trash-o"></i>Eliminar</button>
+            </div>
         </div>
     </div>
   

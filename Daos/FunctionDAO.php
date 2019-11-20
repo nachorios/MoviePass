@@ -16,7 +16,6 @@
     }
 
     public function Add($date, $hour, $id_saloon, $id_billboard) {
-
         $flag = false;
         //$sql = "INSERT INTO $this->tableName (id_billboard, date, hour, id_saloon) VALUES (:id_billboard, :date, :hour, :id_saloon);";
         $sql = "INSERT INTO functions (id_billboard, date, hour, id_saloon) 
@@ -35,9 +34,7 @@
 
         try {
             $this->connection = Connection::GetInstance();
-
             $proof = $this->connection->ExecuteNonQuery($sql, $parameters);
-
             if($proof > 0)
                 $flag = true;
         } catch(Exception $e) {
@@ -115,7 +112,7 @@
         WHERE id_function = :id_function AND NOT EXISTS ( 
             SELECT * 
             FROM (SELECT * FROM functions) as t
-            WHERE t.date = :date AND t.id_function != :id_function AND (t.id_saloon = :id_saloon OR ((STR_TO_DATE(t.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL 15 MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL 15 MINUTE))))
+            WHERE t.date = :date AND t.id_function != :id_function AND (((STR_TO_DATE(t.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL 15 MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL 15 MINUTE))))
         ) LIMIT 1;";
         $flag = false;
 
@@ -159,7 +156,7 @@
         } catch(Exception $e){
             //echo $e->getMessage();
         }
-        return flag;
+        return $flag;
     }
 
     protected function mapear($value) {

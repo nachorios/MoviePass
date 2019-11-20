@@ -16,7 +16,7 @@
             </div>
         </div>
     </form>
-    <table class="table">
+    <table class="table text-center">
         <thead>
             <th>Cantidad de entradas</th>
             <th>Pelicula</th>
