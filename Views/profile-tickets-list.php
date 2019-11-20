@@ -1,6 +1,6 @@
 <div class="container text-center bg-light rounded">
     <h1 class="">Entradas Adquiridas</h1>
-    <form action="<?php URL . '/User/TicketList/' ?>">
+    <form action="<?php URL . '/Buyout/TicketList/' ?>"> <!--cambie el user por buyout-->
         <div class="row">
             <div class="form-group col-4">
                 <label for="" class="">Buscar por pelicula: </label>
