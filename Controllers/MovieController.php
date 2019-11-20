@@ -35,7 +35,7 @@
             foreach($arrayMovies as $movie) {
                 $isThisGenre = false;
                 $isThisDate = false;
-                if (isset($_GET['show_genre'])) {
+                if (isset($_GET['show_genre']) && !empty($_GET['show_genre'])) {
                     $genre_id = $_GET['show_genre'];
                     if($genre_id != -1) {
                          foreach ($movie->getGenre_ids() as $genre) {
@@ -43,16 +43,21 @@
                                    $isThisGenre = true;
                               }
                          }
+                    } else {
+                        $isThisGenre = true;
                     }
+                    if(!$isThisGenre)
+                        continue;
                } 
-               if (isset($_GET['show_date'])) {
+               if (isset($_GET['show_date']) && !empty($_GET['show_date'])) {
                     $date = $_GET['show_date'];
                     if ($date != null) {
-                         
                          if($movie->getRelease_date() == $date) {
                               $isThisDate = true;
                          }
                     }    
+                    if(!$isThisDate)
+                       continue;
                 }
                 if($isThisDate || $isThisGenre) {
                     if(!in_array($movie, $newArrayMovies)) {
@@ -60,8 +65,7 @@
                     }
                 }
             }
-            if(!empty($newArrayMovies))
-                $arrayMovies = $newArrayMovies;
+            $arrayMovies = $newArrayMovies;
             require_once(VIEWS_PATH."movie-list.php");
         }
         /*--------------*/

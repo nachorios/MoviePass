@@ -163,12 +163,12 @@
         <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
 
             <div class="col p-2 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary"><?php echo $cinema->getName() ?></strong>
+                <strong class="d-inline-block mb-2 text-primary"><?php echo substr($cinema->getName(), 0, 20); if(strlen($cinema->getName()) > 20) echo '...'; ?></strong>
                 <h5 class="mb-0"><?php echo substr($movie->getTitle(), 0, 34); if(strlen($movie->getTitle()) > 34) echo '...'; ?></h5>
                 <div class="mb-1 text-muted">
                     Puntaje: <?php echo $movie->getVote_average() ?>
                 </div>
-                <table class="table-sm table-hover text-center" id="edit-funtion-table">
+                <table class="table-sm table table-hover text-center" id="edit-funtion-table">
                 <!-- <button type="button" value='<?php echo $cinema->getIdCinema() .'/'. $movie->getId() .'/'. $billboard->getId(); ?>' 
                 id="editar-<?php echo $id ?>" onclick = "editBillboard(this);"
                  data-toggle="modal" data-target="#editar-modal" class="btn btn-info mt-2"><i class="fa fa-pencil-square-o"></i>Editar</button> -->
@@ -195,9 +195,9 @@
                             
                         <?php } else { echo '<tr class="table-secondary">'; } 
                                 } else { echo '<tr class="table-secondary">'; } ?>
-                            <td><?php echo $func->getDate() ?></td>
-                            <td><?php echo $func->getSaloon()->getName() ?></td>
-                            <td><?php echo $func->getHour() ?></td>
+                            <td><small><?php echo str_replace("-","/",$func->getDate()) ?></small></td>
+                            <td><small><?php echo substr($func->getSaloon()->getName(), 0, 8); if(strlen($func->getSaloon()->getName()) > 8) echo '...'; ?></small></td>
+                            <td><small><?php echo $func->getHour() ?></small></td>
                         </tr>
 
                         <?php endforeach;?>
@@ -234,12 +234,12 @@
                                     $saloonList .= $saloon->getId().'-'. $saloon->getName().'-'; 
                                 }
                             } 
-                            echo $id .'/'. $saloonList; ?>" onclick="addSaloon(this);"  data-toggle="modal" data-target="#agregar-function-modal" class="btn btn-warning"><i class="fa fa-plus"></i></button>
+                            echo $id .'/'. $saloonList; ?>" onclick="addSaloon(this);"  data-toggle="modal" data-target="#agregar-function-modal" class="btn btn-warning btn-sm"><i class="fa fa-plus"></i></button>
                     </div>
                 <?php endif; ?>
                 <p class="card-text mb-auto" > </p>
                 <?php if(count($billboard->getFunctions())<2): ?>
-                    <p class="card-text mb-auto font-italic" ><?php echo substr($movie->getOverview(), 0, 100); if(strlen($movie->getOverview()) > 100) echo '...'; ?></p>
+                    <p class="card-text mb-auto font-italic" ><?php echo substr($movie->getOverview(), 0, 80); if(strlen($movie->getOverview()) > 80) echo '...'; ?></p>
                 <?php endif; ?>
                 <button class="btn btn-secondary btn-sm mb-2" data-placement="left" data-toggle="popover" title="<?php echo $movie->getTitle() ?>" data-html="true" 
                 data-content='<ul class="list-unstyled">
