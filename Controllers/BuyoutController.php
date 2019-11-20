@@ -171,6 +171,8 @@
     public function AdminTicketList() {
         $user = $_SESSION['loggedUser'];
         $billboardList = $this->billboardDAO->getAll();
+        if(!is_array($billboardList))
+            $billboardList = array($billboardList);
         $userBuyouts = $this->buyoutDAO->getAll();
         if(!is_array($userBuyouts))
             $userBuyouts = array($userBuyouts);
@@ -186,7 +188,6 @@
 
         $movieTicketList = $this->getMovieTicketList($billboardList, $userBuyouts, $buysDAO);
         $cinemaTicketList = $this->getCinemaTicketList($billboardList, $userBuyouts, $buysDAO);
-
         require_once(VIEWS_PATH . 'navbar.php');
         require_once(VIEWS_PATH . "admin-tickets-list.php");
     }

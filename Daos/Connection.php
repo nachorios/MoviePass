@@ -73,7 +73,7 @@ public function executeNonQuery($query, $parameters = array())
           }
           catch(\PDOException $ex)
           {
-               throw $ex;
+               echo $ex->getMessage();
           }
      }
    }

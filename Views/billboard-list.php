@@ -31,7 +31,37 @@
             });
        </script><?php
         }
-   }
+    }
+    if(isset($addedFunction)) {
+        if($addedFunction) {
+            ?><script>
+            $(function(){
+                $('#registro-funcion-exito').modal('show');
+            });
+        </script><?php
+        } else {
+            ?><script>
+            $(function(){
+                $('#registro-funcion-error').modal('show');
+            });
+    </script><?php
+        }
+    }
+    if(isset($deletedFunction)) {
+        if($deletedFunction) {
+            ?><script>
+            $(function(){
+                $('#borrado-funcion-exito').modal('show');
+            });
+        </script><?php
+        } else {
+            ?><script>
+            $(function(){
+                $('#borrado-funcion-error').modal('show');
+            });
+    </script><?php
+        }
+    }
      if(isset($deletedCinema)) {
         ?><script>
              $(function(){
@@ -59,6 +89,7 @@
         document.getElementById('date-edit').value = dataAux[0];
         document.getElementById('time-edit').value = dataAux[1];
         document.getElementById('function-edit').value = dataAux[2];
+        document.getElementById('function-delete').value = dataAux[2];
     
         var saloons = dataAux[4].split('-').slice(0, -1);
         var selectEdit = document.getElementById('select-edit-saloon');
@@ -77,6 +108,28 @@
         }
         selectEdit.value = dataAux[3];
         
+     }
+
+     function addSaloon(saloon) {
+        var data = saloon.id;
+        var dataAux = data.split('/');
+        document.getElementById('billboard-function-add').value = dataAux[0];
+    
+        var saloons = dataAux[1].split('-').slice(0, -1);
+        var selectAdd = document.getElementById('select-add-saloon');
+        
+        while (selectAdd.options.length > 1) {                
+            selectAdd.remove(1);
+        }
+        for(var i = 0; i < saloons.length; i++){
+            var newOption = document.createElement("option");
+            newOption.value = saloons[i];
+            i++;
+            newOption.innerHTML = saloons[i];
+            newOption.setAttribute("name", "saloon");
+
+            selectAdd.options.add(newOption);
+        }
      }
 
      function loadingDelete(id) {
@@ -150,7 +203,40 @@
                         <?php endforeach;?>
                     </tbody>
                 </table>
-
+                <?php 
+                if(!is_array($cinema->getSaloon()))
+                    $saloonSize = 1;
+                else 
+                    $saloonSize = count($cinema->getSaloon());
+                if(!is_array($billboard->getFunctions()))
+                    $functionAmount = 1;
+                else
+                    $functionAmount = count($billboard->getFunctions());
+                if($functionAmount < $saloonSize): ?>
+                    <div class="text-center m-2">                
+                        <button type="button" id="<?php 
+                            $id = $billboard->getId();
+                            $saloonList = ""; 
+                            $saloons = $billboard->getCinema()->getSaloon();
+                            if(!is_array($saloons))
+                                $saloons = array($saloons);
+                            foreach($saloons as $saloon){ 
+                                $saloonExists = false;
+                                $functions = $billboard->getFunctions();
+                                if(!is_array($functions))
+                                    $functions = array($functions);
+                                foreach($functions as $function) {
+                                    if($function->getSaloon()->getId() == $saloon->getId()) {
+                                        $saloonExists = true;
+                                    }
+                                }
+                                if(!$saloonExists){
+                                    $saloonList .= $saloon->getId().'-'. $saloon->getName().'-'; 
+                                }
+                            } 
+                            echo $id .'/'. $saloonList; ?>" onclick="addSaloon(this);"  data-toggle="modal" data-target="#agregar-function-modal" class="btn btn-warning"><i class="fa fa-plus"></i></button>
+                    </div>
+                <?php endif; ?>
                 <p class="card-text mb-auto" > </p>
                 <?php if(count($billboard->getFunctions())<2): ?>
                     <p class="card-text mb-auto font-italic" ><?php echo substr($movie->getOverview(), 0, 100); if(strlen($movie->getOverview()) > 100) echo '...'; ?></p>
@@ -180,7 +266,7 @@
                     </li>
                 </ul>'>
                 Más información</button>
-                
+                    
                 <?php
         if(isset($_SESSION['loggedUser'])) {
             if($_SESSION['loggedUser']->getRole()>1) {

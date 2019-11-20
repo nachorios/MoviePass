@@ -81,7 +81,11 @@
                 <td><?php echo $buysDAO->GetAmountMovieTickets($buy->getMovie()->getId(), $startDate, $endDate); ?>.00 $</td>
             </tr>
             <?php endif;
-        endforeach; ?>
+        endforeach;
+        if(empty($userBuyouts)): ?>
+        <td>Aún no se han registrado ventas...</td>
+        <td>0.00$</td>
+        <?php endif; ?>
         </tbody>
     </table>
     <table class="table mb-5">
@@ -104,7 +108,11 @@
                 <td><?php echo $buysDAO->GetAmountCinemaTickets($buy->getCinema()->getIdCinema(), $startDate, $endDate); ?>.00 $</td>
             </tr>
             <?php endif;
-        endforeach; ?>
+        endforeach; 
+        if(empty($userBuyouts)): ?>
+            <td>Aún no se han registrado ventas...</td>
+            <td>0.00$</td>
+        <?php endif; ?>
         </tbody>
     </table>
 </div>

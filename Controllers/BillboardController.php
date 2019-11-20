@@ -56,6 +56,34 @@ class BillboardController {
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
+    public function addFunction($days, $hours, $id_saloon, $id_billboard){
+       /*echo '<pre>';
+        var_dump($_POST);
+        echo '</pre>';*/
+        $addedFunction = $this->functionDAO->Add($days, $hours, $id_saloon, $id_billboard);
+        $movieList = $this->movieDAO;
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
+        require_once(VIEWS_PATH . 'navbar.php');
+        require_once(VIEWS_PATH . "billboard-list.php");
+    }
+
+    public function deleteFunction() {
+        if(isset($_GET['delete'])) {
+            $proof = $this->functionDAO->Delete($_GET['delete']);
+            if($proof == 1)
+            $deletedFunction = true;
+            else
+            $deletedFunction = false;
+        }
+
+        $movieList = $this->movieDAO;
+        $cinemasList = $this->cinemaDAO;
+        $billboardList = $this->billboardDAO;
+        require_once(VIEWS_PATH . 'navbar.php');
+        require_once(VIEWS_PATH . "billboard-list.php");
+      }
+
     public function deleteBillboard()
     {
         if(isset($_GET['delete'])) {
