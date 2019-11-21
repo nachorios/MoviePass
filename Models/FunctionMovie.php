@@ -5,12 +5,22 @@ class FunctionMovie{
     private $hour;
     private $saloon;
     private $idFunction;
+    private $duration;
 
-    public function __construct($date, $hour, $saloon, $idFunction){
+    public function __construct($date, $hour, $saloon, $idFunction, $duration = 0){
         $this->date = $date;
         $this->hour = $hour;
         $this->saloon = $saloon;
         $this->idFunction = $idFunction;
+        $this->duration = $duration;
+    }
+
+    public function getDuration(){
+        return $this->duration;
+    }
+
+    public function setDuration($duration){
+        $this->duration = $duration;
     }
 
     public function setDate($date){

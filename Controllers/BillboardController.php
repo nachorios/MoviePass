@@ -29,7 +29,7 @@ class BillboardController {
         /*echo '<pre>';
         var_dump($_POST);
         echo '</pre>';*/
-        $added = $this->billboardDAO->Add($idMovie, $idCinema, $idSaloon, $day, $hour);
+        $added = $this->billboardDAO->Add($idMovie, $idCinema, $idSaloon, $day, $hour, $this->movieDAO->GetById($idMovie)->getRuntime());
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
@@ -47,8 +47,8 @@ class BillboardController {
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
-    public function editFunction($days, $hours, $id_saloon, $id_function){
-        $edited = $this->functionDAO->Update($days, $hours, $id_saloon, $id_function);
+    public function editFunction($days, $hours, $id_saloon, $id_function ,$duration){
+        $edited = $this->functionDAO->Update($days, $hours, $id_saloon, $id_function, $duration);
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;
@@ -56,11 +56,11 @@ class BillboardController {
         require_once(VIEWS_PATH . "billboard-list.php");
     }
 
-    public function addFunction($days, $hours, $id_saloon, $id_billboard){
+    public function addFunction($days, $hours, $id_saloon, $id_billboard, $duration){
        /*echo '<pre>';
         var_dump($_POST);
         echo '</pre>';*/
-        $addedFunction = $this->functionDAO->Add($days, $hours, $id_saloon, $id_billboard);
+        $addedFunction = $this->functionDAO->Add($days, $hours, $id_saloon, $id_billboard, $duration);
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;

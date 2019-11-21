@@ -70,6 +70,7 @@
     </div>
   
     <input type="text" name="billboard-function-add" class="form-control" id="billboard-function-add" value="" hidden> </input>
+    <input type="text" name="movie-add-duration" class="form-control" id="movie-add-duration" value="" hidden> </input>
     <!--<input type="text" name="oldCinema" class="form-control" id="oldCinema" value="" hidden> </input>-->
     
     <div class="mt-3">

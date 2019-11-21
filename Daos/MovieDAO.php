@@ -45,6 +45,7 @@
                 $movie->setVote_average($indice['vote_average']);
                 $movie->setOverview($indice['overview']);
                 $movie->setRelease_date($indice['release_date']);
+                $movie->setRuntime($indice['runtime']);
                 array_push($movielist, $movie);
             }
             return $movielist;
@@ -76,6 +77,7 @@
             $movie->setVote_average($movieData['vote_average']);
             $movie->setOverview($movieData['overview']);
             $movie->setRelease_date($movieData['release_date']);
+            $movie->setRuntime($movieData['runtime']);
             return $movie;
         }
 
@@ -85,10 +87,10 @@
         public function Add(/*Movie */$movie) {
             try {
 
-                $query = "INSERT INTO " . $this->tableName . "(title, time, language) VALUES (:title, :time, :language);";
+                $query = "INSERT INTO " . $this->tableName . "(title, runtime, language) VALUES (:title, :runtime, :language);";
 
                 $parameters["title"] = $movie->getTitle();
-                $parameters["time"] = $movie->getTime();
+                $parameters["runtime"] = $movie->getRuntime();
                 $parameters["language"] = $movie->getLanguage();
 
                 $this->connection = Connection::GetInstance();
@@ -118,7 +120,7 @@
 
                     $movie = new Movie();
                     $movie->setTitle($row["title"]);
-                    $movie->setTime($row["time"]);
+                    $movie->setRunime($row["runtime"]);
                     $movie->setLanguage($row["language"]);
                     array_push($movieList, $movie);
 
