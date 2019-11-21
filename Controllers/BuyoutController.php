@@ -195,12 +195,15 @@
     //le paso date porque es el dato a travez del cual accedo a buyout y a travez de el obtengo el id
     public function DeleteTicket($date)
     {
-        $idToDelete = $buyoutDAO->GetId($date);
+        $idToDelete = $this->buyoutDAO->GetId($date);
 
-        $flag = $buyoutDAO->Delete($idToDelete);
+        echo $idToDelete;
+
+        $flag = $this->buyoutDAO->Delete($idToDelete);
 
         if($flag = true)
         {
+          echo "se borro el dato correctamente";
           //<script> alert("Hello! I am an alert box!"); </script>
         }
     }

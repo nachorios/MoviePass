@@ -1,6 +1,7 @@
 <?php namespace Models;
 
 class Buyout{
+    private $id_buyout;
     private $quan;
     private $date;
     private $total;
@@ -8,13 +9,18 @@ class Buyout{
     private $cinema;
     private $funcion;
 
-    public function __construct($quan, $total, $movie, $cinema, $funcion, $date){
+    public function __construct($quan, $total, $movie, $cinema, $funcion, $date, $id_buyout = 0){
         $this->quan = $quan;
         $this->total = $total;
         $this->movie = $movie;
         $this->cinema = $cinema;
         $this->funcion = $funcion;
         $this->date = $date;
+        $this->$id_buyout = $id_buyout;
+    }
+
+    public function setIdBuyout($id_buyout){
+        $this->id_buyout = $id_buyout;
     }
 
     public function setMovie($movie){
@@ -39,6 +45,10 @@ class Buyout{
 
     public function setTotal($total){
         $this->total=$total;
+    }
+
+    public function getIdBuyout(){
+        return $this->id_buyout;
     }
 
     public function getMovie(){
