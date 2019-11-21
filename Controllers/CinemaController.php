@@ -26,7 +26,7 @@ class CinemaController{
 
     public function registerCinema($nameCinema, $address, $nameSaloon, $value, $capacity)
     {
-      
+
       $newCinema = new Cinema($nameCinema, $address);
       $addedCinema = $this->cinemaDAO->Add($newCinema);
 
@@ -44,18 +44,18 @@ class CinemaController{
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
-    
+
 
     public function deleteCinema() {
-      
+
       $proof = $this->cinemaDAO->Delete($_GET['delete']);
-      if($proof == 1) 
+      if($proof == 1)
         $deletedCinema = true;
       else
         $deletedCinema = false;
 
       require_once(VIEWS_PATH . 'navbar.php');
-      $cinemasList = $this->cinemaDAO; //muestra lista de dao al registrar
+      $cinemasList = $this->cinemaDAO; //muestra lista de dao al eliminar
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
@@ -80,5 +80,5 @@ class CinemaController{
       require_once(VIEWS_PATH . "cinemas-list.php");
     }
 
-    
+
 }

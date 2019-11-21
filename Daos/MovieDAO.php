@@ -3,8 +3,9 @@
     use \Exception as Exception;
     use Models\Movie as Movie;
     use Daos\Connection as Connection;
+    use Interfaces\IDAO as IDAO;
 
-    class MovieDAO {
+    class MovieDAO implements IDAO{
 
         private $connection;
         private $tableName = "movies";
@@ -81,7 +82,7 @@
         /**
          * Funcion para agregar mediante un INSERT una pelicula a la base de datos.
          */
-        public function Add(Movie $movie) {
+        public function Add(/*Movie */$movie) {
             try {
 
                 $query = "INSERT INTO " . $this->tableName . "(title, time, language) VALUES (:title, :time, :language);";
@@ -127,6 +128,16 @@
             } catch(Exception $e) {
                 throw $e;
             }
+
+        }
+
+        public function Update($movie,$id_movie)
+        {
+
+        }
+
+        public function Delete($id_movie)
+        {
 
         }
 

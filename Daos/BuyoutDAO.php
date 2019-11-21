@@ -181,6 +181,7 @@ class BuyoutDAO{
         return $result;
     }
 
+    //creo que se puede llegar a hacer el delete por date
     public function Delete($id_buyout)
     {
       $query = "DELETE FROM buyouts WHERE (id_buyout = :id_buyout)";

@@ -24,7 +24,7 @@
             <th>Hora</th>
             <th>Sala</th>
             <!--<th>Codigo QR</th>-->
-            <th>Eliminar</th>
+            <!--<th>Eliminar</th>-->
         </thead>
           <tbody>
           <?php foreach($userTickets as $ticket):?>
@@ -35,7 +35,7 @@
                   <td><?php echo $ticket->getFunction()->getHour(); ?></td>
                   <td><?php echo $ticket->getFunction()->getSaloon()->getName(); ?></td>
                   <!--<td>QR</td>-->
-                  <td><a href="<?php echo URL ?>/Buyout/DeleteTicket/<?php echo $ticket->getFunction()->getDate()?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
+<!-- descomentar esta linea                  <td><a href="<?php //echo URL ?>/Buyout/DeleteTicket/<?php //echo $ticket->getFunction()->getDate()?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td> -->
   <!--                <td><button type="button" onclick="loading(this, 'danger', ''); window.location='<?php// echo URL ?>/Buyout/DeleteTicket?delete=<?php// echo $ticket->getFunction()->getDate()  ?>'" class="btn btn-danger"><i class="fa fa-trash-o"></i></button> </td>  -->
 
   <!--                <a href="?delete=<?php //echo $value->getEmail() ?>" class="btn btn-light">

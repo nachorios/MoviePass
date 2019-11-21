@@ -7,7 +7,7 @@ use Daos\Connection as Connection;
 use Daos\SaloonDAO as SaloonDAO;
 use Interfaces\IDAO as IDAO;
 
-class CinemaDAO{
+class CinemaDAO implements IDAO{
 
   private $connection;
   private $saloonDAO;
@@ -47,7 +47,7 @@ class CinemaDAO{
   {
     $sql = "SELECT * FROM cinemas";
     $result = array();
-    
+
     try {
       $this->connection = Connection::getInstance();
       $resultSet = $this->connection->execute($sql);
@@ -82,7 +82,7 @@ class CinemaDAO{
     return $result;
   }
 
-  public function Update(Cinema $cinema, $id_cinema) {
+  public function Update($cinema, $id_cinema) {
     $query = "UPDATE cinemas SET name = :name, address = :address WHERE id_cinema = :id_cinema";
     $flag = false;
     try {
@@ -109,7 +109,7 @@ class CinemaDAO{
   }
 
   public function Delete($id_cinema) {
-    
+
     $query = "DELETE FROM cinemas WHERE (id_cinema = :id_cinema)";
     $flag = false;
     try {

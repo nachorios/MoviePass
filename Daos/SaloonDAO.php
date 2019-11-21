@@ -63,7 +63,7 @@ class SaloonDAO{
         $query =" select s.id_saloon, s.name, s.capacity, s.entry_value, s.id_cinema
           from saloon as s
           where s.id_saloon = :id_saloon";
-          
+
           $this->connection = Connection::GetInstance();
 
           $parameters['id_saloon'] = $id_saloon;
@@ -82,7 +82,7 @@ class SaloonDAO{
   }
 
 
-    public function Update(Saloon $saloon, $id_saloon)
+    public function Update($saloon, $id_saloon)
     {
       $query = "UPDATE saloon SET name = :name, capacity = :capacity, entry_value = :entry_value WHERE id_saloon = :id_saloon";
       $flag = false;
@@ -127,6 +127,11 @@ class SaloonDAO{
       catch(Exception $e){
           echo $e->getMessage();
         }
+    }
+
+    public function GetAll()
+    {
+
     }
 
     private function mapear($value) {

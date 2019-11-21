@@ -18,10 +18,10 @@
         /*----Vistas----*/
         public function ShowListView() //pruebas
         {
-            
+
 		    require_once( VIEWS_PATH . 'header.php');
             require_once( VIEWS_PATH . 'navbar.php');
-            
+
             $arrayIdMovies = $this->billboardDAO->GetAllMoviesInBillboard();
             $arrayMovies = array();
             foreach($arrayIdMovies as $idMovie) {
@@ -30,6 +30,7 @@
                     array_push($arrayMovies, $movieAux);
                 }
             }
+
             $genreList = $this->movieDAO->getGenreList();
             $newArrayMovies = array();
             foreach($arrayMovies as $movie) {
@@ -48,14 +49,14 @@
                     }
                     if(!$isThisGenre)
                         continue;
-               } 
+               }
                if (isset($_GET['show_date']) && !empty($_GET['show_date'])) {
                     $date = $_GET['show_date'];
                     if ($date != null) {
                          if($movie->getRelease_date() == $date) {
                               $isThisDate = true;
                          }
-                    }    
+                    }
                     if(!$isThisDate)
                        continue;
                 }

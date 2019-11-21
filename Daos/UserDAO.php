@@ -3,8 +3,9 @@
 use \Exception as Exception;
 use Models\User as User;
 use Daos\Connection as Connection;
+use Interfaces\IDAO as IDAO;
 
-class UserDAO {
+class UserDAO implements IDAO{
 
     private $connection;
     //private $tableName = "Users";
@@ -86,6 +87,21 @@ class UserDAO {
         //echo $e->getMessage();
       }
       return NULL; // si no encuentra el usuario
+    }
+
+    public function GetAll()
+    {
+
+    }
+
+    public function Update($user, $id_user = array())
+    {
+
+    }
+
+    public function Delete($id_user)
+    {
+
     }
 
     protected function mapear($value)
