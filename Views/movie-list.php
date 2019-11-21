@@ -84,6 +84,7 @@
                          <ul class="list-group list-group-flush">
                               <li class="list-group-item">Fecha de estreno: <?php echo $movie->getRelease_date() ?></li>
                               <li class="list-group-item">Calificacion: <?php echo $movie->getVote_average() ?></li>
+                              <li class="list-group-item">Duracion: <?php echo $movie->getRuntime() ?></li>
                               <li class="list-group-item">Generos:
                               <?php
                                    $movieGenres = $movie->getGenre_ids();

@@ -26,7 +26,7 @@
     /**
      * Funcion para agregar mediante un INSERT una pelicula a la base de datos.
      */
-    public function Add($id_movie, $id_cinema, $id_saloon, $day, $hour) {
+    public function Add($id_movie, $id_cinema, $id_saloon, $day, $hour, $duration) {
       $flag = false;
       try {
         $sql = "INSERT INTO billboard (id_movie, id_cinema)
@@ -47,7 +47,7 @@
         $countProof = 0;
         if($rowCount > 0) {
           for($i = 0; $i < count($day); $i++) {
-            $countProof += $this->functionDAO->Add($day[$i], $hour[$i], $id_saloon[$i], $id_billboard);
+            $countProof += $this->functionDAO->Add($day[$i], $hour[$i], $id_saloon[$i], $id_billboard, $duration);
           }
         }
         if($countProof == 0) {

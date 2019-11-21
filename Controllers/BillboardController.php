@@ -25,11 +25,11 @@ class BillboardController {
         $this->buyOutDAO = new BuyoutDAO();
     }
 
-    public function Add($idCinema, $idMovie, $day, $hour, $idSaloon){
+    public function Add($idCinema, $idMovie, $day, $hour, $idSaloon, $duration){
         /*echo '<pre>';
         var_dump($_POST);
         echo '</pre>';*/
-        $added = $this->billboardDAO->Add($idMovie, $idCinema, $idSaloon, $day, $hour);
+        $added = $this->billboardDAO->Add($idMovie, $idCinema, $idSaloon, $day, $hour, $duration);
         $movieList = $this->movieDAO;
         $cinemasList = $this->cinemaDAO;
         $billboardList = $this->billboardDAO;

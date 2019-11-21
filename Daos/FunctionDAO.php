@@ -15,15 +15,15 @@
         $this->saloonDAO = new SaloonDAO();
     }
 
-    public function Add($date, $hour, $id_saloon, $id_billboard) {
+    public function Add($date, $hour, $id_saloon, $id_billboard, $duration) {
         $flag = false;
         //$sql = "INSERT INTO $this->tableName (id_billboard, date, hour, id_saloon) VALUES (:id_billboard, :date, :hour, :id_saloon);";
-        $sql = "INSERT INTO functions (id_billboard, date, hour, id_saloon) 
-        SELECT :id_billboard, :date, :hour, :id_saloon
+        $sql = "INSERT INTO functions (id_billboard, date, hour, id_saloon, duration) 
+        SELECT :id_billboard, :date, :hour, :id_saloon, :duration
         WHERE NOT EXISTS (
             SELECT * 
             FROM functions as f
-            WHERE f.date = :date AND (STR_TO_DATE(f.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL 15 MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL 15 MINUTE))
+            WHERE f.date = :date AND (STR_TO_DATE(f.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL :duration MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL :duration MINUTE))
         ) LIMIT 1;";
 
         $parameters = Array();
@@ -31,6 +31,7 @@
         $parameters["date"] = $date;
         $parameters["hour"] = $hour;
         $parameters["id_saloon"] = $id_saloon;
+        $parameters["duration"] = $duration;
 
         try {
             $this->connection = Connection::GetInstance();

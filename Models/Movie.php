@@ -14,7 +14,8 @@ class Movie {
     private $title;
     private $vote_average;
     private $overview;
-    private $release_date;
+	private $release_date;
+	private $runtime;
     public function __construct(){
     }
     public function getPopularity(){
@@ -100,6 +101,14 @@ class Movie {
 	}
 	public function setRelease_date($release_date){
 		$this->release_date = $release_date;
+	}
+
+	public function getRuntime(){
+		return $this->runtime;
+	}
+
+	public function setRuntime($runtime){
+		$this->runtime  = $runtime;
 	}
 }
 ?>

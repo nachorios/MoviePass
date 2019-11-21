@@ -251,6 +251,7 @@
                             <li>Fecha de Estreno: <?php echo $movie->getRelease_date(); ?></li>
                             <li>Titulo original:<?php echo str_replace("'", "”", str_replace("\"","”", $movie->getOriginal_title())); ?></li>
                             <li>Puntuacion: <?php echo $movie->getVote_average(); ?></li>
+                            <li>Duracion: <?php echo $movie->getRuntime(); ?></li>
                         </ul>
                     </li>
                     <br/>
