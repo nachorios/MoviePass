@@ -41,7 +41,7 @@
                         <h4 class = "modal-title">Error al editar</h4>
                 </div>
                 <div class = "modal-body">
-                        <p>No se ha logrado editar la cartelera, verifica si el cine ya posee la pelicula seleccionada.</p>
+                        <p>No se ha logrado editar la cartelera, verifica si el cine ya posee la pelicula seleccionada y los horarios de las funciones no pueden interferirse.</p>
                 </div>
                 <div class = "modal-footer">
                         <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
@@ -75,7 +75,7 @@
                         <h4 class = "modal-title">Error al agregar pelicula</h4>
                 </div>
                 <div class = "modal-body">
-                        <p>No se ha podido agregar la pelicula a la cartelera. Se puede agregar una sola vez la misma pelicula por cine y las funciones deben tener 15 minutos entre ellas.</p>
+                        <p>No se ha podido agregar la pelicula a la cartelera. Se puede agregar una sola vez la misma pelicula por cine y los horarios de las funciones no pueden interferirse.</p>
                 </div>
                 <div class = "modal-footer">
                         <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
@@ -164,6 +164,23 @@
                 </div>
                 <div class = "modal-footer">
                         <button type = "button" class = "btn btn-success" data-dismiss = "modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!---->
+<!-- AGREGAR FUNCION ERROR -->
+<div class = "modal fade" id = "registro-funcion-error" role = "dialog">
+        <div class = "modal-dialog modal-sm text-danger">
+            <div class = "modal-content">
+                <div class = "modal-header">
+                        <h4 class = "modal-title">Error al agregar función</h4>
+                </div>
+                <div class = "modal-body">
+                        <p>No se ha podido agregar la función a la cartelera. Se puede agregar una sola vez la misma pelicula por cine y los horarios de las funciones no pueden interferirse.</p>
+                </div>
+                <div class = "modal-footer">
+                        <button type = "button" class = "btn btn-danger" data-dismiss = "modal">Aceptar</button>
                 </div>
             </div>
         </div>

@@ -18,8 +18,8 @@
     public function Add($date, $hour, $id_saloon, $id_billboard, $duration) {
         $flag = false;
         //$sql = "INSERT INTO $this->tableName (id_billboard, date, hour, id_saloon) VALUES (:id_billboard, :date, :hour, :id_saloon);";
-        $sql = "INSERT INTO functions (id_billboard, date, hour, id_saloon, duration) 
-        SELECT :id_billboard, :date, :hour, :id_saloon, :duration
+        $sql = "INSERT INTO functions (id_billboard, date, hour, id_saloon) 
+        SELECT :id_billboard, :date, :hour, :id_saloon
         WHERE NOT EXISTS (
             SELECT * 
             FROM functions as f
@@ -105,7 +105,7 @@
         return $result;
     }
 
-    public function Update($date, $hour, $id_saloon, $id_function) {
+    public function Update($date, $hour, $id_saloon, $id_function, $duration) {
         try {
         //$sql = "UPDATE $this->tableName SET date = :date, hour = :hour, id_saloon = :id_saloon WHERE id_function = :id_function;";
         $sql = "UPDATE functions as f
@@ -113,7 +113,7 @@
         WHERE id_function = :id_function AND NOT EXISTS ( 
             SELECT * 
             FROM (SELECT * FROM functions) as t
-            WHERE t.date = :date AND t.id_function != :id_function AND (((STR_TO_DATE(t.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL 15 MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL 15 MINUTE))))
+            WHERE t.date = :date AND t.id_function != :id_function AND (((STR_TO_DATE(t.hour, '%H:%i:%s') BETWEEN (STR_TO_DATE(:hour, '%H:%i:%s') - INTERVAL :duration MINUTE) AND (STR_TO_DATE(:hour, '%H:%i:%s') + INTERVAL :duration MINUTE))))
         ) LIMIT 1;";
         $flag = false;
 
@@ -124,6 +124,7 @@
         $parameters["hour"] = $hour;
         $parameters["id_saloon"] = $id_saloon;
         $parameters["id_function"] = $id_function;
+        $parameters["duration"] = $duration;
 
         $rowCount = $this->connection->executeNonQuery($sql, $parameters);
 

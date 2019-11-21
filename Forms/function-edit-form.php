@@ -97,6 +97,7 @@
     </div>
   
     <input type="text" name="function-edit" class="form-control" id="function-edit" value="" hidden> </input>
+    <input type="text" name="movie-edit-duration" class="form-control" id="movie-edit-duration" value="" hidden> </input>
     <!--<input type="text" name="oldCinema" class="form-control" id="oldCinema" value="" hidden> </input>-->
     
     <div class="mt-3">

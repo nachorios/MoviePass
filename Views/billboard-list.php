@@ -90,8 +90,9 @@
         document.getElementById('time-edit').value = dataAux[1];
         document.getElementById('function-edit').value = dataAux[2];
         document.getElementById('function-delete').value = dataAux[2];
+        document.getElementById('movie-edit-duration').value = dataAux[3];
     
-        var saloons = dataAux[4].split('-').slice(0, -1);
+        var saloons = dataAux[5].split('-').slice(0, -1);
         var selectEdit = document.getElementById('select-edit-saloon');
         
         while (selectEdit.options.length > 1) {                
@@ -106,7 +107,7 @@
 
             selectEdit.options.add(newOption);
         }
-        selectEdit.value = dataAux[3];
+        selectEdit.value = dataAux[4];
         
      }
 
@@ -114,8 +115,9 @@
         var data = saloon.id;
         var dataAux = data.split('/');
         document.getElementById('billboard-function-add').value = dataAux[0];
+        document.getElementById('movie-add-duration').value = dataAux[1];
     
-        var saloons = dataAux[1].split('-').slice(0, -1);
+        var saloons = dataAux[2].split('-').slice(0, -1);
         var selectAdd = document.getElementById('select-add-saloon');
         
         while (selectAdd.options.length > 1) {                
@@ -166,7 +168,7 @@
                 <strong class="d-inline-block mb-2 text-primary"><?php echo substr($cinema->getName(), 0, 20); if(strlen($cinema->getName()) > 20) echo '...'; ?></strong>
                 <h5 class="mb-0"><?php echo substr($movie->getTitle(), 0, 34); if(strlen($movie->getTitle()) > 34) echo '...'; ?></h5>
                 <div class="mb-1 text-muted">
-                    Puntaje: <?php echo $movie->getVote_average() ?>
+                    Duración: <?php echo $movie->getRuntime() ?> minutos.
                 </div>
                 <table class="table-sm table table-hover text-center" id="edit-funtion-table">
                 <!-- <button type="button" value='<?php echo $cinema->getIdCinema() .'/'. $movie->getId() .'/'. $billboard->getId(); ?>' 
@@ -182,7 +184,7 @@
                             if(isset($_SESSION['loggedUser'])){
                                 if($_SESSION['loggedUser']->getRole()>1){ ?> 
                         <tr class="table-secondary" id="<?php 
-                            $id = $func->getDate() .'/'. $func->getHour() .'/'. $func->getId() .'/'. $func->getSaloon()->getId() ;
+                            $id = $func->getDate() .'/'. $func->getHour() .'/'. $func->getId() .'/'. $movie->getRuntime() .'/'. $func->getSaloon()->getId() ;
                             $saloonList = ""; 
                             $saloons = $billboard->getCinema()->getSaloon();
                             if(!is_array($saloons))
@@ -215,7 +217,7 @@
                 if($functionAmount < $saloonSize): ?>
                     <div class="text-center m-2">                
                         <button type="button" id="<?php 
-                            $id = $billboard->getId();
+                            $id = $billboard->getId() .'/'. $movie->getRuntime();
                             $saloonList = ""; 
                             $saloons = $billboard->getCinema()->getSaloon();
                             if(!is_array($saloons))
