@@ -214,7 +214,12 @@
                     $functionAmount = 1;
                 else
                     $functionAmount = count($billboard->getFunctions());
-                if($functionAmount < $saloonSize): ?>
+                if($functionAmount < $saloonSize): 
+                    if(isset($_SESSION['loggedUser'])) {
+                        if($_SESSION['loggedUser']->getRole()>1) {
+                ?>
+
+
                     <div class="text-center m-2">                
                         <button type="button" id="<?php 
                             $id = $billboard->getId() .'/'. $movie->getRuntime();
@@ -238,7 +243,10 @@
                             } 
                             echo $id .'/'. $saloonList; ?>" onclick="addSaloon(this);"  data-toggle="modal" data-target="#agregar-function-modal" class="btn btn-warning btn-sm"><i class="fa fa-plus"></i></button>
                     </div>
-                <?php endif; ?>
+
+                    <?php }
+                    }
+                endif; ?>
                 <p class="card-text mb-auto" > </p>
                 <?php if(count($billboard->getFunctions())<2): ?>
                     <p class="card-text mb-auto font-italic" ><?php echo substr($movie->getOverview(), 0, 80); if(strlen($movie->getOverview()) > 80) echo '...'; ?></p>
