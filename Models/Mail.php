@@ -49,16 +49,16 @@ class Mail
                 //Server settings
            //     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
                 $mail->isSMTP();                                            // Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+                $mail->Host       = 'smtp.office365.com';                    // Set the SMTP server to send through
                 $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                $mail->Username   = 'moviepassmdq@gmail.com';                     // SMTP username
+                $mail->Username   = 'moviepassmdq@hotmail.com';                     // SMTP username
                 $mail->Password   = 'proyecto2019';                               // SMTP password
                 $mail->SMTPSecure = "tls";         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
                 $mail->Port       = "587";                                    // TCP port to connect to
                 $mail->CharSet = "UTF-8";
              //   $mail->Debugoutput = 'html';
                 //Recipients
-                $mail->setFrom('moviepassmdq@gmail.com', 'Movie Pass');
+                $mail->setFrom('moviepassmdq@hotmail.com', 'Movie Pass');
                 $mail->addAddress($email);            // Name is optional
               /*  $mail->addReplyTo('info@example.com', 'Information');
                 $mail->addCC('cc@example.com');
