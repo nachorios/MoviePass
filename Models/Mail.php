@@ -66,8 +66,16 @@ class Mail
             
                 // Attachments
              //   $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-                $mail->addAttachment(dirname(__DIR__) . '\qrcode.pdf', 'Codigo qr entradas');    // Optional name
-            
+                    // Optional name
+                    $cant = $buy->getQuan();
+                if($cant > 1){    
+                    for($i = 0; $i < $cant; $i ++){
+                        
+                        $mail->addAttachment(ROOT . '\temp\qr'. $i .'.png');
+                    }
+                }else{
+                    $mail->addAttachment(ROOT . '\temp\qr.png', 'Codigo qr entradas');
+                }
                 // Content
                 $id = $this->buyoutDAO->GetId($buy->getDate());
                 $cinema = $this->cinemaDAO->GetById($buy->getCinema());

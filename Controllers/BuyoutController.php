@@ -14,7 +14,7 @@
     use Models\Movie as Movie;
     use Models\User as User;
     use Models\Mail as Mail;
-    include(ROOT. '/Models/Qr.php');
+    use Models\Qr as Qr;
 
     class BuyoutController{
         private $buyoutDAO;
@@ -39,10 +39,18 @@
                 $buyComplete = $this->buyoutDAO->Add($buy, $mail, $credit_number);
                 $email = new Mail();
 
-                $idBuy = $this->buyoutDAO->GetId($date)
+                $idBuy = $this->buyoutDAO->GetId($date);
                 $qr = new Qr();
-                $qr->text($idBuy);
-                $qr->qrCode(350, ROOT.'temp/qr.png');
+              
+                if($cant > 1){    
+                    for($i = 0; $i < $cant; $i ++){
+                        $qr->text($idBuy);
+                        $qr->qrCode(350, ROOT.'temp/qr'. $i .'.png');
+                    }
+                }else{
+                    $qr->text($idBuy);
+               $qr->qrCode(350, ROOT.'temp/qr.png');
+                }
                 $email->sendMail($mail, $buy);
             } else {
                 $buyComplete = false;
