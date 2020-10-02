@@ -19,7 +19,7 @@
         public function ShowListView() //pruebas
         {
 
-		    require_once( VIEWS_PATH . 'header.php');
+	    require_once( VIEWS_PATH . 'header.php');
             require_once( VIEWS_PATH . 'navbar.php');
 
             $arrayIdMovies = $this->billboardDAO->GetAllMoviesInBillboard();

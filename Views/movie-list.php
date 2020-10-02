@@ -72,7 +72,7 @@
      <div class="card mb-3 float-left">
           <div class="row no-gutters">
                <div class="col-md-4">
-                    <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?>" class="card-img" alt="...">
+                    <img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->getPoster_path() ?><?php echo $movie->getPoster_path() ?>" class="card-img" alt="...">
                </div>
                <div class="col-md-8">
                     <div class="card-header">

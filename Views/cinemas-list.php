@@ -273,7 +273,7 @@
                     </div>
                     <div class="card-body text-danger">
                     <blockquote class="blockquote mb-0">
-                         <p>Vuelve m√°s tarde</p>
+                         <p>Vuelve m·s tarde</p>
                     </blockquote>
                     </div>
                </div>
