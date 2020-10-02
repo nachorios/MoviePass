@@ -6,6 +6,8 @@
     use Daos\CinemaDAO as CinemaDAO;
     use Daos\MovieDAO as MovieDAO;
     use Daos\UserDAO as UserDAO;
+	
+	use Controllers\HomeController as HomeController;
 
     use Models\Billboard as Billboard;
     use Models\Buyout as Buyout;
@@ -21,12 +23,14 @@
         private $movieDAO;
         private $cinemaDAO;
         private $billboardDAO;
+		private $homeController;
 
         public function __construct(){
             $this->buyoutDAO = new BuyoutDAO();
             $this->cinemaDAO = new CinemaDAO();
             $this->movieDAO = new MovieDAO();
             $this->billboardDAO = new BillboardDAO();
+			$this->homeController = new HomeController();
         }
 
         public function Add($id_function, $cant, $total, $id_cinema, $id_movie, $credit_number){
@@ -56,9 +60,8 @@
                 $buyComplete = false;
             }
 
-            require_once(VIEWS_PATH . 'navbar.php');
             include(MODALS_PATH . 'buyout-modals.php');
-            require_once(VIEWS_PATH . 'home.php');
+			$this->homeController->ShowView();
         }
 
         public function ShowView() {
