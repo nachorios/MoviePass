@@ -3,14 +3,18 @@
     use Daos\UserDAO as UserDAO;
 //    use Daos\BuyoutDAO as BuyoutDAO;
     use Models\User as User;
+	use Controllers\HomeController as HomeController;
+
 
     class UserController{
         private $userDAO;
-//        private $buyoutDAO;
+		private $homeController;
+		//private $buyoutDAO;
 
         public function __construct(){
             $this->userDAO = new UserDAO();
-  //          $this->buyoutDAO = new BuyoutDAO();
+			$this->homeController = new HomeController();
+			//$this->buyoutDAO = new BuyoutDAO();
         }
 
         public function register($mail, $pass, $replyPass, $name, $lastName, $dni, $role) {
@@ -48,18 +52,18 @@
                $logged = true;
             }
 
-            require_once(VIEWS_PATH . 'navbar.php');
             if ($logged) {
-                require_once(VIEWS_PATH . "home.php");
+				$this->homeController->ShowView();
             } else {
                 require_once(VIEWS_PATH . 'navbar.php');
                 require_once(VIEWS_PATH . "login.php");
             }
         }
 
+
         public function facebookLogin() {
 
-        include('Config/fb-config.php');
+			include('Config/fb-config.php');
 
             try{
                 $accessToken = $helper->getAccessToken();
@@ -86,14 +90,13 @@
             $userData = $response->getGraphNode()->asArray();
             $date = /*$userData['birthday']*/null;
             $_SESSION['loggedUser'] = new User($userData['first_name'], $userData['last_name'], null, $userData['email'], null, 1, $userData['picture']['url'], $date);
-            require_once(VIEWS_PATH . 'navbar.php');
-            require_once(VIEWS_PATH . "home.php");
+            $this->homeController->ShowView();
+
         }
 
         public function logout() {
             unset($_SESSION['loggedUser']);
-            require_once(VIEWS_PATH . 'navbar.php');
-            require_once(VIEWS_PATH . "home.php");
+            $this->homeController->ShowView();
         }
 
         public function profile() {
@@ -110,8 +113,7 @@
                 else
                 echo "<script> alert('No se ha logrado agregar un administrador.'); </script>";
             }
-            require_once(VIEWS_PATH . 'navbar.php');
-            require_once(VIEWS_PATH . "home.php");
+            $this->homeController->ShowView();
         }
 
         /*public function TicketList() {

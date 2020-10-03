@@ -10,36 +10,38 @@ class HomeController {
     
     private $movieDAO;
     private $cinemaDAO;
-        private $billboardDAO;
+    private $billboardDAO;
     
     public function __construct() {
         $this->cinemaDAO = new CinemaDAO();
         $this->movieDAO = new MovieDAO();
         $this->billboardDAO = new BillboardDAO();
     }
-
-    public function Index($message = "") {
+    
+    public function ShowView() {
     	$movies_list  = $this->movieDAO->getNowApi();
-	$cinemas_list = $this->cinemaDAO->GetAll();
+		$cinemas_list = $this->cinemaDAO->GetAll();
 
-	if(!is_array($cinemas_list)) {
-		$cinema_aux = $cinemas_list;
-		$cinemas_list = array();
-		array_push($cinemas_list, $cinema_aux);
-	} 
+		if(!is_array($cinemas_list)) {
+			$cinema_aux = $cinemas_list;
+			$cinemas_list = array();
+			array_push($cinemas_list, $cinema_aux);
+		} 
 
-	$movies_id_aux = $this->billboardDAO->GetAllMoviesInBillboard();
-	$movies_in_billboard = array();
-	foreach($movies_id_aux as $movie_id) {
-		$movie_aux = $this->movieDAO->GetById($movie_id['id_movie']);
-		if(!in_array($movie_aux, $movies_in_billboard)) {
-			array_push($movies_in_billboard, $movie_aux);
+		$movies_id_aux = $this->billboardDAO->GetAllMoviesInBillboard();
+		$movies_in_billboard = array();
+		foreach($movies_id_aux as $movie_id) {
+			$movie_aux = $this->movieDAO->GetById($movie_id['id_movie']);
+			if(!in_array($movie_aux, $movies_in_billboard)) {
+				array_push($movies_in_billboard, $movie_aux);
+			}
 		}
-	}
-
-	//if(!empty(debo traer una variables $funcion)){}else{}
         require_once(VIEWS_PATH.'navbar.php');
         require_once(VIEWS_PATH."home.php");
+    }
+    
+    public function Index($message = "") {
+		$this->ShowView();
     }
 
     public function Login($message = "") {
