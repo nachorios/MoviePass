@@ -52,6 +52,13 @@
                $qr->qrCode(350, ROOT.'temp/qr.png');
                 }
                 $email->sendMail($mail, $buy);
+
+                $dir = ROOT.'temp/';
+                foreach(glob($dir.'*.*') as $v){
+                     unlink($v);
+                }
+
+              
             } else {
                 $buyComplete = false;
             }
