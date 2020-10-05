@@ -188,12 +188,14 @@
     <?php endforeach; ?>
     </select>
 </div>
-<div class="container" id="container">
-    <div class="text-dark row" style="background-color:rgb(0,0,0,0.5);">
-        <div class="form-group col m-2">
+<div class="form-group">
             <label for="date" class="text-light"> Añadir fecha: </label>
             <input type="date" name="date[]" value="<?php echo date("Y-m-d"); ?>" min="<?php echo date("Y-m-d"); ?>" max="<?php /*echo date("Y-m-31");*/ ?>" required>
-        </div>
+            <a href="#" class="m-2" id="add"><button type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></a>
+</div>
+<div class="container" id="container">
+    <div class="text-dark row" style="background-color:rgb(0,0,0,0.5);">
+        
         <div class="form-group col m-2">
             <label for="time" class="text-light"> Seleccionar horario: </label>
             <input type="time" name="time[]" min="15:00" max="23:00" required>    

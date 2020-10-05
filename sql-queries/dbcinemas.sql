@@ -72,16 +72,24 @@ CREATE TABLE billboard(
   -- CONSTRAINT fk_id_movies foreign key (id_movie) references movies (id_movie),
   -- CONSTRAINT fk_id_cinema foreign key (id_cinema) references cinemas (id_cinema)
 );
+
+create table dates(
+id_date int auto_increment,
+hour varchar(30),
+Constraint pk_id_date primary key(id_date)
+
+);
+
 create table functions(
 	id_function int auto_increment,
     id_billboard int not null,
     id_saloon int,
-    date varchar(30),
-    hour varchar(30),
+    id_date int,
     duration int,
     CONSTRAINT pk_id_function PRIMARY KEY (id_function),
     CONSTRAINT pk_id_saloon FOREIGN KEY (id_saloon) references saloon (id_saloon) ON DELETE CASCADE,
-    CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard) ON DELETE CASCADE
+    CONSTRAINT fk_id_billboard FOREIGN KEY (id_billboard) references billboard (id_billboard) ON DELETE CASCADE,
+	CONSTRAINT pk_id_date FOREIGN KEY (id_date) references dates (id_date) ON DELETE CASCADE
 );
 
 CREATE TABLE rols(
@@ -120,9 +128,7 @@ CREATE TABLE buyouts(
   CONSTRAINT idbuyout PRIMARY KEY (id_buyout)
 );
 
-select buyouts.id_buyout
-from buyouts
-where buyouts.date = "2019-11-20 02:16:22 ";
+
 
 /*entradas*/
 CREATE TABLE tickets(
